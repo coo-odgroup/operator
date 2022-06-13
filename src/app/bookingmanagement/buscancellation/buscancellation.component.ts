@@ -1,0 +1,638 @@
+
+import { Component, OnInit, ViewChild, } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Buscancellation } from '../../model/buscancellation';
+import { BusOperatorService } from './../../services/bus-operator.service';
+import { BusService } from '../../services/bus.service';
+import { NotificationService } from '../../services/notification.service';
+import { BuscancellationService } from '../../services/buscancellation.service';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { Constants } from '../../constant/constant';
+import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import * as XLSX from 'xlsx';
+import { NgxSpinnerService } from "ngx-spinner";
+import { DatePipe } from '@angular/common';
+import { LocationService } from '../../services/location.service';
+import { reduce } from 'lodash';
+
+
+@Component({
+  selector: 'app-buscancellation',
+  templateUrl: './buscancellation.component.html',
+  styleUrls: ['./buscancellation.component.scss'],
+  providers: [NgbModalConfig, NgbModal]
+})
+export class BuscancellationComponent implements OnInit {
+
+  @ViewChild("addnew") addnew;
+  public busCancellationForm: FormGroup;
+  isCitiesControlVisible = true;
+  public formConfirm: FormGroup;
+  public searchForm: FormGroup;
+  pagination: any;
+  pipe = new DatePipe('en-US');
+
+  public selectedCancelBus: Array<any> = [];
+  modalReference: NgbModalRef;
+  confirmDialogReference: NgbModalRef;
+  busCancellations: Buscancellation[];
+  busCancellationRecord: Buscancellation;
+  buses: any;
+  operators: any;
+  busDatas: any;
+  //selectedBus:any;
+  cancelledDates: any;
+  public isSubmit: boolean;
+  public mesgdata: any;
+  public ModalHeading: any;
+  public ModalBtn: any;
+  public months: any;
+  public years: any;
+  public reasons: any;
+  public showdates: any;
+  all: any;
+  public busesRecord: any;
+  public DatesRecord: any;
+  dateformate: string;
+  locations: any;
+  url: string;
+
+  //getter for form array buses
+  get busesFormGroup() {
+    return this.busCancellationForm.get('buses') as FormArray;
+  }
+  constructor(private locationService:LocationService,private buscanCellationService: BuscancellationService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busOperatorService: BusOperatorService, private busService: BusService, private spinner: NgxSpinnerService,) {
+    this.isSubmit = false;
+    this.busCancellationRecord = {} as Buscancellation;
+    config.backdrop = 'static';
+    config.keyboard = false;
+    this.ModalHeading = "Add Bus Cancellation";
+    this.ModalBtn = "Save";
+    var d = new Date();
+    this.months = [
+      { id: '01', name: 'January' }, { id: '02', name: 'February' }, { id: '03', name: 'March' }, { id: '04', name: 'April' },
+      { id: '05', name: 'May' }, { id: '06', name: 'June' }, { id: '07', name: 'July' }, { id: '08', name: 'August' },
+      { id: '09', name: 'September' }, { id: '10', name: 'October' }, { id: '11', name: 'November' }, { id: '12', name: 'December' }
+    ];
+
+    this.years = [
+      { id: '1', name: d.getFullYear() }, { id: '2', name: d.getFullYear() + 1 },
+      { id: '3', name: d.getFullYear() + 2 }, { id: '4', name: d.getFullYear() + 3 }
+    ];
+    this.reasons = [{ id: '01', reason: 'request from Owner' }, { id: '02', reason: 'request from Manager' }, { id: '03', reason: 'request from Conductor' }, { id: '04', reason: 'request from Association' }, { id: '05', reason: 'bus breakdown' }, { id: '06', reason: 'others' }];
+  }
+  OpenModal(content) {
+
+    this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
+  }
+
+  ngOnInit(): void {
+    this.spinner.show();
+    // this.loadBusCancellationData();
+    this.createBusCancellationForm();
+    this.loadServices();
+
+    this.busCancellationForm = this.fb.group({
+      bus_operator_id: 157,
+      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      month: [null],
+      year: [null],
+      reason: [null],
+      other_reson: [null],
+      busLists: [null],
+      buses: this.fb.array([
+        this.fb.group({
+          bus_id: [null],
+          busName: [null],
+          dateLists: this.fb.array([
+            this.fb.group({
+              //busScheduleId: [null],
+              entryDates: [null],
+              datechecked: [''],
+            })
+          ]),
+        }),
+      ]),
+    });
+
+    this.searchForm = this.fb.group({
+      name: [null],
+      bus_id: [null],
+      bus_operator_id: [null],
+      source_id: [null],
+      destination_id: [null],
+      toDate: [null],
+      fromDate: [null],
+      rows_number: Constants.RecordLimit,
+    });
+
+    this.getBusbyOperator();
+    this.search();
+
+
+  }
+
+
+  page(label: any) {
+    return label;
+  }
+
+
+  search(pageurl = "") {
+    this.spinner.show();
+    const data = {
+      name: this.searchForm.value.name,
+      bus_id: this.searchForm.value.bus_id,
+      bus_operator_id: 157,
+      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      source_id: this.searchForm.value.source_id,
+      destination_id: this.searchForm.value.destination_id,
+      toDate: this.searchForm.value.toDate,
+      fromDate: this.searchForm.value.fromDate,
+      rows_number: this.searchForm.value.rows_number,
+      USER_BUS_OPERATOR_ID: localStorage.getItem('USER_BUS_OPERATOR_ID')
+    };
+
+    // console.log(data);
+    if (pageurl != "") {
+      this.buscanCellationService.getAllaginationData(pageurl, data).subscribe(
+        res => {
+          this.busCancellations = res.data.data.data;
+          this.pagination = res.data.data;
+          this.url= this.pagination.path+'?page='+this.pagination.current_page ;
+          this.all = res.data;
+          this.spinner.hide();
+
+        }
+      );
+    }
+    else {
+      this.buscanCellationService.getAllData(data).subscribe(
+        res => {
+          this.busCancellations = res.data.data.data;
+          this.pagination = res.data.data;
+          this.url= this.pagination.path+'?page='+this.pagination.current_page ;
+          this.all = res.data;
+          this.spinner.hide();
+       
+        }
+      );
+    }
+  }
+
+
+  refresh() {
+    this.spinner.show();
+    this.searchForm = this.fb.group({
+      name: [null],
+      bus_id: [null],
+      bus_operator_id: [null],
+      source_id: [null],
+      destination_id: [null],
+      toDate: [null],
+      fromDate: [null],
+      rows_number: Constants.RecordLimit,
+    });
+
+    this.search();
+
+
+  }
+
+
+
+  title = 'angular-app';
+  fileName = 'Bus-Cancellation.xlsx';
+
+  exportexcel(): void {
+
+    /* pass here the table id */
+    let element = document.getElementById('print-section');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+
+  }
+
+
+
+
+  createBusCancellationForm() {
+    this.busCancellationForm = this.fb.group({
+      bus_operator_id: '',
+      //busOperatorname:'',
+      busLists: '',
+      month: '',
+      year: '',
+      reason: '',
+      other_reson: '',
+      buses: this.fb.array([
+        this.fb.group({
+          bus_id: [null],
+          busName: [null],
+          dateLists: this.fb.array([
+            this.fb.group({
+              //busScheduleId: [null],
+              entryDates: [null],
+              datechecked: [null],
+
+            })
+          ]),
+        }),
+      ]),
+
+    });
+  }
+
+
+  ResetAttributes() {
+    this.getBusbyOperator();
+    this.loadServices();
+    this.buses=[];
+    this.showdates = '0';
+    this.busCancellationRecord = {} as Buscancellation;
+    this.busCancellationForm = this.fb.group({
+      bus_operator_id: 157,
+      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      month: [null],
+      year: [null],
+      reason: [null],
+      other_reson: [null],
+      busLists: [null],
+      buses: this.fb.array([
+        this.fb.group({
+          bus_id: [null],
+          busName: [null],
+          dateLists: this.fb.array([
+            this.fb.group({
+              //busScheduleId: [null],
+              entryDates: [null],
+              datechecked: [''],
+            })
+          ]),
+        }),
+      ]),
+    });
+    this.ModalHeading = "Add Bus Cancellation";
+    this.ModalBtn = "Save";
+    //reset the selected values
+    const arr = <FormArray>this.busCancellationForm.controls.buses;
+    arr.controls = [];
+  }
+  showCancelledDates(event: Event, id: any) {
+    this.showdates = '1';
+    this.busCancellationRecord = this.busCancellations[id];
+  }
+  getBusbyOperator() {
+    this.spinner.show();
+    let operatorId = 157;
+  //let operatorId = localStorage.getItem('OPERATOR_ID');
+    if (operatorId) {
+      this.busOperatorService.getBusbyOperator(operatorId).subscribe(
+        resp => {
+          this.buses = resp.data;
+          this.spinner.hide();
+
+        });
+    }
+  }
+
+
+  getBusScheduleEntryDatesFilter() {
+    if (this.busCancellationForm.value.month == null || this.busCancellationForm.value.year == null ||this.busCancellationForm.value.busLists == null)
+      return false;
+
+
+    const arr = <FormArray>this.busCancellationForm.controls.buses;
+    arr.controls = [];
+    //console.log(this.busCancellationForm.value);
+
+    this.spinner.show();
+    this.busService.getBusScheduleEntryDatesFilter(this.busCancellationForm.value).subscribe(
+      response => {
+        this.busDatas = response.data.busDatas;
+        let counter = 0;
+    // console.log(this.busDatas);
+        
+        for (let bData of this.busDatas) {
+          this.busesRecord = (<FormArray>this.busCancellationForm.controls['buses']) as FormArray;
+          let busesGroup: FormGroup = this.fb.group({
+            bus_id: [bData.bus_id],
+            busName: [bData.busName],
+            dateLists: this.fb.array([
+            ]),
+          })
+          this.busesRecord.insert(counter, busesGroup);
+          this.DatesRecord = (<FormArray>this.busCancellationForm.controls['buses']).at(counter).get('dateLists') as FormArray;
+
+          let arraylen = this.DatesRecord.length;
+          let data = this.busCancellationRecord.bus_cancelled_date;
+          let canceldates = bData.cancelDates;
+          let caneldateArr=[] ; 
+          let count = 0;
+          for (let canceldt of bData.cancelDates) {
+            caneldateArr[count]= this.pipe.transform(canceldt.cancelled_date, 'y-MM-dd');
+            count++;
+         }
+          // console.log(caneldateArr);
+          
+          let existingDate=false;
+          for (let eDate of bData.entryDates) {
+
+            let dateformate = this.pipe.transform(eDate.entry_date, 'y-MM-dd');
+      
+            let isPresent=false;
+            
+            if(this.busCancellationRecord.bus_cancelled_date)
+            {
+              isPresent = this.busCancellationRecord.bus_cancelled_date.some(function (el) {    ////checking the date in the array                      
+                return  el.cancelled_date === dateformate;               
+              });
+           
+            }    
+              if(canceldates.length>0)
+            { 
+              existingDate = caneldateArr.some(function (el) { 
+              return  el === dateformate;
+                            
+              });
+
+            }
+
+            if(this.ModalBtn=="Save")
+            {
+              if (existingDate) {
+                let newDatesgroup: FormGroup = this.fb.group({
+                  entryDates: [eDate.entry_date],
+                  datechecked: [{ value: null, disabled: true}],
+                })
+                this.DatesRecord.insert(arraylen, newDatesgroup);
+              }       
+              
+              else {
+                let newDatesgroup: FormGroup = this.fb.group({
+                  entryDates: [eDate.entry_date],
+  
+                  datechecked: [null],
+                })
+                this.DatesRecord.insert(arraylen, newDatesgroup);            
+              }
+            }
+            if(this.ModalBtn=="Update")
+            {
+                    
+              if (isPresent) {
+                let newDatesgroup: FormGroup = this.fb.group({
+                  entryDates: [eDate.entry_date],
+                  datechecked: [true],
+                })
+                this.DatesRecord.insert(arraylen, newDatesgroup);
+              }
+              else {
+                let newDatesgroup: FormGroup = this.fb.group({
+                  entryDates: [eDate.entry_date],
+  
+                  datechecked: [null],
+                })
+                this.DatesRecord.insert(arraylen, newDatesgroup);            
+  
+              }
+            }
+
+            // if (existingDate) {
+            //   let newDatesgroup: FormGroup = this.fb.group({
+            //     entryDates: [eDate.entry_date],
+            //     datechecked: [{ value: false, disabled: true }],
+            //   })
+            //   this.DatesRecord.insert(arraylen, newDatesgroup);
+            // }       
+            // if (isPresent) {
+            //   let newDatesgroup: FormGroup = this.fb.group({
+            //     entryDates: [eDate.entry_date],
+            //     datechecked: [true],
+            //   })
+            //   this.DatesRecord.insert(arraylen, newDatesgroup);
+            // }
+            // else {
+            //   let newDatesgroup: FormGroup = this.fb.group({
+            //     entryDates: [eDate.entry_date],
+
+            //     datechecked: [null],
+            //   })
+            //   this.DatesRecord.insert(arraylen, newDatesgroup);            
+
+            // }
+
+            
+            
+          }
+    
+         
+          counter++;
+        }
+        response = [];
+
+        this.spinner.hide();
+
+        // console.log(this.DatesRecord);
+      }
+    );
+  }
+
+  loadServices() {
+    this.loadOperators();
+
+  }
+  loadOperators() {
+    const BusOperator = {
+      USER_BUS_OPERATOR_ID: localStorage.getItem("USER_BUS_OPERATOR_ID")
+    };
+    if (BusOperator.USER_BUS_OPERATOR_ID == "") {
+      this.busOperatorService.readAll().subscribe(
+        record => {
+          this.operators = record.data;
+          this.operators.map((i: any) => { i.operatorData = i.organisation_name + '    (  ' + i.operator_name + '  )'; return i; });
+
+        }
+      );
+    }
+    else {
+      this.busOperatorService.readOne(BusOperator.USER_BUS_OPERATOR_ID).subscribe(
+        record => {
+          this.operators = record.data;
+          this.operators.map((i: any) => { i.operatorData = i.organisation_name + '    (  ' + i.operator_name + '  )'; return i; });
+
+        }
+      );
+    }
+
+    this.locationService.readAll().subscribe(
+      records=>{
+        this.locations=records.data;
+      }
+    );
+
+  }
+  addBusCancellation() {
+    this.spinner.show();
+    let counter = 0;
+    let id: any = this.busCancellationRecord.id;
+    const data = {
+      bus_operator_id: this.busCancellationForm.value.bus_operator_id,
+      cancelled_by: localStorage.getItem('USERNAME'),
+      month: this.busCancellationForm.value.month,
+      year: this.busCancellationForm.value.year,
+      reason: "Cancelled By Owner",
+      other_reson: this.busCancellationForm.value.other_reson,
+      //BELOW ELEMENTS ARE ARRAY
+      buses: this.busCancellationForm.value.buses,
+    };
+
+
+    data.buses[0].dateLists.forEach(function (value) {
+      if(value.datechecked == true)
+      {
+        counter++;
+      }
+
+  });
+  //  console.log(data);
+  //  return;
+  if(counter == 0)
+  {
+    this.notificationService.addToast({ title: Constants.ErrorTitle, msg:'Please Select a Date', type: Constants.ErrorType });
+            this.spinner.hide();
+  }
+  else
+  {
+    if (id == null) {
+      this.buscanCellationService.create(data).subscribe(
+        resp => {
+          if (resp.status == 1) {
+            this.notificationService.addToast({
+              title: Constants.SuccessTitle, msg: resp.message,
+              type: Constants.SuccessType
+            });
+            this.modalReference.close();
+            this.ResetAttributes();
+            this.search(this.url);
+          }
+          else {
+            this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+            this.spinner.hide();
+          }
+        });
+    }
+    else {
+
+      this.buscanCellationService.update(id, data).subscribe(
+        resp => {
+          if (resp.status == 1) {
+            this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
+            this.modalReference.close();
+            this.ResetAttributes();
+            // this.refresh();
+            this.search(this.url);
+          }
+          else {
+            this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+            this.spinner.hide();
+          }
+        });
+    }
+
+  }
+  }
+
+  editBusCancellation(event: Event, id: any) {
+    this.showdates = '0';
+    this.selectedCancelBus = [];
+    this.busCancellationRecord = this.busCancellations[id];
+    //console.log(this.busCancellationRecord);  
+    //  console.log(this.selectedCancelBus);
+
+
+    this.selectedCancelBus.push(JSON.parse(this.busCancellationRecord.bus_id));
+    this.busCancellationForm.patchValue({
+      bus_operator_id: this.busCancellationRecord.bus_operator_id,
+      month: this.busCancellationRecord.month,
+      year: this.busCancellationRecord.year,
+      reason: this.busCancellationRecord.reason,
+      other_reson: this.busCancellationRecord.other_reson,
+      busLists: this.selectedCancelBus
+    });
+    this.getBusbyOperator();
+
+    // setTimeout(() => { 
+    //   this.busCancellationForm.get('bus_operator_id').patchValue(this.busCancellationRecord.operatorId); 
+    //   console.log("formControl value updated"); 
+    // }, 3000); 
+
+    // call the change event's function after initialized the component. 
+    // setTimeout(() => { 
+    //   this.onChange(); 
+    // }, 3500); 
+    this.ModalHeading = "Edit Bus Cancellation";
+    this.ModalBtn = "Update";
+    //reset the selected values
+    const arr = <FormArray>this.busCancellationForm.controls.buses;
+    arr.controls = [];
+    this.getBusScheduleEntryDatesFilter();
+  }
+  openConfirmDialog(content) {
+    this.confirmDialogReference = this.modalService.open(content, { scrollable: true, size: 'md' });
+  }
+  deleteRecord() {
+
+    let delitem = this.formConfirm.value.id;
+    this.buscanCellationService.delete(delitem).subscribe(
+      resp => {
+        if (resp.status == 1) {
+          this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
+          this.confirmDialogReference.close();
+          // this.refresh();
+          this.search(this.url);
+        }
+        else {
+
+          this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+          this.spinner.hide();
+        }
+      });
+  }
+  deleteBusCancellation(content, delitem: any) {
+    this.confirmDialogReference = this.modalService.open(content, { scrollable: true, size: 'md' });
+    this.formConfirm = this.fb.group({
+      id: [delitem]
+    });
+  }
+  changeStatus(event: Event, stsitem: any) {
+    this.spinner.show();
+    this.buscanCellationService.chngsts(stsitem).subscribe(
+      resp => {
+        if (resp.status == 1) {
+          this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
+          // this.refresh();
+          this.search(this.url);
+        }
+        else {
+          this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
+          this.spinner.hide();
+        }
+      }
+    );
+  }                             
+
+}
+
+
+function cancelled_date(cancelled_date: any, arg1: string) {
+  throw new Error('Function not implemented.');
+}
+

@@ -1,0 +1,49 @@
+::ng-deep table.dataTable td.dataTables_empty {
+    display: none;
+}
+::ng-deep tr.odd
+{
+    display: none;
+}
+::ng-deep tr.even
+{
+    display: none;
+}
+
+// ::ng-deep .datelist label input[type="checkbox"][disabled] 
+// {
+// background-color: #d30101f2 !important;
+// cursor:not-allowed !important;
+// }
+
+
+
+
+.ng-select.custom {
+    border:0px;
+    min-height: 0px;
+    border-radius: 0;
+}
+.ng-select.custom .ng-select-container  {            
+    min-height: 0px;
+    border-radius: 0;
+}
+
+::ng-deep .sml_input
+{
+height: calc(1.5em + 1rem);
+padding:0px 9px;
+margin-left: 2px;
+}
+
+
+@media print {
+    ::ng-deep .hide_print {
+      display: none !important;
+    }
+  }
+
+  ::ng-deep disabled
+  {
+    color: red;
+  }

@@ -1,0 +1,480 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <app-card [hidHeader]="false" cardTitle="SEAT OPEN" cardClass="card-datatable" [options]="false"
+      cardClass=" table-border-style user-profile-list ">
+      <div class="row">
+        
+        <div class="col-12">
+          <form [formGroup]="searchForm">
+            <div class="row">
+              <div class="col-md-4">
+                  <button class="btn sml_input btn-success mb-2 " (click)="ResetAttributes();OpenModal(content)">
+                    Seat Open Here
+                  </button>
+                  <div class="dropdown float-right">
+                    <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
+                      <option value=10>10</option>
+                      <option value=25>25</option>
+                      <option value=50>50</option>
+                      <option value=100>100</option>
+                      <option value='all'>All</option>
+                    </select>
+                  </div>
+
+                
+              </div>
+              <div class="col-md-5 ">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <div class="input-group">
+                      <input type="date" class="form-control sml_input" placeholder="Search Date Here " required
+                        formControlName="fromDate">
+                      <input type="date" class="form-control sml_input" placeholder="Search Date Here " required
+                        formControlName="toDate">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                        <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus"
+                        formControlName="bus_id" [clearable]="false" required>
+                      </ng-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn btn-success  sml_input" (click)="search()" title="search">
+            <i class="fas fa-search"> </i> Search
+          </button>
+          <button type="button" class="btn btn-danger sml_input" (click)="refresh()" title="refresh">
+            <i class="fas fa-sync-alt"> </i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive" id="print-section">
+        <table class="table table-striped"> 
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Bus</th>
+              <th>Seat Open Details (Date & Seats)</th>
+      
+            </tr>
+          </thead>
+          <tbody *ngIf="seatOpen?.length != 0">
+            <tr *ngFor="let sblock of seatOpen; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number }}</td>
+              <td>
+                <table >
+                  <tr  *ngFor="let opendate of sblock;let dateIndex= index ">
+                    <td >
+                      {{opendate[0].value[0].operation_date | date: 'dd/MM'}}
+                    </td>
+      
+                    <td style="padding-left: 10px !important">
+                      <span *ngFor="let seat of opendate[0].value; let seatIndex= index ">
+                        {{seat.seats.seatText}},
+                      </span>
+                    </td>
+                    <td class="hide_print">
+                        <span type="button" (click)="openConfirmDialog (confirmDialog,
+                        opendate[0].value[0].bus.id ,
+                        opendate[0].value[0].operation_date)"  class="btn   float-right"> 
+                          <i class="fa fa-trash " aria-hidden="true"></i>
+                      </span>
+      
+                    </td>
+      
+                  </tr>
+                </table>
+              </td>
+      
+            </tr>
+          </tbody>
+          <tbody *ngIf="seatOpen?.length == 0">
+            <tr>
+              <td colspan="8" class="no-data-available text-center"><h4 class="text-danger">No data Found!</h4></td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="pagination?.length!= 0" class="hide_print container">
+          <div class="row">
+            <div class="col-6">
+
+              <div class="col-12">
+                <p class=" row mt-3 ml-1"> Showing {{all?.to}} of {{all?.total}} records. </p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex flex-row-reverse mb-4 text-center" *ngIf="pagination?.links">
+                <nav class="my-1 pt-1 ">
+                  <ul class="pagination pagination-circle pg-blue mb-0">
+                    <li (click)="set_page(pagination.first_page_url,statusLabel)"
+                      class="page-item {{ pagination.current_page == 1 ? 'disabled' : '' }} clearfix d-none d-md-block">
+                      <a class="page-link">First</a>
+                    </li>
+                    <li class="page-item " *ngFor="let b of pagination.links ; let i = index ">
+                      <a class="page-link {{ pagination.current_page == b.label ? 'active' : '' }}"
+                        (click)="(b.url) ? set_page(b.url) : ''" [innerHTML]="page(b.label)"></a>
+                    </li>
+                    <li class="page-item {{ pagination.last_page == 1 ? 'disabled' : '' }} clearfix d-none d-md-block"
+                      (click)="set_page(pagination.last_page_url,statusLabel)">
+                      <a class="page-link">Last</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card-footer">
+        <ng-template #confirmDialog let-modal>
+          <div class="modal-header">
+            <h5 class="ng-tns-c116-5">Would you Like to Delete the Record??</h5>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-material">
+                  <div class="right-icon-control">
+                    Would you Like to Delete the Record
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" (click)="deleteRecord()" class="btn btn-primary" ngbAutofocus>
+              Confirm Delete
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" #defaultClick
+              (click)="modal.dismiss('Cross click')">
+              Cancel
+            </button>
+          </div>
+        </ng-template>
+        <button type="button" #addnew class="btn btn-primary btn-add-task m-t-10 invisible" id="modal"
+          (click)="ResetAttributes(); loadServices(); OpenModal(content)">
+          Add
+        </button>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h5 class="ng-tns-c116-5">{{ ModalHeading }}</h5>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-material">
+                  <div class="right-icon-control">
+                    <form [formGroup]="seatOpenForm" class="editForm" novalidate>
+
+                      <div class="row">
+                        <div class="col-md-8 ">
+                          <div class="row">
+                           
+                            <div class="col-sm-12">
+                              <div class="form-group row">
+                                <label for="busname" class="col-sm-2 col-form-label">Bus Name<span
+                                    class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                  <ng-select [items]="buses" required bindLabel="testing" bindValue="id"
+                                    placeholder="Select Bus" formControlName="bus_id" [clearable]="false"
+                                    (change)="getSchedule();checkroute();checkEvent($event);alreadyOpen();">
+                                  </ng-select>
+
+                                  <span class="text-danger" *ngIf="
+                                    seatOpenForm.controls['bus_id'].touched &&
+                                    seatOpenForm.controls['bus_id'].hasError(
+                                      'required'
+                                    )
+                                  ">
+                                    Bus required!
+                                  </span>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-sm-12 p-0">
+                                    <label *ngFor="let eDate of busSchedule ;">
+                                      <span class="col-3  btn " *ngFor="let  date of eDate.bus_schedule_date ;">
+                                        {{date.entry_date | date: 'dd-MM-YY' }}
+                                      </span>
+          
+                                    </label>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          
+                          </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                          <div class="col-sm-12">
+                            <div class="form-group row">
+                              <!-- <label for="date" class="col-sm-4 col-form-label">Date<span
+                                  class="text-danger">*</span></label> -->
+                              <div class="col-sm-8">
+                                <div class="col-sm-8">
+
+                                  <ngb-datepicker #dp (datesSelectedChange)="change($event)" [displayMonths]="1"
+                                    [dayTemplate]="t">
+                                  </ngb-datepicker>
+
+                                  <ng-template #t let-date="date" let-focused="focused">
+                                    <span class="custom-day" (click)="onDateSelection($event,date)"
+                                      [class.focused]="focused"
+                                      [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                                      [class.faded]="isHovered(date) || isInside(date)"
+                                      [class.selected]="isDateSelected(date)" (mouseenter)="hoveredDate = date"
+                                      (mouseleave)="hoveredDate = null">
+                                      {{ date.day }}
+                                    </span>
+                                  </ng-template>
+                                  <!-- <hr> -->
+                                  <!-- <pre>DateSelected: {{ datesSelected | json }} </pre> -->
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+
+                      <div class="row">
+                        <div class="row form-group col-sm-12">
+                          <div class="col-md-9" >
+                            <div formArrayName="bus_seat_layout_data" class="col-12">
+                              <div class="row" *ngFor="
+                                  let layoutRow of seatOpenForm.controls
+                                    .bus_seat_layout_data.controls;
+                                  let layout_row = index
+                                " [formGroupName]="layout_row">
+                                <div formArrayName="lowerBerth" class="col-12"
+                                  style="display: flex; justify-content: center">
+                                  <div *ngFor="
+                                      let layoutCol of layoutRow['controls']
+                                        .lowerBerth['controls'];
+                                      let layout_row = index
+                                    " [formGroupName]="layout_row" style="
+                                      width: 50px;
+                                      float: left;
+                                      text-align: center;
+                                    ">
+                                    <!-- (change)="chooseSeat($event.target.checked,layoutCol.controls.seatType.value,layoutCol.controls.seatText.value,1)" -->
+                                    <label class="seatHolder">
+                                      <input type="checkbox" formControlName="seatChecked" *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        " />
+                                      <span class="seaterImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 1
+                                        "></span>
+                                      <span class="sleeperImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 2
+                                        "></span>
+                                      <span class="verticalImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 3
+                                        "></span>
+                                      <span class="blankImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 4
+                                        "></span>
+                                      <span *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        ">{{
+                                        layoutCol.controls.seatText.value
+                                        }}</span>
+                                    </label>
+                                  </div>
+                                </div>
+
+                                <div formArrayName="upperBerth" class="col-12"
+                                  style="display: flex; justify-content: center">
+                                  <div *ngFor="
+                                      let layoutCol of layoutRow['controls']
+                                        .upperBerth['controls'];
+                                      let layout_row = index
+                                    " [formGroupName]="layout_row" style="
+                                      width: 50px;
+                                      float: left;
+                                      text-align: center;
+                                    ">
+                                    <label class="seatHolder">
+                                      <input type="checkbox" formControlName="seatChecked" *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        " />
+                                      <span class="seaterImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 1
+                                        "></span>
+                                      <span class="sleeperImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 2
+                                        "></span>
+                                      <span class="verticalImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 3
+                                        "></span>
+                                      <span class="blankImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 4
+                                        "></span>
+                                      <span *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        ">{{
+                                        layoutCol.controls.seatText.value
+                                        }}</span>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <table class="table" border="1" *ngIf="alreadyOpenData.length > 0">
+                                  <thead>
+                                    <tr>
+                                      <th> Date</th>
+                                      <th> Open Seats</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let aldOpen of alreadyOpenData">
+                                      <td>
+                                          {{aldOpen.value[0].operation_date}}
+                                      </td>
+                                      <td>
+                                        <span *ngFor="let seat of aldOpen.value">
+                                            {{seat.seats.seatText}} ,
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  </tbody>                                
+                                </table>
+                              </div>
+                            </div>
+                          </div>  
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" [disabled]="!seatOpenForm.valid" (click)="addOpenseat()" class="btn btn-primary"
+              ngbAutofocus>
+              {{ ModalBtn }}
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" #defaultClick
+              (click)="modal.dismiss('Cross click')">
+              Close
+            </button>
+          </div>
+        </ng-template>
+
+        <ng-template #details let-modal>
+          <div class="modal-header">
+            <h5 class="ng-tns-c116-5">Seat Open Details Of [<b class="text-danger">{{
+                seatOpenDetails[0][0].value[0].bus.name}}: {{ seatOpenDetails[0][0].value[0].bus.bus_number}}</b>]</h5>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="col-sm-12">
+                  <tr *ngFor="let opendate of seatOpenDetails;let dateIndex= index ">
+                    <td>
+                      <!-- {{opendate |json}} -->
+                      <table class="table table-striped">
+                        <tr>
+                          <th><small> #</small> </th>
+                          <th><small> Date</small> </th>
+                          <th> <small>Route </small> </th>
+                          <th> <small>OPen Seats</small> </th>
+                          <th> <small> Reason</small> </th>
+                          <th> <small> Created On</small> </th>
+                          <th><small> Created By</small></th>
+                          <th class="hide_print">Action</th>
+                        </tr>
+                        <tr *ngFor="let routdate of opendate;let routIndex= index ">
+                          <td>
+                            {{routIndex+1}}
+                          </td>
+                          <td>
+                            {{routdate.value[0].operation_date}}
+                          </td>
+                          <td>
+                            {{routdate.value[0].source[0].name}} >> {{routdate.value[0].destination[0].name}}
+                          </td>
+                          <td>
+                            <span *ngFor="let seat of routdate.value; let seatIndex= index ">
+                              {{seat.seats.seatText}},
+                            </span>
+                          </td>
+                          <td>
+                            {{routdate.value[0].reason}} <br> {{routdate.value[0].other_reason}}
+                          </td>
+
+                          <td>
+                            {{routdate.value[0].created_at | date: 'dd/MM/yyyy-- H:mm:ss'}}
+                          </td>
+                          <td>
+                            {{routdate.value[0].created_by}}
+                          </td>
+
+                          <td class="hide_print">
+                            <div class="overlay-edit">
+                              <button type="button" (click)="openConfirmDialog (confirmDialog,
+                                              opendate[0].value[0].bus.id ,
+                                              routdate.value[0].ticket_price_id,
+                                              routdate.value[0].operation_date)" class="btn btn-icon btn-danger">
+                                <i class="feather icon-trash-2"></i>
+                              </button>
+                            </div>
+                          </td>
+
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" #defaultClick
+              (click)="modal.dismiss('Cross click')">
+              Close
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </app-card>
+  </div>
+</div>

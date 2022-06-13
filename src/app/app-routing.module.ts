@@ -1,0 +1,69 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from './theme/layout/admin/admin.component';
+import { LoginComponent  } from './theme/layout/admin/login/login.component';
+import {AuthComponent} from './theme/layout/auth/auth.component';
+import { Routeguard } from './helpers/routeguard';
+
+const routes: Routes = [
+  {
+    path: '',
+    //component: LoginComponent,
+    children:[
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./login/login.module').then(module =>module.LoginModule)
+      },
+      {
+        path: 'forget-password',
+        loadChildren: () => import('./forgetpassword/forgetpassword.module').then(module =>module.ForgetPasswordModule)
+      },
+      {
+        path: 'signup',
+        loadChildren: () => import('./signup/signup.module').then(module =>module.SignupModule)
+      },
+      {
+        path: 'otp',
+        loadChildren: () => import('./otp/otp.module').then(module =>module.OtpModule)
+      }      
+    ]
+  },
+  {
+    path: '',
+    component: AdminComponent,
+    
+    children: [
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      },
+      {
+        path: 'busmanagement',
+        loadChildren: () => import('./busmanagement/busmanagement.module').then(module => module.BusmanagementModule),
+        canActivate: [Routeguard]
+      },
+      {
+        path: 'bookingmanagement',
+        loadChildren: () => import('./bookingmanagement/bookingmanagement.module').then(module => module.BookingmanagementModule),
+        canActivate: [Routeguard]
+      },
+      {
+        path: 'reports',
+        loadChildren: () => import('./reports/reports.module').then(module => module.ReportsModule),
+        canActivate: [Routeguard]
+      }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
