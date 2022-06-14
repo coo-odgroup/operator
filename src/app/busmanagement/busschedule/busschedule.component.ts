@@ -166,7 +166,7 @@ export class BusscheduleComponent implements OnInit {
     this.busScheduleRecord= {} as Busschedule;
     this.busScheduleForm = this.fb.group({
       bus_id: ['',Validators.compose([Validators.required,])],
-      bus_operator_id: ['',Validators.compose([Validators.required,])],
+      bus_operator_id: [null],
       running_cycle: ['',Validators.compose([Validators.required,])],
       entry_date: ['',Validators.compose([Validators.required,])],
     });
