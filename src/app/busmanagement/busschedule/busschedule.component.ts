@@ -85,8 +85,8 @@ export class BusscheduleComponent implements OnInit {
       name: [null],  
       rows_number: Constants.RecordLimit,
       bus_id: [null],  
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
     });
 
     this.search();
@@ -100,11 +100,12 @@ export class BusscheduleComponent implements OnInit {
     this.spinner.show();
     const data = { 
       name: this.searchForm.value.name,
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       bus_id: this.searchForm.value.bus_id,
       rows_number:this.searchForm.value.rows_number, 
     };
+    // console.log(data);
     if(pageurl!="")
     {
       this.busscheduleService.getAllPaginationData(pageurl,data).subscribe(
@@ -135,8 +136,8 @@ export class BusscheduleComponent implements OnInit {
    {
     this.searchForm = this.fb.group({  
       name: [null],  
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       bus_id: [null],
       rows_number: Constants.RecordLimit,
     });
@@ -188,13 +189,14 @@ export class BusscheduleComponent implements OnInit {
   findOperator() {
     this.spinner.show();
  
-    let operatorId = 157;
-    // let operatorId = localStorage.getItem('OPERATOR_ID');
+    // let operatorId = 157;
+    let operatorId = localStorage.getItem('OPERATOR_ID');
     if (operatorId) {
       this.busService.getByOperaor(operatorId).subscribe(
         res => {
           this.buses = res.data;
-          this.buses.map((i:any) => { i.testing = i.name + ' - ' + i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
+          this.buses.map((i:any) => { i.testing = i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
+          // this.buses.map((i:any) => { i.testing = i.name + ' - ' + i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
           this.spinner.hide();
 
         }
@@ -265,8 +267,8 @@ export class BusscheduleComponent implements OnInit {
   
     const data ={
       bus_id:this.busScheduleForm.value.bus_id,
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       entry_date:this.busScheduleForm.value.entry_date,
       running_cycle:this.busScheduleForm.value.running_cycle,
       created_by:localStorage.getItem('USERNAME')
@@ -321,8 +323,8 @@ export class BusscheduleComponent implements OnInit {
     this.busScheduleForm = this.fb.group({
       id:this.busScheduleRecord.id,
       bus_id: this.scheduleRecord.bus.id,
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       entry_date:this.scheduleRecord.bus_schedule_date[0].entry_date,
       cancelled_by:'Admin', 
       running_cycle:this.scheduleRecord.running_cycle,

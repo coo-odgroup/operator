@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
         // console.log(res);  
         if(res.status==1){ 
           this.loginRecord=res.data;
+          // console.log(this.loginRecord);  
           localStorage.setItem("USERRECORDS",JSON.stringify(this.loginRecord));
           localStorage.setItem("USERID",JSON.stringify(this.loginRecord.id)); 
           localStorage.setItem("ROLE_ID",JSON.stringify(this.loginRecord.role_id)); 

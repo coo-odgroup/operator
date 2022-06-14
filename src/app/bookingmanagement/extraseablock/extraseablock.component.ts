@@ -205,8 +205,8 @@ export class ExtraseablockComponent implements OnInit {
       date:this.searchForm.value.date,
       source_id:this.searchForm.value.source_id,
       destination_id:this.searchForm.value.destination_id,
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
     };
 
     // console.log(data);
@@ -592,8 +592,8 @@ export class ExtraseablockComponent implements OnInit {
     this.busSchedule = [];
     this.seatOpenRecord = {} as Seatopen;
     this.seatOpenForm = this.fb.group({
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       id: [null],
       bus_id: [null],
       busRoute: [null],
@@ -656,8 +656,8 @@ export class ExtraseablockComponent implements OnInit {
     // this.seatBlockForm.controls.bus_id.setValue('');
     this.seatOpenForm.controls.busRoute.setValue('');
 
-    let operatorId = 157;
-    // let operatorId =  localStorage.getItem('OPERATOR_ID');
+    // let operatorId = 157;
+    let operatorId =  localStorage.getItem('OPERATOR_ID');
 
     if (operatorId) {
       this.spinner.show();

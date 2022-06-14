@@ -208,8 +208,8 @@ export class SeatblockComponent implements OnInit {
       page_no:this.page_no,
       fromDate:this.searchForm.value.fromDate,
       toDate:this.searchForm.value.toDate,
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       source_id:this.searchForm.value.source_id,
       destination_id:this.searchForm.value.destination_id,
       USER_BUS_OPERATOR_ID:localStorage.getItem('USER_BUS_OPERATOR_ID') 
@@ -320,8 +320,8 @@ export class SeatblockComponent implements OnInit {
       toDate:[null],
       source_id:[null],
       destination_id:[null],
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
     });
      this.search();
   
@@ -642,8 +642,8 @@ export class SeatblockComponent implements OnInit {
     this.busSchedule = [] ;
     this.seatBlockRecord = {} as Seatblock;
     this.seatBlockForm = this.fb.group({
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       id: [null],
       bus_id: [null],
       busRoute: [null],
@@ -681,8 +681,8 @@ export class SeatblockComponent implements OnInit {
     // this.seatBlockForm.controls.bus_id.setValue('');
     this.seatBlockForm.controls.busRoute.setValue('');
 
-    let operatorId = 157;
-    // let operatorId =  localStorage.getItem('OPERATOR_ID');
+    // let operatorId = 157;
+    let operatorId =  localStorage.getItem('OPERATOR_ID');
 
     if (operatorId) {
       this.spinner.show();

@@ -94,8 +94,8 @@ export class BuscancellationComponent implements OnInit {
     this.loadServices();
 
     this.busCancellationForm = this.fb.group({
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       month: [null],
       year: [null],
       reason: [null],
@@ -144,8 +144,8 @@ export class BuscancellationComponent implements OnInit {
     const data = {
       name: this.searchForm.value.name,
       bus_id: this.searchForm.value.bus_id,
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       source_id: this.searchForm.value.source_id,
       destination_id: this.searchForm.value.destination_id,
       toDate: this.searchForm.value.toDate,
@@ -258,8 +258,8 @@ export class BuscancellationComponent implements OnInit {
     this.showdates = '0';
     this.busCancellationRecord = {} as Buscancellation;
     this.busCancellationForm = this.fb.group({
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       month: [null],
       year: [null],
       reason: [null],
@@ -291,8 +291,8 @@ export class BuscancellationComponent implements OnInit {
   }
   getBusbyOperator() {
     this.spinner.show();
-    let operatorId = 157;
-  //let operatorId = localStorage.getItem('OPERATOR_ID');
+    // let operatorId = 157;
+  let operatorId = localStorage.getItem('OPERATOR_ID');
     if (operatorId) {
       this.busOperatorService.getBusbyOperator(operatorId).subscribe(
         resp => {

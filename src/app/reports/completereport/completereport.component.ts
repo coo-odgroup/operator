@@ -71,8 +71,8 @@ export class CompletereportComponent implements OnInit {
    
 
     this.search();
-    // this.findOperator(localStorage.getItem('OPERATOR_ID'));
-    this.findOperator(157);
+    this.findOperator(localStorage.getItem('OPERATOR_ID'));
+    // this.findOperator(157);
 
   }
 
@@ -101,8 +101,8 @@ export class CompletereportComponent implements OnInit {
      this.completeReportRecord = this.searchFrom.value ; 
      
     const data = {
-      bus_operator_id: 157,
-      // bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       bus_id:this.completeReportRecord.bus_id,
       date_type :this.completeReportRecord.date_type,
       pnr :this.completeReportRecord.pnr,
