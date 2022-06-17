@@ -311,10 +311,10 @@ export class BuscancellationComponent implements OnInit {
 
     const arr = <FormArray>this.busCancellationForm.controls.buses;
     arr.controls = [];
-    //console.log(this.busCancellationForm.value);
+    // console.log(this.busCancellationForm.value);
 
     this.spinner.show();
-    this.busService.getBusScheduleEntryDatesFilter(this.busCancellationForm.value).subscribe(
+    this.busService.getBusScheduleEntry(this.busCancellationForm.value).subscribe(
       response => {
         this.busDatas = response.data.busDatas;
         let counter = 0;
@@ -480,9 +480,10 @@ export class BuscancellationComponent implements OnInit {
 
   }
   addBusCancellation() {
-    this.spinner.show();
+    // this.spinner.show();
     let counter = 0;
-    let id: any = this.busCancellationRecord.id;
+    let id: any = "";
+      id= this.busCancellationRecord.id;
     const data = {
       bus_operator_id: this.busCancellationForm.value.bus_operator_id,
       cancelled_by: localStorage.getItem('USERNAME'),
@@ -502,6 +503,7 @@ export class BuscancellationComponent implements OnInit {
       }
 
   });
+  //  console.log(id);
   //  console.log(data);
   //  return;
   if(counter == 0)
@@ -511,41 +513,52 @@ export class BuscancellationComponent implements OnInit {
   }
   else
   {
-    if (id == null) {
-      this.buscanCellationService.create(data).subscribe(
-        resp => {
-          if (resp.status == 1) {
-            this.notificationService.addToast({
-              title: Constants.SuccessTitle, msg: resp.message,
-              type: Constants.SuccessType
-            });
-            this.modalReference.close();
-            this.ResetAttributes();
-            this.search(this.url);
-          }
-          else {
-            this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
-            this.spinner.hide();
-          }
-        });
+    if(counter>5){ 
+      this.notificationService.addToast({ title: Constants.ErrorTitle, msg:'You Can`t block more than 5 Days', type: Constants.ErrorType });
+      this.spinner.hide();
+      return;
     }
-    else {
+    else{
+      if (id == null) {
+     
+        this.buscanCellationService.create(data).subscribe(
+          resp => {
+            if (resp.status == 1) {
+              console.log(resp);
+              this.notificationService.addToast({
+                title: Constants.SuccessTitle, msg: resp.data,
+                type: Constants.SuccessType
+              });
+              this.modalReference.close();
+              this.ResetAttributes();
+              this.search(this.url);
+            }
+            else {
+              this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+              this.spinner.hide();
+            }
+          });
+      }
+      else {
 
-      this.buscanCellationService.update(id, data).subscribe(
-        resp => {
-          if (resp.status == 1) {
-            this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
-            this.modalReference.close();
-            this.ResetAttributes();
-            // this.refresh();
-            this.search(this.url);
-          }
-          else {
-            this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
-            this.spinner.hide();
-          }
-        });
+        this.buscanCellationService.update(id, data).subscribe(
+          resp => {
+            if (resp.status == 1) {
+              this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
+              this.modalReference.close();
+              this.ResetAttributes();
+              // this.refresh();
+              this.search(this.url);
+            }
+            else {
+              this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+              this.spinner.hide();
+            }
+          });
+      }
+
     }
+    
 
   }
   }
@@ -554,7 +567,7 @@ export class BuscancellationComponent implements OnInit {
     this.showdates = '0';
     this.selectedCancelBus = [];
     this.busCancellationRecord = this.busCancellations[id];
-    //console.log(this.busCancellationRecord);  
+    console.log(this.busCancellationRecord);  
     //  console.log(this.selectedCancelBus);
 
 
@@ -565,7 +578,7 @@ export class BuscancellationComponent implements OnInit {
       year: this.busCancellationRecord.year,
       reason: this.busCancellationRecord.reason,
       other_reson: this.busCancellationRecord.other_reson,
-      busLists: this.selectedCancelBus
+      busLists: this.busCancellationRecord.bus_id
     });
     this.getBusbyOperator();
 

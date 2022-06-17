@@ -228,7 +228,7 @@
                             class="text-danger">*</span></label>
                         <div class="col-sm-10">
                           <ng-select [items]="buses" bindLabel="name" bindValue="id" placeholder="Select Bus"
-                            [multiple]="true" [clearable]="false" (change)="getBusScheduleEntryDatesFilter()"
+                             [clearable]="false" (change)="getBusScheduleEntryDatesFilter()"
                             formControlName="busLists">
                           </ng-select>
                         </div>
@@ -276,7 +276,7 @@
                         <label *ngFor="let busesFormGroup of busesitem['controls'].dateLists['controls']; let i=index"
                           class="col-6 col-sm-4 col-md-3 " [formGroupName]="i">
                             <input type="checkbox" class="filled-in" formControlName="datechecked" />
-                            <span>{{busesFormGroup.controls.entryDates.value}}</span>
+                            <span>{{busesFormGroup.controls.entryDates.value | date: 'dd-MMM'}}</span>
                         </label>
                       </div>
                       </div>
