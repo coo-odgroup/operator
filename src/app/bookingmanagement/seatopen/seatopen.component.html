@@ -9,7 +9,7 @@
       cardClass=" table-border-style user-profile-list ">
       <div class="row">
         
-        <div class="col-12">
+        <div class="col-12 p-0">
           <form [formGroup]="searchForm">
             <div class="row">
               <div class="col-md-4">
@@ -28,7 +28,7 @@
 
                 
               </div>
-              <div class="col-md-5 ">
+              <!-- <div class="col-md-5 ">
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <div class="input-group">
@@ -39,13 +39,31 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-3 col-sm-12">
                 <div class="form-group row">
                   <div class="col-sm-12">
                         <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus"
                         formControlName="bus_id" [clearable]="false" required>
                       </ng-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 col-sm-12">
+                <div class="row ">
+                  <div class="col-6">
+                    <div class="form-group ">
+                      <input type="date" class="form-control sml_input" placeholder="Enter pnr" required
+                        formControlName="fromDate" />
+                      <label><small><b>Start Date</b></small></label>
+                    </div>
+                  </div>
+                  <div class=" col-6">
+                    <div class="form-group ">
+                      <input type="date" class="form-control sml_input" placeholder="Enter pnr" required
+                        formControlName="toDate" />
+                      <label> <small><b>End Date</b></small></label>
+                    </div>
                   </div>
                 </div>
               </div>
