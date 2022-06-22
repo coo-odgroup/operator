@@ -64,7 +64,7 @@ export class CompletereportComponent implements OnInit {
       bus_id : [null],
       date_type:['journey'],
       pnr:[null],
-      rows_number:50,
+      rows_number:10,
       source_id:[null],
       destination_id:[null]
     })  
@@ -142,7 +142,8 @@ export class CompletereportComponent implements OnInit {
       this.busService.getByOperaor(operatorId).subscribe(
         res => {
           this.buses = res.data;
-        this.buses.map((i: any) => { i.busData = i.name + ' - ' + i.bus_number ; return i; });
+        this.buses.map((i: any) => { i.busData = i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')'; return i; });
+        // this.buses.map((i: any) => { i.busData = i.name + ' - ' + i.bus_number ; return i; });
           // console.log(this.buses);
         }
       );
@@ -177,8 +178,9 @@ export class CompletereportComponent implements OnInit {
       rangeToDate:[null],
       payment_id : [null],
       pnr:[null],
+      bus_id : [null],
       date_type:['journey'],
-      rows_number: 50,
+      rows_number: 10,
       // rows_number: Constants.RecordLimit,
       source_id:[null],
       destination_id:[null]

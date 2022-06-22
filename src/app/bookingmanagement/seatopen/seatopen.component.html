@@ -71,12 +71,11 @@
               <th>#</th>
               <th>Bus</th>
               <th>Seat Open Details <br>(Date & Seats)</th>
-      
             </tr>
           </thead>
           <tbody *ngIf="seatOpen?.length != 0">
             <tr *ngFor="let sblock of seatOpen; let i = index">
-              <td>{{i+1}}</td>
+              <td style="min-width: 15px !important;">{{i+1}}</td>
               <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number }}</td>
               <td>
                 <table >

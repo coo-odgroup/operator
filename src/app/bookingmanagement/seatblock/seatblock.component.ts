@@ -825,7 +825,6 @@ export class SeatblockComponent implements OnInit {
           this.set_page(this.lastUrl);
         }
         else {
-
           this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
         }
       });

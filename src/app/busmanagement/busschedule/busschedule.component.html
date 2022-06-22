@@ -90,7 +90,7 @@
           </thead>
           <tbody *ngIf="busSchedules?.length != 0">
             <tr *ngFor="let busSchedule of busSchedules; let i=index; ">
-              <td>{{ i+1 }} </td>
+              <td style="min-width: 15px !important;">{{ i+1 }} </td>
               <!-- <td (click)="showEntryDates($event,i);OpenModal(schedulecontent);">{{
                 busSchedule.bus.bus_operator.organisation_name }} [{{ busSchedule.bus.bus_operator.operator_name }}]
               </td> -->

@@ -762,7 +762,7 @@ export class ExtraseablockComponent implements OnInit {
             if (resp.status == 1) {
               this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
               this.modalReference.close();
-              this.lastUrl=
+              this.lastUrl= '';
               this.set_page(this.lastUrl);
             }
             else {
