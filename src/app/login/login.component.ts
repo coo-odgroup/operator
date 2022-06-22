@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       password:this.form.value.password,
       user_type:4 , 
     };
-    console.log(data);
+    // console.log(data);
     this.loginService.checkLogin(data).subscribe(
 
       res=>{

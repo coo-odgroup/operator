@@ -11,11 +11,19 @@
     </ul>
   </div>
 
-  <div *ngIf="roleId!=1 && roleId!=2" class="border-top">
+
+  <div class="border-top  border-bottom">
     <img src="/assets/images/calling_woman_vector.png" style="width: 94%;" class="pt-2 pb-2">
     <div class="col-12 text-center pt-2 pb-2 lead"><a href="mailto:support@odbus.in"><i class="fa fa-envelope"></i> support@odbus.in</a></div>
-    <div class="col-12 text-center pt-2 pb-2 lead  border-bottom"><a href="tel:9937000838"><i class="fa fa-phone"></i> 9937000838</a></div>
+    <div class="col-12 text-center pt-2 pb-2 lead border-bottom "><a href="tel:9937000838"><i class="fa fa-phone"></i> 9937000838</a></div>
+    <div class="col-12 text-center pt-2 pb-2 lead">
+    <a href="javascript:" (click)="logout()" class="btn btn-danger btn-sm text-light"><b><i class="fas fa-sign-out-alt"></i> Logout</b></a>
+
+    </div>
   </div>
+
+
+
   
   
 </perfect-scrollbar>
