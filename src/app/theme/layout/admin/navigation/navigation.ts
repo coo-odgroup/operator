@@ -48,7 +48,7 @@ const OperatorItems =[{
     },
     {
       id: 'seatBlock',
-      title: 'seat  Block',
+      title: 'Seat  Block',
       type: 'item',
       icon:'feather icon-slash',
       url: 'bookingmanagement/seatblock'
