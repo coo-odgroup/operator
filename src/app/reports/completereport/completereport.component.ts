@@ -51,8 +51,7 @@ export class CompletereportComponent implements OnInit {
       this.fromDate = calendar.getToday();
       this.toDate = calendar.getToday();
     }
-    title = 'angular-app';
-    fileName= 'Complete-Report.xlsx';
+   
   ngOnInit(): void {
     this.spinner.show();
 
@@ -75,7 +74,8 @@ export class CompletereportComponent implements OnInit {
     // this.findOperator(157);
 
   }
-
+  title = 'angular-app';
+  fileName= 'Complete-Report.xlsx';
   exportexcel(): void
   {
     

@@ -316,7 +316,7 @@ export class BusscheduleComponent implements OnInit {
     this.findOperator();
     this.busScheduleRecord=this.busSchedules[id];
     this.scheduleRecord=this.busScheduleRecord;
-    // console.log(this.scheduleRecord);
+    console.log(this.scheduleRecord);
 
     
 

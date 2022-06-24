@@ -58,20 +58,6 @@
                   </select>
                 </div>
               </div>
-
-
-              <!-- <div class="col-md-5 col-sm-12">
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    <div class="input-group">
-                      <input type="date" class="form-control sml_input" placeholder="Search Date Here " required
-                        formControlName="fromDate">
-                      <input type="date" class="form-control sml_input" placeholder="Search Date Here " required
-                        formControlName="toDate">
-                    </div>
-                  </div>
-                </div>
-              </div> -->
               <div class="col-md-3 col-sm-12">
                 <div class="form-group row">
                   <div class="col-sm-12">
@@ -130,7 +116,7 @@
           <tbody *ngIf="seatBlock?.length != 0">
             <tr *ngFor="let sblock of seatBlock; let i = index">
               <td style="min-width: 15px !important;">{{i+1}}</td>
-              <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number }}</td>
+              <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number }}<br>{{sblock[0][0].value[0].bus_source[0]?.name}}  >>  {{sblock[0][0].value[0].bus_destination[0]?.name}}</td>
               <td>
                 <table>
                   <tr *ngFor="let opendate of sblock;let dateIndex= index ">
@@ -477,10 +463,20 @@
                             </div>
                           </div>
                         </div>
+                        <style>
+                          .table1.table1-bordered > thead > tr > th{
+                            border:3px solid rgb(223, 11, 11);
+                            color: brown;
+                          }
+                          .table1.table1-bordered > tbody > tr > td{
+                            border:3px solid rgb(223, 11, 11);
+                          }
+                        </style>
                         <div class="col-md-3">
                           <div class="row">
                             <div class="col-md-12">
-                              <table class="table" border="1" *ngIf="alreadyBlocksData.length > 0">
+                              <h6 *ngIf="alreadyBlocksData.length > 0">Already Block Seats</h6>
+                              <table class="table table1 table1-bordered" *ngIf="alreadyBlocksData.length > 0">
                                 <thead>
                                   <tr>
                                     <th> Date</th>
@@ -493,8 +489,9 @@
                                       {{aldBlock.value[0].operation_date}}
                                     </td>
                                     <td>
-                                      <span *ngFor="let seat of aldBlock.value">
-                                        {{seat.seats.seatText}} ,
+                                      <span *ngFor="let seat of aldBlock.value" >
+                                        <!-- {{seat.seats.seatText}} , -->
+                                        <b>{{seat.seats.seatText}}</b> ,
                                       </span>
                                     </td>
                                   </tr>
