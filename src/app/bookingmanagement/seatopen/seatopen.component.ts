@@ -16,7 +16,7 @@ import * as XLSX from 'xlsx';
 import { NgxSpinnerService } from "ngx-spinner";
 
 import {Input,Output,EventEmitter} from '@angular/core';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -104,6 +104,7 @@ export class SeatopenComponent implements OnInit {
   alreadyOpenData: any = [];
   constructor(
     calendar: NgbCalendar,
+    private dtconfig: NgbDatepickerConfig,
     private seatopenService: SeatopenService,
     private seatlayoutService: SeatlayoutService,
     private bss: BusscheduleService,
@@ -123,6 +124,12 @@ export class SeatopenComponent implements OnInit {
     config.keyboard = false;
     this.ModalHeading = "Add Seat Open";
     this.ModalBtn = "Save";
+
+
+    const current = new Date();
+    this.dtconfig.minDate = { year: current.getFullYear(), month: 
+    current.getMonth() + 1, day: current.getDate() };
+
   }
 
   OpenModal(content) {

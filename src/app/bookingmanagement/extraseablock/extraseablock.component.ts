@@ -17,7 +17,7 @@ import { SeatlayoutService } from '../../services/seatlayout.service';
 import * as XLSX from 'xlsx';
 import { NgxSpinnerService } from "ngx-spinner";
 import {Input,Output,EventEmitter} from '@angular/core';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -106,6 +106,7 @@ export class ExtraseablockComponent implements OnInit {
   extraSeatBlockDetails: any;
   lastUrl: any;
   constructor(
+    private dtconfig: NgbDatepickerConfig,
     private buscanCellationService: BuscancellationService,
     private seatopenService: ExtraseatblockService,
     private bss: BusscheduleService,
@@ -126,6 +127,10 @@ export class ExtraseablockComponent implements OnInit {
     config.keyboard = false;
     this.ModalHeading = "Block Extra Seats";
     this.ModalBtn = "Save";
+
+    const current = new Date();
+    this.dtconfig.minDate = { year: current.getFullYear(), month: 
+    current.getMonth() + 1, day: current.getDate() };
   }
 
   OpenModal(content) {

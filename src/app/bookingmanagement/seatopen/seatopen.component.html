@@ -234,31 +234,31 @@
                                 </div>
 
                                 <div class="row">
-                                  <div class="col-sm-12 p-0">
+                                  <div class="col-sm-12 ">
+                                    <strong *ngIf="busSchedule.length>0">Current Running Schedule For This Bus </strong>
                                     <label *ngFor="let eDate of busSchedule ;">
                                       <span class="col-3  btn " *ngFor="let  date of eDate.bus_schedule_date ;">
-                                        {{date.entry_date | date: 'dd-MM-YY' }}
+                                        {{date.entry_date | date: 'dd-MM' }}
                                       </span>
           
                                     </label>
                                   </div>
                                 </div>
-
                               </div>
                             </div>
-                          
                           </div>
                         </div>
                         <div class="col-md-4 text-center">
                           <div class="col-sm-12">
                             <div class="form-group row">
+                              <strong>Please Choose the Date from the Calender</strong>
                               <!-- <label for="date" class="col-sm-4 col-form-label">Date<span
                                   class="text-danger">*</span></label> -->
                               <div class="col-sm-8">
                                 <div class="col-sm-8">
 
                                   <ngb-datepicker #dp (datesSelectedChange)="change($event)" [displayMonths]="1"
-                                    [dayTemplate]="t">
+                                    [dayTemplate]="t" [min]="dtconfig.minDate">
                                   </ngb-datepicker>
 
                                   <ng-template #t let-date="date" let-focused="focused">

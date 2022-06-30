@@ -264,7 +264,7 @@ margin-bottom: 5px !important;
                   </div>
 
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group row">
                         <label for="busCancel" class="col-sm-4 col-form-label">Month<span
                             class="text-danger">*</span></label>
@@ -277,7 +277,7 @@ margin-bottom: 5px !important;
                       </div>
                     </div>
                    
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group row">
                         <label for="busCancel" class="col-sm-4 col-form-label">Year<span
                             class="text-danger">*</span></label>
@@ -289,6 +289,23 @@ margin-bottom: 5px !important;
                         </div>
                       </div>
                     </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group row" >
+                        <label for="reason" class="col-sm-4 col-form-label">Reason<span class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                          <ng-select [items]="reasons" bindLabel="reason" bindValue="reason" placeholder="Select reason"
+                            [clearable]="false" required formControlName="other_reson">
+                          </ng-select>
+                          <!-- <span *ngIf="busCancellationForm.controls.reason.value=='others'">
+                            <input type="text" class="form-control" ngbAutofocus placeholder="Enter Reson"
+                              formControlName="other_reson" />
+                          </span> -->
+                        </div>
+                      </div>
+                    </div>
+
+
                   </div>
 
                   <div class="form-group row" formArrayName="buses">
@@ -322,6 +339,5 @@ margin-bottom: 5px !important;
           (click)="modal.dismiss('Cross click')">Close</button>
       </div>
     </ng-template>
-
   </div>
 </div>

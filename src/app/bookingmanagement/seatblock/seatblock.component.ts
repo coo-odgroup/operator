@@ -17,7 +17,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { replace } from 'lodash';
 
 import {Input,Output,EventEmitter} from '@angular/core';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -68,6 +69,8 @@ export class SeatblockComponent implements OnInit {
   modalReference: NgbModalRef;
   confirmDialogReference: NgbModalRef;
 
+  
+
   seatBlock: any=[];
   seatBlockDetails: any;
 
@@ -95,6 +98,7 @@ export class SeatblockComponent implements OnInit {
   lowerData: FormArray;
   upperData: FormArray;
   busopenform: any;
+  
 
   // datesSelected:NgbDateStruct[]=[]; 
   dtOptionsSeatblock: { pagingType: string; pageLength: number; serverSide: boolean; processing: boolean; dom: string; order: string[]; aLengthMenu: (string | number)[]; buttons: ({ extend: string; className: string; init: (api: any, node: any, config: any) => void; exportOptions: { columns: string; }; text?: undefined; action?: undefined; } | { text: string; className: string; init: (api: any, node: any, config: any) => void; action: () => void; extend?: undefined; exportOptions?: undefined; })[]; language: { searchPlaceholder: string; processing: string; }; ajax: (dataTablesParameters: any, callback: any) => void; columns: ({ data: string; title?: undefined; render?: undefined; orderable?: undefined; className?: undefined; } | { title: string; data: string; render?: undefined; orderable?: undefined; className?: undefined; } | { data: string; render: (data: any) => "Active" | "Pending"; title?: undefined; orderable?: undefined; className?: undefined; } | { title: string; data: any; orderable: boolean; className: string; render?: undefined; })[]; };
@@ -108,6 +112,7 @@ export class SeatblockComponent implements OnInit {
   alreadyBlocksData: any=[];
   constructor(
     calendar: NgbCalendar,
+    private dtconfig: NgbDatepickerConfig,
     private seatblockService: SeatblockService,
     private seatlayoutService: SeatlayoutService,
     private bss: BusscheduleService,
@@ -127,13 +132,17 @@ export class SeatblockComponent implements OnInit {
     config.keyboard = false;
     this.ModalHeading = "Add Seat Block";
     this.ModalBtn = "Save";
+    
+    const current = new Date();
+    this.dtconfig.minDate = { year: current.getFullYear(), month: 
+    current.getMonth() + 1, day: current.getDate() };
   }
 
   OpenModal(content) {
     this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
   }
   ngOnInit(): void {
-
+    
     this.spinner.show();
     this.seatBlockForm = this.fb.group({
       bus_operator_id: [null],
