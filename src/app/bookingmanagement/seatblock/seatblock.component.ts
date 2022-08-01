@@ -15,6 +15,7 @@ import { SeatlayoutService } from '../../services/seatlayout.service';
 import * as XLSX from 'xlsx';
 import { NgxSpinnerService } from "ngx-spinner";
 import { replace } from 'lodash';
+import { DatePipe } from '@angular/common';
 
 import {Input,Output,EventEmitter} from '@angular/core';
 import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -69,7 +70,7 @@ export class SeatblockComponent implements OnInit {
   modalReference: NgbModalRef;
   confirmDialogReference: NgbModalRef;
 
-  
+  datePipe: DatePipe = new DatePipe('en-US');
 
   seatBlock: any=[];
   seatBlockDetails: any;
@@ -188,6 +189,13 @@ export class SeatblockComponent implements OnInit {
    
   }
 
+  getFormattedDate(){
+    
+    var date = new Date();
+    var transformDate = this.datePipe.transform(date, 'yyyy-MM-dd');
+    return transformDate;
+
+  }
   set_page(url:any)
   {
     this.lastUrl = '';
@@ -595,7 +603,7 @@ export class SeatblockComponent implements OnInit {
             counter++;
           }
         }
-        console.log(this.seatBlockForm.value);
+        // console.log(this.seatBlockForm.value);
         this.spinner.hide();
         
       }
@@ -934,7 +942,7 @@ export class SeatblockComponent implements OnInit {
     this.spinner.show();
     // this.checkroute();
     this.onSelectAll();
-    console.log(this.seatBlockForm.value.bus_id);
+    // console.log(this.seatBlockForm.value.bus_id);
 
     if(this.seatBlockForm.value.date == null)
     {
@@ -957,6 +965,7 @@ export class SeatblockComponent implements OnInit {
       this.seatblockService.updateSeatBlock(data).subscribe(
         resp => {
           if (resp.status == 1) {
+            // console.log(resp);
             this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
             this.modalReference.close();
             this.lastUrl=

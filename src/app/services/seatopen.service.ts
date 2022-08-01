@@ -51,6 +51,21 @@ export class SeatopenService {
     )
   }
 
+  updateSeatOpen(data): Observable<any> {
+    return this.httpClient.post<any>(this.apiURL + '/updateSeatOpen', JSON.stringify(data), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+  edit(data): Observable<any> {
+    return this.httpClient.post<any>(this.apiURL + '/editseatOpen', JSON.stringify(data), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
+
   update(id, post): Observable<any> {
     return this.httpClient.put<any>(this.apiURL + '/seatopen/' + id, JSON.stringify(post), this.httpOptions)
     .pipe(

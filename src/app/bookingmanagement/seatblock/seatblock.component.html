@@ -102,7 +102,7 @@
         </div>
       </div>
 
-
+      <!-- <p>{{getFormattedDate()}}</p> -->
       <div class="table-responsive" id="print-section">
         <table class="table table-striped">
           <thead>
@@ -130,10 +130,13 @@
                       </span>
                     </td>
                     <td class="hide_print">
-                      <span type="button" (click)="ResetAttributes();editsblock(opendate[0].value[0].bus.id ,
-                      opendate[0].value[0].operation_date,opendate[0].value[0].ticket_price_id);OpenModal(editSeat)" class="btn btn-sm">
-                        <i class="fa fa-edit " aria-hidden="true"></i>
+                      <span *ngIf="opendate[0].value[0].operation_date >= getFormattedDate()">
+                        <span type="button" (click)="ResetAttributes();editsblock(opendate[0].value[0].bus.id ,
+                        opendate[0].value[0].operation_date,opendate[0].value[0].ticket_price_id);OpenModal(editSeat)" class="btn btn-sm">
+                          <i class="fa fa-edit " aria-hidden="true"></i>
+                        </span>
                       </span>
+                    
                       <!-- opendate[0].value[0].bus.id ,
                       opendate[0].value[0].operation_date) -->
 
