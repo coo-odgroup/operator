@@ -138,11 +138,11 @@ margin-bottom: 5px !important;
                       {{cancelDT.cancelled_date | date: 'dd/MM'}} ,<br>
                 </span> 
               </td>
-
+              <!-- {{busCancellation.bus_cancelled_date[0].cancelled_date}} -->
                 <td class="hide_print">
                         <div class="row">
                           <div class="col-6">
-                            <span type="button"   (click)="ResetAttributes();editBusCancellation($event, i); OpenModal(content);" > 
+                            <span type="button" *ngIf="busCancellation.bus_cancelled_date[0].cancelled_date >= getFormattedDate()"   (click)="ResetAttributes();editBusCancellation($event, i); OpenModal(content);" > 
                               <i class="fa fa-edit " aria-hidden="true"></i>
                           </span>
                           </div>

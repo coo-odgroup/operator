@@ -33,6 +33,8 @@ export class BuscancellationComponent implements OnInit {
   pagination: any;
   pipe = new DatePipe('en-US');
 
+  datePipe: DatePipe = new DatePipe('en-US');
+
   public selectedCancelBus: Array<any> = [];
   modalReference: NgbModalRef;
   confirmDialogReference: NgbModalRef;
@@ -96,8 +98,8 @@ export class BuscancellationComponent implements OnInit {
     this.busCancellationForm = this.fb.group({
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
-      month: [null],
-      year: [null],
+      month: this.getcurrentmonths(),
+      year: this.getcurrentyears(),
       reason: [null],
       other_reson: [null],
       busLists: [null],
@@ -130,8 +132,39 @@ export class BuscancellationComponent implements OnInit {
     this.getBusbyOperator();
     this.search();
 
+    // console.log( this.getcurrentmonths());
+    // console.log( this.getcurrentyears());
+  }
+
+  
+  
+  getFormattedDate(){
+    
+    var date = new Date();
+    var transformDate = this.datePipe.transform(date, 'yyyy-MM-dd');
+    return transformDate;
 
   }
+  getcurrentmonths(){
+    
+    var date = new Date();
+    var transformmonth = this.datePipe.transform(date, 'MM');
+    // console.log(transformmonth);
+    return transformmonth;
+  }
+
+  getcurrentyears(){ 
+    var date = new Date();
+    var transformyear = this.datePipe.transform(date, 'yyyy');
+    // console.log(transformyear);
+    return transformyear;
+
+  }
+
+
+
+
+
 
 
   page(label: any) {
@@ -260,8 +293,8 @@ export class BuscancellationComponent implements OnInit {
     this.busCancellationForm = this.fb.group({
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
-      month: [null],
-      year: [null],
+      month: this.getcurrentmonths(),
+      year: this.getcurrentyears(),
       reason: [null],
       other_reson: [null],
       busLists: [null],
@@ -567,7 +600,7 @@ export class BuscancellationComponent implements OnInit {
     this.showdates = '0';
     this.selectedCancelBus = [];
     this.busCancellationRecord = this.busCancellations[id];
-    console.log(this.busCancellationRecord);  
+    // console.log(this.busCancellationRecord);  
     //  console.log(this.selectedCancelBus);
 
 
