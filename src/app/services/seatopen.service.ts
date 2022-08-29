@@ -45,7 +45,7 @@ export class SeatopenService {
   }
 
   create(data): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + '/seatopen', JSON.stringify(data), this.httpOptions)
+    return this.httpClient.post<any>(this.apiURL + '/addseatOpenByOperator', JSON.stringify(data), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

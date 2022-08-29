@@ -18,7 +18,7 @@ import * as XLSX from 'xlsx';
 import { NgxSpinnerService } from "ngx-spinner";
 import {Input,Output,EventEmitter} from '@angular/core';
 import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
-
+import { DatePipe } from '@angular/common';
 
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -73,7 +73,7 @@ export class ExtraseablockComponent implements OnInit {
   seatOpenRecord: Seatopen;
 
 
-
+  datePipe: DatePipe = new DatePipe('en-US');
   buses: any;
   busoperators: any;
   locations: any;
@@ -105,6 +105,9 @@ export class ExtraseablockComponent implements OnInit {
   cancelDates: any;
   extraSeatBlockDetails: any;
   lastUrl: any;
+  public DatesRecord: any;
+  busDatas: any;
+  checkedDate: any= [];
   constructor(
     private dtconfig: NgbDatepickerConfig,
     private buscanCellationService: BuscancellationService,
@@ -146,6 +149,13 @@ export class ExtraseablockComponent implements OnInit {
       date: [null],
       reason: [null],
       otherReson: [null],
+      dateLists: this.fb.array([
+        this.fb.group({
+          //busScheduleId: [null],
+          entryDates: [null],
+          datechecked: [''],
+        })
+      ]),
       bus_seat_layout_id: [null],
       bus_seat_layout_data: this.fb.array([
         this.fb.group({
@@ -593,6 +603,7 @@ export class ExtraseablockComponent implements OnInit {
   ResetAttributes() {
     this.datesSelected=[];
     this.route = [];
+    this.DatesRecord="";
     // this.loadServices();
     this.busSchedule = [];
     this.seatOpenRecord = {} as Seatopen;
@@ -605,6 +616,13 @@ export class ExtraseablockComponent implements OnInit {
       date: [null],
       reason: [null],
       otherReson: [null],
+      dateLists: this.fb.array([
+        this.fb.group({
+          //busScheduleId: [null],
+          entryDates: [null],
+          datechecked: [''],
+        })
+      ]),
       bus_seat_layout_data: this.fb.array([
         this.fb.group({
           upperBerth: this.fb.array([
@@ -679,23 +697,6 @@ export class ExtraseablockComponent implements OnInit {
 
   }
 
-  // findOperator(event: any) {
-  //   this.seatOpenForm.controls.bus_id.setValue('');
-  //   this.seatOpenForm.controls.busRoute.setValue('');
-  //   let operatorId = event.id;
-  //   if (operatorId) {
-  //     this.spinner.show();
-  //     this.busService.getByOperaor(operatorId).subscribe(
-  //       res => {
-  //         this.buses = res.data;
-  //         this.buses.map((i: any) => { i.testing = i.name + ' - ' + i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
-  //          this.spinner.hide();
-          
-  //       }
-  //     );
-  //   }
-
-  // }
   findSource() {
     let source_id = this.seatOpenForm.controls.source_id.value;
     let destination_id = this.seatOpenForm.controls.destination_id.value;
@@ -718,13 +719,81 @@ export class ExtraseablockComponent implements OnInit {
       );
     }
   }
+  getcurrentmonths(){
+    
+    var date = new Date();
+    var transformmonth = this.datePipe.transform(date, 'MM');
+    // console.log(transformmonth);
+    return transformmonth;
+  }
+
+  getcurrentyears(){ 
+    var date = new Date();
+    var transformyear = this.datePipe.transform(date, 'yyyy');
+    // console.log(transformyear);
+    return transformyear;
+
+  }
+
+  getBusScheduleEntryDatesFilter() {
+    if (this.seatOpenForm.value.bus_id==null)
+      return false;
+
+
+    const arr = <FormArray>this.seatOpenForm.controls.dateLists;
+    arr.controls = [];
+
+    const data={
+      busLists: this.seatOpenForm.value.bus_id,
+      month:this.getcurrentmonths(),
+      year:this.getcurrentyears(),
+    }
+
+    this.spinner.show();
+    this.busService.getBusScheduleEntry(data).subscribe(
+      response => {
+        this.busDatas = response.data.busDatas;
+        let counter = 0;
+        for (let bData of this.busDatas) {
+          this.DatesRecord = (<FormArray>this.seatOpenForm.controls['dateLists']) as FormArray;
+          let arraylen = this.DatesRecord.length;
+          for (let eDate of bData.entryDates) {    
+            if(this.ModalBtn=="Save")
+            {
+                let newDatesgroup: FormGroup = this.fb.group({
+                  entryDates: [eDate.entry_date],
+                  datechecked: [null],
+                })
+                this.DatesRecord.insert(arraylen, newDatesgroup);
+                // console.log(this.DatesRecord);
+                // return
+            }           
+          }
+         
+          counter++;
+        }
+        response = [];
+        this.spinner.hide();
+      }
+    );
+  }
 
   addOpenseat() {
+
+    this.checkedDate;
+    
+    let i=0;
+    for(let checked of this.seatOpenForm.value.dateLists){
+      if(checked.datechecked==true){
+        this.checkedDate[i] = checked.entryDates;
+        i++;
+      } 
+    }
+    
+    
     this.spinner.show();
-    // console.log(this.seatOpenForm.value);
-    // return
     this.onSelectAll();
-    if(this.seatOpenForm.value.date == null)
+    if(this.checkedDate == null)
     {
       this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
       this.spinner.hide();
@@ -737,7 +806,7 @@ export class ExtraseablockComponent implements OnInit {
         busRoute: this.seatOpenForm.value.busRoute,
         reason: 'Blocked By Owner',
         other_reson: this.seatOpenForm.value.otherReson,
-        date: this.seatOpenForm.value.date,
+        date: this.checkedDate,
         bus_seat_layout_data: this.seatOpenForm.value.bus_seat_layout_data,
         created_by: localStorage.getItem('USERNAME')
   

@@ -218,7 +218,7 @@
                     <form [formGroup]="seatOpenForm" class="editForm" novalidate>
 
                       <div class="row">
-                        <div class="col-md-8 ">
+                        <div class="col-md-11 ">
                           <div class="row">
                            
                             <div class="col-sm-12">
@@ -228,7 +228,7 @@
                                 <div class="col-sm-10">
                                   <ng-select [items]="buses" required bindLabel="testing" bindValue="id"
                                     placeholder="Select Bus" formControlName="bus_id" [clearable]="false"
-                                    (change)="getSchedule();checkroute();checkEvent($event);alreadyOpen();">
+                                    (change)="getSchedule();checkroute();checkEvent($event);alreadyOpen();getBusScheduleEntryDatesFilter();">
                                   </ng-select>
 
                                   <span class="text-danger" *ngIf="
@@ -240,28 +240,23 @@
                                     Bus required!
                                   </span>
                                 </div>
-
-                                <div class="row">
-                                  <div class="col-sm-12 ">
-                                    <strong *ngIf="busSchedule.length>0">Current Running Schedule For This Bus </strong>
-                                    <label *ngFor="let eDate of busSchedule ;">
-                                      <span class="col-3  btn " *ngFor="let  date of eDate.bus_schedule_date ;">
-                                        {{date.entry_date | date: 'dd-MM' }}
-                                      </span>
-          
-                                    </label>
-                                  </div>
-                                </div>
+                                <div class="row col-md-12 datelist" formArrayName="dateLists">
+                                  <span *ngIf="this.DatesRecord">
+                                   <label *ngFor="let busesFormGroup of seatOpenForm['controls'].dateLists['controls']; let i=index"
+                                   class="col-6 col-sm-4 col-md-3 text-center" [formGroupName]="i" >
+                                     <input type="checkbox" class="filled-in" formControlName="datechecked" />
+                                     <span>{{busesFormGroup.controls.entryDates.value | date: 'dd-MMM'}}</span>
+                                 </label>
+                                  </span>
+                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-4 text-center">
+                        <!-- <div class="col-md-4 text-center">
                           <div class="col-sm-12">
                             <div class="form-group row">
                               <strong>Please Choose the Date from the Calender</strong>
-                              <!-- <label for="date" class="col-sm-4 col-form-label">Date<span
-                                  class="text-danger">*</span></label> -->
                               <div class="col-sm-8">
                                 <div class="col-sm-8">
 
@@ -279,14 +274,11 @@
                                       {{ date.day }}
                                     </span>
                                   </ng-template>
-                                  <!-- <hr> -->
-                                  <!-- <pre>DateSelected: {{ datesSelected | json }} </pre> -->
-
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                       
 
@@ -310,7 +302,7 @@
                                       float: left;
                                       text-align: center;
                                     ">
-                                    <!-- (change)="chooseSeat($event.target.checked,layoutCol.controls.seatType.value,layoutCol.controls.seatText.value,1)" -->
+                                  
                                     <label class="seatHolder">
                                       <input type="checkbox" formControlName="seatChecked" *ngIf="
                                           layoutCol.controls.seatType.value != 4

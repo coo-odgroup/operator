@@ -45,7 +45,7 @@ export class SeatblockService {
 
 
   create(data): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + '/seatblock', JSON.stringify(data), this.httpOptions)
+    return this.httpClient.post<any>(this.apiURL + '/addseatBlockByOperator', JSON.stringify(data), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

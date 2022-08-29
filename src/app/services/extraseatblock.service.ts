@@ -32,7 +32,7 @@ export class ExtraseatblockService {
   }
 
   create(data): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + '/extraSeatBlock', JSON.stringify(data), this.httpOptions)
+    return this.httpClient.post<any>(this.apiURL + '/addExtraSeatBlockByOperator', JSON.stringify(data), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

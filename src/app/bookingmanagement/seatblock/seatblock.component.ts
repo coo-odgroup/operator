@@ -69,7 +69,8 @@ export class SeatblockComponent implements OnInit {
 
   modalReference: NgbModalRef;
   confirmDialogReference: NgbModalRef;
-
+  pipe = new DatePipe('en-US');
+  
   datePipe: DatePipe = new DatePipe('en-US');
 
   seatBlock: any=[];
@@ -86,9 +87,11 @@ export class SeatblockComponent implements OnInit {
   public ModalHeading: any;
   public ModalBtn: any;
   public searchBy: any;
+  public DatesRecord: any;
   seatLayouts: any;
   busRecord: any;
   seatLayoutData: any =[];
+  checkedDate: any =[];
   busForm: any;
   seatLayoutCol: any;
   upperberthcol: any;
@@ -112,6 +115,8 @@ export class SeatblockComponent implements OnInit {
   lastUrl: any;
   alreadyBlocksData: any=[];
   blockSeatsData: any;
+  busDatas: any=[];
+  busesRecord: FormArray;
   constructor(
     calendar: NgbCalendar,
     private dtconfig: NgbDatepickerConfig,
@@ -154,6 +159,13 @@ export class SeatblockComponent implements OnInit {
       date: [null],
       reason: [null],
       otherReson: [null],
+      dateLists: this.fb.array([
+        this.fb.group({
+          //busScheduleId: [null],
+          entryDates: [null],
+          datechecked: [''],
+        })
+      ]),
       bus_seat_layout_id: [null],
       bus_seat_layout_data: this.fb.array([
         this.fb.group({
@@ -184,7 +196,6 @@ export class SeatblockComponent implements OnInit {
     this.findOperator();
     this.search();
     
-   
 
    
   }
@@ -194,8 +205,23 @@ export class SeatblockComponent implements OnInit {
     var date = new Date();
     var transformDate = this.datePipe.transform(date, 'yyyy-MM-dd');
     return transformDate;
+  }
+  getcurrentmonths(){
+    
+    var date = new Date();
+    var transformmonth = this.datePipe.transform(date, 'MM');
+    // console.log(transformmonth);
+    return transformmonth;
+  }
+
+  getcurrentyears(){ 
+    var date = new Date();
+    var transformyear = this.datePipe.transform(date, 'yyyy');
+    // console.log(transformyear);
+    return transformyear;
 
   }
+
   set_page(url:any)
   {
     this.lastUrl = '';
@@ -853,6 +879,7 @@ export class SeatblockComponent implements OnInit {
     this.alreadyBlocksData=[];
     this.route = [];
     this.buses ="";
+    this.DatesRecord="";
     this.loadServices();
     this.busSchedule = [] ;
     this.seatBlockRecord = {} as Seatblock;
@@ -865,6 +892,12 @@ export class SeatblockComponent implements OnInit {
       date: [null],
       reason: [null],
       otherReson: [null],
+      dateLists: this.fb.array([
+        this.fb.group({
+          entryDates: [null],
+          datechecked: [''],
+        })
+      ]),
       bus_seat_layout_data: this.fb.array([
         this.fb.group({
           upperBerth: this.fb.array([
@@ -872,10 +905,7 @@ export class SeatblockComponent implements OnInit {
           lowerBerth: this.fb.array([
           ])//Lower Berth Items will be added Here
         })
-      ]),
-      busses: this.fb.array([
-
-      ])
+      ]),  
     });
 
     this.ModalHeading = "Add Seat Block";
@@ -937,6 +967,56 @@ export class SeatblockComponent implements OnInit {
   }
 
 
+  
+  getBusScheduleEntryDatesFilter() {
+    if (this.seatBlockForm.value.bus_id==null)
+      return false;
+
+
+    const arr = <FormArray>this.seatBlockForm.controls.dateLists;
+    arr.controls = [];
+
+    const data={
+      busLists: this.seatBlockForm.value.bus_id,
+      month:this.getcurrentmonths(),
+      year:this.getcurrentyears(),
+    }
+
+    this.spinner.show();
+    this.busService.getBusScheduleEntry(data).subscribe(
+      response => {
+        this.busDatas = response.data.busDatas;
+        let counter = 0;
+        for (let bData of this.busDatas) {
+          this.DatesRecord = (<FormArray>this.seatBlockForm.controls['dateLists']) as FormArray;
+          let arraylen = this.DatesRecord.length;
+          for (let eDate of bData.entryDates) {    
+            if(this.ModalBtn=="Save")
+            {
+                let newDatesgroup: FormGroup = this.fb.group({
+                  entryDates: [eDate.entry_date],
+                  datechecked: [null],
+                })
+                this.DatesRecord.insert(arraylen, newDatesgroup);
+                // console.log(this.DatesRecord);
+                // return
+            }           
+          }
+         
+          counter++;
+        }
+        response = [];
+        this.spinner.hide();
+      }
+    );
+  }
+
+
+
+
+
+
+
 
   updateBlockseat() {
     this.spinner.show();
@@ -981,9 +1061,19 @@ export class SeatblockComponent implements OnInit {
   }
   }
   addBlockseat() {
+
+    this.checkedDate;
+    let i=0;
+    for(let checked of this.seatBlockForm.value.dateLists){
+      if(checked.datechecked==true){
+        this.checkedDate[i] = checked.entryDates;
+        i++;
+      } 
+    }
+
     this.spinner.show();
     this.onSelectAll();
-    if(this.seatBlockForm.value.date == null)
+    if(this.checkedDate.length<1)
     {
       this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
       this.spinner.hide();
@@ -995,7 +1085,7 @@ export class SeatblockComponent implements OnInit {
       busRoute: this.seatBlockForm.value.busRoute,
       reason: 'Blocked By Owner',
       other_reson: this.seatBlockForm.value.otherReson,
-      date: this.seatBlockForm.value.date,
+      date: this.checkedDate,
       bus_seat_layout_data: this.seatBlockForm.value.bus_seat_layout_data,
       created_by: localStorage.getItem('USERNAME'),
       type: "2"
