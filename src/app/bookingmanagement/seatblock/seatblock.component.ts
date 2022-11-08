@@ -985,6 +985,7 @@ export class SeatblockComponent implements OnInit {
     this.spinner.show();
     this.busService.getBusScheduleEntry(data).subscribe(
       response => {
+        // console.log(response.data.busDatas);
         this.busDatas = response.data.busDatas;
         let counter = 0;
         for (let bData of this.busDatas) {
@@ -1002,7 +1003,6 @@ export class SeatblockComponent implements OnInit {
                 // return
             }           
           }
-         
           counter++;
         }
         response = [];

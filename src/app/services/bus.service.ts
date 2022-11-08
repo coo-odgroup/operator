@@ -26,7 +26,8 @@ export class BusService {
   }
 
   getBusScheduleEntry(post):Observable<any> {
-    return this.httpClient.post<any>(this.apiURL+ '/getBusScheduleEntry', JSON.stringify(post), this.httpOptions)
+    // return this.httpClient.post<any>(this.apiURL+ '/getBusScheduleEntry', JSON.stringify(post), this.httpOptions)
+    return this.httpClient.post<any>(this.apiURL+ '/getBusScheduleEntryforOperator', JSON.stringify(post), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )

@@ -1220,7 +1220,7 @@ export class SeatopenComponent implements OnInit {
     this.spinner.show();
     // this.checkroute();
     this.onSelectAll();
-    console.log(this.seatOpenForm.value.bus_id);
+    // console.log(this.seatOpenForm.value.bus_id);
 
     if(this.seatOpenForm.value.date == null)
     {

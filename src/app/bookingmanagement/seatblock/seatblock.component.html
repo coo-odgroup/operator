@@ -104,7 +104,8 @@
 
       <!-- <p>{{getFormattedDate()}}</p> -->
       <div class="table-responsive" id="print-section">
-        <table class="table table-striped">
+        <table class="table table-striped" tyle="font-size: 10px;
+        margin-left: 1px;">
           <thead>
             <tr>
               <th>#</th>
@@ -233,7 +234,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="min-height: 450px;">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">
@@ -397,7 +398,8 @@
                       </div>
 
                       <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-9" style="font-size: 10px;
+                        margin-left: 1px;">
                           <div formArrayName="bus_seat_layout_data" class="col-12">
                             <div class="row" *ngFor="
                                 let layoutRow of seatBlockForm.controls
@@ -618,9 +620,8 @@
 
         <ng-template #editSeat let-modal>
           <div class="modal-header">
-            <h5 class="ng-tns-c116-5">
-              <!-- {{ busRecord.name }} [{{ busRecord.bus_number }}] -->
-            </h5>
+          
+            <h5 class="ng-tns-c116-5">{{ ModalHeading }}</h5>
             <button
               type="button"
               class="close"
@@ -630,7 +631,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form [formGroup]="seatBlockForm" class="editForm" novalidate>
+          <form [formGroup]="seatBlockForm" class="editForm" novalidate style="overflow-y: scroll;">
             <div class="modal-body">
               <div class="row">
                 <div class="col-md-6">
