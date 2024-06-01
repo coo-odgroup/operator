@@ -183,6 +183,14 @@ export class BusService {
       catchError(this.errorHandler)
     );
   }
+  findbySource(post): Observable<any>
+  {
+    return this.httpClient.post<any>(this.apiURL+ '/locationBusss', JSON.stringify(post), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    )
+  }
+
   getByOperaor(id):Observable<any>{
     return this.httpClient.get<any>(this.apiURL+'/operatorBus/'+id,this.httpOptions).pipe(
       catchError(this.errorHandler)

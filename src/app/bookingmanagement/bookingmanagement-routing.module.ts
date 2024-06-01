@@ -12,6 +12,10 @@ const routes: Routes = [
 	    {
         path: 'seatopen',
         loadChildren: () => import('./seatopen/seatopen.module').then(module => module.SeatOpenModule)
+      },
+      {
+        path: 'ownerfare',
+        loadChildren: () => import('./ownerfare/ownerfare.module').then(module => module.OwnerFareModule)
       }, 
       {
         path: 'seatblock',

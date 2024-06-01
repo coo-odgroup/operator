@@ -44,6 +44,11 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
+        canActivate: [Routeguard]
+      },
+      {
         path: 'busmanagement',
         loadChildren: () => import('./busmanagement/busmanagement.module').then(module => module.BusmanagementModule),
         canActivate: [Routeguard]

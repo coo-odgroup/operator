@@ -1,0 +1,126 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<style>
+    .form-group {
+    margin-bottom: 5px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    h4 {
+    font-size: 14px;
+    }
+    .btn-primary {
+    min-height: 140px;
+}
+}
+
+</style>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Owner Dashboard" cardClass="card-datatable" [options]="false" [isCardFooter]="false">
+
+            <!-- <div class=" mb-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body" style="background: lightsteelblue;">
+                              <h5 class="card-title">Today's Journey PNR</h5>
+                              <p class="card-text">22</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body" style="background: lightsteelblue;">
+                              <h5 class="card-title">Upcoming PNR</h5>
+                              <p class="card-text">33</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body" style="background: lightsteelblue;">
+                              <h5 class="card-title">Total Buses</h5>
+                              <p class="card-text">2 Active/1 Inactive</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body" style="background: lightsteelblue;">
+                              <h5 class="card-title">Cancel Bus/Buses</h5>
+                              <p class="card-text">5</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div> -->
+            <div class=" mb-3">
+                <div class="row p-0">
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <a [routerLink]="['/reports/completeReport']"  class="btn btn-primary">
+                                <img class="card-img-top" src="../../assets/images/crd.png" alt="Card image cap">
+                                <h4 class="text-center"> <b>BOOKING REPORT</b></h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <a [routerLink]="['/bookingmanagement/buscancellation']"  class="btn btn-primary">
+                                <img class="card-img-top" src="../../assets/images/crd.png" alt="Card image cap">
+                                <h4 class="text-center"> <b>BUS CANCEL</b></h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <a [routerLink]="['/bookingmanagement/seatblock']" class="btn btn-primary">
+                                <img class="card-img-top" src="../../assets/images/crd.png" alt="Card image cap">
+                                <h4 class="text-center"> <b>SEAT BLOCK</b></h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <a [routerLink]="['/bookingmanagement/seatopen']" class="btn btn-primary">
+                                <img class="card-img-top" src="../../assets/images/crd.png" alt="Card image cap">
+                                <h4 class="text-center"> <b>SEAT OPEN</b></h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <a [routerLink]="['/bookingmanagement/extraseatblock']" class="btn btn-primary">
+                                <img class="card-img-top" src="../../assets/images/crd.png" alt="Card image cap">
+                                <h4 class="text-center"> <b>EXTRA SEAT BLOCK</b></h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <a [routerLink]="['/busmanagement/busschedule']" class="btn btn-primary">
+                                <img class="card-img-top" src="../../assets/images/crd.png" alt="Card image cap">
+                                <h4 class="text-center"> <b>BUS SCHEDULE</b></h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="card">
+                            <a [routerLink]="['/bookingmanagement/ownerfare']" class="btn btn-primary">
+                                <img class="card-img-top" src="../../assets/images/crd.png" alt="Card image cap">
+                                <h4 class="text-center"> <b> Manage Fare</b></h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </app-card>
+    </div>
+</div>
+
+

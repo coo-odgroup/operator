@@ -32,8 +32,16 @@ const OperatorItems =[{
   icon: 'feather icon-home',
   children: [
     {
-      id: 'completerepor',
+      id: 'dashboard',
       title: 'Dashboards',
+    
+      type: 'item',
+      icon: 'feather icon-home',
+      url: 'dashboard'
+    },
+    {
+      id: 'completerepor',
+      title: 'Booking Report',
     
       type: 'item',
       icon: 'feather icon-home',
@@ -73,6 +81,13 @@ const OperatorItems =[{
       type: 'item',
       icon:'feather icon-twitter',
       url: 'busmanagement/busschedule'
+    },
+    {
+      id: 'Owner Fare',
+      title: 'Manage Fare',
+      type: 'item',
+      icon:'feather icon-twitter',
+      url: 'bookingmanagement/ownerfare'
     }
   ]
 }];
