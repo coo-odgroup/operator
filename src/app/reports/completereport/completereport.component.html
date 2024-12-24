@@ -166,7 +166,15 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <i class="fas fa-rupee-sign"></i> <b>{{complete.owner_fare}}</b>
+                                    <i class="fas fa-rupee-sign"></i> <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
+                                </td>
+                            </tr>
+                            <tr>     
+                                <td colspan="3"> &nbsp;Total payment</td>           
+                                <td >
+                                    <strong placement="top" ngbTooltip="Sum of Total Payment"> <i
+                                            class="fas fa-rupee-sign"></i> <b
+                                            class="text-danger">{{completedata?.owner_fare}}</b></strong>
                                 </td>
                             </tr>
                         </tbody>
@@ -284,7 +292,7 @@
                 <td>{{complete.users.phone}}</td>
                 <td>{{complete.users.email}}</td>
                 <!-- <td>{{complete.total_fare}}</td> -->
-                <td>{{complete.owner_fare}}</td>
+                <td>{{complete.owner_fare + complete.additional_owner_fare}}</td>
                 <!-- <td>{{complete.booking_detail[0].bus_seats.ticket_price.base_seat_fare}}</td>
                 <td>{{complete.booking_detail[0].bus_seats.ticket_price.base_sleeper_fare}}</td>
                 <td>{{complete.additional_festival_fare}}</td>
@@ -306,6 +314,7 @@
                 </td>
                 <td>{{complete.app_type}}</td>                         -->
             </tr>
+            
         </tbody>
     </table>
 </div>

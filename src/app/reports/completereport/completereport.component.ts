@@ -63,7 +63,7 @@ export class CompletereportComponent implements OnInit {
       bus_id : [null],
       date_type:['journey'],
       pnr:[null],
-      rows_number:10,
+      rows_number:25,
       source_id:[null],
       destination_id:[null]
     })  
