@@ -44,14 +44,14 @@ const OperatorItems =[{
       title: 'Booking Report',
     
       type: 'item',
-      icon: 'feather icon-home',
+      icon: 'feather icon-list',
       url: 'reports/completeReport'
     },
     {
       id: 'BusCancellation',
       title: 'Bus Cancellation',
       type: 'item',
-      icon:'feather icon-wifi-off',
+      icon:'feather icon-x-square',
       url: 'bookingmanagement/buscancellation'
     },
     {
@@ -65,28 +65,28 @@ const OperatorItems =[{
       id: 'seatopen',
       title: 'Seat Open',
       type: 'item',
-      icon:'feather icon-shield',
+      icon:'feather icon-book',
       url: 'bookingmanagement/seatopen'
     },
     {
       id: 'extraseatblock',
       title: 'Extra Seat Block',
       type: 'item',
-      icon:'feather icon-pie-chart',
+      icon:'feather icon-plus-square',
       url: 'bookingmanagement/extraseatblock'
     },
     {
       id: 'BusSchedule',
       title: 'Bus Schedule',
       type: 'item',
-      icon:'feather icon-twitter',
+      icon:'feather icon-calendar',
       url: 'busmanagement/busschedule'
     },
     {
       id: 'Owner Fare',
       title: 'Manage Fare',
       type: 'item',
-      icon:'feather icon-twitter',
+      icon:'feather icon-layers',
       url: 'bookingmanagement/ownerfare'
     }
   ]
