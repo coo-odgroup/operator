@@ -6,6 +6,7 @@ import {RoleService} from '.././services/role.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 import{Constants} from '../constant/constant';
+import { EncryptionService } from '../encrypt.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   
 
-  constructor(public router: Router,protected fb:FormBuilder, private loginService: LoginService, private notificationService: NotificationService,private notify: NotificationService,private roleService: RoleService) {
+  constructor(public router: Router,protected fb:FormBuilder, private loginService: LoginService, private notificationService: NotificationService,private notify: NotificationService,private roleService: RoleService,private enc:EncryptionService) {
 
     // this.roleService.getRoles().subscribe(
     //   res=>{
@@ -62,8 +63,9 @@ export class LoginComponent implements OnInit {
       res=>{
         // console.log(res);  
         if(res.status==1){ 
-          this.loginRecord=res.data;
-          // console.log(this.loginRecord);  
+          let loginRecord:any=this.enc.decrypt(res.data);
+          loginRecord=JSON.parse(loginRecord);
+          this.loginRecord=loginRecord;       
           localStorage.setItem("USERRECORDS",JSON.stringify(this.loginRecord));
           localStorage.setItem("USERID",JSON.stringify(this.loginRecord.id)); 
           localStorage.setItem("ROLE_ID",JSON.stringify(this.loginRecord.role_id)); 
