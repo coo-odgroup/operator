@@ -167,6 +167,8 @@
         align-items: center;
         justify-content: flex-start;
         padding: 0 25px;
+        background-color: #efc003;
+        box-shadow: 0 3px 10px #0003;
 
         .logo-dark,
         .logo-thumb {
@@ -1748,7 +1750,7 @@ perfect-scrollbar
 
         .m-header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             width: 100%;
             height: $header-height;
@@ -3408,3 +3410,32 @@ body.box-layout {
         border-top: 0px !important;
     }
 }
+
+.home-icon i {
+    font-size: 30px;
+    display: none;
+}
+
+@media only screen and (max-width: 599px) {
+    .mobile-menu, .pcoded-header .m-header .mob-toggler{
+        display: none;
+    }
+    .home-icon i {
+        display: block;
+    }
+    .pcoded-content {
+     min-height: auto;
+    }
+        .pcoded-content {
+        padding: 25px 15px 5px 15px;
+    }
+    .pcoded-header{
+        position: fixed;
+    }
+    .pcoded-main-container{
+        margin-top: 50px;
+    }
+    .footer-mar{
+        margin-bottom: 50px;
+    }
+}  

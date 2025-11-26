@@ -6,8 +6,35 @@
       <router-outlet></router-outlet>
     </div>
 </div>
-<div class="card card mb-0 pb-0">
+
+
+
+
+
+<div class="card card mb-0 pb-0 footer-mar">
   <div class="card-body text-center ">
     All Rights Reserved @ SEOFIED IT SERVICES PVT. LTD.
   </div>
+</div>
+
+<div class="mobile-menu-list my-section" *ngIf="showSection" >
+  <ul>
+    <li><a href="">Dashboards</a></li>
+    <li><a href="">Booking Report</a></li>
+    <li><a href="">Bus Cancellation</a></li>
+    <li><a href="">Seat Block</a></li>
+    <li><a href="">Seat Open</a></li>
+    <li><a href="">Extra Seat Block</a></li>
+    <li><a href="">Bus Schedule</a></li>
+    <li><a href="">Manage Fare</a></li>
+  </ul>
+</div>
+
+<div class="mobile-display">
+  <ul>
+    <li><a href=""><span><i class="feather icon-book"></i></span>Seat Open/Block</a></li>
+    <li><a href=""><span><i class="feather icon-x-square"></i></span>Bus Cancel</a></li>
+    <li><a href=""><span><i class="feather icon-plus-square"></i></span>Extra Seat Block</a></li>
+    <li><a (click)="toggleSection()"><span><i class="feather icon-list"></i></span>Menu</a></li>
+  </ul>
 </div>

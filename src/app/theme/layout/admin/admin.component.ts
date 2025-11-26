@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { NextConfig } from '../../../app-config';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -12,6 +13,7 @@ export class AdminComponent implements OnInit {
   public navCollapsed: boolean;
   public navCollapsedMob: boolean;
   public windowWidth: number;
+  showSection = false;
 
   constructor(private zone: NgZone, private location: Location) {
     this.flatConfig = NextConfig.config;
@@ -56,5 +58,10 @@ export class AdminComponent implements OnInit {
       }
     }
   }
+  toggleSection() {
+    this.showSection = !this.showSection;
+  }
 
 }
+
+
