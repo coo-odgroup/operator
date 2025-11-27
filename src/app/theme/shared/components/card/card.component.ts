@@ -60,6 +60,7 @@ export class CardComponent implements OnInit {
 
   public collapsedCard: string;
   public collapsedIcon: string;
+  
 
   public loadCard: boolean;
 
@@ -85,6 +86,7 @@ export class CardComponent implements OnInit {
     this.loadCard = false;
 
     this.cardRemove = 'open';
+    
   }
 
   ngOnInit() {

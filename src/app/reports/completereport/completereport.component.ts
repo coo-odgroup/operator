@@ -36,7 +36,8 @@ export class CompletereportComponent implements OnInit {
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
-
+  showSection = false;
+  
   constructor(
     private spinner: NgxSpinnerService,
     private http: HttpClient , 
@@ -189,7 +190,9 @@ export class CompletereportComponent implements OnInit {
     this.search();
   }
 
-
+toggleSection() {
+    this.showSection = !this.showSection;
+  }
 
 //   loadServices() {
 

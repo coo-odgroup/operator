@@ -46,13 +46,20 @@ margin-left: 2px;
     display: block !important;
   }
   
+ .table-responsive {
+    margin-top: 14px;
+}
+
   @media print {
     ::ng-deep .hide_print {
       display: none !important;
     }
   }
 
-
+  .full-w{
+    width: 100%;
+  }
+  
   // .tableFixHead {
   //   overflow-y: auto;
   //   height: 800px;

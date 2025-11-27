@@ -15,6 +15,7 @@
           <li class="dropdown-item close-card" (click)="cardRemoveAction()"><a href="javascript:"><i class="feather icon-trash"></i> Remove</a></li>
         </ul>
       </div>
+      
     </div>
     <ng-content *ngIf="customHeader" select=".app-card-header"></ng-content>
   </div>
@@ -22,7 +23,7 @@
     <ng-container *ngTemplateOutlet="subMenuContent"></ng-container>
   </div>
   <ng-template #subMenuContent>
-    <div class="card-body" [ngClass]="blockClass">
+    <div class="card-body pt0" [ngClass]="blockClass">
       <ng-content></ng-content>
     </div>
   </ng-template>

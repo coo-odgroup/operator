@@ -33,10 +33,17 @@ a.active.page-link {
 }
 
 .card-header {
-  padding:8px 1.25rem;
-  
+    padding: 8px 1.25rem;
 }
 
+.serch-btn{
+  margin: 0 auto;
+    display: table;
+} 
+
+ .no-bdr{
+  border: none !important;
+ }
 
 // ::ng-deep .datelist label input[type="checkbox"][disabled] 
 // {
@@ -69,4 +76,16 @@ margin-left: 1px;
   right: auto;
   left: 10px;
   z-index: 999999 !important;
+}
+@media only screen and (max-width: 599px) {
+  .m-text-center {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .serch-btn {
+    margin: 15px auto;
+  }
+  .col-sm-2.offset-md-10 {
+    margin-top: 20px;
+  }
 }
