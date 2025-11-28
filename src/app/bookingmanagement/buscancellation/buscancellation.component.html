@@ -30,93 +30,59 @@ margin-bottom: 5px !important;
 
 <div class="row">
   <div class="col-sm-12">
-      <app-card [hidHeader]="false" cardTitle="BUS CANCELLATION" cardClass="card-datatable"  [options]="false"
-      cardClass=" table-border-style user-profile-list ">
-      <div class="row">
-      
-        <div class="col-12">
+      <app-card [hidHeader]="false" cardTitle="Bus Cancellation" cardClass="card-datatable"  [options]="false" cardClass=" table-border-style user-profile-list ">
+
+
           <form [formGroup]="searchForm">
             <div class="row">
-              <div class="col-md-4">
-                  <button class="btn sml_input btn-success mb-2 " (click)="ResetAttributes();OpenModal(content)">
-                    Cancel Bus Here
-                  </button>
-
-                  <div class="dropdown float-right">
-                    <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
+              <div class="col-sm-3">
+                <div class="form-group">
+                   <ng-select [items]="buses" bindLabel="name" bindValue="id" placeholder="Select Bus" [clearable]="false" (change)="getBusScheduleEntryDatesFilter()" formControlName="bus_id"> </ng-select>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                   <input type="date" class="form-control sml_input" placeholder="Start Date" required formControlName="fromDate" />
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                   <input type="date" class="form-control sml_input" placeholder="End Date" required formControlName="toDate" />
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
                       <option value=10>10</option>
                       <option value=25>25</option>
                       <option value=50>50</option>
                       <option value=100>100</option>
                       <option value='all'>All</option>
                     </select>
-                  </div>
-              </div>
-              
-              <!-- <div class="col-md-5">
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                    <div class="input-group">
-
-                      <input type="date" class="form-control sml_input" placeholder="Search Date Here " required
-                        formControlName="fromDate">
-                        <label><small><b>Start Date</b></small></label>
-                        <input type="date" class="form-control sml_input" placeholder="Search Date Here " required
-                        formControlName="toDate">
-                        <label><small><b>Start Date</b></small></label>
-                    </div>
-                  </div>                
-                </div>
-              </div>   -->
-              
-
-              <div class="col-md-3">
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                      <ng-select [items]="buses" bindLabel="name" bindValue="id" placeholder="Select Bus"
-                            [clearable]="false" (change)="getBusScheduleEntryDatesFilter()"
-                            formControlName="bus_id">
-                          </ng-select>
-                  </div>
                 </div>
               </div>
-              <div class="col-md-5 col-sm-12">
-                <div class="row ">  
-                    <div class="col-6">
-                        <div class="form-group ">
-                            <input type="date" class="form-control sml_input" placeholder="Enter pnr"
-                            required formControlName="fromDate" />
-                            <label><small><b>Start Date</b></small></label>
-                        </div> 
-                    </div>
-                    <div class=" col-6">
-                        <div class="form-group "> 
-                            <input type="date" class="form-control sml_input" placeholder="Enter pnr"
-                            required formControlName="toDate" />
-                            <label> <small><b>End Date</b></small></label>
-                        </div>                                            
-                    </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <button type="button" class="btn btn-info btn-sm sml_input" (click)="ResetAttributes();OpenModal(content)"> Cancel Bus Here </button>
+                  <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
+                  <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i class="fas fa-sync-alt"> </i> Refresh </button>
                 </div>
-            </div>
+              </div>
 
-              <div class="col-md-3">
-                <div class="form-group row">
-                  <div class="col-sm-12">
-                      <button type="button" class="btn btn-success  sml_input" (click)="search()" title="search">
-                        <i class="fas fa-search"> </i> Search
-                      </button>
-                      <button type="button" class="btn btn-danger sml_input" (click)="refresh()" title="refresh">
-                        <i class="fas fa-sync-alt"> </i> Refresh
-                      </button>
-                  </div>                
-                </div>
-              </div>  
             </div>            
           </form>
+        
+
+        <div class="no-bdr text-right">
+          <div class="card-header-right" >
+              <div class="btn-group card-option small-btn">
+                  <button  type="button" title="Export" class="btn btn-warning sml_input"><i  class="fas fa-file-export"></i> Export</button>
+                  <button  type="button" title="Excel" class="btn btn-primary sml_input"><i  class="fas fa-folder"></i> Excel</button>
+                  <button  type="button" title="PDF" class="btn btn-info sml_input"><i  class="fas fa-file"></i> PDF</button>
+                  <button  type="button" title="Print" class="btn btn-danger sml_input"><i  class="fas fa-print"></i> Print</button>
+              </div>
+          </div>
         </div>
-      </div>
-
-
       <div class="table-responsive" id="print-section">
         <table class="table table-striped table-bordered ">
           <thead>
