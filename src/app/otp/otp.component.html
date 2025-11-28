@@ -9,8 +9,15 @@
                      <ngb-alert *ngIf="alert!=''">
                         {{ alert }}
                       </ngb-alert>
-                      <h5 class="send-otp f-w-600">OTP send to kis*****gmail.com</h5>
-                      <div class="otp-msg">OTP has been send to: {{mobileNo}}</div>
+                       <div class="otp-msg">OTP has been send to: {{mobileNo}}</div>
+                      <h5 class="send-otp f-w-600">kis*****gmail.com</h5>
+                     
+                      <div class="otp-box">
+                        <input type="text" maxlength="1" oninput="moveNext(this, 'otp2')" id="otp1">
+                        <input type="text" maxlength="1" oninput="moveNext(this, 'otp3')" id="otp2">
+                        <input type="text" maxlength="1" oninput="moveNext(this, 'otp4')" id="otp3">
+                        <input type="text" maxlength="1" id="otp4">
+                      </div>
                       <div class="form-group phone">
                         <div class="cols-sm-10">
                             <div class="input-group">

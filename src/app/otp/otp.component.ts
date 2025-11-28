@@ -93,4 +93,10 @@ export class OtpComponent implements OnInit {
 
   }
 
+  moveNext(event: any, nextInput: any) {
+  if (event.target.value.length === 1) {
+    nextInput.focus();
+  }
+}
+
 }
