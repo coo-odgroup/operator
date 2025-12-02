@@ -9,24 +9,24 @@
             <section *ngIf="showSection" class="my-section">
                 <form [formGroup]="searchFrom" >
                     <div class="row " >
-                        <div class="col-sm-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                             <div class="form-group">
                                 <input type="date" class="form-control sml_input" placeholder="Start Date" required formControlName="rangeFromDate" />
                             </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                             <div class="form-group">
                                 <input type="date" class="form-control sml_input" placeholder="End Date" required formControlName="rangeToDate" />
                             </div>
                         </div>
                         
-                        <div class="col-sm-3 ">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
                             <div class="form-group">
                                 <ng-select [items]="buses" bindLabel="busData" bindValue="id" placeholder="Select Bus" formControlName="bus_id" [clearable]="false"> </ng-select>
                             </div>
                         </div>
 
-                        <div class="col-sm-2 ">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                             <div class="form-group">
                                 <div class="dropdown">
                                     <select class="form-control sml_input" formControlName="date_type">
@@ -36,12 +36,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                             <div class="form-group">
                                 <input type="text" class="form-control sml_input" placeholder="Enter pnr" required formControlName="pnr" />
                             </div>
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-1">
                             <div class="form-group">
                                 <div class="dropdown float-right full-w">
                                     <select class="form-control sml_input " formControlName="rows_number"
@@ -59,9 +59,9 @@
                         
                     </div>
                     <div class="row " >
-                        <div class="col-sm-2 offset-md-10" style="text-align: right;">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2 offset-md-10" style="text-align: right;">
                             <button  type="button" title="search" class="btn btn-success btn-sm sml_input"><i  class="fas fa-search"></i> Search</button>
-                                <button  type="button" title="refresh" class="btn btn-warning btn-sm sml_input"><i  class="fas fa-sync-alt"></i> Reset</button>
+                            <button  type="button" title="refresh" class="btn btn-warning btn-sm sml_input"><i  class="fas fa-sync-alt"></i> Reset</button>
                         </div>
                     </div>
                 </form>

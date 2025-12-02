@@ -35,22 +35,22 @@ margin-bottom: 5px !important;
 
           <form [formGroup]="searchForm">
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                 <div class="form-group">
                    <ng-select [items]="buses" bindLabel="name" bindValue="id" placeholder="Select Bus" [clearable]="false" (change)="getBusScheduleEntryDatesFilter()" formControlName="bus_id"> </ng-select>
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                    <input type="date" class="form-control sml_input" placeholder="Start Date" required formControlName="fromDate" />
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                    <input type="date" class="form-control sml_input" placeholder="End Date" required formControlName="toDate" />
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                   <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
                       <option value=10>10</option>
@@ -61,7 +61,7 @@ margin-bottom: 5px !important;
                     </select>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-12 col-sm-12 col-md-12  col-lg-3 col-xl-3">
                 <div class="form-group">
                   <button type="button" class="btn btn-info btn-sm sml_input" (click)="ResetAttributes();OpenModal(content)"> Cancel Bus Here </button>
                   <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
@@ -109,12 +109,12 @@ margin-bottom: 5px !important;
                         <div class="row">
                           <div class="col-6">
                             <span type="button" *ngIf="busCancellation.bus_cancelled_date[0].cancelled_date >= getFormattedDate()"   (click)="ResetAttributes();editBusCancellation($event, i); OpenModal(content);" > 
-                              <i class="fa fa-edit " aria-hidden="true"></i>
+                              <i class="fa fa-edit btn btn-primary" aria-hidden="true"></i>
                           </span>
                           </div>
                           <div class="col-6">
                             <span type="button" (click)="deleteBusCancellation(confirmDialog,busCancellation.id)" > 
-                              <i class="fa fa-trash " aria-hidden="true"></i>
+                              <i class="fa fa-trash btn btn-danger" aria-hidden="true"></i>
                           </span>
                           </div>
                       </div>

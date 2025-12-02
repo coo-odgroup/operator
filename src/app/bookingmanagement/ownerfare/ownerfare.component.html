@@ -8,7 +8,7 @@
           <form [formGroup]="searchForm">
             <div class="row">
 
-              <div class="col-sm-2">
+              <div class="col-12 col-sm-6 col-md-6  col-lg-2 col-xl-2">
                 <div class="form-group">
                    <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
                       <option value=10>10</option>
@@ -19,29 +19,29 @@
                 </div>
               </div>
 
-              <div class="col-sm-3" *ngIf="role == '1'">
+              <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3" *ngIf="role == '1'">
                 <div class="form-group">
                    <ng-select [items]="busoperators" bindLabel="operatorData" bindValue="id" placeholder="Select Operator" formControlName="bus_operator_id"  [clearable]="false"> </ng-select>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3">
                 <div class="form-group">
                    <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus" formControlName="bus_id" [clearable]="false" required> </ng-select>
                 </div>
               </div>
 
-              <div class="col-sm-2">
+              <div class="col-12 col-sm-6 col-md-6  col-lg-2 col-xl-2">
                 <div class="form-group">
                   <input type="date" class="form-control sml_input" placeholder="Search Date Here " required formControlName="fromDate">
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-12 col-sm-6 col-md-6  col-lg-2 col-xl-2">
                 <div class="form-group">
                   <input type="date" class="form-control sml_input" placeholder="Search Date Here " required formControlName="toDate">
                 </div>
               </div>
 
-              <div class="col-sm-3">
+              <div class="col-12 col-sm-12 col-md-6  col-lg-3 col-xl-3">
                 <div class="form-group">
                   <button type="button" class="btn btn-info btn-sm sml_input" (click)="ResetAttributes();OpenModal(content)"> Add Owner Fare </button>
                   <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>

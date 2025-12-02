@@ -40,22 +40,22 @@
           <form [formGroup]="searchForm">
             <div class="row">
 
-              <div class="col-sm-3">
+              <div class="col-12 col-sm-12 col-md-12  col-lg-3 col-xl-3">
                 <div class="form-group">
                    <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus" formControlName="bus_id" [clearable]="false" required> </ng-select>
                 </div>
               </div>
-              <div class="col-sm-2">
+             <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                    <input type="date" class="form-control sml_input" placeholder="Start Date" required  formControlName="fromDate" />
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                    <input type="date" class="form-control sml_input" placeholder="End Date" required formControlName="toDate" />
                 </div>
               </div>
-              <div class="col-sm-2">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
                 <div class="form-group">
                   <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
                       <option value=10>10</option>
@@ -66,7 +66,7 @@
                     </select>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-12 col-sm-12 col-md-12  col-lg-3 col-xl-3">
                 <div class="form-group">
                   <button type="button" class="btn btn-info btn-sm sml_input" (click)="ResetAttributes();OpenModal(content)"> Seat Block Here </button>
                   <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
@@ -117,21 +117,21 @@
                         {{seat.seats.seatText}},
                       </span>
                     </td>
-                    <td class="hide_print">
+                    <td class="hide_print" style="text-align: right;">
                       <span *ngIf="opendate[0].value[0].operation_date >= getFormattedDate()">
                         <span type="button" (click)="ResetAttributes();editsblock(opendate[0].value[0].bus.id ,
                         opendate[0].value[0].operation_date,opendate[0].value[0].ticket_price_id);OpenModal(editSeat)" class="btn btn-sm">
-                          <i class="fa fa-edit " aria-hidden="true"></i>
+                          <i class="fa fa-edit btn btn-primary" aria-hidden="true"></i>
                         </span>
                       </span>
                     
                       <!-- opendate[0].value[0].bus.id ,
                       opendate[0].value[0].operation_date) -->
 
-                      <span type="button" (click)="ResetAttributes();openConfirmDialog (confirmDialog,
+                      <span type="button " (click)="ResetAttributes();openConfirmDialog (confirmDialog,
                         opendate[0].value[0].bus.id ,
                         opendate[0].value[0].operation_date)" class="btn btn-sm m-1">
-                        <i class="fa fa-trash " aria-hidden="true"></i>
+                        <i class="fa fa-trash btn btn-danger" aria-hidden="true"></i>
                       </span>
                     </td>
                   </tr>

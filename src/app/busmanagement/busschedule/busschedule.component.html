@@ -11,7 +11,7 @@
           <form [formGroup]="searchForm">
             <div class="row">
 
-              <div class="col-sm-3">
+              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
                 <div class="form-group">
                    <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
                     <option value=10>10</option>
@@ -23,19 +23,19 @@
                 </div>
               </div>
 
-              <div class="col-sm-3">
+              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
                 <div class="form-group">
                    <input type="date" class="form-control sml_input" formControlName="date" placeholder="Choose A Date">
                 </div>
               </div>
 
-              <div class="col-sm-3">
+              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
                 <div class="form-group">
                    <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus" formControlName="bus_id" [clearable]="false" required> </ng-select>
                 </div>
               </div>
 
-              <div class="col-sm-3">
+              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
                 <div class="form-group">
                   <button type="button" class="btn btn-info btn-sm sml_input" (click)="ResetAttributes();OpenModal(content)"> Add Schedule </button>
                   <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
@@ -126,20 +126,17 @@
                 <label *ngIf="busSchedule.status==0" class="badge badge-light-danger pointer  text-dark"
                   (click)="changeStatus($event, busSchedule.id);">Pending</label>
               </td> -->
-              <td class="hide_print">
-                    <div class="row">
-                        <div class="col-6">
-                          <span type="button"   (click)="showEntryDates($event,i);editBusSchedule($event, i); OpenModal(content);"  class=" p-2 "> 
+              <td class="hide_print flex">
+                    
+                          <span type="button "   (click)="showEntryDates($event,i);editBusSchedule($event, i); OpenModal(content);"  class=" p-2 "> 
                             <i class="fa fa-edit " aria-hidden="true"></i>
                         </span>
-                        </div>
-                        <div class="col-6">
-                          <span type="button" (click)="deleteBusSchdule(confirmDialog,busSchedule.id)"
+
+                          <span type="button btn btn-danger" (click)="deleteBusSchdule(confirmDialog,busSchedule.id)"
                           class=" p-2  float-right"> 
                             <i class="fa fa-trash " aria-hidden="true"></i>
                         </span>
-                        </div>
-                    </div>
+                       
               </td>
             </tr>
           </tbody>
