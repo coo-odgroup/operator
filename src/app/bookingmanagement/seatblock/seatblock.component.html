@@ -288,7 +288,7 @@
                           <!-- <div *ngIf="busDatas.lenght > 0" > -->
                             
                             <div class="row col-md-12 datelist" formArrayName="dateLists">
-                             <span *ngIf="this.DatesRecord">
+                             <span *ngIf="DatesRecord">
                               <label *ngFor="let busesFormGroup of seatBlockForm['controls'].dateLists['controls']; let i=index"
                               class="col-6 col-sm-4 col-md-3  text-center" [formGroupName]="i" >
                                 <input type="checkbox" class="filled-in" formControlName="datechecked" />
