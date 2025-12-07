@@ -1061,7 +1061,7 @@ export class SeatblockComponent implements OnInit {
   }
   }
 
-  get dateLists(): FormArray {
+get dateLists(): FormArray {
   return this.seatBlockForm.get('dateLists') as FormArray;
 }
 
@@ -1095,22 +1095,19 @@ export class SeatblockComponent implements OnInit {
     this.spinner.show();
     this.onSelectAll();
 
-    if(checkedSeats.length>6)
-    {
-      this.notificationService.addToast({ title: 'Error', msg: 'Please Select Max 6 Seats ', type: 'error' });
-      this.spinner.hide();
-      return;
-    }
+    // if(checkedSeats.length>6)
+    // {
+    //   this.notificationService.addToast({ title: 'Error', msg: 'Please Select Max 6 Seats ', type: 'error' });
+    //   this.spinner.hide();
+    //   return;
+    // }
 
-    console.log(checkedSeats.length);
-    console.log(this.checkedDate.length);
-
-    if(this.checkedDate.length>3)
-    {
-      this.notificationService.addToast({ title: 'Error', msg: 'Please Select Max 3 Dates', type: 'error' });
-      this.spinner.hide();
-      return;
-    }
+    // if(this.checkedDate.length>3)
+    // {
+    //   this.notificationService.addToast({ title: 'Error', msg: 'Please Select Max 3 Dates', type: 'error' });
+    //   this.spinner.hide();
+    //   return;
+    // }
 
     if(this.checkedDate.length<1)
     {
