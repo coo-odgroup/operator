@@ -60,8 +60,8 @@
                     </div>
                     <div class="row " >
                         <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2 offset-md-10" style="text-align: right;">
-                            <button  type="button" title="search" class="btn btn-success btn-sm sml_input"><i  class="fas fa-search"></i> Search</button>
-                            <button  type="button" title="refresh" class="btn btn-warning btn-sm sml_input"><i  class="fas fa-sync-alt"></i> Reset</button>
+                            <button  type="button" title="search" class="btn btn-success btn-sm sml_input"  (click)="search()"><i  class="fas fa-search"></i> Search</button>
+                            <button  type="button" title="refresh" class="btn btn-warning btn-sm sml_input" (click)="refresh()"><i  class="fas fa-sync-alt"></i> Reset</button>
                         </div>
                     </div>
                 </form>
@@ -74,10 +74,10 @@
             <div class="no-bdr text-right">
                 <div class="card-header-right" >
                     <div class="btn-group card-option small-btn">
-                        <button  type="button" title="Export" class="btn btn-warning sml_input"><i  class="fas fa-file-export"></i> Export</button>
-                        <button  type="button" title="Excel" class="btn btn-primary sml_input"><i  class="fas fa-folder"></i> Excel</button>
+                        <button  type="button" title="Export" class="btn btn-warning sml_input"  (click)="exportexcel()"><i  class="fas fa-file-export"></i> Export</button>
+                        <!-- <button  type="button" title="Excel" class="btn btn-primary sml_input"><i  class="fas fa-folder"></i> Excel</button>
                         <button  type="button" title="PDF" class="btn btn-info sml_input"><i  class="fas fa-file"></i> PDF</button>
-                        <button  type="button" title="Print" class="btn btn-danger sml_input"><i  class="fas fa-print"></i> Print</button>
+                        <button  type="button" title="Print" class="btn btn-danger sml_input"><i  class="fas fa-print"></i> Print</button> -->
                     </div>
                 </div>
             </div>
@@ -184,6 +184,10 @@
                                             *ngFor="let b of completedata.data.links ; let i = index ">
                                             <a class="page-link {{ completedata.data.current_page == b.label ? 'active' : '' }}"
                                                 (click)="(b.url) ? search(b.url) : ''" [innerHTML]="page(b.label)"></a>
+                                        </li>
+                                        <li class="page-item {{ completedata.data.next_page_url == null? 'disabled' : ''}} clearfix d-none d-md-block"
+                                            (click)="search(completedata.data.last_page_url,statusLabel)">
+                                            <a class="page-link">Last</a>
                                         </li>
                                         
                                     </ul>

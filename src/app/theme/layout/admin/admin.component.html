@@ -19,22 +19,19 @@
 
 <div class="mobile-menu-list my-section" *ngIf="showSection" >
   <ul>
-    <li><a href="">Dashboards</a></li>
-    <li><a href="">Booking Report</a></li>
-    <li><a href="">Bus Cancellation</a></li>
-    <li><a href="">Seat Block</a></li>
-    <li><a href="">Seat Open</a></li>
-    <li><a href="">Extra Seat Block</a></li>
-    <li><a href="">Bus Schedule</a></li>
-    <li><a href="">Manage Fare</a></li>
+    <li><a href="#/dashboard" (click)="closeMenu()">Dashboard</a></li>    
+    <li><a href="#/busmanagement/busschedule" (click)="closeMenu()">Bus Schedule</a></li>
+    <li><a href="#/busmanagement/extraseatblock" (click)="closeMenu()">Extra Seat Block</a></li>
+    <li><a href="#/bookingmanagement/buscancellation" (click)="closeMenu()">Bus Cancellation</a></li>   
+    <li><a href="#/bookingmanagement/ownerfare" (click)="closeMenu()">Manage Fare</a></li>
   </ul>
 </div>
 
 <div class="mobile-display">
   <ul>
-    <li><a href=""><span><i class="feather icon-book"></i></span>Seat Open/Block</a></li>
-    <li><a href=""><span><i class="feather icon-x-square"></i></span>Bus Cancel</a></li>
-    <li><a href=""><span><i class="feather icon-plus-square"></i></span>Extra Seat Block</a></li>
+    <li><a href="#/bookingmanagement/seatblock" (click)="closeMenu()"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
+    <li><a href="#/bookingmanagement/seatopen" (click)="closeMenu()"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
+    <li><a href="#/reports/completeReport" (click)="closeMenu()"><span><i class="feather icon-crosshair"></i></span>Booking Report</a></li>
     <li><a (click)="toggleSection()"><span><i class="feather icon-list"></i></span>Menu</a></li>
   </ul>
 </div>

@@ -21,10 +21,10 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class CompletereportComponent implements OnInit {
 
-  public searchFrom: FormGroup;
+  public searchFrom: FormGroup | undefined;
 
-  completeReport: CompleteReport[];
-  completeReportRecord: CompleteReport;
+  completeReport: CompleteReport[] = [];
+  completeReportRecord: CompleteReport = {} as CompleteReport;
 
   completedata: any;
   totalfare = 0  ;
@@ -99,7 +99,7 @@ export class CompletereportComponent implements OnInit {
   search(pageurl="")
   {
     this.spinner.show();
-     this.completeReportRecord = this.searchFrom.value ; 
+     this.completeReportRecord = this.searchFrom?.value ; 
      
     const data = {
       // bus_operator_id: 157,
@@ -137,7 +137,7 @@ export class CompletereportComponent implements OnInit {
   }
 
 
-  findOperator(id) {
+  findOperator(id:any) {
     let operatorId = id;
     if (operatorId) {
       this.busService.getByOperaor(operatorId).subscribe(

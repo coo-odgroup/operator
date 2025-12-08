@@ -62,6 +62,10 @@ export class AdminComponent implements OnInit {
     this.showSection = !this.showSection;
   }
 
+  closeMenu() {
+      this.showSection = false;
+  }
+
 }
 
 
