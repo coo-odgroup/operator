@@ -37,7 +37,7 @@
                     </select>
                 </div>
               </div>
-              <div class="col-8 col-sm-6 col-md-6 col-lg-2 col-xl-2 " style="text-align: right;">
+              <div class="col-8 col-sm-6 col-md-6 col-lg-2 col-xl-2 text-right" >
                 <div class="form-group">
                   <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
                   <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i class="fas fa-sync-alt"> </i> Refresh </button>
@@ -49,6 +49,8 @@
         </section>
       <button type="button" class="cancel-btn-kis sml_input cancel-btn" (click)="ResetAttributes();OpenModal(content)">Seat Open</button>
       <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
+
+  
        
       <div class="no-bdr text-right mt-3">
           <div class="card-header-right" >
@@ -188,49 +190,44 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" style="min-height: 450px;">
+          <div class="modal-body" >
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">
                   <div class="right-icon-control">
-                    <form [formGroup]="seatOpenForm" class="editForm" novalidate>
+                    <form [formGroup]="seatOpenForm" class="editForm" novalidate>                        
+                        
+                      <div class="form-group row">
 
-                      <div class="row">
-                        <div class="col-md-11 ">
-                          <div class="row">
-                           
-                            <div class="col-sm-12">
-                              <div class="form-group row">
-                                <label for="busname" class="col-sm-2 col-form-label">Bus Name<span
-                                    class="text-danger">*</span></label>
-                                <div class="col-sm-10">
-                                  <ng-select [items]="buses" required bindLabel="testing" bindValue="id"
-                                    placeholder="Select Bus" formControlName="bus_id" [clearable]="false"
-                                    (change)="getSchedule();checkroute();checkEvent($event);alreadyOpen();getBusScheduleEntryDatesFilter();">
-                                  </ng-select>
+                        <div class="col-sm-12">
+                          <label for="busname">Bus Name<span class="text-danger">*</span></label>
+                          <ng-select [items]="buses" required bindLabel="testing" bindValue="id"
+                            placeholder="Select Bus" formControlName="bus_id" [clearable]="false"
+                            (change)="getSchedule();checkroute();checkEvent($event);alreadyOpen();getBusScheduleEntryDatesFilter();">
+                          </ng-select>
 
-                                  <span class="text-danger" *ngIf="
-                                    seatOpenForm.controls['bus_id'].touched &&
-                                    seatOpenForm.controls['bus_id'].hasError(
-                                      'required'
-                                    )
-                                  ">
-                                    Bus required!
-                                  </span>
-                                </div>
-                                <div class="row col-md-12 datelist" formArrayName="dateLists">
-                                  <span *ngIf="this.DatesRecord">
-                                   <label *ngFor="let busesFormGroup of seatOpenForm['controls'].dateLists['controls']; let i=index"
-                                   class="col-6 col-sm-4 col-md-3 text-center" [formGroupName]="i" >
-                                     <input type="checkbox" class="filled-in" formControlName="datechecked" />
-                                     <span>{{busesFormGroup.controls.entryDates.value | date: 'dd-MMM'}}</span>
-                                 </label>
-                                  </span>
-                                 </div>
-                              </div>
-                            </div>
-                          </div>
+                          <span class="text-danger" *ngIf="
+                            seatOpenForm.controls['bus_id'].touched &&
+                            seatOpenForm.controls['bus_id'].hasError(
+                              'required'
+                            )
+                          ">
+                            Bus required!
+                          </span>
                         </div>
+
+                        <div class="mt-3 col-md-12 datelist" formArrayName="dateLists">
+                          <span *ngIf="this.DatesRecord">
+                            <label *ngFor="let busesFormGroup of seatOpenForm['controls'].dateLists['controls']; let i=index" class="col-4 col-sm-4 col-md-2 text-center" [formGroupName]="i" >
+                              <input type="checkbox" class="filled-in" formControlName="datechecked" />
+                              <span class="ml-1">{{busesFormGroup.controls.entryDates.value | date: 'dd-MMM'}}</span>
+                            </label>
+                          </span>
+                        </div>
+
+                      </div>
+
+                           
                         <!-- <div class="col-md-4 text-center">
                           <div class="col-sm-12">
                             <div class="form-group row">
@@ -257,19 +254,36 @@
                             </div>
                           </div>
                         </div> -->
-                      </div>
+                      
                       
 
                       <div class="row">
-                        <div class="row form-group col-sm-12" style="font-size: 10px;
-                        margin-left: 1px;">
+                        <div class="row form-group col-sm-12" style="font-size: 10px; margin-left: 1px;">
                           <div class="col-md-9" >
+                            <div class="tabs">
+                              <button (click)="switchTab('tab1')"  [class.active]="activeTab === 'tab1'"> Seater  </button>
+                              <button (click)="switchTab('tab2')"  [class.active]="activeTab === 'tab2'"> Sleeper  </button>
+                            </div>
+
+                            <div class="tab-content">
+                              <div *ngIf="activeTab === 'tab1'">
+                                  Seater
+                              </div>
+
+                              <div *ngIf="activeTab === 'tab2'">
+                                Sleeper
+                              </div>
+                            </div>
+
                             <div formArrayName="bus_seat_layout_data" class="col-12">
                               <div class="row" *ngFor="
                                   let layoutRow of seatOpenForm.controls
                                     .bus_seat_layout_data.controls;
                                   let layout_row = index
                                 " [formGroupName]="layout_row">
+
+                            
+
                                 <div formArrayName="lowerBerth" class="col-12"
                                   style="display: flex; justify-content: center">
                                   <div *ngFor="
@@ -342,7 +356,10 @@
                                     </label>
                                   </div>
                                 </div>
+
+                                
                               </div>
+
                             </div>
                           </div>
                           <style>
@@ -382,6 +399,8 @@
                             </div>
                           </div>  
                         </div>
+
+
                       </div>
                     </form>
                   </div>

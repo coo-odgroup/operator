@@ -71,6 +71,7 @@ export class SeatopenComponent implements OnInit {
 
   seatOpen: any=[];
   seatOpenRecord: Seatopen;
+  showSection = false;
 
   datePipe: DatePipe = new DatePipe('en-US');
   lastUrl: any;
@@ -103,7 +104,6 @@ export class SeatopenComponent implements OnInit {
   page_no=1;
   busSchedule: any;
   seatOpenDetails: any;
-  showSection = false;
   alreadyOpenData: any = [];
   openSeatsData: any= [];
   dt: string;
@@ -142,7 +142,7 @@ export class SeatopenComponent implements OnInit {
   toggleSection() {
     this.showSection = !this.showSection;
   }
-  
+
   OpenModal(content) {
     this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
   }
@@ -170,6 +170,10 @@ export class SeatopenComponent implements OnInit {
 
   }
 
+  activeTab: string = 'tab1';
+  switchTab(tab: string) {
+    this.activeTab = tab;
+  }
 //   addDays(a_oDate: Date, days: number): Date {
 //     a_oDate.setDate(a_oDate.getDate() + days);
 //     return a_oDate ;
@@ -1344,4 +1348,12 @@ export class SeatopenComponent implements OnInit {
 
 
 
+}
+
+export class TabsComponent {
+  activeTab: string = 'tab1';
+
+  switchTab(tab: string) {
+    this.activeTab = tab;
+  }
 }
