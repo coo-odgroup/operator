@@ -103,6 +103,7 @@ export class SeatopenComponent implements OnInit {
   page_no=1;
   busSchedule: any;
   seatOpenDetails: any;
+  showSection = false;
   alreadyOpenData: any = [];
   openSeatsData: any= [];
   dt: string;
@@ -138,7 +139,10 @@ export class SeatopenComponent implements OnInit {
     current.getMonth() + 1, day: current.getDate() };
 
   }
-
+  toggleSection() {
+    this.showSection = !this.showSection;
+  }
+  
   OpenModal(content) {
     this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
   }

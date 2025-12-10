@@ -93,6 +93,7 @@ export class OwnerfareComponent implements OnInit {
   all: any;
   completExportdata: string;
   today: Date;
+  showSection = false;
 
 
   constructor(private ownerfareService: OwnerfareService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busService: BusService, private busOperatorService: BusOperatorService, private locationService: LocationService, private spinner: NgxSpinnerService,  private dtconfig: NgbDatepickerConfig) {
@@ -111,7 +112,9 @@ export class OwnerfareComponent implements OnInit {
   this.today = current;
     
   }
-
+  toggleSection() {
+    this.showSection = !this.showSection;
+  }
   OpenModal(content) {
     // console.log(content);
 

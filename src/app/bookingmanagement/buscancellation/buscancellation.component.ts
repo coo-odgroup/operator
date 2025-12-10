@@ -59,6 +59,7 @@ export class BuscancellationComponent implements OnInit {
   dateformate: string;
   locations: any;
   url: string;
+  showSection = false;
 
   //getter for form array buses
   get busesFormGroup() {
@@ -596,6 +597,10 @@ export class BuscancellationComponent implements OnInit {
   }
   }
 
+  toggleSection() {
+    this.showSection = !this.showSection;
+  }
+
   editBusCancellation(event: Event, id: any) {
     this.showdates = '0';
     this.selectedCancelBus = [];
@@ -681,4 +686,6 @@ export class BuscancellationComponent implements OnInit {
 function cancelled_date(cancelled_date: any, arg1: string) {
   throw new Error('Function not implemented.');
 }
+
+
 

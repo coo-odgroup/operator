@@ -34,6 +34,7 @@ export class BusscheduleComponent implements OnInit {
   modalReference: NgbModalRef;
   confirmDialogReference: NgbModalRef;
   viewEntryDates: NgbModalRef;
+  showSection = false;
  
   busSchedules: Busschedule[];
   busScheduleRecord: Busschedule;
@@ -65,6 +66,10 @@ export class BusscheduleComponent implements OnInit {
     this.ModalHeading = "Add Bus Schedule";
     this.ModalBtn = "Save";
   }
+  toggleSection() {
+    this.showSection = !this.showSection;
+  }
+  
   OpenModal(content) {
     this.modalReference=this.modalService.open(content,{ scrollable: true, size: 'xl' });
   }

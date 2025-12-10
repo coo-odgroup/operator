@@ -4,10 +4,9 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <app-card [hidHeader]="false" cardTitle="BUS SCHEDULE" cardClass="card-datatable" [options]="false"
-      cardClass=" table-border-style user-profile-list " [isCardFooter]="true">
+    <app-card [hidHeader]="false" cardTitle="BUS SCHEDULE" cardClass="card-datatable" [options]="false" cardClass=" table-border-style user-profile-list " [isCardFooter]="true">
 
-   
+        <section *ngIf="showSection" class="my-section">
           <form [formGroup]="searchForm">
             <div class="row">
 
@@ -29,15 +28,14 @@
                 </div>
               </div>
 
-              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
+              <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3">
                 <div class="form-group">
                    <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus" formControlName="bus_id" [clearable]="false" required> </ng-select>
                 </div>
               </div>
 
-              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
+              <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3 kis-center">
                 <div class="form-group">
-                  <button type="button" class="btn btn-info btn-sm sml_input" (click)="ResetAttributes();OpenModal(content)"> Add Schedule </button>
                   <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
                   <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i class="fas fa-sync-alt"> </i> Refresh </button>
                 </div>
@@ -46,6 +44,10 @@
 
             </div>
           </form>
+        </section>  
+
+      <button type="button" class="cancel-btn-kis sml_input cancel-btn" (click)="ResetAttributes();OpenModal(content)">Add Schedule</button>
+      <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
 
         <div class="no-bdr text-right mt-3">
           <div class="card-header-right" >

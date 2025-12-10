@@ -102,6 +102,7 @@ export class SeatblockComponent implements OnInit {
   lowerData: FormArray;
   upperData: FormArray;
   busopenform: any;
+  showSection = false;
   
 
   // datesSelected:NgbDateStruct[]=[]; 
@@ -199,7 +200,9 @@ export class SeatblockComponent implements OnInit {
 
    
   }
-
+  toggleSection() {
+    this.showSection = !this.showSection;
+  }
   getFormattedDate(){
     
     var date = new Date();
@@ -1061,6 +1064,8 @@ export class SeatblockComponent implements OnInit {
   }
   }
 
+  
+
 get dateLists(): FormArray {
   return this.seatBlockForm.get('dateLists') as FormArray;
 }
@@ -1342,6 +1347,6 @@ get dateLists(): FormArray {
 
   // }
 
-
+    
 
 }

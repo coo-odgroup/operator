@@ -100,6 +100,7 @@ export class ExtraseablockComponent implements OnInit {
   all: any;
   route: any;
   deletedata: any;
+  showSection = false;
   page_no=1;
   busSchedule: any[];
   cancelDates: any;
@@ -134,6 +135,10 @@ export class ExtraseablockComponent implements OnInit {
     const current = new Date();
     this.dtconfig.minDate = { year: current.getFullYear(), month: 
     current.getMonth() + 1, day: current.getDate() };
+  }
+
+  toggleSection() {
+    this.showSection = !this.showSection;
   }
 
   OpenModal(content) {

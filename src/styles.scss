@@ -45,6 +45,16 @@ a.active.page-link {
   border: none !important;
  }
 
+ .cancel-btn-kis {
+    position: absolute;
+    right: 120px;
+    top: 0;
+    border: none;
+    background: #00acc1;
+    color: #fff;
+    border-radius: 0;
+}
+
 // ::ng-deep .datelist label input[type="checkbox"][disabled] 
 // {
 // background-color: #d30101f2 !important;
@@ -77,6 +87,9 @@ margin-left: 1px;
   left: 10px;
   z-index: 999999 !important;
 }
+.text-right{
+  text-align: right;
+}
 @media only screen and (max-width: 599px) {
   .m-text-center {
     text-align: center;
@@ -88,4 +101,12 @@ margin-left: 1px;
   .col-sm-2.offset-md-10 {
     margin-top: 20px;
   }
+
+   .cancel-btn-kis {
+    right: 109px;
+}
+.kis-center{
+  text-align: center;
+}
+  
 }
