@@ -133,7 +133,7 @@
 
     .card-block,
     .card-body {
-        padding: 20px;
+        padding: 0px 20px 20px 20px;
     }
 
     &.card-load {
@@ -170,5 +170,22 @@
         .card-header {
             border-bottom-color: rgba(255,255,255,0.25);
         }
+    }
+}
+
+.my-section{
+  padding-top: 20px ;
+}
+.serch-btn {
+    background: #ddd;
+    border: none;
+    padding: 8px 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+@media only screen and (max-width: 599px) {
+    .serch-btn {
+        margin: 0px auto !important;
     }
 }

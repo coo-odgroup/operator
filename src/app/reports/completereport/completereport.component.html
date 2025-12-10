@@ -41,7 +41,7 @@
                                 <input type="text" class="form-control sml_input" placeholder="Enter pnr" required formControlName="pnr" />
                             </div>
                         </div>
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-1">
+                        <div class="col-5 col-sm-6 col-md-6 col-lg-2 col-xl-1">
                             <div class="form-group">
                                 <div class="dropdown float-right full-w">
                                     <select class="form-control sml_input " formControlName="rows_number"
@@ -55,23 +55,20 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                    </div>
-                    <div class="row " >
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2 offset-md-10" style="text-align: right;">
+                        <div class="col-7 col-sm-6 col-md-6 col-lg-2 col-xl-2 offset-lg-10 offset-xl-10" style="text-align: right;">
                             <button  type="button" title="search" class="btn btn-success btn-sm sml_input"  (click)="search()"><i  class="fas fa-search"></i> Search</button>
-                            <button  type="button" title="refresh" class="btn btn-warning btn-sm sml_input" (click)="refresh()"><i  class="fas fa-sync-alt"></i> Reset</button>
+                            <button  type="button" title="refresh" class="btn btn-danger btn-sm sml_input" (click)="refresh()"><i  class="fas fa-sync-alt"></i> Reset</button>
                         </div>
+                        
                     </div>
                 </form>
 
             </section>
-            <button class="btn btn-info btn-md serch-btn" (click)="toggleSection()"><i class="fas fa-arrows-alt-v"></i> &nbsp; Report Search Here </button>
+            <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
 
             
 
-            <div class="no-bdr text-right">
+            <div class="no-bdr text-right mt-3">
                 <div class="card-header-right" >
                     <div class="btn-group card-option small-btn">
                         <button  type="button" title="Export" class="btn btn-warning sml_input"  (click)="exportexcel()"><i  class="fas fa-file-export"></i> Export</button>

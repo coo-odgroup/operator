@@ -23,6 +23,9 @@
     display: block;
     line-height: 22px;
 }
+.mobile-display ul li a.active{
+    color: #efc003;
+}
 .mobile-display ul li a span{
     display: block;
     list-style-type: none;
