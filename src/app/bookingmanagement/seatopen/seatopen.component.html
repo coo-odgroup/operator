@@ -257,7 +257,7 @@
                       
                       
 
-                      <div class="row">
+                      <div class="row" *ngIf="this.seatLengthData > 0">
                         <div class="row form-group col-sm-12" style="font-size: 10px; margin-left: 1px;">
                           <div class="col-md-9" >
                             <div class="tabs">
@@ -265,17 +265,96 @@
                               <button (click)="switchTab('tab2')"  [class.active]="activeTab === 'tab2'"> Sleeper  </button>
                             </div>
 
+                             <div formArrayName="bus_seat_layout_data" class="col-12">
+                              <div class="row" *ngFor="
+                                  let layoutRow of seatOpenForm.controls
+                                    .bus_seat_layout_data.controls;
+                                  let layout_row = index
+                                " [formGroupName]="layout_row">
+
                             <div class="tab-content">
                               <div *ngIf="activeTab === 'tab1'">
-                                  Seater
+                                      <div formArrayName="lowerBerth" class="col-12"
+                                  style="display: flex; justify-content: center">
+                                  <div *ngFor="
+                                      let layoutCol of layoutRow['controls']
+                                        .lowerBerth['controls'];
+                                      let layout_row = index
+                                    " [formGroupName]="layout_row" style="
+                                      width: 50px;
+                                      float: left;
+                                      text-align: center;
+                                    ">
+                                  
+                                    <label class="seatHolder">
+                                      <input type="checkbox" formControlName="seatChecked" *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        " />
+                                      <span class="seaterImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 1
+                                        "></span>
+                                      <span class="sleeperImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 2
+                                        "></span>
+                                      <span class="verticalImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 3
+                                        "></span>
+                                      <span class="blankImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 4
+                                        "></span>
+                                      <span *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        ">{{
+                                        layoutCol.controls.seatText.value
+                                        }}</span>
+                                    </label>
+                                  </div>
+                                </div>
                               </div>
 
                               <div *ngIf="activeTab === 'tab2'">
-                                Sleeper
+                                 <div formArrayName="upperBerth" class="col-12"
+                                  style="display: flex; justify-content: center">
+                                  <div *ngFor="
+                                      let layoutCol of layoutRow['controls']
+                                        .upperBerth['controls'];
+                                      let layout_row = index
+                                    " [formGroupName]="layout_row" style="
+                                      width: 50px;
+                                      float: left;
+                                      text-align: center;
+                                    ">
+                                    <label class="seatHolder">
+                                      <input type="checkbox" formControlName="seatChecked" *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        " />
+                                      <span class="seaterImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 1
+                                        "></span>
+                                      <span class="sleeperImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 2
+                                        "></span>
+                                      <span class="verticalImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 3
+                                        "></span>
+                                      <span class="blankImage" *ngIf="
+                                          layoutCol.controls.seatType.value == 4
+                                        "></span>
+                                      <span *ngIf="
+                                          layoutCol.controls.seatType.value != 4
+                                        ">{{
+                                        layoutCol.controls.seatText.value
+                                        }}</span>
+                                    </label>
+                                  </div>
+                                </div>
+
                               </div>
                             </div>
+                           </div>
+                          </div>  
 
-                            <div formArrayName="bus_seat_layout_data" class="col-12">
+                            <!-- <div formArrayName="bus_seat_layout_data" class="col-12">
                               <div class="row" *ngFor="
                                   let layoutRow of seatOpenForm.controls
                                     .bus_seat_layout_data.controls;
@@ -360,7 +439,7 @@
                                 
                               </div>
 
-                            </div>
+                            </div> -->
                           </div>
                           <style>
                             .table1.table1-bordered > thead > tr > th{

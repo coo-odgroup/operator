@@ -110,6 +110,7 @@ export class SeatopenComponent implements OnInit {
   busDatas: any;
   public DatesRecord: any;
   checkedDate: any = [];
+  seatLengthData : Number =0;
   constructor(
     calendar: NgbCalendar,
     private dtconfig: NgbDatepickerConfig,
@@ -145,6 +146,11 @@ export class SeatopenComponent implements OnInit {
 
   OpenModal(content) {
     this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
+    if (this.modalReference) {
+      this.modalReference.result.finally(() => {
+        this.seatLengthData = 0;
+      });
+    }
   }
   
   getFormattedDate(){
@@ -180,7 +186,8 @@ export class SeatopenComponent implements OnInit {
 // }
   
   ngOnInit(): void {
-
+    // this.seatLengthData =0;
+    
   //  this.dt = this.datePipe.transform(this.addDays(new Date(), - 1), 'yyyy-MM-dd');
 
     this.spinner.show();
@@ -445,6 +452,8 @@ export class SeatopenComponent implements OnInit {
             let counter = 0;
             this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']) as FormArray;
             this.seatLayoutData.clear();
+            this.seatLengthData = resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
+            
             if (resp.data.lowerBerth != undefined) {
               for (let lowerData of resp.data.lowerBerth) {
     
@@ -646,6 +655,7 @@ export class SeatopenComponent implements OnInit {
             let counter = 0;
             this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']) as FormArray;
             this.seatLayoutData.clear();
+            this.seatLengthData = resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
             if (resp.data.lowerBerth != undefined) {
               for (let lowerData of resp.data.lowerBerth) {
     
@@ -827,6 +837,7 @@ export class SeatopenComponent implements OnInit {
                 }
                 counter++;
               }
+              
             }
             this.spinner.hide();
           }
