@@ -255,7 +255,7 @@
                           </div>
                         </div> -->
                       
-                      
+                        
 
                       <div class="row" *ngIf="this.seatLengthData > 0">
                         <div class="row form-group col-sm-12" style="font-size: 10px; margin-left: 1px;">
@@ -265,14 +265,14 @@
                               <button (click)="switchTab('tab2')"  [class.active]="activeTab === 'tab2'"> Sleeper  </button>
                             </div>
 
-                             <div formArrayName="bus_seat_layout_data" class="col-12">
+                             <div formArrayName="bus_seat_layout_data" class="col-12 bus-transform">
                               <div class="row" *ngFor="
                                   let layoutRow of seatOpenForm.controls
                                     .bus_seat_layout_data.controls;
                                   let layout_row = index
                                 " [formGroupName]="layout_row">
 
-                            <div class="tab-content">
+                            <div class="tab-content ">
                               <div *ngIf="activeTab === 'tab1'">
                                       <div formArrayName="lowerBerth" class="col-12"
                                   style="display: flex; justify-content: center">

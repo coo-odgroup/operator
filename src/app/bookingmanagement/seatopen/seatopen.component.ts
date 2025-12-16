@@ -1367,4 +1367,5 @@ export class TabsComponent {
   switchTab(tab: string) {
     this.activeTab = tab;
   }
+
 }

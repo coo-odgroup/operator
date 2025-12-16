@@ -112,7 +112,15 @@ margin-left: 1px;
     background-color: #002f80;
     color: #ccc;
 }
+.bus-transform{
+  transform: rotate(90deg);
+    margin-top: 290px;
+}
 @media only screen and (max-width: 599px) {
+  .bus-transform{
+  transform: rotate(90deg);
+    margin-top: 50px;
+}
   .m-text-center {
     text-align: center;
     margin: 0 auto;
