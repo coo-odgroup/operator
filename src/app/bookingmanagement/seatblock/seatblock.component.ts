@@ -200,6 +200,7 @@ export class SeatblockComponent implements OnInit {
 
    
   }
+ 
   toggleSection() {
     this.showSection = !this.showSection;
   }
@@ -353,6 +354,10 @@ export class SeatblockComponent implements OnInit {
     }
   }
 
+  activeTab: string = 'tab1';
+  switchTab(tab: string) {
+    this.activeTab = tab;
+  }
 
   refresh()
    {    
@@ -1347,6 +1352,5 @@ get dateLists(): FormArray {
 
   // }
 
-    
 
 }

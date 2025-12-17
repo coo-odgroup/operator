@@ -112,13 +112,22 @@ margin-left: 1px;
     background-color: #002f80;
     color: #ccc;
 }
+
+
 .bus-transform{
-  transform: rotate(90deg);
-    margin-top: 290px;
+  margin-top: 50px;
 }
+
+@media only screen and (max-width: 768px) {
+  .bus-transform{
+    transform: rotate(90deg);
+    margin-top: 80px;
+}
+}
+
 @media only screen and (max-width: 599px) {
   .bus-transform{
-  transform: rotate(90deg);
+    transform: rotate(90deg);
     margin-top: 50px;
 }
   .m-text-center {
@@ -139,4 +148,19 @@ margin-left: 1px;
   text-align: center;
 }
   
+}
+@media only screen and (max-width: 425px) {
+  .bus-transform{
+    transform: rotate(90deg);
+    margin-top: 100px;
+}
+
+}
+
+@media only screen and (max-width: 320px) {
+  .bus-transform{
+    transform: rotate(90deg);
+    margin-top: 50px;
+}
+
 }
