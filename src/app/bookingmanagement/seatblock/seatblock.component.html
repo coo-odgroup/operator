@@ -388,8 +388,23 @@
                       </div>
 
                       <div class="row">
-                        <div class="col-md-9" style="font-size: 10px;
-                        margin-left: 1px;">
+                        <div class="col-md-9" style="font-size: 10px; margin-left: 1px;">
+
+                          <div class="tabs">
+                            <button (click)="switchTab('tab1')"  [class.active]="activeTab === 'tab1'"> Seater  </button>
+                            <button (click)="switchTab('tab2')"  [class.active]="activeTab === 'tab2'"> Sleeper  </button>
+                          </div>
+
+                          <div class="tab-content ">
+                            <div *ngIf="activeTab === 'tab1'">
+                                Seat
+                            </div>
+                            <div *ngIf="activeTab === 'tab2'">
+                                Sleeper
+                            </div>
+                          </div>
+
+
                           <div formArrayName="bus_seat_layout_data" class="col-12">
                             <div class="row" *ngFor="
                                 let layoutRow of seatBlockForm.controls
@@ -471,6 +486,8 @@
                             </div>
                           </div>
                         </div>
+
+
                         <style>
                           .table1.table1-bordered > thead > tr > th{
                             border:3px solid rgb(223, 11, 11);
@@ -652,20 +669,7 @@
                 <div class="col-md-12">
                   <div formArrayName="bus_seat_layout_data" class="col-12">
 
-                    <div class="tabs">
-                      <button (click)="switchTab('tab1')"  [class.active]="activeTab === 'tab1'"> Seater  </button>
-                      <button (click)="switchTab('tab2')"  [class.active]="activeTab === 'tab2'"> Sleeper  </button>
-                    </div>
-
-                    <div class="tab-content ">
-                      <div *ngIf="activeTab === 'tab1'">
-                          Seat
-                      </div>
-                      <div *ngIf="activeTab === 'tab2'">
-                          Sleeper
-                      </div>
-                    </div>
-
+                    
                     <div class="row" *ngFor="
                         let layoutRow of seatBlockForm.controls
                           .bus_seat_layout_data.controls;

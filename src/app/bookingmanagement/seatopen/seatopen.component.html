@@ -223,7 +223,7 @@
                               <span class="ml-1">{{busesFormGroup.controls.entryDates.value | date: 'dd-MMM'}}</span>
                             </label>
                           </span>
-                          
+
                         </div>
 
                       </div>
@@ -275,8 +275,7 @@
 
                             <div class="tab-content ">
                               <div *ngIf="activeTab === 'tab1'">
-                                      <div formArrayName="lowerBerth" class="col-12"
-                                  style="display: flex; justify-content: center">
+                                <div formArrayName="lowerBerth" class="col-12" style="display: flex; justify-content: center">
                                   <div *ngFor="
                                       let layoutCol of layoutRow['controls']
                                         .lowerBerth['controls'];
