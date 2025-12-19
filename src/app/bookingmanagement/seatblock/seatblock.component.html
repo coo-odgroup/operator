@@ -388,6 +388,7 @@
                       </div>
 
                       <div class="row" *ngIf="this.seatLengthData > 0">
+                      <div class="row">
                         <div class="col-md-9" style="font-size: 10px; margin-left: 1px;">
 
                           <div class="tabs">
@@ -395,6 +396,18 @@
                             <button (click)="switchTab('tab2')"  [class.active]="activeTab === 'tab2'"> Sleeper  </button>
                           </div>
                            <div formArrayName="bus_seat_layout_data" class="col-12">
+
+                          <div class="tab-content ">
+                            <div *ngIf="activeTab === 'tab1'">
+                                Seat
+                            </div>
+                            <div *ngIf="activeTab === 'tab2'">
+                                Sleeper
+                            </div>
+                          </div>
+
+
+                          <div formArrayName="bus_seat_layout_data" class="col-12">
                             <div class="row" *ngFor="
                                 let layoutRow of seatBlockForm.controls
                                   .bus_seat_layout_data.controls;

@@ -310,7 +310,7 @@
                                           </label>
                                         </div>
                                       </div>
-                                </div>
+                                    </div>
                                   </div>  
 
                               <!-- <div formArrayName="bus_seat_layout_data" class="col-12">
@@ -395,11 +395,23 @@
                                     </div>
                                   </div>
 
+                            <div class="tab-content ">
+                              <div *ngIf="activeTab === 'tab1'">
+                                <div formArrayName="lowerBerth" class="col-12" style="display: flex; justify-content: center">
+                                  <div *ngFor="
+                                      let layoutCol of layoutRow['controls']
+                                        .lowerBerth['controls'];
+                                      let layout_row = index
+                                    " [formGroupName]="layout_row" style="
+                                      width: 50px;
+                                      float: left;
+                                      text-align: center;
+                                    ">
                                   
                                 </div>
 
                               </div> -->
-                                </div>
+                                <!-- </div> -->
                                 <style>
                                   .table1.table1-bordered > thead > tr > th{
                                     border:3px solid rgb(223, 11, 11);
@@ -439,7 +451,7 @@
                              </div>
                           </div>
                       </div>   
-                     </div> 
+                      </div> 
                     </form>
                   </div>
                 </div>
