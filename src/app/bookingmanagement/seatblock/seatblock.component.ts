@@ -117,6 +117,7 @@ export class SeatblockComponent implements OnInit {
   alreadyBlocksData: any=[];
   blockSeatsData: any;
   busDatas: any=[];
+  seatLengthData : Number =0;
   busesRecord: FormArray;
   constructor(
     calendar: NgbCalendar,
@@ -148,6 +149,7 @@ export class SeatblockComponent implements OnInit {
 
   OpenModal(content) {
     this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
+     this.seatLengthData = 0;
   }
   ngOnInit(): void {
     
@@ -449,6 +451,7 @@ export class SeatblockComponent implements OnInit {
         let counter = 0;
         this.seatLayoutData = (<FormArray>this.seatBlockForm.controls['bus_seat_layout_data']) as FormArray;
         this.seatLayoutData.clear();
+        this.seatLengthData = resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
         if (resp.data.lowerBerth != undefined) {
           for (let lowerData of resp.data.lowerBerth) {
 
@@ -1353,4 +1356,14 @@ get dateLists(): FormArray {
   // }
 
 
+
+
+}
+
+  export class TabsComponent {
+    activeTab: string = 'tab1';
+
+    switchTab(tab: string) {
+      this.activeTab = tab;
+  }
 }
