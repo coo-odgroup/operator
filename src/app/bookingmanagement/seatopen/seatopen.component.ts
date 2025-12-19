@@ -1323,6 +1323,8 @@ export class SeatopenComponent implements OnInit {
     }
   }
 
+  
+
   addDate(date:NgbDateStruct)
   {
       let index=this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year);
