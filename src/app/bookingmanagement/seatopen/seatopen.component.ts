@@ -1300,6 +1300,7 @@ export class SeatopenComponent implements OnInit {
   @Output() datesSelectedChange=new EventEmitter<NgbDateStruct[]>();
 
  
+  
 
   onDateSelection(event:any,date: NgbDateStruct) {
 
@@ -1323,7 +1324,7 @@ export class SeatopenComponent implements OnInit {
     }
   }
 
-  
+
 
   addDate(date:NgbDateStruct)
   {
