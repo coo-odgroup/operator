@@ -29,9 +29,9 @@
 
 <div class="mobile-display">
   <ul>
-    <li><a href="#/bookingmanagement/seatblock" (click)="closeMenu()" class="active"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
-    <li><a href="#/bookingmanagement/seatopen" (click)="closeMenu()"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
-    <li><a href="#/reports/completeReport" (click)="closeMenu()"><span><i class="feather icon-crosshair"></i></span>Booking Report</a></li>
+    <li><a href="#/bookingmanagement/seatblock" (click)="closeMenu()"  [class.active]="isActive('seatblock')"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
+    <li><a href="#/bookingmanagement/seatopen" (click)="closeMenu()" [class.active]="isActive('seatopen')"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
+    <li><a href="#/reports/completeReport" (click)="closeMenu()" [class.active]="isActive('completeReport')"><span><i class="feather icon-crosshair"></i></span>Booking Report</a></li>
     <li><a (click)="toggleSection()"><span><i class="feather icon-list"></i></span>Menu</a></li>
   </ul>
 </div>

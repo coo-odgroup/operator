@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { NextConfig } from '../../../app-config';
 import { Location } from '@angular/common';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   public windowWidth: number;
   showSection = false;
 
-  constructor(private zone: NgZone, private location: Location) {
+  constructor(private zone: NgZone, private location: Location,private router: Router) {
     this.flatConfig = NextConfig.config;
     let currentURL = this.location.path();
     const baseHerf = this.location['_baseHref'];
@@ -64,6 +64,10 @@ export class AdminComponent implements OnInit {
 
   closeMenu() {
       this.showSection = false;
+  }
+
+   isActive(path: string): boolean {
+    return this.router.url.includes(path);
   }
 
 }
