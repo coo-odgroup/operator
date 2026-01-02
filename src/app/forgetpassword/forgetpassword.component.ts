@@ -18,9 +18,9 @@ import { EncryptionService } from '../encrypt.service';
 })
 export class ForgetpasswordComponent implements OnInit {
 
-  public forgotPasswordForm: FormGroup;
-  public otpForm: FormGroup;
-  public resetForm: FormGroup;
+  public forgotPasswordForm!: FormGroup;
+  public otpForm!: FormGroup;
+  public resetForm!: FormGroup;
   
 
   submitted=false;
@@ -113,6 +113,10 @@ export class ForgetpasswordComponent implements OnInit {
 
  }
 
+  email_id: any;
+  timeLeft: number = 0;
+  interval: any;
+
   onSubmit() {
 
     this.submitted=true;
@@ -134,6 +138,19 @@ export class ForgetpasswordComponent implements OnInit {
             let OtpData:any=this.enc.decrypt(res.data);
             OtpData=JSON.parse(OtpData);
             this.OtpData=OtpData;
+            this.email_id = data.email;
+            console.log(this.email_id);
+
+            this.timeLeft = 60;
+
+            this.interval = setInterval(() => {
+              if (this.timeLeft > 0) {
+                this.timeLeft--;
+              } else {
+                clearInterval(this.interval);
+              }
+            }, 1000);
+
             this.notify.notify("OTP has been sent","Success");
           }else{
             this.notify.notify(res.message,"Error");
@@ -151,6 +168,25 @@ export class ForgetpasswordComponent implements OnInit {
 
  }
 
+  resendOtp() {
+    this.onSubmit();
+  }
+
+  maskEmail(email: string): string {
+    if (!email) return '';
+
+    const [username, domain] = email.split('@');
+
+    if (username.length <= 4) {
+      return username.charAt(0) + '****@' + domain;
+    }
+
+    const first = username.slice(0, 2);
+    const last = username.slice(-2);
+
+    return `${first}****${last}@${domain}`;
+  }
+
   ngOnInit(): void {
 
     this.forgotPasswordForm = this.fb.group({
@@ -167,7 +203,9 @@ export class ForgetpasswordComponent implements OnInit {
       confirm_password: [null, Validators.compose([Validators.required])],
     },{ 
       validator: MustMatch('password', 'confirm_password')
-    });  
+    });
+
+    clearInterval(this.interval);
 
   }
 
