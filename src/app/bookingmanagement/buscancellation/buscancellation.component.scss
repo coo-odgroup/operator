@@ -47,3 +47,70 @@ margin-left: 2px;
   {
     color: red;
   }
+
+
+  // Chnages By Siraz
+
+  /* Bus Cancellation – date list fix */
+.datelist {
+  margin-top: 8px;
+}
+
+.datelist label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+/* Checkbox alignment */
+.datelist input[type="checkbox"] {
+  margin: 0;
+}
+
+@media screen 
+and (min-width: 412px) 
+and (max-width: 915px) 
+and (orientation: portrait) {
+  .bus-transform {
+    margin-top: 110px !important;
+    }
+}
+
+@media screen 
+and (min-width: 768px) 
+and (max-width: 1024px) 
+and (orientation: portrait) {
+  .bus-transform {
+    margin-top: 160px !important;
+    }
+}
+
+@media screen 
+and (min-width: 320px)
+and (max-width: 320px)
+and (min-height: 768px)
+and (max-height: 768px)
+and (orientation: portrait) {
+
+  .mobile-btn {
+    height: 50px;
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+  #print-section {
+    margin-top: 15px;
+  }
+}
+
+
+@media screen and (max-width: 425px) {
+  .datelist label {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+
