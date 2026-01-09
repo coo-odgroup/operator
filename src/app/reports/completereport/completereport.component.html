@@ -120,9 +120,9 @@
                                 <td style="min-width: 15px;">{{ i+1 }}</td>
                                 <td>
                                     <strong>{{complete.pnr}}</strong><br>
-                                    <strong>{{ complete.bus.name }}</strong>( <span style="color: rgb(201, 144, 0);"> {{ complete.bus.bus_number }} </span>)
+                                    <strong>{{ complete.bus.name }} ( {{ complete.bus.bus_number }} ) </strong>
                                     <br>
-                                    <span class="text-danger"> <strong>DOJ</strong> -{{complete.journey_dt | date: 'dd-MM-yyyy'}} </span>
+                                    <strong>DOJ: {{complete.journey_dt | date: 'dd-MMM-yyyy'}} </strong>
                                     <br>
                                     <span *ngFor="let boarding of complete.from_location;">
                                         {{boarding.name}}
@@ -132,28 +132,29 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span *ngFor="let seat of complete.booking_detail;">
-                                        <b style=" color:brown;">{{seat.bus_seats.seats.seatText}} </b>,
+                                    <span *ngFor="let seat of complete.booking_detail; let last = last">
+                                        <b style="color:brown;">
+                                            {{ seat.bus_seats.seats.seatText }}
+                                        </b><span *ngIf="!last"> ,</span>
                                     </span>
                                     <br>
-                                    [<b>{{complete.booking_detail[0].passenger_name}}</b>] -
-                                    <span *ngFor="let passanger of complete.booking_detail;">
-                                        <b>{{passanger.passenger_gender}}</b>,
-                                    </span>  
+                                    <b>{{complete.booking_detail[0].passenger_name  | titlecase}}</b> -
+                                     <span *ngFor="let passanger of complete.booking_detail; let last = last">
+                                        <b>{{ passanger.passenger_gender }}</b><span *ngIf="!last"> ,</span>
+                                     </span>
                                     <br>
                                     <span class=" hide_print" placement="bottom" >
-                                     <h6><i class="fas fa-mobile-alt text-danger"></i>&nbsp;&nbsp;{{complete.users.phone}}  </h6>   
+                                     <i class="fas fa-mobile-alt text-danger"></i>&nbsp;&nbsp;<strong>{{complete.users.phone}}</strong>
                                     </span>
                                 </td>
                                 <td>
-                                    <i class="fas fa-rupee-sign"></i> <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
+                                   <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
                                 </td>
                             </tr>
                             <tr>     
-                                <td colspan="3"> &nbsp;Total payment</td>           
+                                <td colspan="3" class="text-right"> <strong>Total Payment</strong></td>           
                                 <td >
-                                    <strong placement="top" ngbTooltip="Sum of Total Payment"> <i
-                                            class="fas fa-rupee-sign"></i> <b
+                                    <strong placement="top" ngbTooltip="Sum of Total Payment"><b
                                             class="text-danger">{{completedata?.owner_fare}}</b></strong>
                                 </td>
                             </tr>
