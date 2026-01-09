@@ -1,8 +1,8 @@
-<div class="container" *ngIf="this.flatConfig.layout === 'horizontal' && this.flatConfig.subLayout === 'horizontal-2'; else mainHeader">
+<div class="container bg-white" *ngIf="this.flatConfig.layout === 'horizontal' && this.flatConfig.subLayout === 'horizontal-2'; else mainHeader">
   <ng-container *ngTemplateOutlet="mainHeader"></ng-container>
 </div>
 
-<style>
+<!-- <style>
   table {
          font-size: 12px !important;;
      }
@@ -13,18 +13,18 @@
     margin-left: 10px;
     }
 }
-</style>
+</style> -->
 
 <ng-template #mainHeader>
   <div class="m-header">
-    <a href="javascript:" class="mobile-menu" id="mobile-collapse" (click)="navCollapse()"><span></span></a>
+    <!-- <a href="javascript:" class="mobile-menu" id="mobile-collapse" (click)="navCollapse()"><span></span></a> -->
     <!-- <a [routerLink]="['/dashboard/analytics']" class="b-brand">
       <img id="main-logo" src="assets/images/odbus_logo.png" alt="" class="logo">
      
     </a> -->
     
     <a [routerLink]="['/dashboard']"  class="b-brand">
-      <img id="main-logo" src="https://www.odbus.in/assets/img/mob-img/logo.png" alt="" class="logo">
+      <img id="main-logo" src="https://www.odbus.in/assets/img/mob-img/logo.png" alt="" class="logo ml-4">
     </a>
 
     <a href="#/dashboard" class="home-icon"><span><i class="feather icon-home"></i></span></a>
