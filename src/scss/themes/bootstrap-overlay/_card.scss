@@ -25,7 +25,10 @@
     box-shadow: $card-shadow;
     margin-bottom: 30px;
     transition: box-shadow 0.2s ease-in-out;
-    border-top: 3px solid #8CDDCD;
+    // border-top: 3px solid #8CDDCD;
+
+    border-top: 3px solid #2a3386; // changed by siraz
+    border-top-left-radius: 5px;  // added by siraz
 
     &.borderless {
         border-top: none;
@@ -177,7 +180,8 @@
   padding-top: 20px ;
 }
 .serch-btn {
-    background: #8cddcd;
+    // background: #8cddcd;
+    background: #ddb40ef3; //Change Bu siraz
     border: none;
     padding: 8px 20px;
     position: absolute;

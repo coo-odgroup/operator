@@ -249,7 +249,8 @@ select-dropdown .selected.highlighted {
   color: #fff;
   text-align: center;
   padding: 8px;
-  background: rgb(26, 188, 156);
+  // background: rgb(26, 188, 156);
+  background: #1b2155; //Change By siraz
   border-radius: 50%;
   animation: shadow-pulse 1s infinite;
 }
