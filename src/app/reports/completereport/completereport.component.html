@@ -64,11 +64,14 @@
                 </form>
 
             </section>
-            <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
+            <hr *ngIf="showSection">
+            <button class="serch-btn" (click)="toggleSection()">
+                <i [ngClass]="showSection ? 'fas fa-times' : 'fas fa-filter'"></i> {{ showSection ? 'Close' : 'Search' }}
+            </button>
 
             
 
-            <div class="no-bdr text-right mt-3">
+            <div class="no-bdr text-right mt-1" *ngIf="completedata?.data?.data?.length != 0">
                 <div class="card-header-right" >
                     <div class="btn-group card-option small-btn">
                         <button  type="button" title="Export" class="btn btn-warning sml_input"  (click)="exportexcel()"><i  class="fas fa-file-export"></i> Export</button>
@@ -80,32 +83,13 @@
             </div>
 
             <style>
-                 table {
-                        font-size: 12px !important;;
-                    }
-
-                @media only screen and (max-width: 600px) {
-                    table {
-                        font-size: 9px !important;;
-                    }
-                    th{
-                        padding: 1px !important;
-                    }
-                    td{
-                        padding: 1px !important;
-                    }
-                    h6 {
-                        font-size: 12px;
-                        color: #37474f;
-                        font-weight: bolder;
-                    }
-                }
+               
             </style>
 
             <div class="table-responsive " id="print-section">
                 <div class=" tableFixHead">
                     <table class="table table-striped  header-fixed" >
-                        <thead>
+                        <thead *ngIf="completedata?.data?.data?.length != 0">
                             <tr>
                                 <th scope="col" >#</th>
                                 <th scope="col">Ticket Details</th>
@@ -151,24 +135,23 @@
                                    <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
                                 </td>
                             </tr>
-                            <tr>     
+                            <tr *ngIf="completedata?.data?.data?.length != 0">     
                                 <td colspan="3" class="text-right"> <strong>Total Payment</strong></td>           
-                                <td >
-                                    <strong placement="top" ngbTooltip="Sum of Total Payment"><b
-                                            class="text-danger">{{completedata?.owner_fare}}</b></strong>
+                                <td>
+                                    <strong placement="top" ngbTooltip="Sum of Total Payment">{{completedata?.owner_fare}}</strong>
                                 </td>
                             </tr>
                         </tbody>
-                        <tbody *ngIf="completedata?.length == 0">
+                        <tbody *ngIf="completedata?.data?.data?.length == 0">
                             <tr>
-                                <td colspan="10" class="no-data-available">No data!</td>
+                                <td colspan="10" class="no-data-available bold">No Record Found!</td>
                             </tr>
                         <tbody>
                     </table>
                 </div>
 
 
-                <div *ngIf="completedata?.length != 0" class="hide_print container m-text-center">
+                <div *ngIf="completedata?.data?.data?.length != 0" class="hide_print container m-text-center">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <p class="  mt-3 ml-1"> Showing {{completedata?.count}} of {{completedata?.total}} records. </p>

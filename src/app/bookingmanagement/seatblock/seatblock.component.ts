@@ -9,71 +9,94 @@ import { BusscheduleService } from '../../services/busschedule.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { Constants } from '../../constant/constant';
-import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModalConfig,
+  NgbModal,
+  NgbModalRef,
+} from '@ng-bootstrap/ng-bootstrap';
 import { LocationService } from '../../services/location.service';
 import { SeatlayoutService } from '../../services/seatlayout.service';
 import * as XLSX from 'xlsx';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { replace } from 'lodash';
 import { DatePipe } from '@angular/common';
 
-import {Input,Output,EventEmitter} from '@angular/core';
-import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
-
-
-
+import { Input, Output, EventEmitter } from '@angular/core';
+import {
+  NgbDateStruct,
+  NgbCalendar,
+  NgbDatepickerConfig,
+} from '@ng-bootstrap/ng-bootstrap';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
-  one && two && two.year === one.year && two.month === one.month && two.day === one.day;
+  one &&
+  two &&
+  two.year === one.year &&
+  two.month === one.month &&
+  two.day === one.day;
 
 const before = (one: NgbDateStruct, two: NgbDateStruct) =>
-  !one || !two ? false : one.year === two.year ? one.month === two.month ? one.day === two.day
-    ? false : one.day < two.day : one.month < two.month : one.year < two.year;
+  !one || !two
+    ? false
+    : one.year === two.year
+    ? one.month === two.month
+      ? one.day === two.day
+        ? false
+        : one.day < two.day
+      : one.month < two.month
+    : one.year < two.year;
 
 const after = (one: NgbDateStruct, two: NgbDateStruct) =>
-  !one || !two ? false : one.year === two.year ? one.month === two.month ? one.day === two.day
-    ? false : one.day > two.day : one.month > two.month : one.year > two.year;
+  !one || !two
+    ? false
+    : one.year === two.year
+    ? one.month === two.month
+      ? one.day === two.day
+        ? false
+        : one.day > two.day
+      : one.month > two.month
+    : one.year > two.year;
 
 @Component({
   selector: 'app-seatblock',
   templateUrl: './seatblock.component.html',
   styleUrls: ['./seatblock.component.scss'],
-  styles: [`
-  .custom-day {
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    display: inline-block;
-    height: 2rem;
-    width: 2rem;
-  }
-  .custom-day.range, .custom-day:hover {
-    background-color: rgb(2, 117, 216);
-    color: white;
-  }
-  .custom-day.faded {
-    background-color: rgba(2, 117, 216, 0.5);
-  }
-  .custom-day.selected{  
-    background-color: rgba(255, 255, 0, .5);
-      
-  }
-`]
+  styles: [
+    `
+      .custom-day {
+        text-align: center;
+        padding: 0.185rem 0.25rem;
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+      }
+      .custom-day.range,
+      .custom-day:hover {
+        background-color: rgb(2, 117, 216);
+        color: white;
+      }
+      .custom-day.faded {
+        background-color: rgba(2, 117, 216, 0.5);
+      }
+      .custom-day.selected {
+        background-color: rgba(255, 255, 0, 0.5);
+      }
+    `,
+  ],
 })
-
 export class SeatblockComponent implements OnInit {
+  @ViewChild('addnew') addnew: any;
+  public seatBlockForm!: FormGroup;
+  public formConfirm!: FormGroup;
+  public searchForm!: FormGroup;
 
-  @ViewChild("addnew") addnew;
-  public seatBlockForm: FormGroup;
-  public formConfirm: FormGroup;
-  public searchForm: FormGroup;
-
-  modalReference: NgbModalRef;
-  confirmDialogReference: NgbModalRef;
+  modalReference!: NgbModalRef;
+  confirmDialogReference!: NgbModalRef;
   pipe = new DatePipe('en-US');
-  
+
   datePipe: DatePipe = new DatePipe('en-US');
 
-  seatBlock: any=[];
+  seatBlock: any = [];
   seatBlockDetails: any;
 
   // seatBlock: Seatblock[];
@@ -90,36 +113,92 @@ export class SeatblockComponent implements OnInit {
   public DatesRecord: any;
   seatLayouts: any;
   busRecord: any;
-  seatLayoutData: any =[];
-  checkedDate: any =[];
+  seatLayoutData: any = [];
+  checkedDate: any = [];
   busForm: any;
   seatLayoutCol: any;
   upperberthcol: any;
   lowerberthcol: any;
   selectedSeats: any;
-  busArray: FormArray;
-  busesData: FormArray;
-  lowerData: FormArray;
-  upperData: FormArray;
+  busArray!: FormArray;
+  busesData!: FormArray;
+  lowerData!: FormArray;
+  upperData!: FormArray;
   busopenform: any;
   showSection = false;
-  
-  
 
-  // datesSelected:NgbDateStruct[]=[]; 
-  dtOptionsSeatblock: { pagingType: string; pageLength: number; serverSide: boolean; processing: boolean; dom: string; order: string[]; aLengthMenu: (string | number)[]; buttons: ({ extend: string; className: string; init: (api: any, node: any, config: any) => void; exportOptions: { columns: string; }; text?: undefined; action?: undefined; } | { text: string; className: string; init: (api: any, node: any, config: any) => void; action: () => void; extend?: undefined; exportOptions?: undefined; })[]; language: { searchPlaceholder: string; processing: string; }; ajax: (dataTablesParameters: any, callback: any) => void; columns: ({ data: string; title?: undefined; render?: undefined; orderable?: undefined; className?: undefined; } | { title: string; data: string; render?: undefined; orderable?: undefined; className?: undefined; } | { data: string; render: (data: any) => "Active" | "Pending"; title?: undefined; orderable?: undefined; className?: undefined; } | { title: string; data: any; orderable: boolean; className: string; render?: undefined; })[]; };
+  // datesSelected:NgbDateStruct[]=[];
+  dtOptionsSeatblock!: {
+    pagingType: string;
+    pageLength: number;
+    serverSide: boolean;
+    processing: boolean;
+    dom: string;
+    order: string[];
+    aLengthMenu: (string | number)[];
+    buttons: (
+      | {
+          extend: string;
+          className: string;
+          init: (api: any, node: any, config: any) => void;
+          exportOptions: { columns: string };
+          text?: undefined;
+          action?: undefined;
+        }
+      | {
+          text: string;
+          className: string;
+          init: (api: any, node: any, config: any) => void;
+          action: () => void;
+          extend?: undefined;
+          exportOptions?: undefined;
+        }
+    )[];
+    language: { searchPlaceholder: string; processing: string };
+    ajax: (dataTablesParameters: any, callback: any) => void;
+    columns: (
+      | {
+          data: string;
+          title?: undefined;
+          render?: undefined;
+          orderable?: undefined;
+          className?: undefined;
+        }
+      | {
+          title: string;
+          data: string;
+          render?: undefined;
+          orderable?: undefined;
+          className?: undefined;
+        }
+      | {
+          data: string;
+          render: (data: any) => 'Active' | 'Pending';
+          title?: undefined;
+          orderable?: undefined;
+          className?: undefined;
+        }
+      | {
+          title: string;
+          data: any;
+          orderable: boolean;
+          className: string;
+          render?: undefined;
+        }
+    )[];
+  };
   pagination: any;
   all: any;
   route: any;
   deletedata: any;
-  page_no=1;
+  page_no = 1;
   busSchedule: any;
   lastUrl: any;
-  alreadyBlocksData: any=[];
+  alreadyBlocksData: any = [];
   blockSeatsData: any;
-  busDatas: any=[];
-  seatLengthData : Number =0;
-  busesRecord: FormArray;
+  busDatas: any = [];
+  seatLengthData: Number = 0;
+  busesRecord!: FormArray;
   constructor(
     calendar: NgbCalendar,
     private dtconfig: NgbDatepickerConfig,
@@ -133,32 +212,38 @@ export class SeatblockComponent implements OnInit {
     private modalService: NgbModal,
     private busService: BusService,
     private busOperatorService: BusOperatorService,
-    private locationService: LocationService,private spinner: NgxSpinnerService,
+    private locationService: LocationService,
+    private spinner: NgxSpinnerService
   ) {
     this.isSubmit = false;
     this.seatBlockRecord = {} as Seatblock;
     //this.busstoppageRecord= {} as Busstoppage;
     config.backdrop = 'static';
     config.keyboard = false;
-    this.ModalHeading = "Add Seat Block";
-    this.ModalBtn = "Save";
-    
+    this.ModalHeading = 'Add Seat Block';
+    this.ModalBtn = 'Save';
+
     const current = new Date();
-    this.dtconfig.minDate = { year: current.getFullYear(), month: 
-    current.getMonth() + 1, day: current.getDate() };
+    this.dtconfig.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate(),
+    };
   }
 
-  OpenModal(content) {
-    this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
-     this.seatLengthData = 0;
+  OpenModal(content: any) {
+    this.modalReference = this.modalService.open(content, {
+      scrollable: true,
+      size: 'xl',
+    });
+    this.seatLengthData = 0;
   }
   ngOnInit(): void {
-    
     this.spinner.show();
     this.seatBlockForm = this.fb.group({
       bus_operator_id: [null],
       id: [null],
-      bus_id: [null],  
+      bus_id: [null],
       busRoute: [null],
       date: [null],
       reason: [null],
@@ -168,192 +253,192 @@ export class SeatblockComponent implements OnInit {
           //busScheduleId: [null],
           entryDates: [null],
           datechecked: [false],
-        })
+        }),
       ]),
       bus_seat_layout_id: [null],
       bus_seat_layout_data: this.fb.array([
         this.fb.group({
-          upperBerth: this.fb.array([
-          ]),//Upper Berth Items Will be Added Here
-          lowerBerth: this.fb.array([
-          ])//Lower Berth Items will be added Here
-        })
+          upperBerth: this.fb.array([]), //Upper Berth Items Will be Added Here
+          lowerBerth: this.fb.array([]), //Lower Berth Items will be added Here
+        }),
       ]),
     });
     this.formConfirm = this.fb.group({
-      id: [null]
+      id: [null],
     });
 
     this.searchForm = this.fb.group({
       name: [null],
       rows_number: Constants.RecordLimit,
-      page_no:this.page_no,
-      fromDate:[null],
-      toDate:[null],
-      source_id:[null],
-      destination_id:[null],
-      bus_operator_id:[null],
-      bus_id:[null],
+      page_no: this.page_no,
+      fromDate: [null],
+      toDate: [null],
+      source_id: [null],
+      destination_id: [null],
+      bus_operator_id: [null],
+      bus_id: [null],
     });
 
     this.loadServices();
     this.findOperator();
     this.search();
-    
-
-   
   }
- 
+
   toggleSection() {
     this.showSection = !this.showSection;
   }
-  getFormattedDate(){
-    
+  getFormattedDate() {
     var date = new Date();
     var transformDate = this.datePipe.transform(date, 'yyyy-MM-dd');
     return transformDate;
   }
-  getcurrentmonths(){
-    
+  getcurrentmonths() {
     var date = new Date();
     var transformmonth = this.datePipe.transform(date, 'MM');
     // console.log(transformmonth);
     return transformmonth;
   }
 
-  getcurrentyears(){ 
+  getcurrentyears() {
     var date = new Date();
     var transformyear = this.datePipe.transform(date, 'yyyy');
     // console.log(transformyear);
     return transformyear;
-
   }
 
-  set_page(url:any)
-  {
+  set_page(url: any) {
     this.lastUrl = '';
     // console.log(url);
-    this.page_no = url.replace('/api/seatblockData?page=','');
+    this.page_no = url.replace('/api/seatblockData?page=', '');
     this.search();
     this.lastUrl = url;
-  
   }
- 
-  page(label:any){
-    return label;
-   }
 
-   
+  page(label: any) {
+    return label;
+  }
 
   //  this.url= this.pagination.path+'?page='+this.pagination.current_page ;
 
-  search(pageurl="")
-  {        
+  search(pageurl = '') {
     // console.log(pageurl);
     this.spinner.show();
     this.seatBlock = [];
-    const data = { 
+    const data = {
       // name: this.searchForm.value.name,
       bus_id: this.searchForm.value.bus_id,
-      rows_number:this.searchForm.value.rows_number,
-      page_no:this.page_no,
-      fromDate:this.searchForm.value.fromDate,
-      toDate:this.searchForm.value.toDate,
+      rows_number: this.searchForm.value.rows_number,
+      page_no: this.page_no,
+      fromDate: this.searchForm.value.fromDate,
+      toDate: this.searchForm.value.toDate,
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
-      source_id:this.searchForm.value.source_id,
-      destination_id:this.searchForm.value.destination_id,
-      USER_BUS_OPERATOR_ID:localStorage.getItem('USER_BUS_OPERATOR_ID') 
-    };   
+      source_id: this.searchForm.value.source_id,
+      destination_id: this.searchForm.value.destination_id,
+      USER_BUS_OPERATOR_ID: localStorage.getItem('USER_BUS_OPERATOR_ID'),
+    };
 
-    if(pageurl!="")
-    {
-      this.seatblockService.getAllaginationData(pageurl,data).subscribe(
-        res => {
+    if (pageurl != '') {
+      this.seatblockService
+        .getAllaginationData(pageurl, data)
+        .subscribe((res) => {
           let mainArray = res.data.data;
           this.pagination = res.data;
           this.all = res.data;
           this.spinner.hide();
-          this.lastUrl="/api/seatblockData?page="+this.all.current_page ;
-          mainArray = Object.keys(mainArray).map(k1 => ({ value: mainArray[k1] }));
-          if(mainArray.length >0)
-          {
+          this.lastUrl = '/api/seatblockData?page=' + this.all.current_page;
+          mainArray = Object.keys(mainArray).map((k1) => ({
+            value: mainArray[k1],
+          }));
+          if (mainArray.length > 0) {
             for (var bus of mainArray) {
-              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] })); 
-             //  console.log(bus);               
-              
-              let allbus=[];
-             for (var date of bus) {
-               date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
-               let allDate=[];
-               // console.log(date);               
- 
-               for (var route of date) {
-                 route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));              
-                 let allroute = [];
-                //  console.log(route);               
- 
-                 for (var seat of route) {
-                   seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));  
-                   allroute.push(seat);
-                   // console.log(seat);               
-                 }
-                 allDate.push(route);
-               }
-               allbus.push(date);
+              bus = Object.keys(bus.value).map((k2) => ({
+                value: bus.value[k2],
+              }));
+              //  console.log(bus);
+
+              let allbus = [];
+              for (var date of bus) {
+                date = Object.keys(date.value).map((k3) => ({
+                  value: date.value[k3],
+                }));
+                let allDate = [];
+                // console.log(date);
+
+                for (var route of date) {
+                  route = Object.keys(route.value).map((k4) => ({
+                    value: route.value[k4],
+                  }));
+                  let allroute = [];
+                  //  console.log(route);
+
+                  for (var seat of route) {
+                    seat = Object.keys(seat.value).map((k5) => ({
+                      value: seat.value[k5],
+                    }));
+                    allroute.push(seat);
+                    // console.log(seat);
+                  }
+                  allDate.push(route);
+                }
+                allbus.push(date);
+                //  console.log(allbus);
+              }
+              this.seatBlock.push(allbus);
+              //  console.log(this.seatBlock);
+            }
+          }
+        });
+    } else {
+      this.seatblockService.getAllData(data).subscribe((res) => {
+        let mainArray = res.data.data;
+        this.pagination = res.data;
+        this.all = res.data;
+        this.spinner.hide();
+        // console.log(this.all);
+        this.lastUrl = '/api/seatblockData?page=' + this.all.current_page;
+        mainArray = Object.keys(mainArray).map((k1) => ({
+          value: mainArray[k1],
+        }));
+        if (mainArray.length > 0) {
+          for (var bus of mainArray) {
+            bus = Object.keys(bus.value).map((k2) => ({
+              value: bus.value[k2],
+            }));
+            //  console.log(bus);
+
+            let allbus = [];
+            for (var date of bus) {
+              date = Object.keys(date.value).map((k3) => ({
+                value: date.value[k3],
+              }));
+              let allDate = [];
+              // console.log(date);
+
+              for (var route of date) {
+                route = Object.keys(route.value).map((k4) => ({
+                  value: route.value[k4],
+                }));
+                let allroute = [];
+                //  console.log(route);
+
+                for (var seat of route) {
+                  seat = Object.keys(seat.value).map((k5) => ({
+                    value: seat.value[k5],
+                  }));
+                  allroute.push(seat);
+                  // console.log(seat);
+                }
+                allDate.push(route);
+              }
+              allbus.push(date);
               //  console.log(allbus);
-             }
-             this.seatBlock.push(allbus);
+            }
+            this.seatBlock.push(allbus);
             //  console.log(this.seatBlock);
-           }
           }
         }
-      );
-    }
-    else
-    {
-      this.seatblockService.getAllData(data).subscribe(
-        res => {
-          let mainArray = res.data.data;
-          this.pagination = res.data;
-          this.all = res.data;
-          this.spinner.hide();
-          // console.log(this.all);
-          this.lastUrl="/api/seatblockData?page="+this.all.current_page ;
-          mainArray = Object.keys(mainArray).map(k1 => ({ value: mainArray[k1] }));
-          if(mainArray.length >0)
-          {
-            for (var bus of mainArray) {
-              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] })); 
-             //  console.log(bus);               
-              
-              let allbus=[];
-             for (var date of bus) {
-               date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
-               let allDate=[];
-               // console.log(date);               
- 
-               for (var route of date) {
-                 route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));              
-                 let allroute = [];
-                //  console.log(route);               
- 
-                 for (var seat of route) {
-                   seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));  
-                   allroute.push(seat);
-                   // console.log(seat);               
-                 }
-                 allDate.push(route);
-               }
-               allbus.push(date);
-              //  console.log(allbus);
-             }
-             this.seatBlock.push(allbus);
-            //  console.log(this.seatBlock);
-           }
-          }
-        }
-      );
+      });
     }
   }
 
@@ -362,130 +447,120 @@ export class SeatblockComponent implements OnInit {
     this.activeTab = tab;
   }
 
-  refresh()
-   {    
-    this.lastUrl = ''; 
-     this.spinner.show();
-     this.searchForm = this.fb.group({
+  refresh() {
+    this.lastUrl = '';
+    this.spinner.show();
+    this.searchForm = this.fb.group({
       name: [null],
-      bus_id:[null],
+      bus_id: [null],
       rows_number: Constants.RecordLimit,
-      page_no:this.page_no,
-      fromDate:[null],
-      toDate:[null],
-      source_id:[null],
-      destination_id:[null],
+      page_no: this.page_no,
+      fromDate: [null],
+      toDate: [null],
+      source_id: [null],
+      destination_id: [null],
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
     });
-     this.search();
-  
-    
-   }
+    this.search();
+  }
 
-   viewDetails(id)
-   {
+  viewDetails(id: string | number) {
     // console.log(id);
-    this.seatBlockDetails= this.seatBlock[id] ;
-   }
-
+    this.seatBlockDetails = this.seatBlock[id];
+  }
 
   title = 'angular-app';
-  fileName= 'Seat-Block.xlsx';
+  fileName = 'Seat-Block.xlsx';
 
-  exportexcel(): void
-  {
-    
+  exportexcel(): void {
     /* pass here the table id */
     let element = document.getElementById('print-section');
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
- 
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
-    /* save to file */  
+
+    /* save to file */
     XLSX.writeFile(wb, this.fileName);
- 
   }
 
+  alreadyBlocks() {
+    this.alreadyBlocksData = [];
+    const data = {
+      bus_id: this.seatBlockForm.value.bus_id,
+    };
 
-  alreadyBlocks() 
-{
-  this.alreadyBlocksData = [];
-  const data = {
-    bus_id: this.seatBlockForm.value.bus_id
-  };
-
-  this.bss.alreadyBlocks(data).subscribe(
-    seatData => {
-      let BlocksData = seatData.data ;
+    this.bss.alreadyBlocks(data).subscribe((seatData) => {
+      let BlocksData = seatData.data;
       // console.log(this.alreadyBlocksData);
 
-
-      BlocksData = Object.keys(BlocksData).map(k1 => ({ value: BlocksData[k1] }));
-      if(BlocksData.length >0)
-      {
+      BlocksData = Object.keys(BlocksData).map((k1) => ({
+        value: BlocksData[k1],
+      }));
+      if (BlocksData.length > 0) {
         for (var bus of BlocksData) {
           this.alreadyBlocksData.push(bus);
-         
-       }
+        }
       }
-    }
-  );
+    });
   }
 
   checkEvent(event: any) {
     this.spinner.show();
     const data = {
-      bus_id: this.seatBlockForm.value.bus_id
+      bus_id: this.seatBlockForm.value.bus_id,
     };
     // console.log(data);
-    this.busService.getSelectedSeat(data.bus_id).subscribe(
-      seatData => {
-        this.selectedSeats = seatData.data['seat'];
-        // console.log(this.selectedSeats);
-        this.seatlayoutService.seatsBus(data).subscribe(
-      resp => {
+    this.busService.getSelectedSeat(data.bus_id).subscribe((seatData) => {
+      this.selectedSeats = seatData.data['seat'];
+      // console.log(this.selectedSeats);
+      this.seatlayoutService.seatsBus(data).subscribe((resp) => {
         // console.log(resp);
-       
+
         let counter = 0;
-        this.seatLayoutData = (<FormArray>this.seatBlockForm.controls['bus_seat_layout_data']) as FormArray;
+        this.seatLayoutData = (<FormArray>(
+          this.seatBlockForm.controls['bus_seat_layout_data']
+        )) as FormArray;
         this.seatLayoutData.clear();
-        this.seatLengthData = resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
+        this.seatLengthData =
+          resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
         if (resp.data.lowerBerth != undefined) {
           for (let lowerData of resp.data.lowerBerth) {
-
             let arraylen = this.seatLayoutData.length;
             let berthData: FormGroup = this.fb.group({
-              lowerBerth: this.fb.array([
-              ]),
-              upperBerth: this.fb.array([
-              ])
+              lowerBerth: this.fb.array([]),
+              upperBerth: this.fb.array([]),
             });
             this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
-            this.seatLayoutCol = (<FormArray>this.seatBlockForm.controls['bus_seat_layout_data']).at(counter).get('lowerBerth') as FormArray;
+            this.seatLayoutCol = (<FormArray>(
+              this.seatBlockForm.controls['bus_seat_layout_data']
+            ))
+              .at(counter)
+              .get('lowerBerth') as FormArray;
             for (let seatData of lowerData) {
-              let checkedval = "";
-              let seatId = "";
-              let desiabled_seats = "";
+              let checkedval = '';
+              let seatId = '';
+              let desiabled_seats = '';
               for (let selectedSeat of this.selectedSeats) {
                 if (selectedSeat.seats_id == seatData.id) {
-                  if(selectedSeat.type== null){ 
-                    if(selectedSeat.duration == '0' && selectedSeat.operation_date==null)    
-                    {
+                  if (selectedSeat.type == null) {
+                    if (
+                      selectedSeat.duration == '0' &&
+                      selectedSeat.operation_date == null
+                    ) {
                       // console.log(seatData);
-                      checkedval = "true";
+                      checkedval = 'true';
                       seatId = selectedSeat.id;
-                      desiabled_seats = "true";
-
-                    }                 
+                      desiabled_seats = 'true';
+                    }
                   }
                 }
               }
               let collen = this.seatLayoutCol.length;
 
-              if (checkedval == "true") {
+              if (checkedval == 'true') {
                 //console.log(this.seatBlockRecord.seat_block_seats);
                 if (!this.seatBlockRecord.seat_block_seats) {
                   let columnData: FormGroup = this.fb.group({
@@ -495,15 +570,17 @@ export class SeatblockComponent implements OnInit {
                     seatChecked: [],
                     category: ['0'],
                     seatId: [seatData.id],
-                    busId: [data.bus_id]
+                    busId: [data.bus_id],
                   });
                   this.seatLayoutCol.insert(collen, columnData);
-                }
-                else {
-                  var isPresent = this.seatBlockRecord.seat_block_seats.some(function (el) { 
-                    
-                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
-                  });
+                } else {
+                  var isPresent = this.seatBlockRecord.seat_block_seats.some(
+                    function (el: { seats_id: string }) {
+                      return (
+                        JSON.parse(el.seats_id) === JSON.parse(seatData.id)
+                      );
+                    }
+                  );
                   if (isPresent) {
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
@@ -512,10 +589,9 @@ export class SeatblockComponent implements OnInit {
                       seatChecked: [true],
                       category: ['0'],
                       seatId: [seatData.id],
-                      busId: [data.bus_id]
+                      busId: [data.bus_id],
                     });
                     this.seatLayoutCol.insert(collen, columnData);
-
                   } else {
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
@@ -524,14 +600,13 @@ export class SeatblockComponent implements OnInit {
                       seatChecked: [],
                       category: ['0'],
                       seatId: [seatData.id],
-                      busId: [data.bus_id]
+                      busId: [data.bus_id],
                     });
                     this.seatLayoutCol.insert(collen, columnData);
                   }
                 }
-              }
-              else {
-                // console.log(this.seatBlockRecord.seat_block_seats);            
+              } else {
+                // console.log(this.seatBlockRecord.seat_block_seats);
 
                 let columnData: FormGroup = this.fb.group({
                   seatText: [seatData.seatText],
@@ -540,7 +615,7 @@ export class SeatblockComponent implements OnInit {
                   seatChecked: [{ value: false, disabled: true }],
                   category: ['0'],
                   seatId: [seatData.id],
-                  busId: [data.bus_id]
+                  busId: [data.bus_id],
                 });
                 this.seatLayoutCol.insert(collen, columnData);
               }
@@ -552,32 +627,36 @@ export class SeatblockComponent implements OnInit {
           for (let upperData of resp.data.upperBerth) {
             let arraylen = this.seatLayoutData.length;
             let berthData: FormGroup = this.fb.group({
-              lowerBerth: this.fb.array([
-              ]),
-              upperBerth: this.fb.array([
-              ])
+              lowerBerth: this.fb.array([]),
+              upperBerth: this.fb.array([]),
             });
             this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
-            this.seatLayoutCol = (<FormArray>this.seatBlockForm.controls['bus_seat_layout_data']).at(counter).get('upperBerth') as FormArray;
+            this.seatLayoutCol = (<FormArray>(
+              this.seatBlockForm.controls['bus_seat_layout_data']
+            ))
+              .at(counter)
+              .get('upperBerth') as FormArray;
             for (let seatData of upperData) {
-              let checkedval = "";
-              let seatId = "";
-              let desiabled_seats = "";
+              let checkedval = '';
+              let seatId = '';
+              let desiabled_seats = '';
               for (let selectedSeat of this.selectedSeats) {
                 if (selectedSeat.seats_id == seatData.id) {
-                  if(selectedSeat.type== null){ 
-                    if(selectedSeat.duration == '0' && selectedSeat.operation_date==null)    
-                    {
-                  checkedval = "true";
-                  seatId = selectedSeat.id;
-                  // desiabled_seats = "true";
+                  if (selectedSeat.type == null) {
+                    if (
+                      selectedSeat.duration == '0' &&
+                      selectedSeat.operation_date == null
+                    ) {
+                      checkedval = 'true';
+                      seatId = selectedSeat.id;
+                      // desiabled_seats = "true";
                     }
                   }
                 }
               }
               let collen = this.seatLayoutCol.length;
 
-              if (checkedval == "true") {
+              if (checkedval == 'true') {
                 if (!this.seatBlockRecord.seat_block_seats) {
                   let columnData: FormGroup = this.fb.group({
                     seatText: [seatData.seatText],
@@ -586,15 +665,17 @@ export class SeatblockComponent implements OnInit {
                     seatChecked: [],
                     category: ['0'],
                     seatId: [seatData.id],
-                    busId: [data.bus_id]
+                    busId: [data.bus_id],
                   });
                   this.seatLayoutCol.insert(collen, columnData);
-                }
-                else {
-                  
-                  var isPresent = this.seatBlockRecord.seat_block_seats.some(function (el) { 
-                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
-                  });
+                } else {
+                  var isPresent = this.seatBlockRecord.seat_block_seats.some(
+                    function (el: { seats_id: string }) {
+                      return (
+                        JSON.parse(el.seats_id) === JSON.parse(seatData.id)
+                      );
+                    }
+                  );
                   if (isPresent) {
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
@@ -603,10 +684,9 @@ export class SeatblockComponent implements OnInit {
                       seatChecked: [true],
                       category: ['0'],
                       seatId: [seatData.id],
-                      busId: [data.bus_id]
+                      busId: [data.bus_id],
                     });
                     this.seatLayoutCol.insert(collen, columnData);
-
                   } else {
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
@@ -615,16 +695,13 @@ export class SeatblockComponent implements OnInit {
                       seatChecked: [],
                       category: ['0'],
                       seatId: [seatData.id],
-                      busId: [data.bus_id]
+                      busId: [data.bus_id],
                     });
                     this.seatLayoutCol.insert(collen, columnData);
                   }
                 }
-
-
-              }
-              else {
-                // console.log(this.seatBlockRecord.seat_block_seats);            
+              } else {
+                // console.log(this.seatBlockRecord.seat_block_seats);
 
                 let columnData: FormGroup = this.fb.group({
                   seatText: [seatData.seatText],
@@ -633,7 +710,7 @@ export class SeatblockComponent implements OnInit {
                   seatChecked: [{ value: false, disabled: true }],
                   category: ['0'],
                   seatId: [seatData.id],
-                  busId: [data.bus_id]
+                  busId: [data.bus_id],
                 });
                 this.seatLayoutCol.insert(collen, columnData);
               }
@@ -643,71 +720,68 @@ export class SeatblockComponent implements OnInit {
         }
         // console.log(this.seatBlockForm.value);
         this.spinner.hide();
-        
-      }
-    );
-      }
-    );
-
-    
+      });
+    });
   }
 
   checkEditEvent(event: any) {
     this.spinner.show();
     const data = {
-      bus_id: this.seatBlockForm.value.bus_id
+      bus_id: this.seatBlockForm.value.bus_id,
     };
     // console.log(data);
-    this.busService.getSelectedSeat(data.bus_id).subscribe(
-      seatData => {
-        // this.selectedSeats = seatData.data['seat'];
-        this.selectedSeats = seatData.data['seat'];
-        // console.log(this.selectedSeats);
-        this.seatlayoutService.seatsBus(data).subscribe(
-      resp => {
+    this.busService.getSelectedSeat(data.bus_id).subscribe((seatData) => {
+      // this.selectedSeats = seatData.data['seat'];
+      this.selectedSeats = seatData.data['seat'];
+      // console.log(this.selectedSeats);
+      this.seatlayoutService.seatsBus(data).subscribe((resp) => {
         // console.log(resp);
-       
+
         let counter = 0;
-        this.seatLayoutData = (<FormArray>this.seatBlockForm.controls['bus_seat_layout_data']) as FormArray;
+        this.seatLayoutData = (<FormArray>(
+          this.seatBlockForm.controls['bus_seat_layout_data']
+        )) as FormArray;
         this.seatLayoutData.clear();
         if (resp.data.lowerBerth != undefined) {
           for (let lowerData of resp.data.lowerBerth) {
-
             let arraylen = this.seatLayoutData.length;
             let berthData: FormGroup = this.fb.group({
-              lowerBerth: this.fb.array([
-              ]),
-              upperBerth: this.fb.array([
-              ])
+              lowerBerth: this.fb.array([]),
+              upperBerth: this.fb.array([]),
             });
             this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
-            this.seatLayoutCol = (<FormArray>this.seatBlockForm.controls['bus_seat_layout_data']).at(counter).get('lowerBerth') as FormArray;
+            this.seatLayoutCol = (<FormArray>(
+              this.seatBlockForm.controls['bus_seat_layout_data']
+            ))
+              .at(counter)
+              .get('lowerBerth') as FormArray;
             for (let seatData of lowerData) {
-              let checkedval = "";
-              let seatId = "";
-              let desiabled_seats = "";
+              let checkedval = '';
+              let seatId = '';
+              let desiabled_seats = '';
               for (let selectedSeat of this.selectedSeats) {
                 if (selectedSeat.seats_id == seatData.id) {
-                  if(selectedSeat.type== null){ 
-                    if(selectedSeat.duration == '0' && selectedSeat.operation_date==null)    
-                    {
+                  if (selectedSeat.type == null) {
+                    if (
+                      selectedSeat.duration == '0' &&
+                      selectedSeat.operation_date == null
+                    ) {
                       // console.log(seatData);
-                      checkedval = "true";
+                      checkedval = 'true';
                       seatId = selectedSeat.id;
-                      desiabled_seats = "true";
-
-                    }                 
+                      desiabled_seats = 'true';
+                    }
                   }
                 }
               }
               let collen = this.seatLayoutCol.length;
 
-              if (checkedval == "true") {
-                if (!this.seatBlockRecord.seat_block_seats) 
-                {
-                  var isPresent = this.blockSeatsData.some(function (el) { 
-                    
-                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
+              if (checkedval == 'true') {
+                if (!this.seatBlockRecord.seat_block_seats) {
+                  var isPresent = this.blockSeatsData.some(function (el: {
+                    seats_id: string;
+                  }) {
+                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id);
                   });
                   if (isPresent) {
                     let columnData: FormGroup = this.fb.group({
@@ -717,13 +791,10 @@ export class SeatblockComponent implements OnInit {
                       seatChecked: [true],
                       category: ['0'],
                       seatId: [seatData.id],
-                      busId: [data.bus_id]
+                      busId: [data.bus_id],
                     });
                     this.seatLayoutCol.insert(collen, columnData);
-
-                  }
-                  else
-                  {
+                  } else {
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
                       seatType: [seatData.seat_class_id],
@@ -731,13 +802,12 @@ export class SeatblockComponent implements OnInit {
                       seatChecked: [],
                       category: ['0'],
                       seatId: [seatData.id],
-                      busId: [data.bus_id]
+                      busId: [data.bus_id],
                     });
                     this.seatLayoutCol.insert(collen, columnData);
                   }
                 }
-              }
-              else {        
+              } else {
                 let columnData: FormGroup = this.fb.group({
                   seatText: [seatData.seatText],
                   seatType: [seatData.seat_class_id],
@@ -745,7 +815,7 @@ export class SeatblockComponent implements OnInit {
                   seatChecked: [{ value: false, disabled: true }],
                   category: ['0'],
                   seatId: [seatData.id],
-                  busId: [data.bus_id]
+                  busId: [data.bus_id],
                 });
                 this.seatLayoutCol.insert(collen, columnData);
               }
@@ -757,36 +827,41 @@ export class SeatblockComponent implements OnInit {
           for (let upperData of resp.data.upperBerth) {
             let arraylen = this.seatLayoutData.length;
             let berthData: FormGroup = this.fb.group({
-              lowerBerth: this.fb.array([
-              ]),
-              upperBerth: this.fb.array([
-              ])
+              lowerBerth: this.fb.array([]),
+              upperBerth: this.fb.array([]),
             });
             this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
-            this.seatLayoutCol = (<FormArray>this.seatBlockForm.controls['bus_seat_layout_data']).at(counter).get('upperBerth') as FormArray;
+            this.seatLayoutCol = (<FormArray>(
+              this.seatBlockForm.controls['bus_seat_layout_data']
+            ))
+              .at(counter)
+              .get('upperBerth') as FormArray;
             for (let seatData of upperData) {
-              let checkedval = "";
-              let seatId = "";
-              let desiabled_seats = "";
+              let checkedval = '';
+              let seatId = '';
+              let desiabled_seats = '';
               for (let selectedSeat of this.selectedSeats) {
                 if (selectedSeat.seats_id == seatData.id) {
-                  if(selectedSeat.type== null){ 
-                    if(selectedSeat.duration == '0' && selectedSeat.operation_date==null)    
-                    {
-                  checkedval = "true";
-                  seatId = selectedSeat.id;
-                  // desiabled_seats = "true";
+                  if (selectedSeat.type == null) {
+                    if (
+                      selectedSeat.duration == '0' &&
+                      selectedSeat.operation_date == null
+                    ) {
+                      checkedval = 'true';
+                      seatId = selectedSeat.id;
+                      // desiabled_seats = "true";
                     }
                   }
                 }
               }
               let collen = this.seatLayoutCol.length;
 
-              if (checkedval == "true") {
+              if (checkedval == 'true') {
                 if (!this.seatBlockRecord.seat_block_seats) {
-                  var isPresent = this.blockSeatsData.some(function (el) { 
-                    
-                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
+                  var isPresent = this.blockSeatsData.some(function (el: {
+                    seats_id: string;
+                  }) {
+                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id);
                   });
                   if (isPresent) {
                     let columnData: FormGroup = this.fb.group({
@@ -796,28 +871,24 @@ export class SeatblockComponent implements OnInit {
                       seatChecked: [true],
                       category: ['0'],
                       seatId: [seatData.id],
-                      busId: [data.bus_id]
+                      busId: [data.bus_id],
                     });
                     this.seatLayoutCol.insert(collen, columnData);
-
+                  } else {
+                    let columnData: FormGroup = this.fb.group({
+                      seatText: [seatData.seatText],
+                      seatType: [seatData.seat_class_id],
+                      berthType: [seatData.berthType],
+                      seatChecked: [],
+                      category: ['0'],
+                      seatId: [seatData.id],
+                      busId: [data.bus_id],
+                    });
+                    this.seatLayoutCol.insert(collen, columnData);
                   }
-                  else
-                  {
-                  let columnData: FormGroup = this.fb.group({
-                    seatText: [seatData.seatText],
-                    seatType: [seatData.seat_class_id],
-                    berthType: [seatData.berthType],
-                    seatChecked: [],
-                    category: ['0'],
-                    seatId: [seatData.id],
-                    busId: [data.bus_id]
-                  });
-                  this.seatLayoutCol.insert(collen, columnData);
-                 }
                 }
-              }
-              else {
-                // console.log(this.seatBlockRecord.seat_block_seats);            
+              } else {
+                // console.log(this.seatBlockRecord.seat_block_seats);
 
                 let columnData: FormGroup = this.fb.group({
                   seatText: [seatData.seatText],
@@ -826,7 +897,7 @@ export class SeatblockComponent implements OnInit {
                   seatChecked: [{ value: false, disabled: true }],
                   category: ['0'],
                   seatId: [seatData.id],
-                  busId: [data.bus_id]
+                  busId: [data.bus_id],
                 });
                 this.seatLayoutCol.insert(collen, columnData);
               }
@@ -836,64 +907,60 @@ export class SeatblockComponent implements OnInit {
         }
         // console.log(this.seatBlockForm.value);
         this.spinner.hide();
-        
-      }
-    );
-      }
-    );
-
-    
+      });
+    });
   }
 
-  checkroute() { 
+  checkroute() {
     this.seatBlockForm.controls.busRoute.setValue('');
     const data = {
-      bus_id: this.seatBlockForm.value.bus_id
+      bus_id: this.seatBlockForm.value.bus_id,
     };
     // console.log(data);
-    this.busService.fetchBusRoutesById(data.bus_id).subscribe(
-      resp => {
-        this.route = resp.data;
-        this.route.map((i: any) => { i.routes =  i.source[0].name + '>>' + i.destination[0].name ; return i; });
-
-      }
-    );
+    this.busService.fetchBusRoutesById(data.bus_id).subscribe((resp) => {
+      this.route = resp.data;
+      this.route.map((i: any) => {
+        i.routes = i.source[0].name + '>>' + i.destination[0].name;
+        return i;
+      });
+    });
     // console.log(data);
   }
 
-  getSchedule()
-  {
+  getSchedule() {
     // console.log(this.seatBlockForm.value.bus_id);
     const data = {
-      bus_id: this.seatBlockForm.value.bus_id
+      bus_id: this.seatBlockForm.value.bus_id,
     };
-    this.bss.getScheduleById(data.bus_id).subscribe(
-      seatData => {
-        this.busSchedule = seatData ;
-      }
-    );
+    this.bss.getScheduleById(data.bus_id).subscribe((seatData) => {
+      this.busSchedule = seatData;
+    });
   }
-
 
   onSelectAll() {
     // console.log(this.route);
     // console.log(this.seatBlockForm.value.bus_id);
-    const selected = this.route.map(item => item.id);
-    this.seatBlockForm.get('busRoute').patchValue(selected);
+    const selected = this.route.map((item: { id: any }) => item.id);
+    const busRouteControl = this.seatBlockForm.get('busRoute');
+    if (busRouteControl) {
+      busRouteControl.patchValue(selected);
+    }
   }
   onClearAll() {
-    this.seatBlockForm.get('busRoute').patchValue([]);
+    const busRouteControl = this.seatBlockForm.get('busRoute');
+    if (busRouteControl) {
+      busRouteControl.patchValue([]);
+    }
   }
 
-
   ResetAttributes() {
-    this.datesSelected=[];
-    this.alreadyBlocksData=[];
+    this.datesSelected = [];
+    this.alreadyBlocksData = [];
     this.route = [];
-    this.buses ="";
-    this.DatesRecord="";
+    this.buses = '';
+    this.DatesRecord = '';
     this.loadServices();
-    this.busSchedule = [] ;
+    this.busSchedule = [];
     this.seatBlockRecord = {} as Seatblock;
     this.seatBlockForm = this.fb.group({
       // bus_operator_id: 157,
@@ -908,30 +975,26 @@ export class SeatblockComponent implements OnInit {
         this.fb.group({
           entryDates: [null],
           datechecked: [false],
-        })
+        }),
       ]),
       bus_seat_layout_data: this.fb.array([
         this.fb.group({
-          upperBerth: this.fb.array([
-          ]),//Upper Berth Items Will be Added Here
-          lowerBerth: this.fb.array([
-          ])//Lower Berth Items will be added Here
-        })
-      ]),  
+          upperBerth: this.fb.array([]), //Upper Berth Items Will be Added Here
+          lowerBerth: this.fb.array([]), //Lower Berth Items will be added Here
+        }),
+      ]),
     });
 
-    this.ModalHeading = "Add Seat Block";
-    this.ModalBtn = "Save";
+    this.ModalHeading = 'Add Seat Block';
+    this.ModalBtn = 'Save';
 
     this.findOperator();
   }
 
   loadServices() {
-    this.locationService.readAll().subscribe(
-      records => {
-        this.locations = records.data;
-      }
-    );
+    this.locationService.readAll().subscribe((records) => {
+      this.locations = records.data;
+    });
   }
 
   findOperator() {
@@ -939,96 +1002,105 @@ export class SeatblockComponent implements OnInit {
     this.seatBlockForm.controls.busRoute.setValue('');
 
     // let operatorId = 157;
-    let operatorId =  localStorage.getItem('OPERATOR_ID');
+    let operatorId = localStorage.getItem('OPERATOR_ID');
 
     if (operatorId) {
       this.spinner.show();
-      this.busService.getByOperaor(operatorId).subscribe(
-        res => {
-          this.buses = res.data;
-          this.buses.map((i:any) => { i.testing = i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
-           this.spinner.hide();
-          // console.log(this.buses);
-       
-        }
-      );
+      this.busService.getByOperaor(operatorId).subscribe((res) => {
+        this.buses = res.data;
+        this.buses.map((i: any) => {
+          i.testing =
+            i.bus_number +
+            '(' +
+            i.from_location[0].name +
+            '>>' +
+            i.to_location[0].name +
+            ')';
+          return i;
+        });
+        this.spinner.hide();
+        // console.log(this.buses);
+      });
     }
-
   }
   findSource() {
     let source_id = this.seatBlockForm.controls.source_id.value;
     let destination_id = this.seatBlockForm.controls.destination_id.value;
 
-
-    if (source_id != "" && destination_id != "") {
-      this.busService.findSource(source_id, destination_id).subscribe(
-        res => {
-          this.buses = res.data;
-          this.buses.map((i:any) => { i.testing = i.name + ' - ' + i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
-        }
-      );
-    }
-    else {
-      this.busService.all().subscribe(
-        res => {
-          this.buses = res.data;
-          this.buses.map((i:any) => { i.testing = i.name + ' - ' + i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
-        }
-      );
+    if (source_id != '' && destination_id != '') {
+      this.busService.findSource(source_id, destination_id).subscribe((res) => {
+        this.buses = res.data;
+        this.buses.map((i: any) => {
+          i.testing =
+            i.name +
+            ' - ' +
+            i.bus_number +
+            '(' +
+            i.from_location[0].name +
+            '>>' +
+            i.to_location[0].name +
+            ')';
+          return i;
+        });
+      });
+    } else {
+      this.busService.all().subscribe((res) => {
+        this.buses = res.data;
+        this.buses.map((i: any) => {
+          i.testing =
+            i.name +
+            ' - ' +
+            i.bus_number +
+            '(' +
+            i.from_location[0].name +
+            '>>' +
+            i.to_location[0].name +
+            ')';
+          return i;
+        });
+      });
     }
   }
 
-
-  
   getBusScheduleEntryDatesFilter() {
-    if (this.seatBlockForm.value.bus_id==null)
-      return false;
-
+    if (this.seatBlockForm.value.bus_id == null) return false;
 
     const arr = <FormArray>this.seatBlockForm.controls.dateLists;
     arr.controls = [];
 
-    const data={
+    const data = {
       busLists: this.seatBlockForm.value.bus_id,
-      month:this.getcurrentmonths(),
-      year:this.getcurrentyears(),
-    }
+      month: this.getcurrentmonths(),
+      year: this.getcurrentyears(),
+    };
 
     this.spinner.show();
-    this.busService.getBusScheduleEntry(data).subscribe(
-      response => {
-        // console.log(response.data.busDatas);
-        this.busDatas = response.data.busDatas;
-        let counter = 0;
-        for (let bData of this.busDatas) {
-          this.DatesRecord = (<FormArray>this.seatBlockForm.controls['dateLists']) as FormArray;
-          let arraylen = this.DatesRecord.length;
-          for (let eDate of bData.entryDates) {    
-            if(this.ModalBtn=="Save")
-            {
-                let newDatesgroup: FormGroup = this.fb.group({
-                  entryDates: [eDate.entry_date],
-                  datechecked: [null],
-                })
-                this.DatesRecord.insert(arraylen, newDatesgroup);
-                // console.log(this.DatesRecord);
-                // return
-            }           
+    this.busService.getBusScheduleEntry(data).subscribe((response) => {
+      // console.log(response.data.busDatas);
+      this.busDatas = response.data.busDatas;
+      let counter = 0;
+      for (let bData of this.busDatas) {
+        this.DatesRecord = (<FormArray>(
+          this.seatBlockForm.controls['dateLists']
+        )) as FormArray;
+        let arraylen = this.DatesRecord.length;
+        for (let eDate of bData.entryDates) {
+          if (this.ModalBtn == 'Save') {
+            let newDatesgroup: FormGroup = this.fb.group({
+              entryDates: [eDate.entry_date],
+              datechecked: [null],
+            });
+            this.DatesRecord.insert(arraylen, newDatesgroup);
+            // console.log(this.DatesRecord);
+            // return
           }
-          counter++;
         }
-        response = [];
-        this.spinner.hide();
+        counter++;
       }
-    );
+      response = [];
+      this.spinner.hide();
+    });
   }
-
-
-
-
-
-
-
 
   updateBlockseat() {
     this.spinner.show();
@@ -1036,51 +1108,54 @@ export class SeatblockComponent implements OnInit {
     this.onSelectAll();
     // console.log(this.seatBlockForm.value.bus_id);
 
-    if(this.seatBlockForm.value.date == null)
-    {
-      this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
+    if (this.seatBlockForm.value.date == null) {
+      this.notificationService.addToast({
+        title: 'Error',
+        msg: 'Please Select Date',
+        type: 'error',
+      });
       this.spinner.hide();
       return;
-    }else{
-    const data = {
-      bus_operator_id: this.seatBlockForm.value.bus_operator_id,
-      bus_id: this.seatBlockForm.value.bus_id,
-      busRoute: this.seatBlockForm.value.busRoute,
-      reason: 'Blocked By Owner',
-      other_reson: this.seatBlockForm.value.otherReson,
-      date: this.seatBlockForm.value.date,
-      bus_seat_layout_data: this.seatBlockForm.value.bus_seat_layout_data,
-      created_by: localStorage.getItem('USERNAME'),
-      type: "2"
-    };
+    } else {
+      const data = {
+        bus_operator_id: this.seatBlockForm.value.bus_operator_id,
+        bus_id: this.seatBlockForm.value.bus_id,
+        busRoute: this.seatBlockForm.value.busRoute,
+        reason: 'Blocked By Owner',
+        other_reson: this.seatBlockForm.value.otherReson,
+        date: this.seatBlockForm.value.date,
+        bus_seat_layout_data: this.seatBlockForm.value.bus_seat_layout_data,
+        created_by: localStorage.getItem('USERNAME'),
+        type: '2',
+      };
 
-      this.seatblockService.updateSeatBlock(data).subscribe(
-        resp => {
-          if (resp.status == 1) {
-            // console.log(resp);
-            this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
-            this.modalReference.close();
-            this.lastUrl=
-            this.set_page(this.lastUrl);
-          }
-          else {
-            this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
-            this.spinner.hide();
-          }
+      this.seatblockService.updateSeatBlock(data).subscribe((resp) => {
+        if (resp.status == 1) {
+          // console.log(resp);
+          this.notificationService.addToast({
+            title: 'Success',
+            msg: resp.message,
+            type: 'success',
+          });
+          this.modalReference.close();
+          this.lastUrl = this.set_page(this.lastUrl);
+        } else {
+          this.notificationService.addToast({
+            title: 'Error',
+            msg: resp.message,
+            type: 'error',
+          });
+          this.spinner.hide();
         }
-      );
-
+      });
+    }
   }
+
+  get dateLists(): FormArray {
+    return this.seatBlockForm.get('dateLists') as FormArray;
   }
-
-  
-
-get dateLists(): FormArray {
-  return this.seatBlockForm.get('dateLists') as FormArray;
-}
 
   addBlockseat() {
-
     this.checkedDate = [];
 
     this.dateLists.controls.forEach((row: any, i: number) => {
@@ -1089,22 +1164,21 @@ get dateLists(): FormArray {
       }
     });
 
-  
     const checkedSeats: any[] = [];
 
-    this.seatBlockForm.value.bus_seat_layout_data.forEach((block: { lowerBerth: any[]; upperBerth: any[]; }) => {
+    this.seatBlockForm.value.bus_seat_layout_data.forEach(
+      (block: { lowerBerth: any[]; upperBerth: any[] }) => {
+        // Check lowerBerth
+        block.lowerBerth
+          .filter((seat) => seat.seatChecked === true)
+          .forEach((seat) => checkedSeats.push(seat));
 
-      // Check lowerBerth
-      block.lowerBerth
-        .filter(seat => seat.seatChecked === true)
-        .forEach(seat => checkedSeats.push(seat));
-
-      // Check upperBerth
-      block.upperBerth
-        .filter(seat => seat.seatChecked === true)
-        .forEach(seat => checkedSeats.push(seat));
-
-    });
+        // Check upperBerth
+        block.upperBerth
+          .filter((seat) => seat.seatChecked === true)
+          .forEach((seat) => checkedSeats.push(seat));
+      }
+    );
 
     this.spinner.show();
     this.onSelectAll();
@@ -1123,248 +1197,268 @@ get dateLists(): FormArray {
     //   return;
     // }
 
-    if(this.checkedDate.length<1)
-    {
-      this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
+    if (this.checkedDate.length < 1) {
+      this.notificationService.addToast({
+        title: 'Error',
+        msg: 'Please Select Date',
+        type: 'error',
+      });
       this.spinner.hide();
       return;
-    }else{
-    const data = {
-      bus_operator_id: this.seatBlockForm.value.bus_operator_id,
-      bus_id: this.seatBlockForm.value.bus_id,
-      busRoute: this.seatBlockForm.value.busRoute,
-      reason: 'Blocked By Owner',
-      other_reson: this.seatBlockForm.value.otherReson,
-      date: this.checkedDate,
-      bus_seat_layout_data: this.seatBlockForm.value.bus_seat_layout_data,
-      created_by: localStorage.getItem('USERNAME'),
-      type: "2"
-    };
-    // console.log(data);
-    // return;
-    let id = this.seatBlockRecord.id;
-    if (id != null) {
-      this.seatblockService.update(id, data).subscribe(
-        resp => {
+    } else {
+      const data = {
+        bus_operator_id: this.seatBlockForm.value.bus_operator_id,
+        bus_id: this.seatBlockForm.value.bus_id,
+        busRoute: this.seatBlockForm.value.busRoute,
+        reason: 'Blocked By Owner',
+        other_reson: this.seatBlockForm.value.otherReson,
+        date: this.checkedDate,
+        bus_seat_layout_data: this.seatBlockForm.value.bus_seat_layout_data,
+        created_by: localStorage.getItem('USERNAME'),
+        type: '2',
+      };
+      // console.log(data);
+      // return;
+      let id = this.seatBlockRecord.id;
+      if (id != null) {
+        this.seatblockService.update(id, data).subscribe((resp) => {
           if (resp.status == 1) {
-            this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
+            this.notificationService.addToast({
+              title: 'Success',
+              msg: resp.message,
+              type: 'success',
+            });
             this.modalReference.close();
             this.set_page(this.lastUrl);
-          }
-          else {
-            this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
+          } else {
+            this.notificationService.addToast({
+              title: 'Error',
+              msg: resp.message,
+              type: 'error',
+            });
             this.spinner.hide();
           }
-        }
-      );
-    }
-    else {
-      this.seatblockService.create(data).subscribe(
-        resp => {
+        });
+      } else {
+        this.seatblockService.create(data).subscribe((resp) => {
           if (resp.status == 1) {
-            this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
+            this.notificationService.addToast({
+              title: 'Success',
+              msg: resp.message,
+              type: 'success',
+            });
             this.modalReference.close();
-            this.lastUrl=
-            this.set_page(this.lastUrl);
-          }
-          else {
-            this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
+            this.lastUrl = this.set_page(this.lastUrl);
+          } else {
+            this.notificationService.addToast({
+              title: 'Error',
+              msg: resp.message,
+              type: 'error',
+            });
             this.spinner.hide();
           }
-        }
-      );
-
+        });
+      }
     }
-  }
   }
 
   changeStatus(event: Event, stsitem: any) {
     this.spinner.show();
-    this.seatblockService.chngsts(stsitem).subscribe(
-      resp => {
-
-        if (resp.status == 1) {
-          this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
-          this.set_page(this.lastUrl);
-        }
-        else {
-          this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
-          this.spinner.hide();
-        }
+    this.seatblockService.chngsts(stsitem).subscribe((resp) => {
+      if (resp.status == 1) {
+        this.notificationService.addToast({
+          title: 'Success',
+          msg: resp.message,
+          type: 'success',
+        });
+        this.set_page(this.lastUrl);
+      } else {
+        this.notificationService.addToast({
+          title: 'Error',
+          msg: resp.message,
+          type: 'error',
+        });
+        this.spinner.hide();
       }
-    );
+    });
   }
 
-
-  openConfirmDialog(content, id: any,date: any) {
-    this.confirmDialogReference = this.modalService.open(content, { scrollable: true, size: 'md' });
+  openConfirmDialog(content: any, id: any, date: any) {
+    this.confirmDialogReference = this.modalService.open(content, {
+      scrollable: true,
+      size: 'md',
+    });
     this.seatBlockRecord = this.seatBlock[id];
-    this.deletedata = {     
-      bus_id: id ,
+    this.deletedata = {
+      bus_id: id,
       operationDate: date,
-      type: "2"      
+      type: '2',
     };
   }
   deleteRecord() {
-    
     let delitem = this.deletedata;
     // console.log(delitem);
     // return;
-    this.seatblockService.delete(delitem).subscribe(
-      resp => {
-        if (resp.status == 1) {
-          this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
-          this.confirmDialogReference.close();
-          // this.modalReference.close();
+    this.seatblockService.delete(delitem).subscribe((resp) => {
+      if (resp.status == 1) {
+        this.notificationService.addToast({
+          title: Constants.SuccessTitle,
+          msg: resp.message,
+          type: Constants.SuccessType,
+        });
+        this.confirmDialogReference.close();
+        // this.modalReference.close();
 
-          this.set_page(this.lastUrl);
-        }
-        else {
-          this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
-        }
-      });
+        this.set_page(this.lastUrl);
+      } else {
+        this.notificationService.addToast({
+          title: Constants.ErrorTitle,
+          msg: resp.message,
+          type: Constants.ErrorType,
+        });
+      }
+    });
   }
 
-  editsblock(bus_id:any,operation_date:any,ticket_price_id:any) {
+  editsblock(bus_id: any, operation_date: any, ticket_price_id: any) {
     this.loadServices();
     const data = {
       bus_id: bus_id,
       operation_date: operation_date,
-      ticket_price_id:ticket_price_id,
-      type:2
+      ticket_price_id: ticket_price_id,
+      type: 2,
     };
 
     this.seatBlockForm = this.fb.group({
-      bus_operator_id:  localStorage.getItem('OPERATOR_ID'),
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       id: [null],
-      bus_id: bus_id,  
+      bus_id: bus_id,
       busRoute: [null],
-      date:operation_date,
-      reason: "Blocked By Owner",
+      date: operation_date,
+      reason: 'Blocked By Owner',
       otherReson: [null],
       bus_seat_layout_id: [null],
       bus_seat_layout_data: this.fb.array([
         this.fb.group({
-          upperBerth: this.fb.array([
-          ]),//Upper Berth Items Will be Added Here
-          lowerBerth: this.fb.array([
-          ])//Lower Berth Items will be added Here
-        })
+          upperBerth: this.fb.array([]), //Upper Berth Items Will be Added Here
+          lowerBerth: this.fb.array([]), //Lower Berth Items will be added Here
+        }),
       ]),
     });
-    
-    this.ModalHeading = "Edit Seat Block";
-    this.ModalBtn = "Update";
 
-    this.seatblockService.edit(data).subscribe(
-      res => {
-        this.blockSeatsData= res.data;
-        if(this.blockSeatsData.length>0)
-        {
-          this.checkEditEvent(bus_id);
-        }
+    this.ModalHeading = 'Edit Seat Block';
+    this.ModalBtn = 'Update';
+
+    this.seatblockService.edit(data).subscribe((res) => {
+      this.blockSeatsData = res.data;
+      if (this.blockSeatsData.length > 0) {
+        this.checkEditEvent(bus_id);
       }
-    );
-    this.checkroute();    
+    });
+    this.checkroute();
   }
 
-  
-  hoveredDate: NgbDateStruct;
+  hoveredDate!: NgbDateStruct;
 
-  fromDate: NgbDateStruct;
-  toDate: NgbDateStruct;
+  fromDate!: NgbDateStruct;
+  toDate!: NgbDateStruct;
 
-  _datesSelected:NgbDateStruct[]=[]; 
+  _datesSelected: NgbDateStruct[] = [];
 
   @Input()
-  set datesSelected(value:NgbDateStruct[])  
-  {
-     this._datesSelected=value;
-     
+  set datesSelected(value: NgbDateStruct[]) {
+    this._datesSelected = value;
   }
-  get datesSelected():NgbDateStruct[]
-  {
-    
-    return this._datesSelected?this._datesSelected:[];
+  get datesSelected(): NgbDateStruct[] {
+    return this._datesSelected ? this._datesSelected : [];
   }
 
-  @Output() datesSelectedChange=new EventEmitter<NgbDateStruct[]>();
+  @Output() datesSelectedChange = new EventEmitter<NgbDateStruct[]>();
 
- 
-
-  onDateSelection(event:any,date: NgbDateStruct) {
-
-    event.target.parentElement.blur();  //make that not appear the outline
+  onDateSelection(event: any, date: NgbDateStruct) {
+    event.target.parentElement.blur(); //make that not appear the outline
     if (!this.fromDate && !this.toDate) {
-      if (event.ctrlKey==true)  //If is CrtlKey pressed
+      if (event.ctrlKey == true)
+        //If is CrtlKey pressed
         this.fromDate = date;
-      else
-        this.addDate(date);
+      else this.addDate(date);
 
       this.datesSelectedChange.emit(this.datesSelected);
-
     } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
       this.toDate = date;
-      this.addRangeDate(this.fromDate,this.toDate);
-      this.fromDate=null;
-      this.toDate=null;
+      this.addRangeDate(this.fromDate, this.toDate);
+      this.fromDate = null;
+      this.toDate = null;
     } else {
       this.toDate = null;
       this.fromDate = date;
     }
   }
 
-  addDate(date:NgbDateStruct)
-  {
-      let index=this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year);
-      if (index>=0)       //If exist, remove the date
-        this.datesSelected.splice(index,1);
-      else   //a simple push
-        this.datesSelected.push(date);
-        // console.log(this.datesSelected);
-        this.seatBlockForm.controls['date'].setValue(this.datesSelected);
+  addDate(date: NgbDateStruct) {
+    let index = this.datesSelected.findIndex(
+      (f) => f.day == date.day && f.month == date.month && f.year == date.year
+    );
+    if (index >= 0)
+      //If exist, remove the date
+      this.datesSelected.splice(index, 1);
+    //a simple push
+    else this.datesSelected.push(date);
+    // console.log(this.datesSelected);
+    this.seatBlockForm.controls['date'].setValue(this.datesSelected);
+  }
+  addRangeDate(fromDate: NgbDateStruct, toDate: NgbDateStruct) {
+    //We get the getTime() of the dates from and to
+    let from = new Date(
+      fromDate.year + '-' + fromDate.month + '-' + fromDate.day
+    ).getTime();
+    let to = new Date(
+      toDate.year + '-' + toDate.month + '-' + toDate.day
+    ).getTime();
+    for (
+      let time = from;
+      time <= to;
+      time += 24 * 60 * 60 * 1000 //add one day
+    ) {
+      let date = new Date(time);
+      //javascript getMonth give 0 to January, 1, to February...
+      this.addDate({
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+      });
     }
-    addRangeDate(fromDate:NgbDateStruct,toDate:NgbDateStruct)
-    {
-        //We get the getTime() of the dates from and to
-        let from=new Date(fromDate.year+"-"+fromDate.month+"-"+fromDate.day).getTime();
-        let to=new Date(toDate.year+"-"+toDate.month+"-"+toDate.day).getTime();
-        for (let time=from;time<=to;time+=(24*60*60*1000)) //add one day
-        {
-            let date=new Date(time);
-            //javascript getMonth give 0 to January, 1, to February...
-            this.addDate({year:date.getFullYear(),month:date.getMonth()+1,day:date.getDate()});
-        }   
-        this.datesSelectedChange.emit(this.datesSelected);
-    }
-    //return true if is selected
-    isDateSelected(date:NgbDateStruct)
-    {
-        return (this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year)>=0);
-    }
-  isHovered = date => this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate);
-  isInside = date => after(date, this.fromDate) && before(date, this.toDate);
-  isFrom = date => equals(date, this.fromDate);
-  isTo = date => equals(date, this.toDate);
+    this.datesSelectedChange.emit(this.datesSelected);
+  }
+  //return true if is selected
+  isDateSelected(date: NgbDateStruct) {
+    return (
+      this.datesSelected.findIndex(
+        (f) => f.day == date.day && f.month == date.month && f.year == date.year
+      ) >= 0
+    );
+  }
+  isHovered = (date) =>
+    this.fromDate &&
+    !this.toDate &&
+    this.hoveredDate &&
+    after(date, this.fromDate) &&
+    before(date, this.hoveredDate);
+  isInside = (date) => after(date, this.fromDate) && before(date, this.toDate);
+  isFrom = (date) => equals(date, this.fromDate);
+  isTo = (date) => equals(date, this.toDate);
 
-
-  
   // change(value:NgbDateStruct[])
   // {
   //   this.datesSelected=value;
-    
 
   // }
-
-
-
-
 }
 
-  export class TabsComponent {
-    activeTab: string = 'tab1';
+export class TabsComponent {
+  activeTab: string = 'tab1';
 
-    switchTab(tab: string) {
-      this.activeTab = tab;
+  switchTab(tab: string) {
+    this.activeTab = tab;
   }
 }

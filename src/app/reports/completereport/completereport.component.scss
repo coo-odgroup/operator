@@ -86,4 +86,28 @@ margin-left: 2px;
   //    position: inherit;
   // }
 
+table {
+          font-size: 12px !important;
+      }
+      thead {
+          background-color: #bbbbbb !important;
+      }
+     
+      @media only screen and (max-width: 600px) {
+          table {
+              font-size: 9px !important;
+          }
+          th {
+              padding: 1px !important;
+          }
+          td {
+              padding: 1px !important;
+          }
+          h6 {
+              font-size: 12px;
+              color: #37474f;
+              font-weight: bolder;
+          }
+      }
+
   
