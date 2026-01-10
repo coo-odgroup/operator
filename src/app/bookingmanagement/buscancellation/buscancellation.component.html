@@ -73,7 +73,7 @@ margin-bottom: 5px !important;
           </form>
         </section>
 
-        <button type="button" class="cancel-btn-kis sml_input cancel-btn" (click)="ResetAttributes();OpenModal(content)">Cancel Bus</button>
+        <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1" (click)="ResetAttributes();OpenModal(content)">Cancel Bus</button>
         <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
 
 
@@ -205,7 +205,7 @@ margin-bottom: 5px !important;
     <button type="button" #addnew class="btn btn-primary btn-add-task m-t-10 invisible" id="modal"
       (click)="ResetAttributes();OpenModal(content);">Add </button>
     <ng-template #content let-modal>
-      <div class="modal-header">
+      <div class="modal-header bg-primary">
         <h5 class="ng-tns-c116-5"> {{ModalHeading}}</h5>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
             aria-hidden="true">&times;</span></button>

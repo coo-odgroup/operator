@@ -76,7 +76,7 @@
             </div>
           </form>
         </section>
-      <button type="button" class="cancel-btn-kis sml_input cancel-btn" (click)="ResetAttributes();OpenModal(content)">Extra Seat</button>
+      <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1" (click)="ResetAttributes();OpenModal(content)">Extra Seat</button>
       <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
       
       <div class="no-bdr text-right mt-3">
@@ -206,13 +206,13 @@
           Add
         </button>
         <ng-template #content let-modal>
-          <div class="modal-header">
+          <div class="modal-header bg-primary">
             <h5 class="ng-tns-c116-5">{{ ModalHeading }}</h5>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body box_height">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">
