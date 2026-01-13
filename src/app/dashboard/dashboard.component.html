@@ -1,133 +1,209 @@
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
 </ngx-spinner>
-<!-- <style>
-    .form-group {
-        margin-bottom: 5px !important;
-    }
 
 
-.card {
-    border-top: 0px solid #8CDDCD;
-    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05);
-}
+<!-- <ngx-spinner></ngx-spinner> -->
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
 
-@media only screen and (max-width: 600px) {
-    h4 {
-        font-size: 14px;
-    }
-    .btn-primary {
-        min-height: 140px;
-    }
-}
+<div *ngIf="user_role != 1">
+  <div class="row"> 
+      <div class="col-xl-12 ">
+          <app-card   [hidHeader]="true" [options]="false">
+              <div class="float-left">
+                  <label > 
+                    <h2>Showing {{searchfor}} Data</h2>   
+                  </label>               
+                </div>             
+              <div class="btn-group btn-group-toggle float-right" ngbRadioGroup name="ticketSize" data-toggle="buttons">
+                
+                  <label ngbButtonLabel class="btn btn-info {{searchfor === 'Today' ? 'active' : ''}}">Today
+                    <input ngbButton type="radio" class="dateRange" name="dateRange" value="sm-view" id="option1" (click)="getall('Today')"><i class="feather icon-align-justify m-0"></i>
+                  </label>
+                  <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Week' ? 'active' : ''}}">This Week
+                    <input ngbButton type="radio" class="dateRange" name="dateRange" value="md-view" id="option2" (click)="getall('This Week')"> <i class="feather icon-menu m-0"></i>
+                  </label>
+                  <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Month' ? 'active' : ''}}">This Month
+                    <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option3" (click)="getall('This Month')"> <i class="feather icon-grid m-0"></i>
+                  </label>
+                  <label ngbButtonLabel class="btn btn-info {{searchfor === 'ALL' ? 'active' : ''}}">All
+                    <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option5" (click)="getall('ALL')"> <i class="feather icon-award m-0"></i>
+                  </label>
+                  
+                  <!-- <label ngbButtonLabel class="btn btn-info">Custom Range
+                      <input ngbButton type="radio" name="dateRange" value="large-view" id="option4"> <i class="feather icon-plus m-0"></i>
+                  </label> -->
+                </div>             
+            </app-card>    
+      </div> 
+  </div>
+  <div class="row" *ngIf="dashboarddata">   
+      
+          <div class="col-md-3" *ngIf="RoleType==1">
+              <app-card [hidHeader]="true" cardClass="bg-c-blue text-white widget-visitor-card" blockClass="text-center">
+                  <h3 class="text-white">{{dashboarddata.active_operator}}</h3>
+                  <h6 class="text-white">Total Bus Operators</h6>
+                  <i class="feather icon-file-text"></i>
+                </app-card>
+            
+          </div>
+          <!-- <div class="col-md-3" *ngIf="RoleType==4">
+            <app-card [hidHeader]="true" cardClass="bg-c-blue text-white widget-visitor-card" blockClass="text-center">
+                <h3 class="text-white">{{dashboarddata.sales_data[0].today_amount || "0"}}</h3>
+                <h6 class="text-white">Sales {{RangeText}}</h6>
+                <i class="feather icon-file-text"></i>
+              </app-card>
+          
+          </div> -->
+          <div class="col-md-3">
+            <app-card [hidHeader]="true" cardClass="bg-c-green text-white widget-visitor-card" blockClass="text-center">
+                  <h3 class="text-white">{{dashboarddata.active_bus}}</h3>
+                  <h6 class="text-white">Active Buses</h6>
+                  <i class="feather icon-file-text"></i>
+                </app-card>      
+          </div>
+          <div class="col-md-3">
+              <app-card [hidHeader]="true" cardClass="bg-c-red text-white widget-visitor-card" blockClass="text-center">
+                  <h3 class="text-white">{{dashboarddata.today_pnr}}</h3>
+                  <h6 class="text-white">PNR Booked</h6>
+                  <i class="feather icon-award"></i>
+                </app-card>
+            
+          </div>
+          <div class="col-md-3">
+              <app-card [hidHeader]="true" cardClass="bg-c-yellow text-white widget-visitor-card" blockClass="text-center">
+                  <h3 class="text-white">{{dashboarddata.upcoming_pnr}}</h3>
+                  <h6 class="text-white">PNR Upcoming Booking</h6>
+                  <i class="feather icon-file-text"></i>
+                </app-card>
+          </div>
+          <div class="col-md-3">
+              <app-card [hidHeader]="true" cardClass="bg-c-red text-white widget-visitor-card" blockClass="text-center">
+                  <h3 class="text-white">{{dashboarddata.upcoming_pnr}}</h3>
+                  <h6 class="text-white">Cancelled PNR</h6>
+                  <i class="feather icon-file-text"></i>
+                </app-card>
+          </div>
 
-</style> -->
-
-
-<div class="row">
-    <div class="col-sm-12">
-        <app-card cardTitle="Owner Dashboard" cardClass="card-datatable" [options]="false" [isCardFooter]="false">
-
-            <!-- <div class=" mb-3">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body" style="background: lightsteelblue;">
-                              <h5 class="card-title">Today's Journey PNR</h5>
-                              <p class="card-text">22</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body" style="background: lightsteelblue;">
-                              <h5 class="card-title">Upcoming PNR</h5>
-                              <p class="card-text">33</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body" style="background: lightsteelblue;">
-                              <h5 class="card-title">Total Buses</h5>
-                              <p class="card-text">2 Active/1 Inactive</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body" style="background: lightsteelblue;">
-                              <h5 class="card-title">Cancel Bus/Buses</h5>
-                              <p class="card-text">5</p>
-                            </div>
-                        </div>
-                    </div>
-                   
+          <div class="col-md-6">
+              <app-card class="booking_device_height" cardTitle="Booking By Device {{searchfor}}" [options]="false">
+                <app-apex-chart chartID="pie-chart-2-cac" [chartConfig]="this.pie2CAC" style="height:200px; padding-top: 6px;"></app-apex-chart>
+              </app-card>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6 col-xl-6">
+                  <app-card [hidHeader]="true" cardClass="bg-c-blue card-body22 order-card borderless">
+                    <h6 class="text-white">Sales {{RangeText}}</h6>
+                    <h3 class="text-white">
+                      <span *ngFor="let book_pft of dashboarddata.booking_profit;">
+                        <i class="fas fa-rupee-sign"></i> {{dashboarddata.sales_data[0].today_amount |number : '1.2-2'}}
+                      </span>
+                    </h3>             
+                    <i class="card-icon feather icon-filter"></i>
+                  </app-card>
                 </div>
-            </div> -->
-            <div class=" mb-3">
-                <div class="row p-0">
-                    <div class="col-md-3 col-6">
-                        <div class="card">
-                            <a [routerLink]="['/reports/completeReport']"  >
-                                <img class="card-img-top" src="../../assets/images/BOOKING-REPORT.svg" alt="Card image cap">
-                                <!-- <h4 class="text-center"> <b>BOOKING REPORT</b></h4> -->
-                            </a>
-                        </div>
-                    </div>
-                    <!-- class="btn btn-primary" -->
-                    <div class="col-md-3 col-6">
-                        <div class="card">
-                            <a [routerLink]="['/bookingmanagement/buscancellation']"  >
-                                <img class="card-img-top" src="../../assets/images/BUS-CANCEL.svg" alt="Card image cap">
-                                <!-- <h4 class="text-center"> <b>BUS CANCEL</b></h4> -->
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card">
-                            <a [routerLink]="['/bookingmanagement/seatblock']" >
-                                <img class="card-img-top" src="../../assets/images/SEAT-BLOCK.svg" alt="Card image cap">
-                                <!-- <h4 class="text-center"> <b>SEAT BLOCK</b></h4> -->
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card">
-                            <a [routerLink]="['/bookingmanagement/seatopen']" >
-                                <img class="card-img-top" src="../../assets/images/SEAT-OPEN.svg" alt="Card image cap">
-                                <!-- <h4 class="text-center"> <b>SEAT OPEN</b></h4> -->
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card">
-                            <a [routerLink]="['/bookingmanagement/extraseatblock']" >
-                                <img class="card-img-top" src="../../assets/images/EXTRA-SEAT-BLOCK.svg" alt="Card image cap">
-                                <!-- <h4 class="text-center"> <b>EXTRA SEAT BLOCK</b></h4> -->
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card">
-                            <a [routerLink]="['/busmanagement/busschedule']" >
-                                <img class="card-img-top" src="../../assets/images/BUS-SCHEDULE.svg" alt="Card image cap">
-                                <!-- <h4 class="text-center"> <b>BUS SCHEDULE</b></h4> -->
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="card">
-                            <a [routerLink]="['/bookingmanagement/ownerfare']" >
-                                <img class="card-img-top" src="../../assets/images/MANAGE-FARE.svg" alt="Card image cap">
-                                <!-- <h4 class="text-center"> <b> Manage Fare</b></h4> -->
-                            </a>
-                        </div>
-                    </div>
+
+                <div class="col-md-6 col-xl-6">
+                  <app-card [hidHeader]="true" cardClass="bg-c-blue card-body22 order-card borderless">
+                    <h6 class="text-white"> Total Profit {{RangeText}}</h6>
+                    <h3 class="text-white">
+                      <span *ngFor="let book_pft of dashboarddata.booking_profit;">
+                        <i class="fas fa-rupee-sign"></i> {{book_pft.odbus_amount  + dashboarddata.cancellation_profit |number : '1.2-2'}}
+                      </span>
+                    </h3>             
+                    <i class="card-icon feather icon-filter"></i>
+                  </app-card>
                 </div>
-            </div>            
-        </app-card>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 col-xl-6">
+                  <app-card [hidHeader]="true" cardClass="bg-c-green card-body22 order-card borderless">
+                    <h6 class="text-white">Booking Profit {{RangeText}}</h6>
+                    <h3 class="text-white">
+                      <span *ngFor="let book_pft of dashboarddata.booking_profit;">
+                          <i class="fas fa-rupee-sign"></i> {{book_pft.odbus_amount |number : '1.2-2'}}
+                      </span>
+                    </h3>             
+                    <i class="card-icon feather icon-users"></i>
+                  </app-card>
+                </div>
+
+                <div class="col-md-6 col-xl-6">
+                  <app-card [hidHeader]="true" cardClass="bg-c-red card-body22 order-card borderless">
+                    <h6 class="text-white">Cancellation Profit {{RangeText}}</h6>
+                    <h3 class="text-white">
+                          <i class="fas fa-rupee-sign"></i> {{dashboarddata.cancellation_profit |number : '1.2-2'}}
+                    </h3>             
+                    <i class="card-icon feather icon-users"></i>
+                  </app-card>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-md-12">
+              <app-card cardTitle="TOP ROUTES BOOKINGS IN LAST 30 DAYS" cardClass="table-card" blockClass="p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead>
+                      <tr>   
+                        <th>#</th>               
+                        <th>ROUTES</th>
+                        <th>PNR</th>
+                        <th>PRICE</th>                    
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let route of routedata; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>
+                          {{route.from_location[0].name}} - {{route.to_location[0].name}}
+                        </td>
+                        <td>{{route.pnr_count}} PNR</td>
+                        <td><i class="fas fa-rupee-sign"></i> {{route.amount |number : '1.2-2'}}</td>                   
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </app-card>
+            </div>
+            <div class="col-xl-6 col-md-12">
+              <app-card cardTitle="TOP BUSES AS PER BOOKINGS IN LAST 30 DAYS" cardClass="table-card" blockClass="p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead>
+                    <tr>   
+                      <th>#</th>                      
+                      <th>Bus</th>
+                      <th>PNR</th>
+                      <th>PRICE</th>                    
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let Operator of oprdata; let i = index">
+                      <td>{{i+1}}</td>
+                      <td> <span *ngIf="Operator.operatorName.length > 0">{{Operator.operatorName[0].name}} <strong>[  {{Operator.operatorName[0].bus_number}} ]</strong></span></td>
+                      <td> {{Operator.count}} PNR</td>
+                      <td><i class="fas fa-rupee-sign"></i> {{Operator.amount |number : '1.2-2'}}</td>                   
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </app-card>
+            </div>
     </div>
 </div>
+
+
+  
+  
+    
+    
+      
+    
+
+
+
 
 
