@@ -60,6 +60,12 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
 })
 export class ExtraseablockComponent implements OnInit {
 
+  activeTab: string = 'tab1';
+
+switchTab(tab: string) {
+  this.activeTab = tab;
+}
+
   @ViewChild("addnew") addnew;
   public seatOpenForm: FormGroup;
   public formConfirm: FormGroup;
@@ -375,210 +381,289 @@ export class ExtraseablockComponent implements OnInit {
     );
   }
 
-  checkEvent(event: any) {
-    const data = {
-      bus_id: this.seatOpenForm.value.bus_id
-    };
+  // checkEvent(event: any) {
+  //   const data = {
+  //     bus_id: this.seatOpenForm.value.bus_id
+  //   };
+  //    this.activeTab = 'tab1'; 
+  //   this.spinner.show();
 
-    this.spinner.show();
+  //   this.busService.getSelectedextraSeat(data.bus_id).subscribe(
+  //     seatData => {
+  //       this.selectedSeats = seatData.data;
+  //       //console.log(this.selectedSeats);
+  //       this.seatlayoutService.seatsBus(data).subscribe(
+  //     resp => {
+  //       //console.log(resp);
+  //       let counter = 0;
+  //       this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']) as FormArray;
+  //       this.seatLayoutData.clear();
+  //       if (resp.data.lowerBerth != undefined) {
+  //         for (let lowerData of resp.data.lowerBerth) {
 
-    this.busService.getSelectedextraSeat(data.bus_id).subscribe(
-      seatData => {
-        this.selectedSeats = seatData.data;
-        //console.log(this.selectedSeats);
-        this.seatlayoutService.seatsBus(data).subscribe(
-      resp => {
-        //console.log(resp);
-        let counter = 0;
-        this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']) as FormArray;
-        this.seatLayoutData.clear();
-        if (resp.data.lowerBerth != undefined) {
-          for (let lowerData of resp.data.lowerBerth) {
+  //           let arraylen = this.seatLayoutData.length;
+  //           let berthData: FormGroup = this.fb.group({
+  //             lowerBerth: this.fb.array([
+  //             ]),
+  //             upperBerth: this.fb.array([
+  //             ])
+  //           });
+  //           this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
+  //           this.seatLayoutCol = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']).at(counter).get('lowerBerth') as FormArray;
+  //           for (let seatData of lowerData) {
+  //             let checkedval = "";
+  //             let seatId = "";
+  //             let desiabled_seats = "";
+  //             for (let selectedSeat of this.selectedSeats) {
+  //               if (selectedSeat.seats_id == seatData.id) {
+  //                 checkedval = "true";
+  //                 seatId = selectedSeat.id;
+  //                 desiabled_seats = "true";
+  //               }
+  //             }
+  //             let collen = this.seatLayoutCol.length;
 
-            let arraylen = this.seatLayoutData.length;
-            let berthData: FormGroup = this.fb.group({
-              lowerBerth: this.fb.array([
-              ]),
-              upperBerth: this.fb.array([
-              ])
-            });
-            this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
-            this.seatLayoutCol = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']).at(counter).get('lowerBerth') as FormArray;
-            for (let seatData of lowerData) {
-              let checkedval = "";
-              let seatId = "";
-              let desiabled_seats = "";
-              for (let selectedSeat of this.selectedSeats) {
-                if (selectedSeat.seats_id == seatData.id) {
-                  checkedval = "true";
-                  seatId = selectedSeat.id;
-                  desiabled_seats = "true";
-                }
-              }
-              let collen = this.seatLayoutCol.length;
-
-              if (checkedval == "true") {
-                //console.log(this.seatOpenRecord.seat_open_seats);
-                if (!this.seatOpenRecord.seat_open_seats) {
-                  let columnData: FormGroup = this.fb.group({
-                    seatText: [seatData.seatText],
-                    seatType: [seatData.seat_class_id],
-                    berthType: [seatData.berthType],
-                    seatChecked: [],
-                    category: ['0'],
-                    seatId: [seatData.id],
-                    busId: [data.bus_id]
-                  });
-                  this.seatLayoutCol.insert(collen, columnData);
-                }
-                else {
-                  var isPresent = this.seatOpenRecord.seat_open_seats.some(function (el) { 
+  //             if (checkedval == "true") {
+  //               //console.log(this.seatOpenRecord.seat_open_seats);
+  //               if (!this.seatOpenRecord.seat_open_seats) {
+  //                 let columnData: FormGroup = this.fb.group({
+  //                   seatText: [seatData.seatText],
+  //                   seatType: [seatData.seat_class_id],
+  //                   berthType: [seatData.berthType],
+  //                   seatChecked: [],
+  //                   category: ['0'],
+  //                   seatId: [seatData.id],
+  //                   busId: [data.bus_id]
+  //                 });
+  //                 this.seatLayoutCol.insert(collen, columnData);
+  //               }
+  //               else {
+  //                 var isPresent = this.seatOpenRecord.seat_open_seats.some(function (el) { 
                     
-                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
-                  });
-                  if (isPresent) {
-                    let columnData: FormGroup = this.fb.group({
-                      seatText: [seatData.seatText],
-                      seatType: [seatData.seat_class_id],
-                      berthType: [seatData.berthType],
-                      seatChecked: [true],
-                      category: ['0'],
-                      seatId: [seatData.id],
-                      busId: [data.bus_id]
-                    });
-                    this.seatLayoutCol.insert(collen, columnData);
+  //                   return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
+  //                 });
+  //                 if (isPresent) {
+  //                   let columnData: FormGroup = this.fb.group({
+  //                     seatText: [seatData.seatText],
+  //                     seatType: [seatData.seat_class_id],
+  //                     berthType: [seatData.berthType],
+  //                     seatChecked: [true],
+  //                     category: ['0'],
+  //                     seatId: [seatData.id],
+  //                     busId: [data.bus_id]
+  //                   });
+  //                   this.seatLayoutCol.insert(collen, columnData);
 
-                  } else {
-                    let columnData: FormGroup = this.fb.group({
-                      seatText: [seatData.seatText],
-                      seatType: [seatData.seat_class_id],
-                      berthType: [seatData.berthType],
-                      seatChecked: [],
-                      category: ['0'],
-                      seatId: [seatData.id],
-                      busId: [data.bus_id]
-                    });
-                    this.seatLayoutCol.insert(collen, columnData);
-                  }
-                }
-              }
-              else {
-                // console.log(this.seatOpenRecord.seat_open_seats);            
+  //                 } else {
+  //                   let columnData: FormGroup = this.fb.group({
+  //                     seatText: [seatData.seatText],
+  //                     seatType: [seatData.seat_class_id],
+  //                     berthType: [seatData.berthType],
+  //                     seatChecked: [],
+  //                     category: ['0'],
+  //                     seatId: [seatData.id],
+  //                     busId: [data.bus_id]
+  //                   });
+  //                   this.seatLayoutCol.insert(collen, columnData);
+  //                 }
+  //               }
+  //             }
+  //             else {
+  //               // console.log(this.seatOpenRecord.seat_open_seats);            
 
-                let columnData: FormGroup = this.fb.group({
-                  seatText: [seatData.seatText],
-                  seatType: [seatData.seat_class_id],
-                  berthType: [seatData.berthType],
-                  seatChecked: [{ value: false, disabled: true }],
-                  category: ['0'],
-                  seatId: [seatData.id],
-                  busId: [data.bus_id]
-                });
-                this.seatLayoutCol.insert(collen, columnData);
-              }
-            }
-            counter++;
-          }
-        }
-        if (resp.data.upperBerth != undefined) {
-          for (let upperData of resp.data.upperBerth) {
-            let arraylen = this.seatLayoutData.length;
-            let berthData: FormGroup = this.fb.group({
-              lowerBerth: this.fb.array([
-              ]),
-              upperBerth: this.fb.array([
-              ])
-            });
-            this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
-            this.seatLayoutCol = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']).at(counter).get('upperBerth') as FormArray;
-            for (let seatData of upperData) {
-              let checkedval = "";
-              let seatId = "";
-              let desiabled_seats = "";
-              for (let selectedSeat of this.selectedSeats) {
-                if (selectedSeat.seats_id == seatData.id) {
-                  checkedval = "true";
-                  seatId = selectedSeat.id;
-                  // desiabled_seats = "true";
-                }
-              }
-              let collen = this.seatLayoutCol.length;
+  //               let columnData: FormGroup = this.fb.group({
+  //                 seatText: [seatData.seatText],
+  //                 seatType: [seatData.seat_class_id],
+  //                 berthType: [seatData.berthType],
+  //                 seatChecked: [{ value: false, disabled: true }],
+  //                 category: ['0'],
+  //                 seatId: [seatData.id],
+  //                 busId: [data.bus_id]
+  //               });
+  //               this.seatLayoutCol.insert(collen, columnData);
+  //             }
+  //           }
+  //           counter++;
+  //         }
+  //       }
+  //       if (resp.data.upperBerth != undefined) {
+  //         for (let upperData of resp.data.upperBerth) {
+  //           let arraylen = this.seatLayoutData.length;
+  //           let berthData: FormGroup = this.fb.group({
+  //             lowerBerth: this.fb.array([
+  //             ]),
+  //             upperBerth: this.fb.array([
+  //             ])
+  //           });
+  //           this.seatLayoutData.insert(arraylen, berthData); //PUSH BLANK LOWER BETH ARRAY TO seatLayoutData
+  //           this.seatLayoutCol = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']).at(counter).get('upperBerth') as FormArray;
+  //           for (let seatData of upperData) {
+  //             let checkedval = "";
+  //             let seatId = "";
+  //             let desiabled_seats = "";
+  //             for (let selectedSeat of this.selectedSeats) {
+  //               if (selectedSeat.seats_id == seatData.id) {
+  //                 checkedval = "true";
+  //                 seatId = selectedSeat.id;
+  //                 // desiabled_seats = "true";
+  //               }
+  //             }
+  //             let collen = this.seatLayoutCol.length;
 
-              if (checkedval == "true") {
-                if (!this.seatOpenRecord.seat_open_seats) {
-                  let columnData: FormGroup = this.fb.group({
-                    seatText: [seatData.seatText],
-                    seatType: [seatData.seat_class_id],
-                    berthType: [seatData.berthType],
-                    seatChecked: [],
-                    category: ['0'],
-                    seatId: [seatData.id],
-                    busId: [data.bus_id]
-                  });
-                  this.seatLayoutCol.insert(collen, columnData);
-                }
-                else {
+  //             if (checkedval == "true") {
+  //               if (!this.seatOpenRecord.seat_open_seats) {
+  //                 let columnData: FormGroup = this.fb.group({
+  //                   seatText: [seatData.seatText],
+  //                   seatType: [seatData.seat_class_id],
+  //                   berthType: [seatData.berthType],
+  //                   seatChecked: [],
+  //                   category: ['0'],
+  //                   seatId: [seatData.id],
+  //                   busId: [data.bus_id]
+  //                 });
+  //                 this.seatLayoutCol.insert(collen, columnData);
+  //               }
+  //               else {
                   
-                  var isPresent = this.seatOpenRecord.seat_open_seats.some(function (el) { 
-                    return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
-                  });
-                  if (isPresent) {
-                    let columnData: FormGroup = this.fb.group({
-                      seatText: [seatData.seatText],
-                      seatType: [seatData.seat_class_id],
-                      berthType: [seatData.berthType],
-                      seatChecked: [true],
-                      category: ['0'],
-                      seatId: [seatData.id],
-                      busId: [data.bus_id]
-                    });
-                    this.seatLayoutCol.insert(collen, columnData);
+  //                 var isPresent = this.seatOpenRecord.seat_open_seats.some(function (el) { 
+  //                   return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
+  //                 });
+  //                 if (isPresent) {
+  //                   let columnData: FormGroup = this.fb.group({
+  //                     seatText: [seatData.seatText],
+  //                     seatType: [seatData.seat_class_id],
+  //                     berthType: [seatData.berthType],
+  //                     seatChecked: [true],
+  //                     category: ['0'],
+  //                     seatId: [seatData.id],
+  //                     busId: [data.bus_id]
+  //                   });
+  //                   this.seatLayoutCol.insert(collen, columnData);
 
-                  } else {
-                    let columnData: FormGroup = this.fb.group({
-                      seatText: [seatData.seatText],
-                      seatType: [seatData.seat_class_id],
-                      berthType: [seatData.berthType],
-                      seatChecked: [],
-                      category: ['0'],
-                      seatId: [seatData.id],
-                      busId: [data.bus_id]
-                    });
-                    this.seatLayoutCol.insert(collen, columnData);
-                  }
-                }
-
-
-              }
-              else {
-                // console.log(this.seatOpenRecord.seat_open_seats);            
-
-                let columnData: FormGroup = this.fb.group({
-                  seatText: [seatData.seatText],
-                  seatType: [seatData.seat_class_id],
-                  berthType: [seatData.berthType],
-                  seatChecked: [{ value: false, disabled: true }],
-                  category: ['0'],
-                  seatId: [seatData.id],
-                  busId: [data.bus_id]
-                });
-                this.seatLayoutCol.insert(collen, columnData);
-              }
-            }
-            counter++;
-          }
-        }
-
-        this.spinner.hide();
+  //                 } else {
+  //                   let columnData: FormGroup = this.fb.group({
+  //                     seatText: [seatData.seatText],
+  //                     seatType: [seatData.seat_class_id],
+  //                     berthType: [seatData.berthType],
+  //                     seatChecked: [],
+  //                     category: ['0'],
+  //                     seatId: [seatData.id],
+  //                     busId: [data.bus_id]
+  //                   });
+  //                   this.seatLayoutCol.insert(collen, columnData);
+  //                 }
+  //               }
 
 
-      }
-    );
-      }
-    );
+  //             }
+  //             else {
+  //               // console.log(this.seatOpenRecord.seat_open_seats);            
+
+  //               let columnData: FormGroup = this.fb.group({
+  //                 seatText: [seatData.seatText],
+  //                 seatType: [seatData.seat_class_id],
+  //                 berthType: [seatData.berthType],
+  //                 seatChecked: [{ value: false, disabled: true }],
+  //                 category: ['0'],
+  //                 seatId: [seatData.id],
+  //                 busId: [data.bus_id]
+  //               });
+  //               this.seatLayoutCol.insert(collen, columnData);
+  //             }
+  //           }
+  //           counter++;
+  //         }
+  //       }
+
+  //       this.spinner.hide();
+
+
+  //     }
+  //   );
+  //     }
+  //   );
 
     
-  }
+  // }
+
+  //changed by siraz
+ 
+  checkEvent(event: any) {
+  this.activeTab = 'tab1';   // Change by Siraz
+  const data = {
+    bus_id: this.seatOpenForm.value.bus_id
+  };
+
+  this.spinner.show();
+
+  this.busService.getSelectedextraSeat(data.bus_id).subscribe(
+    seatData => {
+      this.selectedSeats = seatData.data;
+
+      this.seatlayoutService.seatsBus(data).subscribe(
+        resp => {
+          let counter = 0;
+          this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']);
+          this.seatLayoutData.clear();     // 🔥 Clear previous bus layout
+
+          if (resp.data.lowerBerth) {
+            for (let lowerData of resp.data.lowerBerth) {
+              this.seatLayoutData.push(this.fb.group({
+                lowerBerth: this.fb.array([]),
+                upperBerth: this.fb.array([])
+              }));
+
+              let lowerArray = this.seatLayoutData.at(counter).get('lowerBerth') as FormArray;
+
+              for (let seatData of lowerData) {
+                let isBlocked = this.selectedSeats.some(x => x.seats_id == seatData.id);
+
+                lowerArray.push(this.fb.group({
+                  seatText: seatData.seatText,
+                  seatType: seatData.seat_class_id,
+                  berthType: seatData.berthType,
+                  seatChecked: isBlocked ? [] : [{ value: false, disabled: true }],
+                  seatId: seatData.id,
+                  busId: data.bus_id
+                }));
+              }
+              counter++;
+            }
+          }
+
+          if (resp.data.upperBerth) {
+            for (let upperData of resp.data.upperBerth) {
+              this.seatLayoutData.push(this.fb.group({
+                lowerBerth: this.fb.array([]),
+                upperBerth: this.fb.array([])
+              }));
+
+              let upperArray = this.seatLayoutData.at(counter).get('upperBerth') as FormArray;
+
+              for (let seatData of upperData) {
+                let isBlocked = this.selectedSeats.some(x => x.seats_id == seatData.id);
+
+                upperArray.push(this.fb.group({
+                  seatText: seatData.seatText,
+                  seatType: seatData.seat_class_id,
+                  berthType: seatData.berthType,
+                  seatChecked: isBlocked ? [] : [{ value: false, disabled: true }],
+                  seatId: seatData.id,
+                  busId: data.bus_id
+                }));
+              }
+              counter++;
+            }
+          }
+
+          this.spinner.hide();
+        }
+      );
+    }
+  );
+}
+
+
 
 
   checkroute(event: any) {
