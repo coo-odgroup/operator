@@ -5,66 +5,77 @@
 <div class="row">
   <div class="col-sm-12">
 
-    <app-card [hidHeader]="false" cardTitle="Seat Open" cardClass="card-datatable" [options]="false" cardClass=" table-border-style user-profile-list ">
+    <app-card [hidHeader]="false" cardTitle="Seat Open" cardClass="card-datatable" [options]="false"
+      cardClass=" table-border-style user-profile-list ">
 
-        <section *ngIf="showSection" class="my-section">
-          <form [formGroup]="searchForm">
-            <div class="row">
+      <section *ngIf="showSection" class="my-section">
+        <form [formGroup]="searchForm">
+          <div class="row">
 
-              <div class="col-12 col-sm-12 col-md-12  col-lg-3 col-xl-3">
-                <div class="form-group">
-                   <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus" formControlName="bus_id" [clearable]="false" required> </ng-select>
-                </div>
+            <div class="col-12 col-sm-12 col-md-12  col-lg-3 col-xl-3">
+              <div class="form-group">
+                <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus"
+                  formControlName="bus_id" [clearable]="false" required> </ng-select>
               </div>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
-                <div class="form-group">
-                   <input type="date" class="form-control sml_input" placeholder="Start Date" required formControlName="fromDate" />
-                </div>
-              </div>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
-                <div class="form-group">
-                   <input type="date" class="form-control sml_input" placeholder="End Date" required formControlName="toDate" />
-                </div>
-              </div>
-              <div class="col-4 col-sm-6 col-md-6 col-lg-3 col-xl-3">
-                <div class="form-group">
-                  <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
-                      <option value=10>10</option>
-                      <option value=25>25</option>
-                      <option value=50>50</option>
-                      <option value=100>100</option>
-                      <option value='all'>All</option>
-                    </select>
-                </div>
-              </div>
-              <div class="col-8 col-sm-6 col-md-6 col-lg-2 col-xl-2 text-right" >
-                <div class="form-group">
-                  <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
-                  <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i class="fas fa-sync-alt"> </i> Refresh </button>
-                </div>
-              </div>
-              
             </div>
-          </form>
-        </section>
-      <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1" (click)="ResetAttributes();OpenModal(content)">Seat Open</button>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+              <div class="form-group">
+                <input type="date" class="form-control sml_input" placeholder="Start Date" required
+                  formControlName="fromDate" />
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+              <div class="form-group">
+                <input type="date" class="form-control sml_input" placeholder="End Date" required
+                  formControlName="toDate" />
+              </div>
+            </div>
+            <div class="col-4 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+              <div class="form-group">
+                <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
+                  <option value=10>10</option>
+                  <option value=25>25</option>
+                  <option value=50>50</option>
+                  <option value=100>100</option>
+                  <option value='all'>All</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-8 col-sm-6 col-md-6 col-lg-2 col-xl-2 text-right">
+              <div class="form-group">
+                <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i
+                    class="fas fa-search"> </i> Search </button>
+                <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i
+                    class="fas fa-sync-alt"> </i> Refresh </button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </section>
+      <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1"
+        (click)="ResetAttributes();OpenModal(content)">Seat Open</button>
       <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
 
-  
-       
-      <div class="no-bdr text-right mt-3">
-          <div class="card-header-right" >
-              <div class="btn-group card-option small-btn">
-                  <button  type="button" title="Export" class="btn btn-warning sml_input mobile-btn mr-1 "><i  class="fas fa-file-export"></i> Export</button>
-                  <button  type="button" title="Excel" class="btn btn-primary sml_input mobile-btn mr-1 "><i  class="fas fa-folder"></i> Excel</button>
-                  <button  type="button" title="PDF" class="btn btn-info sml_input mobile-btn mr-1 "><i  class="fas fa-file"></i> PDF</button>
-                  <button  type="button" title="Print" class="btn btn-danger sml_input mobile-btn "><i  class="fas fa-print"></i> Print</button>
-              </div>
+
+
+      <div class="no-bdr text-right mt-3" *ngIf="seatOpen?.length != 0">
+        <div class="card-header-right">
+          <div class="btn-group card-option small-btn">
+            <button type="button" title="Export" class="btn btn-warning sml_input mobile-btn mr-1 "><i
+                class="fas fa-file-export"></i> Export</button>
+            <!-- <button type="button" title="Excel" class="btn btn-primary sml_input mobile-btn mr-1 "><i
+                class="fas fa-folder"></i> Excel</button>
+            <button type="button" title="PDF" class="btn btn-info sml_input mobile-btn mr-1 "><i
+                class="fas fa-file"></i> PDF</button>
+            <button type="button" title="Print" class="btn btn-danger sml_input mobile-btn "><i
+                class="fas fa-print"></i> Print</button> -->
           </div>
+        </div>
       </div>
       <div class="table-responsive" id="print-section">
-        <table class="table table-striped" style="font-size: 12px;"> 
-          <thead>
+        <table class="table table-striped" style="font-size: 12px;">
+          <thead *ngIf="seatOpen?.length != 0">
             <tr>
               <th>#</th>
               <th>Bus</th>
@@ -74,14 +85,16 @@
           <tbody *ngIf="seatOpen?.length != 0">
             <tr *ngFor="let sblock of seatOpen; let i = index">
               <td style="min-width: 15px !important;">{{i+1}}</td>
-              <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number }}<br>{{sblock[0][0].value[0].bus_source[0]?.name}}  >>  {{sblock[0][0].value[0].bus_destination[0]?.name}}</td>
+              <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number
+                }}<br>{{sblock[0][0].value[0].bus_source[0]?.name}} >>
+                {{sblock[0][0].value[0].bus_destination[0]?.name}}</td>
               <td>
-                <table >
-                  <tr  *ngFor="let opendate of sblock;let dateIndex= index ">
-                    <td >
+                <table>
+                  <tr *ngFor="let opendate of sblock;let dateIndex= index ">
+                    <td>
                       {{opendate[0].value[0].operation_date | date: 'dd/MM'}}
                     </td>
-      
+
                     <td style="padding-left: 10px !important">
                       <span *ngFor="let seat of opendate[0].value; let seatIndex= index ">
                         {{seat.seats.seatText}},
@@ -91,32 +104,33 @@
 
                       <span *ngIf="opendate[0].value[0].operation_date >= getFormattedDate()">
                         <span type="button" (click)="ResetAttributes();editsopen(opendate[0].value[0].bus.id ,
-                        opendate[0].value[0].operation_date,opendate[0].value[0].ticket_price_id);OpenModal(editSeat)" class="btn btn-sm">
+                        opendate[0].value[0].operation_date,opendate[0].value[0].ticket_price_id);OpenModal(editSeat)"
+                          class="btn btn-sm">
                           <i class="fa fa-edit btn btn-primary" aria-hidden="true"></i>
                         </span>
                       </span>
 
-                        <span type="button" (click)="openConfirmDialog (confirmDialog,
+                      <span type="button" (click)="openConfirmDialog (confirmDialog,
                         opendate[0].value[0].bus.id ,
-                        opendate[0].value[0].operation_date)"  class="btn   float-right"> 
-                          <i class="fa fa-trash btn btn-danger" aria-hidden="true"></i>
+                        opendate[0].value[0].operation_date)" class="btn   float-right">
+                        <i class="fa fa-trash btn btn-danger" aria-hidden="true"></i>
                       </span>
-      
+
                     </td>
-      
+
                   </tr>
                 </table>
               </td>
-      
+
             </tr>
           </tbody>
           <tbody *ngIf="seatOpen?.length == 0">
             <tr>
-              <td colspan="8" class="no-data-available text-center"><h4 class="text-danger">No data Found!</h4></td>
+              <td colspan="8" class="no-data-available bold">No Record Found!</td>
             </tr>
           </tbody>
         </table>
-        <div *ngIf="pagination?.length!= 0" class="hide_print container">
+        <div *ngIf="seatOpen?.length != 0" class="hide_print container">
           <div class="row">
             <div class="col-6">
 
@@ -190,13 +204,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body box_height" >
+          <div class="modal-body box_height">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">
                   <div class="right-icon-control">
-                    <form [formGroup]="seatOpenForm" class="editForm" novalidate>                        
-                        
+                    <form [formGroup]="seatOpenForm" class="editForm" novalidate>
+
                       <div class="form-group row">
 
                         <div class="col-sm-12">
@@ -218,7 +232,9 @@
 
                         <div class="mt-3 col-md-12 datelist" formArrayName="dateLists">
                           <span *ngIf="this.DatesRecord">
-                            <label *ngFor="let busesFormGroup of seatOpenForm['controls'].dateLists['controls']; let i=index" class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-2 text-center" [formGroupName]="i" >
+                            <label
+                              *ngFor="let busesFormGroup of seatOpenForm['controls'].dateLists['controls']; let i=index"
+                              class="col-6 col-sm-3 col-md-4 col-lg-3 col-xl-2 text-center" [formGroupName]="i">
                               <input type="checkbox" class="filled-in" formControlName="datechecked" />
                               <span class="ml-1">{{busesFormGroup.controls.entryDates.value | date: 'dd-MMM'}}</span>
                             </label>
@@ -227,8 +243,8 @@
 
                       </div>
 
-                           
-                        <!-- <div class="col-md-4 text-center">
+
+                      <!-- <div class="col-md-4 text-center">
                           <div class="col-sm-12">
                             <div class="form-group row">
                               <strong>Please Choose the Date from the Calender</strong>
@@ -254,30 +270,32 @@
                             </div>
                           </div>
                         </div> -->
-                      
-                        
+
+
 
                       <div class="row" *ngIf="this.seatLengthData > 0">
                         <div class="row form-group col-sm-12" style="font-size: 10px; margin-left: 1px;">
-                          
-                          <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9" >
+
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                             <div class="tabs">
-                              <button (click)="switchTab('tab1')"  [class.active]="activeTab === 'tab1'"> Seater  </button>
-                              <button (click)="switchTab('tab2')"  [class.active]="activeTab === 'tab2'"> Sleeper  </button>
+                              <button (click)="switchTab('tab1')" [class.active]="activeTab === 'tab1'"> Seater
+                              </button>
+                              <button (click)="switchTab('tab2')" [class.active]="activeTab === 'tab2'"> Sleeper
+                              </button>
                             </div>
 
-                             <div formArrayName="bus_seat_layout_data" class="col-12 bus-transform">
+                            <div formArrayName="bus_seat_layout_data" class="col-12 bus-transform">
                               <div class="row" *ngFor="
                                   let layoutRow of seatOpenForm.controls
                                     .bus_seat_layout_data.controls;
                                   let layout_row = index
                                 " [formGroupName]="layout_row">
 
-                            <div class="tab-content ">
-                              <div *ngIf="activeTab === 'tab1'">
-                                      <div formArrayName="lowerBerth" class="col-12"
-                                  style="display: flex; justify-content: center">
-                                  <div *ngFor="
+                                <div class="tab-content ">
+                                  <div *ngIf="activeTab === 'tab1'">
+                                    <div formArrayName="lowerBerth" class="col-12"
+                                      style="display: flex; justify-content: center">
+                                      <div *ngFor="
                                       let layoutCol of layoutRow['controls']
                                         .lowerBerth['controls'];
                                       let layout_row = index
@@ -286,37 +304,37 @@
                                       float: left;
                                       text-align: center;
                                     ">
-                                  
-                                    <label class="seatHolder">
-                                      <input type="checkbox" formControlName="seatChecked" *ngIf="
+
+                                        <label class="seatHolder">
+                                          <input type="checkbox" formControlName="seatChecked" *ngIf="
                                           layoutCol.controls.seatType.value != 4
                                         " />
-                                      <span class="seaterImage" *ngIf="
+                                          <span class="seaterImage" *ngIf="
                                           layoutCol.controls.seatType.value == 1
                                         "></span>
-                                      <span class="sleeperImage" *ngIf="
+                                          <span class="sleeperImage" *ngIf="
                                           layoutCol.controls.seatType.value == 2
                                         "></span>
-                                      <span class="verticalImage" *ngIf="
+                                          <span class="verticalImage" *ngIf="
                                           layoutCol.controls.seatType.value == 3
                                         "></span>
-                                      <span class="blankImage" *ngIf="
+                                          <span class="blankImage" *ngIf="
                                           layoutCol.controls.seatType.value == 4
                                         "></span>
-                                      <span *ngIf="
+                                          <span *ngIf="
                                           layoutCol.controls.seatType.value != 4
                                         ">{{
-                                        layoutCol.controls.seatText.value
-                                        }}</span>
-                                    </label>
+                                            layoutCol.controls.seatText.value
+                                            }}</span>
+                                        </label>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
 
-                              <div *ngIf="activeTab === 'tab2'">
-                                 <div formArrayName="upperBerth" class="col-12"
-                                  style="display: flex; justify-content: center">
-                                  <div *ngFor="
+                                  <div *ngIf="activeTab === 'tab2'">
+                                    <div formArrayName="upperBerth" class="col-12"
+                                      style="display: flex; justify-content: center">
+                                      <div *ngFor="
                                       let layoutCol of layoutRow['controls']
                                         .upperBerth['controls'];
                                       let layout_row = index
@@ -325,35 +343,35 @@
                                       float: left;
                                       text-align: center;
                                     ">
-                                    <label class="seatHolder">
-                                      <input type="checkbox" formControlName="seatChecked" *ngIf="
+                                        <label class="seatHolder">
+                                          <input type="checkbox" formControlName="seatChecked" *ngIf="
                                           layoutCol.controls.seatType.value != 4
                                         " />
-                                      <span class="seaterImage" *ngIf="
+                                          <span class="seaterImage" *ngIf="
                                           layoutCol.controls.seatType.value == 1
                                         "></span>
-                                      <span class="sleeperImage" *ngIf="
+                                          <span class="sleeperImage" *ngIf="
                                           layoutCol.controls.seatType.value == 2
                                         "></span>
-                                      <span class="verticalImage" *ngIf="
+                                          <span class="verticalImage" *ngIf="
                                           layoutCol.controls.seatType.value == 3
                                         "></span>
-                                      <span class="blankImage" *ngIf="
+                                          <span class="blankImage" *ngIf="
                                           layoutCol.controls.seatType.value == 4
                                         "></span>
-                                      <span *ngIf="
+                                          <span *ngIf="
                                           layoutCol.controls.seatType.value != 4
                                         ">{{
-                                        layoutCol.controls.seatText.value
-                                        }}</span>
-                                    </label>
+                                            layoutCol.controls.seatText.value
+                                            }}</span>
+                                        </label>
+                                      </div>
+                                    </div>
+
                                   </div>
                                 </div>
-
                               </div>
                             </div>
-                           </div>
-                          </div>  
 
                             <!-- <div formArrayName="bus_seat_layout_data" class="col-12">
                               <div class="row" *ngFor="
@@ -443,12 +461,13 @@
                             </div> -->
                           </div>
                           <style>
-                            .table1.table1-bordered > thead > tr > th{
-                              border:3px solid rgb(223, 11, 11);
+                            .table1.table1-bordered>thead>tr>th {
+                              border: 3px solid rgb(223, 11, 11);
                               color: brown;
                             }
-                            .table1.table1-bordered > tbody > tr > td{
-                              border:3px solid rgb(223, 11, 11);
+
+                            .table1.table1-bordered>tbody>tr>td {
+                              border: 3px solid rgb(223, 11, 11);
                             }
                           </style>
                           <div class="col-md-3">
@@ -465,19 +484,19 @@
                                   <tbody>
                                     <tr *ngFor="let aldOpen of alreadyOpenData">
                                       <td>
-                                          {{aldOpen.value[0].operation_date | date: 'dd-MM-YYYY'}}
+                                        {{aldOpen.value[0].operation_date | date: 'dd-MM-YYYY'}}
                                       </td>
                                       <td>
-                                        <span *ngFor="let seat of aldOpen.value" >
-                                            <b>{{seat.seats.seatText}}</b> ,
+                                        <span *ngFor="let seat of aldOpen.value">
+                                          <b>{{seat.seats.seatText}}</b> ,
                                         </span>
                                       </td>
                                     </tr>
-                                  </tbody>                                
+                                  </tbody>
                                 </table>
                               </div>
                             </div>
-                          </div>  
+                          </div>
                         </div>
 
 
@@ -586,12 +605,7 @@
             <h5 class="ng-tns-c116-5">
               <!-- {{ busRecord.name }} [{{ busRecord.bus_number }}] -->
             </h5>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -604,7 +618,7 @@
                         class="text-danger">*</span></label>
                     <div class="col-sm-9">
                       <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus"
-                        formControlName="bus_id"  [clearable]="false" required  [readonly]="true">
+                        formControlName="bus_id" [clearable]="false" required [readonly]="true">
                       </ng-select>
 
                     </div>
@@ -612,15 +626,14 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Date<span
-                      class="text-danger">*</span></label>
+                    <label class="col-sm-3 col-form-label">Date<span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                       {{seatOpenForm.controls.date.value}}
                     </div>
                   </div>
-                   <!-- Date :{{seatOpenForm.controls.date.value}} -->
-                  
-              </div>
+                  <!-- Date :{{seatOpenForm.controls.date.value}} -->
+
+                </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
@@ -630,8 +643,7 @@
                           .bus_seat_layout_data.controls;
                         let layout_row = index
                       " [formGroupName]="layout_row">
-                      <div formArrayName="lowerBerth" class="col-12"
-                        style="display: flex; justify-content: center">
+                      <div formArrayName="lowerBerth" class="col-12" style="display: flex; justify-content: center">
                         <div *ngFor="
                             let layoutCol of layoutRow['controls']
                               .lowerBerth['controls'];
@@ -667,8 +679,7 @@
                         </div>
                       </div>
 
-                      <div formArrayName="upperBerth" class="col-12"
-                        style="display: flex; justify-content: center">
+                      <div formArrayName="upperBerth" class="col-12" style="display: flex; justify-content: center">
                         <div *ngFor="
                             let layoutCol of layoutRow['controls']
                               .upperBerth['controls'];
@@ -709,27 +720,17 @@
             </div>
           </form>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-primary"
-              (click)="checkroute();updateBlockseat()"
-              ngbAutofocus
-            >
-            <!-- (click)="checkroute();updateBlockseat()" -->
+            <button type="button" class="btn btn-primary" (click)="checkroute();updateBlockseat()" ngbAutofocus>
+              <!-- (click)="checkroute();updateBlockseat()" -->
               Update Seat Layout
             </button>
-            <button
-              type="button"
-              class="btn btn-default"
-              data-dismiss="modal"
-              #defaultClick
-              (click)="modal.dismiss('Cross click')"
-            >
+            <button type="button" class="btn btn-default" data-dismiss="modal" #defaultClick
+              (click)="modal.dismiss('Cross click')">
               Cancel
             </button>
           </div>
         </ng-template>
-        
+
 
       </div>
     </app-card>

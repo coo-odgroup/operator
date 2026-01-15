@@ -80,7 +80,7 @@
         <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1" (click)="ResetAttributes();OpenModal(content)">Seat Block</button>
         <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
       
-        <div class="no-bdr text-right mt-3">
+        <div class="no-bdr text-right mt-3" *ngIf="seatBlock?.length != 0">
           <div class="card-header-right" >
               <div class="btn-group card-option small-btn">
                   <button  type="button" title="Export" class="btn btn-warning sml_input  mobile-btn" (click)="exportexcel()"><i  class="fas fa-file-export"></i>Export</button>
@@ -96,7 +96,7 @@
       <div class="table-responsive" id="print-section">
         <table class="table table-striped" tyle="font-size: 10px;
         margin-left: 1px;">
-          <thead>
+          <thead *ngIf="seatBlock?.length != 0">
             <tr>
               <th>#</th>
               <th>Bus</th>
@@ -144,13 +144,11 @@
           </tbody>
           <tbody *ngIf="seatBlock?.length == 0">
             <tr>
-              <td colspan="8" class="no-data-available text-center">
-                <h4 class="text-danger">No data Found!</h4>
-              </td>
+              <td colspan="8" class="no-data-available bold">No Record Found!</td>
             </tr>
           </tbody>
         </table>
-        <div *ngIf="pagination?.length!= 0" class="hide_print container">
+        <div *ngIf="seatBlock?.length != 0" class="hide_print container">
           <div class="row mob">
             <div class="col-md-6">
 

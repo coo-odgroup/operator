@@ -77,7 +77,7 @@ margin-bottom: 5px !important;
         <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
 
 
-        <div class="no-bdr text-right mt-3">
+        <div class="no-bdr text-right mt-3" *ngIf="busCancellations?.length != 0">
           <div class="card-header-right" >
               <div class="btn-group card-option small-btn">
                   <button  type="button" title="Export" class="btn btn-warning sml_input mobile-btn" (click)="exportexcel()"><i  class="fas fa-file-export"></i> Export</button>
@@ -128,9 +128,7 @@ margin-bottom: 5px !important;
           </tbody>
           <tbody *ngIf="busCancellations?.length == 0">
             <tr>
-              <td colspan="7" class="no-data-available">
-                <h5 class="text-dnager">No Record Found!</h5>
-              </td>
+              <td colspan="7" class="no-data-available">No Record Found!</td>
             </tr>
           <tbody>
         </table>  

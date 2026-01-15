@@ -7,10 +7,12 @@ import {NotificationService} from '../services/notification.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DashboardComponent } from './dashboard.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
   imports: [
+    HighchartsChartModule,
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
