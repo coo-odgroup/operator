@@ -126,21 +126,86 @@ margin-left: 2px;
 }
 
 
-@media screen 
-and (min-width: 412px) 
-and (max-width: 915px) 
-and (orientation: portrait) {
-  .bus-transform {
-    margin-top: 110px !important;
-    }
-}
+// @media screen 
+// and (min-width: 375px) 
+// and (max-width: 667px) 
+// and (orientation: landscape) {
+//   .bus-transform {
+//     margin-top: 10px;
+//     }
+// }
 
+// @media screen 
+// and (min-width: 300px) 
+// and (max-width: 400px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 60px;
+//     }
+// }
+
+
+// @media screen 
+// and (min-width: 375px) 
+// and (max-width: 667px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 60px;
+//     }
+// }
+// @media screen 
+// and (min-width: 414px) 
+// and (max-width: 896px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 70px;
+//     }
+// }
+// @media screen 
+// and (min-width: 430px) 
+// and (max-width: 932px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 80px;
+//     }
+// }
+// @media screen 
+// and (min-width: 360px) 
+// and (max-width: 740px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 80px;
+//     }
+// }
+// @media screen 
+// and (min-width: 412px) 
+// and (max-width: 915px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 60px;
+//     }
+// }
 @media screen 
 and (min-width: 768px) 
 and (max-width: 1024px) 
 and (orientation: portrait) {
   .bus-transform {
-    margin-top: 160px !important;
+    margin-top: 110px;
+    }
+}
+
+@media screen 
+and (min-width: 1024px) 
+and (max-width: 1366px) 
+and (orientation: portrait) {
+  .bus-transform {
+    margin-top: 10px;
     }
 }
 
@@ -166,5 +231,92 @@ and (orientation: portrait) {
 @media (max-width: 425px) {
   .datelist label {
     justify-content: center;
+  }
+}
+
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.tabs button {
+  border: none;
+  padding: 6px 25px;
+  margin-top: 5px;
+  background: #d6d6d6;
+  cursor: pointer;
+  // margin: 0 5px;
+  // border-radius: 5px;
+}
+
+.tabs button.active {
+  background: #003a8f;
+  color: rgb(195, 195, 195);
+}
+
+// Chnages By Siraz
+
+@media screen 
+and (min-width: 320px)
+and (max-width: 375px)
+and (orientation: portrait)
+and (orientation: portrait) {
+  .bus-transform {
+    transform: rotate(90deg);
+    margin-top: 60px !important;
+    }
+}
+
+@media screen 
+and (min-width: 375px)
+and (max-width: 425px)
+and (orientation: portrait)
+and (orientation: portrait) {
+  .bus-transform {
+    transform: rotate(90deg);
+    margin-top: 90px !important;
+    }
+}
+
+@media screen 
+and (min-width: 425px)
+and (max-width: 768px)
+and (orientation: portrait)
+and (orientation: portrait) {
+  .bus-transform {
+    transform: rotate(90deg);
+    margin-top: 110px !important;
+    }
+}
+
+@media screen 
+and (min-width: 768px)
+and (orientation: portrait)
+and (orientation: portrait) {
+  .bus-transform {
+    transform: rotate(90deg);
+    margin-top: 150px !important;
+    }
+}
+
+
+@media screen 
+and (min-width: 320px)
+and (max-width: 320px)
+and (min-height: 768px)
+and (max-height: 768px)
+and (orientation: portrait) {
+
+  .mobile-btn {
+    height: 50px;
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+  #print-section {
+    margin-top: 15px;
   }
 }
