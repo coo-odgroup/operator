@@ -133,8 +133,16 @@ margin-left: 2px;
 
 // Add by siraz
 
-.box_height{
+/* Default modal height */
+.box_height {
   height: 300px;
+  overflow-y: auto;
+}
+
+/* When bus is selected → height auto */
+.box_height.auto-height {
+  height: auto;
+  max-height: 85vh;
 }
 
 
@@ -147,62 +155,62 @@ and (orientation: landscape) {
     }
 }
 
-@media screen 
-and (min-width: 300px) 
-and (max-width: 400px) 
-and (orientation: portrait) {
-  .bus-transform {
-    transform: rotate(90deg);
-    margin-top: 60px;
-    }
-}
+// @media screen 
+// and (min-width: 300px) 
+// and (max-width: 400px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 60px;
+//     }
+// }
 
 
-@media screen 
-and (min-width: 375px) 
-and (max-width: 667px) 
-and (orientation: portrait) {
-  .bus-transform {
-    transform: rotate(90deg);
-    margin-top: 60px;
-    }
-}
-@media screen 
-and (min-width: 414px) 
-and (max-width: 896px) 
-and (orientation: portrait) {
-  .bus-transform {
-    transform: rotate(90deg);
-    margin-top: 70px;
-    }
-}
-@media screen 
-and (min-width: 430px) 
-and (max-width: 932px) 
-and (orientation: portrait) {
-  .bus-transform {
-    transform: rotate(90deg);
-    margin-top: 80px;
-    }
-}
-@media screen 
-and (min-width: 360px) 
-and (max-width: 740px) 
-and (orientation: portrait) {
-  .bus-transform {
-    transform: rotate(90deg);
-    margin-top: 80px;
-    }
-}
-@media screen 
-and (min-width: 412px) 
-and (max-width: 915px) 
-and (orientation: portrait) {
-  .bus-transform {
-    transform: rotate(90deg);
-    margin-top: 60px;
-    }
-}
+// @media screen 
+// and (min-width: 375px) 
+// and (max-width: 667px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 60px;
+//     }
+// }
+// @media screen 
+// and (min-width: 414px) 
+// and (max-width: 896px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 70px;
+//     }
+// }
+// @media screen 
+// and (min-width: 430px) 
+// and (max-width: 932px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 80px;
+//     }
+// }
+// @media screen 
+// and (min-width: 360px) 
+// and (max-width: 740px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 80px;
+//     }
+// }
+// @media screen 
+// and (min-width: 412px) 
+// and (max-width: 915px) 
+// and (orientation: portrait) {
+//   .bus-transform {
+//     transform: rotate(90deg);
+//     margin-top: 60px;
+//     }
+// }
 @media screen 
 and (min-width: 768px) 
 and (max-width: 1024px) 
@@ -224,20 +232,45 @@ and (orientation: portrait) {
 // Chnages By Siraz
 
 @media screen 
-and (min-width: 412px) 
-and (max-width: 915px) 
+and (min-width: 320px)
+and (max-width: 375px)
+and (orientation: portrait)
 and (orientation: portrait) {
   .bus-transform {
+    transform: rotate(90deg);
+    margin-top: 60px !important;
+    }
+}
+
+@media screen 
+and (min-width: 375px)
+and (max-width: 425px)
+and (orientation: portrait)
+and (orientation: portrait) {
+  .bus-transform {
+    transform: rotate(90deg);
+    margin-top: 90px !important;
+    }
+}
+
+@media screen 
+and (min-width: 425px)
+and (max-width: 768px)
+and (orientation: portrait)
+and (orientation: portrait) {
+  .bus-transform {
+    transform: rotate(90deg);
     margin-top: 110px !important;
     }
 }
 
 @media screen 
-and (min-width: 768px) 
-and (max-width: 1024px) 
+and (min-width: 768px)
+and (orientation: portrait)
 and (orientation: portrait) {
   .bus-transform {
-    margin-top: 160px !important;
+    transform: rotate(90deg);
+    margin-top: 150px !important;
     }
 }
 

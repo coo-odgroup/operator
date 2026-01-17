@@ -219,7 +219,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body box_height">
+          <div class="modal-body box_height"
+     [class.auto-height]="seatOpenForm.controls.bus_id?.value">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">
@@ -300,10 +301,10 @@
                         seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.lowerBerth.length > 0 ||
                         seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.length > 0">
 
-                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 text-start">
+                         <div class="col-12">
 
                           <!-- TABS -->
-                          <div class="tabs text-center mb-2">
+                          <div class="tabs col-sm-12 col-form-label text-center">
                             <button (click)="switchTab('tab1')" [class.active]="activeTab==='tab1'">Seater</button>
                             <button (click)="switchTab('tab2')" [class.active]="activeTab==='tab2'">Sleeper</button>
                           </div>

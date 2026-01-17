@@ -108,8 +108,16 @@ margin-left: 2px;
 
 //   Chnages By Siraz
 
-.box_height{
+/* Default modal height */
+.box_height {
   height: 300px;
+  overflow-y: auto;
+}
+
+/* When bus is selected → height auto */
+.box_height.auto-height {
+  height: auto;
+  max-height: 85vh;
 }
 
 /* DATE ALIGNMENT FIX ONLY */
@@ -235,26 +243,26 @@ and (orientation: portrait) {
 }
 
 
-.tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
+// .tabs {
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: 10px;
+// }
 
-.tabs button {
-  border: none;
-  padding: 6px 25px;
-  margin-top: 5px;
-  background: #d6d6d6;
-  cursor: pointer;
-  // margin: 0 5px;
-  // border-radius: 5px;
-}
+// .tabs button {
+//   border: none;
+//   padding: 6px 25px;
+//   margin-top: 5px;
+//   background: #d6d6d6;
+//   cursor: pointer;
+//   // margin: 0 5px;
+//   // border-radius: 5px;
+// }
 
-.tabs button.active {
-  background: #003a8f;
-  color: rgb(195, 195, 195);
-}
+// .tabs button.active {
+//   background: #003a8f;
+//   color: rgb(195, 195, 195);
+// }
 
 // Chnages By Siraz
 

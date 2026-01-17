@@ -204,7 +204,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body box_height">
+         <div class="modal-body box_height"
+     [class.auto-height]="seatOpenForm.controls.bus_id?.value">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">

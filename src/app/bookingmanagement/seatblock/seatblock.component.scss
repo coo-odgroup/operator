@@ -108,8 +108,16 @@
 
 // Add by siraz
 
-.box_height{
+/* Default modal height */
+.box_height {
   height: 300px;
+  overflow-y: auto;
+}
+
+/* When bus is selected → height auto */
+.box_height.auto-height {
+  height: auto;
+  max-height: 85vh;
 }
 
 @media only screen and (max-width: 599px) {
@@ -308,3 +316,4 @@ and (orientation: portrait) {
 //     height: max-content;
 //     }
 // }
+
