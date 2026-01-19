@@ -177,8 +177,14 @@ export class SeatopenComponent implements OnInit {
   }
 
   activeTab: string = 'tab1';
+  dnone: string = '';
   switchTab(tab: string) {
     this.activeTab = tab;
+    if(this.activeTab==='tab2'){
+      this.dnone = 'd-none';
+    } else {
+      this.dnone = '';
+    }
   }
 //   addDays(a_oDate: Date, days: number): Date {
 //     a_oDate.setDate(a_oDate.getDate() + days);
@@ -1366,9 +1372,15 @@ export class SeatopenComponent implements OnInit {
 
 export class TabsComponent {
   activeTab: string = 'tab1';
+  dnone: string = '';
 
   switchTab(tab: string) {
     this.activeTab = tab;
+    if(this.activeTab==='tab2'){
+      this.dnone = 'd-none';
+    } else {
+      this.dnone = '';
+    }
   }
 
 }

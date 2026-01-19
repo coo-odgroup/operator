@@ -395,6 +395,45 @@
                         </div> -->
                       </div>
 
+                         <style>
+                          .table1.table1-bordered>thead>tr>th {
+                            border: 3px solid rgb(223, 11, 11);
+                            color: brown;
+                          }
+
+                          .table1.table1-bordered>tbody>tr>td {
+                            border: 3px solid rgb(223, 11, 11);
+                          }
+                        </style>
+                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h6 *ngIf="alreadyBlocksData.length > 0">Already Block Seats</h6>
+                              <table class="table table1 table1-bordered" *ngIf="alreadyBlocksData.length > 0">
+                                <thead>
+                                  <tr>
+                                    <th> Date</th>
+                                    <th> Block Seats</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let aldBlock of alreadyBlocksData">
+                                    <td>
+                                      {{aldBlock.value[0].operation_date}}
+                                    </td>
+                                    <td>
+                                      <span *ngFor="let seat of aldBlock.value">
+                                        <!-- {{seat.seats.seatText}} , -->
+                                        <b>{{seat.seats.seatText}}</b> ,
+                                      </span>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+
                       <div class="row" *ngIf="this.seatLengthData > 0">
 
                         <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9"
@@ -406,7 +445,7 @@
                           </div>
 
                           <div formArrayName="bus_seat_layout_data" class="col-12 bus-transform">
-
+                            <div class="steering {{dnone}}"><img src="assets\images\user\steering.png" alt="" srcset=""></div>
 
                             <div class="row" *ngFor=" let layoutRow of seatBlockForm.controls .bus_seat_layout_data.controls;
                                 let layout_row = index
@@ -492,45 +531,6 @@
                             </div>
                           </div>
                         </div>
-                        <style>
-                          .table1.table1-bordered>thead>tr>th {
-                            border: 3px solid rgb(223, 11, 11);
-                            color: brown;
-                          }
-
-                          .table1.table1-bordered>tbody>tr>td {
-                            border: 3px solid rgb(223, 11, 11);
-                          }
-                        </style>
-                        <div class="col-md-3">
-                          <div class="row">
-                            <div class="col-md-12">
-                              <h6 *ngIf="alreadyBlocksData.length > 0">Already Block Seats</h6>
-                              <table class="table table1 table1-bordered" *ngIf="alreadyBlocksData.length > 0">
-                                <thead>
-                                  <tr>
-                                    <th> Date</th>
-                                    <th> Block Seats</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor="let aldBlock of alreadyBlocksData">
-                                    <td>
-                                      {{aldBlock.value[0].operation_date}}
-                                    </td>
-                                    <td>
-                                      <span *ngFor="let seat of aldBlock.value">
-                                        <!-- {{seat.seats.seatText}} , -->
-                                        <b>{{seat.seats.seatText}}</b> ,
-                                      </span>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-
                       </div>
                     </form>
                   </div>

@@ -297,19 +297,20 @@
                         </div> -->
                       </div>
 
-                        <div class="row col-12" *ngIf="
+                        <div class="col-12" *ngIf="
                         seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.lowerBerth.length > 0 ||
                         seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.length > 0">
 
-                         <div class="col-12">
+                         <div>
 
                           <!-- TABS -->
-                          <div class="tabs col-sm-12 col-form-label text-center">
-                            <button (click)="switchTab('tab1')" [class.active]="activeTab==='tab1'">Seater</button>
-                            <button (click)="switchTab('tab2')" [class.active]="activeTab==='tab2'">Sleeper</button>
+                          <div class="tabs col-form-label text-center">
+                            <button class="col-6" (click)="switchTab('tab1')" [class.active]="activeTab==='tab1'">Seater</button>
+                            <button class="col-6" (click)="switchTab('tab2')" [class.active]="activeTab==='tab2'">Sleeper</button>
                           </div>
 
                           <div formArrayName="bus_seat_layout_data" class="bus-transform">
+                          <div class="steering {{dnone}}"><img src="assets\images\user\steering.png" alt="" srcset=""></div>
 
                             <div *ngFor="let row of seatOpenForm.controls.bus_seat_layout_data.controls; let i=index"
                               [formGroupName]="i">

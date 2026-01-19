@@ -110,4 +110,135 @@ table {
           }
       }
 
-  
+
+// Added by siraz for ticket design
+
+      .ticket-card {
+  display: flex;
+  height: 140px;
+  width: 100%;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin: 15px 0;
+  font-family: Arial, sans-serif;
+}
+
+/* LEFT */
+.ticket-left {
+  width: 28px;
+  background: #f1cc2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* CENTER */
+.ticket-center {
+  flex: 1;
+  padding: 7px 5px;
+  width: 80px;
+}
+
+
+.ticket-center h3 {
+  margin: 5px 0 4px;
+  color: #1b2559;
+  font-size: 15px;
+}
+
+.ticket-center p {
+  margin: 3px 0;
+  font-size: 12px;
+  color: #1b2559;
+  font-weight: bold;
+}
+
+.route{
+  overflow: hidden;
+  height: 20px;
+
+}
+
+.age {
+  margin-top: -6px !important;
+}
+
+/* RIGHT */
+.ticket-right {
+  width: 100px;
+  background: #1b2559;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
+  border-radius: 0 15px 15px 20px;
+}
+
+.ticket-right div {
+  padding: 12px;
+  text-align: center;
+}
+
+.ticket-right p {
+  margin: 4px 0;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.r-mid{
+  overflow: hidden;
+}
+
+
+.r-top{
+ padding: 5px 0 !important;
+}
+
+.r-bottom{
+  padding: 5px 0 !important;
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+// @media screen 
+// and (min-width: 320px)
+// and (max-width: 375px)
+// and (orientation: portrait)
+// and (orientation: portrait) {
+//   .card .card-block, .card .card-body {
+//     padding: 0px 8px 20px 8px !important;
+// }
+// }
+
+// @media screen 
+// and (min-width: 375px)
+// and (max-width: 425px)
+// and (orientation: portrait)
+// and (orientation: portrait) {
+//   .card .card-block, .card .card-body {
+//     padding: 0px 8px 20px 8px !important;
+// }
+// }
+
+// @media screen 
+// and (min-width: 425px)
+// and (max-width: 768px)
+// and (orientation: portrait)
+// and (orientation: portrait) {
+//   .card .card-block, .card .card-body {
+//     padding: 0px 8px 20px 8px !important;
+// }
+// }
+
+// @media screen 
+// and (min-width: 768px)
+// and (orientation: portrait)
+// and (orientation: portrait) {
+//   .card .card-block, .card .card-body {
+//     padding: 0px 8px 20px 8px !important;
+// }
+// }

@@ -61,9 +61,15 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
 export class ExtraseablockComponent implements OnInit {
 
   activeTab: string = 'tab1';
+  dnone: string = '';
 
 switchTab(tab: string) {
   this.activeTab = tab;
+  if(this.activeTab==='tab2'){
+    this.dnone = 'd-none';
+  } else {
+    this.dnone = '';
+  }
 }
 
   @ViewChild("addnew") addnew;
