@@ -268,12 +268,23 @@ and (orientation: portrait) {
 
 @media screen 
 and (min-width: 320px)
+and (max-width: 350px)
+and (orientation: portrait)
+and (orientation: portrait) {
+  .bus-transform {
+    transform: rotate(90deg);
+    margin-top: 75px !important;
+    }
+}
+
+@media screen 
+and (min-width: 350px)
 and (max-width: 375px)
 and (orientation: portrait)
 and (orientation: portrait) {
   .bus-transform {
     transform: rotate(90deg);
-    margin-top: 60px !important;
+    margin-top: 80px !important;
     }
 }
 

@@ -63,11 +63,23 @@
     border-radius: 4px;
 }
 
-@media only screen and (max-width: 599px) {
+@media only screen
+and (max-width: 325px) {
+    .mobile-display ul li a {
+        font-size: 12px;
+        padding: 6px 4px 0px 8px;
+    }
+    .mobile-display ul li a span {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
     .mobile-display {
         display: block;
     }
     .mobile-menu{
         display: none;
     }
-}   
+}
+  
