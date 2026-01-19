@@ -95,106 +95,125 @@
 
     <div class="table-responsive " id="print-section">
         <div class=" tableFixHead">
-            <table class="table table-striped  header-fixed">
-                <thead *ngIf="completedata?.data?.data?.length != 0">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Ticket Details</th>
-                        <th scope="col">Seat No</th>
-                        <th scope="col">Seat Fare</th>
+            <div class="desktop-view">
+                <table class="table table-striped  header-fixed">
+                    <thead *ngIf="completedata?.data?.data?.length != 0">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Ticket Details</th>
+                            <th scope="col">Seat No</th>
+                            <th scope="col">Seat Fare</th>
 
-                    </tr>
-                </thead>
+                        </tr>
+                    </thead>
 
-                <tbody *ngIf="completedata?.length != 0" class="p-0">
-                    <tr *ngFor="let complete of completedata?.data.data; let i = index">
-                        <td style="min-width: 15px;">{{ i+1 }}</td>
-                        <td>
-                            <strong>{{complete.pnr}}</strong><br>
-                            <strong>{{ complete.bus.name }} ( {{ complete.bus.bus_number }} ) </strong>
-                            <br>
-                            <strong>DOJ: {{complete.journey_dt | date: 'dd-MMM-yyyy'}} </strong>
-                            <br>
-                            <span *ngFor="let boarding of complete.from_location;">
-                                {{boarding.name}}
-                            </span> -
-                            <span *ngFor="let dropping of complete.to_location;">
-                                {{dropping.name}}
-                            </span>
-                        </td>
-                        <td>
-                            <span *ngFor="let seat of complete.booking_detail; let last = last">
-                                <b style="color:brown;">
-                                    {{ seat.bus_seats.seats.seatText }}
-                                </b><span *ngIf="!last"> ,</span>
-                            </span>
-                            <br>
-                            <b>{{complete.booking_detail[0].passenger_name | titlecase}}</b> -
-                            <span *ngFor="let passanger of complete.booking_detail; let last = last">
-                                <b>{{ passanger.passenger_gender }}</b><span *ngIf="!last"> ,</span>
-                            </span>
-                            <br>
-                            <span class=" hide_print" placement="bottom">
-                                <i
-                                    class="fas fa-mobile-alt text-danger"></i>&nbsp;&nbsp;<strong>{{complete.users.phone}}</strong>
-                            </span>
-                        </td>
-                        <td>
-                            <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
-                        </td>
-                    </tr>
-                    <tr *ngIf="completedata?.data?.data?.length != 0">
-                        <td colspan="3" class="text-right"> <strong>Total Payment</strong></td>
-                        <td>
-                            <strong placement="top"
-                                ngbTooltip="Sum of Total Payment">{{completedata?.owner_fare}}</strong>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr>
-                                <td colspan="10" class="no-data-available bold">No Record Found!</td>
-                            </tr>
+                    <tbody *ngIf="completedata?.length != 0" class="p-0">
+                        <tr *ngFor="let complete of completedata?.data.data; let i = index">
+                            <td style="min-width: 15px;">{{ i+1 }}</td>
+                            <td>
+                                <strong>{{complete.pnr}}</strong><br>
+                                <strong>{{ complete.bus.name }} ( {{ complete.bus.bus_number }} ) </strong>
+                                <br>
+                                <strong>DOJ: {{complete.journey_dt | date: 'dd-MMM-yyyy'}} </strong>
+                                <br>
+                                <span *ngFor="let boarding of complete.from_location;">
+                                    {{boarding.name}}
+                                </span> -
+                                <span *ngFor="let dropping of complete.to_location;">
+                                    {{dropping.name}}
+                                </span>
+                            </td>
+                            <td>
+                                <span *ngFor="let seat of complete.booking_detail; let last = last">
+                                    <b style="color:brown;">
+                                        {{ seat.bus_seats.seats.seatText }}
+                                    </b><span *ngIf="!last"> ,</span>
+                                </span>
+                                <br>
+                                <b>{{complete.booking_detail[0].passenger_name | titlecase}}</b> -
+                                <span *ngFor="let passanger of complete.booking_detail; let last = last">
+                                    <b>{{ passanger.passenger_gender }}</b><span *ngIf="!last"> ,</span>
+                                </span>
+                                <br>
+                                <span class=" hide_print" placement="bottom">
+                                    <i
+                                        class="fas fa-mobile-alt text-danger"></i>&nbsp;&nbsp;<strong>{{complete.users.phone}}</strong>
+                                </span>
+                            </td>
+                            <td>
+                                <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
+                            </td>
+                        </tr>
+                        <tr *ngIf="completedata?.data?.data?.length != 0">
+                            <td colspan="3" class="text-right"> <strong>Total Payment</strong></td>
+                            <td>
+                                <strong placement="top"
+                                    ngbTooltip="Sum of Total Payment">{{completedata?.owner_fare}}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="completedata?.data?.data?.length == 0">
+                        <tr>
+                            <td colspan="10" class="no-data-available bold">No Record Found!</td>
+                        </tr>
+                    <tbody>
+                </table>
+            </div>
+            <!-- MOBILE TICKET CARD VIEW -->
+            <div class="mobile-view" *ngIf="completedata?.data?.data?.length != 0">
+                <div class="ticket-card" *ngFor="let complete of completedata?.data.data; let i = index">
 
-                    <div class="ticket-card">
-
-                        <!-- LEFT YELLOW -->
-                        <div class="ticket-left">
-                            #1
-                        </div>
-
-                        <!-- CENTER CONTENT -->
-                        <div class="ticket-center">
-                            <h3>GALAXY</h3>
-                            <h3>OD M34Z 7806</h3>
-
-                            <p>Sk Sirazul Amin</p>
-                            <p class="age">Male, Age - 35</p>
-                            <p>Mob : +91 0123456789</p>
-
-                            <p class="route">Bhubaneswar to Rourkela</p>
-                        </div>
-
-                        <!-- RIGHT BLUE -->
-                        <div class="ticket-right">
-                            <div class="r-top">
-                                <p>DOJ : 17-Jan-2026</p>
-                                <p>DEPT : 20:37 PM</p>
-                            </div>
-
-                            <div class="r-mid">
-                                <p>Seat : SL 1, Seat 4,SL 1, Seat 4,SL 1, Seat 4,SL 1, Seat 4</p>
-                            </div>
-
-                            <div class="r-bottom">
-                                <p>Price : Rs 630/-</p>
-                            </div>
-                        </div>
-
+                    <!-- LEFT YELLOW -->
+                    <div class="ticket-left">
+                        #{{ i+1 }}
                     </div>
 
-                <tbody>
-            </table>
+                    <!-- CENTER CONTENT -->
+                    <!-- {{ complete.bus.name }} ( {{ complete.bus.bus_number }} ) -->
+                    <div class="ticket-center">
+                        <h3>{{ complete.bus.name }}</h3>
+                        <h3>{{ complete.bus.bus_number }}</h3>
+
+                        <p>{{complete.booking_detail[0].passenger_name | titlecase}}</p>
+                        <p class="age"><span *ngFor="let passanger of complete.booking_detail; let last = last">
+                                <b>{{ passanger.passenger_gender }}</b><span *ngIf="!last"> ,</span>
+                            </span>, Age - {{complete.booking_detail[0].passenger_age}}</p>
+                        <p>Mob : {{complete.users.phone}}</p>
+
+
+                        <p class="route"><span *ngFor="let boarding of complete.from_location;">
+                                {{boarding.name}}
+                            </span> to <span *ngFor="let dropping of complete.to_location;">
+                                {{dropping.name}}
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- RIGHT BLUE -->
+                    <div class="ticket-right">
+                        <div class="r-top">
+                            <p>DOJ : {{complete.journey_dt | date: 'dd-MMM-yyyy'}}</p>
+                            <p>DEPT : {{ complete.booking_detail[0].bus_seats.ticket_price.dep_time | date:'hh:mm a' }}
+                            </p>
+                        </div>
+
+                        <div class="r-mid">
+                            <p>Seat : <span *ngFor="let seat of complete.booking_detail; let last = last">
+                                    <b style="color:white;">
+                                        {{ seat.bus_seats.seats.seatText }}
+                                    </b><span *ngIf="!last"> ,</span>
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="r-bottom">
+                            <p>Price : Rs {{complete?.owner_fare}}/-</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
 
