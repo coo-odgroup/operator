@@ -214,7 +214,6 @@ thead {
   .ticket-card {
     height: 120px;
     margin: 0 !important;
-<<<<<<< HEAD
 }
 .ticket-center h3{
     margin: 5px 0 4px;
@@ -246,75 +245,10 @@ thead {
 
 @media screen 
 and (min-width: 768px) {
-=======
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 374px) {
-  .ticket-center h3 {
-    margin: 5px 0 4px;
-    font-size: 12px;
-    ;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 374px) {
-  .ticket-center p {
-    margin: 5px 0 4px;
-    font-size: 10px;
-  }
-}
-
-
-@media screen and (min-width: 320px) and (max-width: 374px) {
-  .ticket-right {
-    width: 80px;
-    padding: 1px 0;
-    height: 120px;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 374px) {
-  .ticket-right div {
-    padding: 1px;
-    margin: 0;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 374px) {
-  .ticket-right p {
-    margin: 2px 0;
-    font-size: 7px;
-    padding: 1px 0;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 374px) {
-  .r-bottom {
-    margin-top: -10px;
-  }
-}
-
-@media screen and (min-width: 768px) {
->>>>>>> d48ea6cd6c2a9d87c8bbfc2776c8787ba51949be
   .ticket-card {
     display: none;
   }
 }
-<<<<<<< HEAD
-}
-
-
-@media screen 
-and (min-width: 320px) 
-and (max-width: 375px) {
-  .mob_view{
-    padding: 0px !important;
-    margin-left: -13px !important;
-}
-}
-
-=======
 
 
 /* Default: Desktop */
@@ -336,4 +270,40 @@ and (max-width: 375px) {
     display: block;
   }
 }
->>>>>>> d48ea6cd6c2a9d87c8bbfc2776c8787ba51949be
+
+@media screen 
+and (min-width: 320px) 
+and (max-width: 375px) {
+  .mob_view{
+    padding: 0px !important;
+    margin-left: -13px !important;
+}
+}
+
+.total_seats h5 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .total_seats {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .btn {
+        width: auto;
+        float: right;
+    }
+}
+
+.costum_button i{
+    color: black !important;
+}
+
+.costum_button{
+    color: black !important;
+    border: none !important;
+    border-radius: 3px !important;
+}
