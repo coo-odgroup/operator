@@ -120,7 +120,7 @@
                 <span *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.from_location[0].name}}</span> >> 
                 <span *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.to_location[0].name}}</span> 
               </td>
-              <td>{{ busSchedule.updated_at| date: 'dd/MM/yyyy' }}</td>
+              <td>{{ busSchedule.updated_at | date: 'dd-MM-yyyy' }}</td>
               <!-- <td>{{ busSchedule.created_by }}</td>
               <td>
                 <label *ngIf="busSchedule.status==1" class="badge badge-light-primary pointer text-dark"
@@ -286,7 +286,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <label *ngFor="let entryDate of busScheduleRecord.bus_schedule_date;" class="col-2">
-                        {{entryDate.entry_date}}
+                        {{entryDate.entry_date | date: 'dd - MMM'}}
                       </label>
                     </div>
                   </div>
@@ -339,7 +339,7 @@
                         </td>
                         <td>{{unSchedule.name}}<br>{{unSchedule.bus_number}}</td>
                         <td>{{unSchedule.via}}</td>
-                        <td>{{unSchedule.updated_at | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{unSchedule.updated_at | date: 'dd-MM-yyyy'}}</td>
                         <td>{{unSchedule.created_by}}</td>
 
                         <!-- <td>{{i+1}}</td> -->
@@ -384,7 +384,7 @@
         <div class="row">
           <div class="col-sm-12" *ngIf="showdates==1">
             <label *ngFor="let entryDate of busScheduleRecord.bus_schedule_date;" class="col-2">
-              {{entryDate.entry_date}}
+              {{entryDate.entry_date | date: 'dd - MMM'}}
             </label>
           </div>
         </div>
