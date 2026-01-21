@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("ROLE_ID",JSON.stringify(this.loginRecord.role_id)); 
           localStorage.setItem("USERNAME",this.loginRecord.name); 
           localStorage.setItem("OPERATOR_ID",this.loginRecord.bus_operator_id); 
-          this.router.navigate(['bookingmanagement/seatblock']);
+          this.router.navigate(['dashboard']);
         }else{
           this.notify.notify(res.message,"Error");
         }    

@@ -33,7 +33,7 @@ const OperatorItems =[{
   children: [
     {
       id: 'dashboard',
-      title: 'Dashboards',
+      title: 'Dashboard',
     
       type: 'item',
       icon: 'feather icon-home',

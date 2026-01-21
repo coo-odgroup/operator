@@ -70,6 +70,11 @@ export class AdminComponent implements OnInit {
     return this.router.url.includes(path);
   }
 
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['login']);
+  }
+
 }
 
 

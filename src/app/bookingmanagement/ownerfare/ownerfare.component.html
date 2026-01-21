@@ -88,7 +88,7 @@
       <div class="no-bdr text-right mt-3" *ngIf="ownerFares?.length != 0">
         <div class="card-header-right">
           <div class="btn-group card-option small-btn">
-            <button type="button" title="Export" class="btn btn-warning sml_input mr-1"><i
+            <button type="button" title="Export" class="btn btn-warning sml_input mr-1" (click)="exportexcel()"><i
                 class="fas fa-file-export"></i> Export</button>
             <!-- <button type="button" title="Excel" class="btn btn-primary sml_input mr-1"><i class="fas fa-folder"></i>
               Excel</button>

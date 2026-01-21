@@ -76,32 +76,31 @@
     </button>
 
 
-    
-   <div class="row align-items-center mt-2"
-     *ngIf="completedata?.data?.data?.length != 0">
 
-    <!-- LEFT SIDE -->
-    <div class="col-12 col-md-6">
-        <div class="d-flex flex-column flex-md-row align-items-md-center">
-            <h5 class="mb-1 mb-md-0 me-md-3">
-                Total Seat:
-                <span class="text-primary">{{ completedata?.count || 0 }},</span>
-            </h5>
-            <h5 class="mb-0 ms-md-3">
-                Total Sleeper:
-                <span class="text-primary">{{ completedata?.count || 0 }}</span>
-            </h5>
+    <div class="row align-items-center mt-2" *ngIf="completedata?.data?.data?.length != 0">
+
+        <!-- LEFT SIDE -->
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-column flex-md-row align-items-md-center">
+                <h5 class="mb-1 mb-md-0 me-md-3">
+                    Total Seat Booking:
+                    <span class="text-primary">{{ completedata?.totalSeats || 0 }},</span>
+                </h5>
+                <!-- <h5 class="mb-0 ms-md-3">
+                    Total Sleeper:
+                    <span class="text-primary">{{ completedata?.totalSleepers || 0 }}</span>
+                </h5> -->
+            </div>
         </div>
-    </div>
 
-    <!-- RIGHT SIDE -->
-    <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-start mt-2 mt-md-0">
-        <button type="button" class="btn btn-warning sml_input costum_button">
-            <i class="fas fa-file-export"></i> Export
-        </button>
-    </div>
+        <!-- RIGHT SIDE -->
+        <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-start mt-2 mt-md-0">
+            <button type="button" class="btn btn-warning sml_input costum_button" (click)="exportexcel()">
+                <i class="fas fa-file-export"></i> Export
+            </button>
+        </div>
 
-</div>
+    </div>
 
 
 
