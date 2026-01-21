@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <app-card [hidHeader]="false" cardTitle="BUS SCHEDULE" cardClass="card-datatable" [options]="false"
+    <app-card [hidHeader]="false" cardTitle="Bus Schedule" cardClass="card-datatable" [options]="false"
       cardClass=" table-border-style user-profile-list " [isCardFooter]="true">
 
       <section *ngIf="showSection" class="my-section">
@@ -105,7 +105,7 @@
               <th style="width: 180px;">Created On</th>
               <!-- <th>Created By</th>
               <th>Status</th> -->
-              <th width="100" class="hide_print">&nbsp;</th>
+              <th width="100" class="hide_print">Action</th>
             </tr>
           </thead>
           <tbody *ngIf="busSchedules?.length != 0">
@@ -129,7 +129,7 @@
               <td (click)="showEntryDates($event,i)">{{ busSchedule.bus.bus_number }}<br>
                 <span
                   *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.from_location[0].name}}</span>
-                >>
+                -
                 <span
                   *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.to_location[0].name}}</span>
               </td>
@@ -141,7 +141,7 @@
                 <label *ngIf="busSchedule.status==0" class="badge badge-light-danger pointer  text-dark"
                   (click)="changeStatus($event, busSchedule.id);">Pending</label>
               </td> -->
-              <td class="hide_print flex">
+              <td class="hide_print">
 
                 <span type="button " (click)="showEntryDates($event,i);editBusSchedule($event, i); OpenModal(content);"
                   class=" p-2 ">
@@ -149,7 +149,7 @@
                 </span>
 
                 <span type="button btn btn-danger" (click)="deleteBusSchdule(confirmDialog,busSchedule.id)"
-                  class=" p-2  float-right">
+                  class=" p-2">
                   <i class="fa fa-trash " aria-hidden="true"></i>
                 </span>
 

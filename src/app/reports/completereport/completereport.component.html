@@ -3,7 +3,7 @@
 </ngx-spinner>
 
 
-<app-card cardTitle="Complete Report" cardClass="card-datatable" [options]="false" [isCardFooter]="false">
+<app-card cardTitle="Booking Report" cardClass="card-datatable" [options]="false" [isCardFooter]="false">
 
 
     <section *ngIf="showSection" class="my-section">
@@ -116,6 +116,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Ticket Details</th>
+                            <th scope="col">Booking Route</th>
                             <th scope="col">Seat No</th>
                             <th scope="col">Seat Fare</th>
 
@@ -127,10 +128,18 @@
                             <td style="min-width: 15px;">{{ i+1 }}</td>
                             <td>
                                 <strong>{{complete.pnr}}</strong><br>
-                                <strong>{{ complete.bus.name }} ( {{ complete.bus.bus_number }} ) </strong>
+                                <strong>{{ complete.bus.name }} {{ complete.bus.bus_number }}  </strong>
                                 <br>
                                 <strong>DOJ: {{complete.journey_dt | date: 'dd-MMM-yyyy'}} </strong>
-                                <br>
+                                <!-- <br>
+                                <span *ngFor="let boarding of complete.from_location;">
+                                    {{boarding.name}}
+                                </span> -
+                                <span *ngFor="let dropping of complete.to_location;">
+                                    {{dropping.name}}
+                                </span> -->
+                            </td>
+                            <td class="align-middle">
                                 <span *ngFor="let boarding of complete.from_location;">
                                     {{boarding.name}}
                                 </span> -
@@ -155,7 +164,7 @@
                                         class="fas fa-mobile-alt text-danger"></i>&nbsp;&nbsp;<strong>{{complete.users.phone}}</strong>
                                 </span>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
                             </td>
                         </tr>
@@ -227,6 +236,13 @@
                     </div>
 
                 </div>
+            </div>
+            <div class="mobile-view">
+                <tbody *ngIf="completedata?.data?.data?.length == 0">
+                    <tr>
+                        <td colspan="10" class="no-data-available bold">No Record Found!</td>
+                    </tr>
+                <tbody>
             </div>
 
         </div>
