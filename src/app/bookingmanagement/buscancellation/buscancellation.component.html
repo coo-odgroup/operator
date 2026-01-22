@@ -74,7 +74,7 @@ margin-bottom: 5px !important;
         </section>
 
         <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1" (click)="ResetAttributes();OpenModal(content)">Cancel Bus</button>
-        <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
+        <button class="serch-btn" (click)="toggleSection()"><i [ngClass]="showSection ? 'fas fa-times' : 'fas fa-filter'"></i> &nbsp; {{ showSection ? 'Close' : 'Search' }}</button>
 
 
         <div class="no-bdr text-right mt-3" *ngIf="busCancellations?.length != 0">
