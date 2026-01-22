@@ -75,7 +75,7 @@
                 <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i
                     class="fas fa-search"> </i> Search </button>
                 <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i
-                    class="fas fa-sync-alt"> </i> Refresh </button>
+                    class="fas fa-sync-alt"> </i> Reset </button>
               </div>
             </div>
 
@@ -233,7 +233,7 @@
           Add
         </button>
         <ng-template #content let-modal>
-          <div class="modal-header" style="background-color: #1b2155;">
+          <div class="modal-header">
             <h5 class="ng-tns-c116-5 text-white">{{ ModalHeading }}</h5>
             <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
@@ -640,8 +640,8 @@
         <ng-template #editSeat let-modal>
           <div class="modal-header">
 
-            <h5 class="ng-tns-c116-5">{{ ModalHeading }}</h5>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <h5 class="ng-tns-c116-5 text-white">{{ ModalHeading }}</h5>
+            <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

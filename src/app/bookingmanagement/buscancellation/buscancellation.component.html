@@ -65,7 +65,7 @@ margin-bottom: 5px !important;
               <div class="col-8 col-sm-6 col-md-6 col-lg-2 col-xl-2 mob_view" style="text-align: right;">
                 <div class="form-group">
                   <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
-                  <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i class="fas fa-sync-alt"> </i> Refresh </button>
+                  <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i class="fas fa-sync-alt"> </i> Reset </button>
                 </div>
               </div>
 
@@ -203,9 +203,9 @@ margin-bottom: 5px !important;
     <button type="button" #addnew class="btn btn-primary btn-add-task m-t-10 invisible" id="modal"
       (click)="ResetAttributes();OpenModal(content);">Add </button>
     <ng-template #content let-modal>
-      <div class="modal-header bg-primary">
-        <h5 class="ng-tns-c116-5"> {{ModalHeading}}</h5>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
+      <div class="modal-header">
+        <h5 class="ng-tns-c116-5 text-white"> {{ModalHeading}}</h5>
+        <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
             aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body" style="height: 500px;">
