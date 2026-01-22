@@ -278,6 +278,13 @@ and (max-width: 375px) {
     padding: 0px !important;
     margin-left: -13px !important;
 }
+.search-btn {
+    order: 1;
+  }
+
+  .reset-btn {
+    order: 2;
+  }
 }
 
 .total_seats h5 {
@@ -306,4 +313,9 @@ and (max-width: 375px) {
     color: black !important;
     border: none !important;
     border-radius: 3px !important;
+}
+
+.mob_view {
+  display: flex;
+  justify-content: flex-end;
 }
