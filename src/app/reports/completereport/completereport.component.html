@@ -165,7 +165,7 @@
                                 </span>
                             </td>
                             <td class="align-middle">
-                                <b>{{complete.owner_fare + complete.additional_owner_fare}}</b>
+                                <b>{{complete.owner_fare + complete.additional_owner_fare | number:'1.2-2'}}</b>
                             </td>
                         </tr>
                         <tr *ngIf="completedata?.data?.data?.length != 0">
