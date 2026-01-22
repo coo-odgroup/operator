@@ -4,85 +4,95 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <app-card [hidHeader]="false" cardTitle="BUS SCHEDULE" cardClass="card-datatable" [options]="false" cardClass=" table-border-style user-profile-list " [isCardFooter]="true">
+    <app-card [hidHeader]="false" cardTitle="Bus Schedule" cardClass="card-datatable" [options]="false"
+      cardClass=" table-border-style user-profile-list " [isCardFooter]="true">
 
-        <section *ngIf="showSection" class="my-section">
-          <form [formGroup]="searchForm">
-            <div class="row">
+      <section *ngIf="showSection" class="my-section">
+        <form [formGroup]="searchForm">
+          <div class="row">
 
-              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
-                <div class="form-group">
-                   <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
-                    <option value=10>10</option>
-                    <option value=25>25</option>
-                    <option value=50>50</option>
-                    <option value=100>100</option>
-                    <option value='all'>All</option>
-                  </select>
-                </div>
+            <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
+              <div class="form-group">
+                <select class="form-control sml_input" formControlName="rows_number" (change)=search()>
+                  <option value=10>10</option>
+                  <option value=25>25</option>
+                  <option value=50>50</option>
+                  <option value=100>100</option>
+                  <option value='all'>All</option>
+                </select>
               </div>
-
-              <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
-                <div class="form-group">
-                   <input type="date" class="form-control sml_input" formControlName="date" placeholder="Choose A Date">
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3">
-                <div class="form-group">
-                   <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus" formControlName="bus_id" [clearable]="false" required> </ng-select>
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3 kis-center">
-                <div class="form-group">
-                  <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i class="fas fa-search"> </i> Search </button>
-                  <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i class="fas fa-sync-alt"> </i> Refresh </button>
-                </div>
-              </div>
-
-
             </div>
-          </form>
-        </section>  
 
-      <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1" (click)="ResetAttributes();OpenModal(content)">Add Schedule</button>
+            <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
+              <div class="form-group">
+                <input type="date" class="form-control sml_input" formControlName="date" placeholder="Choose A Date">
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3">
+              <div class="form-group">
+                <ng-select [items]="buses" bindLabel="testing" bindValue="id" placeholder="Select Bus"
+                  formControlName="bus_id" [clearable]="false" required> </ng-select>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6  col-lg-3 col-xl-3 kis-center">
+              <div class="form-group">
+                <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i
+                    class="fas fa-search"> </i> Search </button>
+                <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i
+                    class="fas fa-sync-alt"> </i> Reset </button>
+              </div>
+            </div>
+
+
+          </div>
+        </form>
+      </section>
+
+      <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1"
+        (click)="ResetAttributes();OpenModal(content)">Add Schedule</button>
       <button class="serch-btn" (click)="toggleSection()"><i class="fas fa-filter "></i> &nbsp; Search</button>
 
-        <div class="no-bdr text-right mt-3" *ngIf="busSchedules?.length != 0">
-          <div class="card-header-right" >
-              <div class="btn-group card-option small-btn">
-                  <button  type="button" title="Export" class="btn btn-warning sml_input mobile-btn mr-1"><i  class="fas fa-file-export"></i> Export</button>
-                  <!-- <button  type="button" title="Excel" class="btn btn-primary sml_input mobile-btn mr-1"><i  class="fas fa-folder"></i> Excel</button>
+      <div class="no-bdr text-right mt-3" *ngIf="busSchedules?.length != 0">
+        <div class="card-header-right">
+          <div class="btn-group card-option small-btn">
+            <button type="button" title="Export" class="btn btn-warning sml_input mobile-btn mr-1"
+              (click)="exportexcel()"><i class="fas fa-file-export"></i> Export</button>
+            <!-- <button  type="button" title="Excel" class="btn btn-primary sml_input mobile-btn mr-1"><i  class="fas fa-folder"></i> Excel</button>
                   <button  type="button" title="PDF" class="btn btn-info sml_input mobile-btn mr-1"><i  class="fas fa-file"></i> PDF</button>
                   <button  type="button" title="Print" class="btn btn-danger sml_input mobile-btn"><i  class="fas fa-print"></i> Print</button> -->
-              </div>
           </div>
         </div>
-       
+      </div>
+
       <style>
         table {
-               font-size: 12px !important;;
-           }
+          font-size: 12px !important;
+          ;
+        }
 
-       @media only screen and (max-width: 600px) {
-           table {
-               font-size: 11px !important;
-               font-weight: bold;
-               
-           }
-           th{
-               padding: 1px !important;
-           }
-           td{
-               padding: 1px !important;
-           }
-           .mob{
+        @media only screen and (max-width: 600px) {
+          table {
+            font-size: 11px !important;
+            font-weight: bold;
+
+          }
+
+          th {
+            padding: 1px !important;
+          }
+
+          td {
+            padding: 1px !important;
+          }
+
+          .mob {
             text-align: center !important;
-           }
-          
-}
-   </style>
+          }
+
+        }
+      </style>
       <div class="table-responsive" id="print-section">
         <table class="table table-striped">
           <thead *ngIf="busSchedules?.length != 0">
@@ -95,7 +105,7 @@
               <th style="width: 180px;">Created On</th>
               <!-- <th>Created By</th>
               <th>Status</th> -->
-              <th width="100" class="hide_print">&nbsp;</th>
+              <th width="100" class="hide_print">Action</th>
             </tr>
           </thead>
           <tbody *ngIf="busSchedules?.length != 0">
@@ -117,8 +127,11 @@
                 ----no data-----
               </td>
               <td (click)="showEntryDates($event,i)">{{ busSchedule.bus.bus_number }}<br>
-                <span *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.from_location[0].name}}</span> >> 
-                <span *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.to_location[0].name}}</span> 
+                <span
+                  *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.from_location[0].name}}</span>
+                -
+                <span
+                  *ngIf="busSchedule.from_location!='' && busSchedule.from_location!=null">{{busSchedule.to_location[0].name}}</span>
               </td>
               <td>{{ busSchedule.updated_at | date: 'dd-MM-yyyy' }}</td>
               <!-- <td>{{ busSchedule.created_by }}</td>
@@ -128,17 +141,18 @@
                 <label *ngIf="busSchedule.status==0" class="badge badge-light-danger pointer  text-dark"
                   (click)="changeStatus($event, busSchedule.id);">Pending</label>
               </td> -->
-              <td class="hide_print flex">
-                    
-                          <span type="button "   (click)="showEntryDates($event,i);editBusSchedule($event, i); OpenModal(content);"  class=" p-2 "> 
-                            <i class="fa fa-edit " aria-hidden="true"></i>
-                        </span>
+              <td class="hide_print">
 
-                          <span type="button btn btn-danger" (click)="deleteBusSchdule(confirmDialog,busSchedule.id)"
-                          class=" p-2  float-right"> 
-                            <i class="fa fa-trash " aria-hidden="true"></i>
-                        </span>
-                       
+                <span type="button " (click)="showEntryDates($event,i);editBusSchedule($event, i); OpenModal(content);"
+                  class=" p-2 ">
+                  <i class="fa fa-edit " aria-hidden="true"></i>
+                </span>
+
+                <span type="button btn btn-danger" (click)="deleteBusSchdule(confirmDialog,busSchedule.id)"
+                  class=" p-2">
+                  <i class="fa fa-trash " aria-hidden="true"></i>
+                </span>
+
               </td>
             </tr>
           </tbody>
@@ -217,9 +231,9 @@
       (click)="ResetAttributes();findOperator();OpenModal(content);">Add</button>
 
     <ng-template #content let-modal>
-      <div class="modal-header bg-primary">
-        <h5 class="ng-tns-c116-5"> {{ModalHeading}} </h5>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
+      <div class="modal-header">
+        <h5 class="ng-tns-c116-5 text-white"> {{ModalHeading}} </h5>
+        <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
             aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body" style="height: 500px;">
@@ -245,8 +259,8 @@
                         </div>
                       </div>
                     </div>
-                   
-                    
+
+
                   </div>
                   <div class="row">
                     <div class="col-md-6">
@@ -264,7 +278,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                       <div class="form-group row" style="height:150px;">
                         <label for="busSchedule" class="col-sm-3 col-form-label">Running Cycle<span

@@ -3,7 +3,7 @@
 </ngx-spinner>
 <div class="row">
   <div class="col-sm-12">
-    <app-card [hidHeader]="false" cardTitle="FARE Increase/Decrease" cardClass="card-datatable" [options]="false"
+    <app-card [hidHeader]="false" cardTitle="Fare Increase/Decrease" cardClass="card-datatable" [options]="false"
       cardClass=" table-border-style user-profile-list ">
 
       <section *ngIf="showSection" class="my-section">
@@ -52,7 +52,7 @@
                 <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i
                     class="fas fa-search"> </i> Search </button>
                 <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i
-                    class="fas fa-sync-alt"> </i> Refresh </button>
+                    class="fas fa-sync-alt"> </i> Reset </button>
               </div>
             </div>
 
@@ -88,7 +88,7 @@
       <div class="no-bdr text-right mt-3" *ngIf="ownerFares?.length != 0">
         <div class="card-header-right">
           <div class="btn-group card-option small-btn">
-            <button type="button" title="Export" class="btn btn-warning sml_input mr-1"><i
+            <button type="button" title="Export" class="btn btn-warning sml_input mr-1" (click)="exportexcel()"><i
                 class="fas fa-file-export"></i> Export</button>
             <!-- <button type="button" title="Excel" class="btn btn-primary sml_input mr-1"><i class="fas fa-folder"></i>
               Excel</button>
@@ -317,9 +317,9 @@
         <button type="button" #addnew class="btn btn-primary btn-add-task m-t-10 invisible" id="modal"
           (click)="ResetAttributes();loadServices();OpenModal(content);">Add </button>
         <ng-template #content let-modal>
-          <div class="modal-header bg-primary">
-            <h5 class="ng-tns-c116-5"> {{ModalHeading}}</h5>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
+          <div class="modal-header">
+            <h5 class="ng-tns-c116-5 text-white"> {{ModalHeading}}</h5>
+            <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
                 aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
@@ -508,8 +508,8 @@
 
         <ng-template #editcontent let-modal>
           <div class="modal-header">
-            <h5 class="ng-tns-c116-5"> {{ModalHeading}}</h5>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
+            <h5 class="ng-tns-c116-5 text-white"> {{ModalHeading}}</h5>
+            <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')"><span
                 aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">

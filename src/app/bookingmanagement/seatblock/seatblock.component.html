@@ -75,7 +75,7 @@
                 <button type="button" class="btn btn-success btn-sm sml_input" (click)="search()" title="search"> <i
                     class="fas fa-search"> </i> Search </button>
                 <button type="button" class="btn btn-warning btn-sm sml_input" (click)="refresh()" title="refresh"> <i
-                    class="fas fa-sync-alt"> </i> Refresh </button>
+                    class="fas fa-sync-alt"> </i> Reset </button>
               </div>
             </div>
 
@@ -109,6 +109,7 @@
               <th>#</th>
               <th>Bus</th>
               <th>Block Details (Date & Seats)</th>
+              <th>Created by/ Reason</th>
 
             </tr>
           </thead>
@@ -116,13 +117,14 @@
             <tr *ngFor="let sblock of seatBlock; let i = index">
               <td style="min-width: 15px !important;">{{i+1}}</td>
               <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number
-                }}<br>{{sblock[0][0].value[0].bus_source[0]?.name}} >>
-                {{sblock[0][0].value[0].bus_destination[0]?.name}}</td>
+                }}<br>{{sblock[0][0].value[0].bus_source}} -
+                {{sblock[0][0].value[0].bus_destination}}
+              </td>
               <td>
                 <table>
                   <tr *ngFor="let opendate of sblock;let dateIndex= index ">
                     <td>
-                      {{opendate[0].value[0].operation_date | date: 'dd/MM'}}
+                      {{opendate[0].value[0].operation_date | date: 'dd MMM'}}
                     </td>
 
                     <td style="padding-left: 10px !important">
@@ -150,6 +152,10 @@
                     </td>
                   </tr>
                 </table>
+              </td>
+              <td>
+                {{sblock[0][0].value[0].created_by}} <br>
+                {{sblock[0][0].value[0].reason}}
               </td>
             </tr>
           </tbody>
@@ -227,15 +233,14 @@
           Add
         </button>
         <ng-template #content let-modal>
-          <div class="modal-header bg-primary">
-            <h5 class="ng-tns-c116-5">{{ ModalHeading }}</h5>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <div class="modal-header">
+            <h5 class="ng-tns-c116-5 text-white">{{ ModalHeading }}</h5>
+            <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
 
-          <div class="modal-body box_height"
-     [class.auto-height]="seatBlockForm.controls.bus_id?.value">
+          <div class="modal-body box_height" [class.auto-height]="seatBlockForm.controls.bus_id?.value">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">
@@ -395,44 +400,44 @@
                         </div> -->
                       </div>
 
-                         <style>
-                          .table1.table1-bordered>thead>tr>th {
-                            border: 3px solid rgb(223, 11, 11);
-                            color: brown;
-                          }
+                      <style>
+                        .table1.table1-bordered>thead>tr>th {
+                          border: 3px solid rgb(223, 11, 11);
+                          color: brown;
+                        }
 
-                          .table1.table1-bordered>tbody>tr>td {
-                            border: 3px solid rgb(223, 11, 11);
-                          }
-                        </style>
-                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                          <div class="row">
-                            <div class="col-md-12">
-                              <h6 *ngIf="alreadyBlocksData.length > 0">Already Block Seats</h6>
-                              <table class="table table1 table1-bordered" *ngIf="alreadyBlocksData.length > 0">
-                                <thead>
-                                  <tr>
-                                    <th> Date</th>
-                                    <th> Block Seats</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor="let aldBlock of alreadyBlocksData">
-                                    <td>
-                                      {{aldBlock.value[0].operation_date}}
-                                    </td>
-                                    <td>
-                                      <span *ngFor="let seat of aldBlock.value">
-                                        <!-- {{seat.seats.seatText}} , -->
-                                        <b>{{seat.seats.seatText}}</b> ,
-                                      </span>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
+                        .table1.table1-bordered>tbody>tr>td {
+                          border: 3px solid rgb(223, 11, 11);
+                        }
+                      </style>
+                      <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <h6 *ngIf="alreadyBlocksData.length > 0">Already Block Seats</h6>
+                            <table class="table table1 table1-bordered" *ngIf="alreadyBlocksData.length > 0">
+                              <thead>
+                                <tr>
+                                  <th> Date</th>
+                                  <th> Block Seats</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let aldBlock of alreadyBlocksData">
+                                  <td>
+                                    {{aldBlock.value[0].operation_date}}
+                                  </td>
+                                  <td>
+                                    <span *ngFor="let seat of aldBlock.value">
+                                      <!-- {{seat.seats.seatText}} , -->
+                                      <b>{{seat.seats.seatText}}</b> ,
+                                    </span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
                         </div>
+                      </div>
 
                       <div class="row" *ngIf="this.seatLengthData > 0">
 
@@ -445,7 +450,8 @@
                           </div>
 
                           <div formArrayName="bus_seat_layout_data" class="col-12 bus-transform">
-                            <div class="steering {{dnone}}"><img src="assets\images\user\steering.png" alt="" srcset=""></div>
+                            <div class="steering {{dnone}}"><img src="assets\images\user\steering.png" alt="" srcset="">
+                            </div>
 
                             <div class="row" *ngFor=" let layoutRow of seatBlockForm.controls .bus_seat_layout_data.controls;
                                 let layout_row = index
@@ -634,8 +640,8 @@
         <ng-template #editSeat let-modal>
           <div class="modal-header">
 
-            <h5 class="ng-tns-c116-5">{{ ModalHeading }}</h5>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <h5 class="ng-tns-c116-5 text-white">{{ ModalHeading }}</h5>
+            <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
