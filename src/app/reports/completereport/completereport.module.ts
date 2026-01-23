@@ -10,6 +10,11 @@ import {CompleteReportRoutingModule} from './completereport-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgxPrintModule} from 'ngx-print';
 
+
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +23,10 @@ import {NgxPrintModule} from 'ngx-print';
     FormsModule,
     NgSelectModule,
     NgbModule,
-    NgxPrintModule,NgxSpinnerModule
+    NgxPrintModule,NgxSpinnerModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [ CompletereportComponent],

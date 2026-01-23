@@ -55,9 +55,15 @@
             </div>
 
             <div class="col-6 col-sm-6 col-md-6  col-lg-3 col-xl-3">
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <input type="date" class="form-control sml_input" formControlName="date" placeholder="Choose A Date">
-              </div>
+              </div> -->
+              <mat-form-field appearance="outline" class="w-100">
+                <input matInput [matDatepicker]="startPicker" placeholder="Start Date" formControlName="date"
+                  readonly />
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+              </mat-form-field>
             </div>
 
             <div class="col-12 col-sm-6 col-md-6  col-lg-4 col-xl-4">
@@ -221,8 +227,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body box_height"
-     [class.auto-height]="seatOpenForm.controls.bus_id?.value">
+          <div class="modal-body box_height" [class.auto-height]="seatOpenForm.controls.bus_id?.value">
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-material">
@@ -299,20 +304,23 @@
                         </div> -->
                       </div>
 
-                        <div class="col-12" *ngIf="
+                      <div class="col-12" *ngIf="
                         seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.lowerBerth.length > 0 ||
                         seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.length > 0">
 
-                         <div>
+                        <div>
 
                           <!-- TABS -->
                           <div class="tabs col-form-label text-center">
-                            <button class="col-6" (click)="switchTab('tab1')" [class.active]="activeTab==='tab1'">Seater</button>
-                            <button class="col-6" (click)="switchTab('tab2')" [class.active]="activeTab==='tab2'">Sleeper</button>
+                            <button class="col-6" (click)="switchTab('tab1')"
+                              [class.active]="activeTab==='tab1'">Seater</button>
+                            <button class="col-6" (click)="switchTab('tab2')"
+                              [class.active]="activeTab==='tab2'">Sleeper</button>
                           </div>
 
                           <div formArrayName="bus_seat_layout_data" class="bus-transform">
-                          <div class="steering {{dnone}}"><img src="assets\images\user\steering.png" alt="" srcset=""></div>
+                            <div class="steering {{dnone}}"><img src="assets\images\user\steering.png" alt="" srcset="">
+                            </div>
 
                             <div *ngFor="let row of seatOpenForm.controls.bus_seat_layout_data.controls; let i=index"
                               [formGroupName]="i">

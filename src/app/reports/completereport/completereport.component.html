@@ -10,17 +10,23 @@
         <form [formGroup]="searchFrom">
             <div class="row ">
                 <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
-                    <div class="form-group">
-                        <input type="date" class="form-control sml_input" placeholder="Start Date" required
-                            formControlName="rangeFromDate" />
-                    </div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [matDatepicker]="startPicker" placeholder="Start Date"
+                            formControlName="rangeFromDate" readonly />
+                        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startPicker></mat-datepicker>
+                    </mat-form-field>
                 </div>
+
                 <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
-                    <div class="form-group">
-                        <input type="date" class="form-control sml_input" placeholder="End Date" required
-                            formControlName="rangeToDate" />
-                    </div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput [matDatepicker]="endPicker" placeholder="End Date" formControlName="rangeToDate"
+                            readonly />
+                        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endPicker></mat-datepicker>
+                    </mat-form-field>
                 </div>
+
 
                 <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
                     <div class="form-group">
@@ -62,8 +68,8 @@
                     style="text-align: right;">
                     <button type="button" title="search" class="btn btn-success btn-sm sml_input" (click)="search()"><i
                             class="fas fa-search"></i> Search</button>
-                    <button type="button" title="refresh" class="btn btn-warning btn-sm sml_input" (click)="refresh()"><i
-                            class="fas fa-sync-alt"></i> Reset</button>
+                    <button type="button" title="refresh" class="btn btn-warning btn-sm sml_input"
+                        (click)="refresh()"><i class="fas fa-sync-alt"></i> Reset</button>
                 </div>
 
             </div>
@@ -128,7 +134,7 @@
                             <td style="min-width: 15px;">{{ i+1 }}</td>
                             <td>
                                 <strong>{{complete.pnr}}</strong><br>
-                                <strong>{{ complete.bus.name }} {{ complete.bus.bus_number }}  </strong>
+                                <strong>{{ complete.bus.name }} {{ complete.bus.bus_number }} </strong>
                                 <br>
                                 <strong>DOJ: {{complete.journey_dt | date: 'dd-MMM-yyyy'}} </strong>
                                 <!-- <br>
