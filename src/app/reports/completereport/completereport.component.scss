@@ -138,7 +138,7 @@ thead {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 10px;
   font-weight: bold;
 }
 
@@ -151,9 +151,10 @@ thead {
 
 
 .ticket-center h3 {
-  margin: 5px 0 4px;
+  margin: -5px 0 -1px;
   color: #1b2559;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .ticket-center p {
@@ -213,14 +214,14 @@ thead {
 @media screen and (min-width: 320px) and (max-width: 374px) {
   .ticket-card {
     height: 120px;
-    margin: 0 !important;
+    margin-bottom: 3px !important;
 }
 .ticket-center h3{
-    margin: 5px 0 4px;
-   font-size: 12px;;
+    margin: -7px 0 -8px;
+   font-size: 12px;
 }
 .ticket-center p{
-    margin: 5px 0 4px;
+    margin: 5px 0 -6px;
    font-size: 10px;
 }
  .ticket-right{
@@ -233,7 +234,7 @@ thead {
     margin: 0;
 }
 .ticket-right p{
-    margin: 2px 0;
+    margin: -5px 0;
   font-size: 7px;
   padding: 1px 0;
 }
