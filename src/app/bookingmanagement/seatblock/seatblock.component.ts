@@ -329,13 +329,13 @@ export class SeatblockComponent implements OnInit {
       bus_id: this.searchForm.value.bus_id,
       rows_number: this.searchForm.value.rows_number,
       page_no: this.page_no,
-      fromDate: this.searchForm.value.fromDate,
-      toDate: this.searchForm.value.toDate,
+      fromDate: this.formatDate(this.searchForm.value.fromDate),
+      toDate: this.formatDate(this.searchForm.value.toDate),
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       source_id: this.searchForm.value.source_id,
       destination_id: this.searchForm.value.destination_id,
-      USER_BUS_OPERATOR_ID: localStorage.getItem('USER_BUS_OPERATOR_ID'),
+      USER_BUS_OPERATOR_ID: localStorage.getItem('OPERATOR_ID'),
     };
 
     if (pageurl != '') {
@@ -441,6 +441,16 @@ export class SeatblockComponent implements OnInit {
       });
     }
   }
+
+  formatDate(dateValue: string | number | Date) {
+      const date = new Date(dateValue);
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+
+      return `${year}-${month}-${day}`;
+}
 
   activeTab: string = 'tab1';
   dnone: string = '';

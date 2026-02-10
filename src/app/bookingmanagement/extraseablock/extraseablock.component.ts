@@ -234,7 +234,7 @@ switchTab(tab: string) {
       bus_id: this.searchForm.value.bus_id,
       rows_number: this.searchForm.value.rows_number,
       page_no:this.page_no,
-      date:this.searchForm.value.date,
+      date:this.formatDate(this.searchForm.value.date),
       source_id:this.searchForm.value.source_id,
       destination_id:this.searchForm.value.destination_id,
       // bus_operator_id: 157,
@@ -330,6 +330,16 @@ switchTab(tab: string) {
       );
     }
   }
+
+   formatDate(dateValue: string | number | Date) {
+      const date = new Date(dateValue);
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+
+      return `${year}-${month}-${day}`;
+}
 
 
   refresh() {
