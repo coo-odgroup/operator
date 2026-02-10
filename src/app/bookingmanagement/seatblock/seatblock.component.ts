@@ -441,6 +441,7 @@ export class SeatblockComponent implements OnInit {
       });
     }
   }
+  
 
   formatDate(dateValue: string | number | Date) {
       const date = new Date(dateValue);
