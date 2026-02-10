@@ -158,6 +158,7 @@ export class OwnerfareComponent implements OnInit {
       rows_number: Constants.RecordLimit,
       fromDate:[null],
       toDate:[null],
+      bus_id:[null],
       bus_operator_id:[null],
     });
 

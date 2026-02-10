@@ -90,6 +90,7 @@ export class BusscheduleComponent implements OnInit {
       name: [null],  
       rows_number: Constants.RecordLimit,
       bus_id: [null],  
+      entry_date: [null],  
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
     });
