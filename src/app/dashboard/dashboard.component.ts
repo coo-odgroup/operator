@@ -315,6 +315,7 @@ export class DashboardComponent implements OnInit {
             ...(this.opRevenuechart.xAxis as Highcharts.XAxisOptions),
             categories
           },
+          
           series: [{
             name: 'Total Revenue',
             type: 'column',
