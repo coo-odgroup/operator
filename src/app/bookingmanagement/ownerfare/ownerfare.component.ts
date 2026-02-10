@@ -177,8 +177,8 @@ export class OwnerfareComponent implements OnInit {
     const data = {
       name: this.searchForm.value.name,
       rows_number: this.searchForm.value.rows_number,
-      fromDate:this.searchForm.value.fromDate,
-      toDate:this.searchForm.value.toDate,
+      fromDate:this.formatDate(this.searchForm.value.fromDate),
+      toDate:this.formatDate(this.searchForm.value.toDate),
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       USER_BUS_OPERATOR_ID:localStorage.getItem("BUS_OPERATOR_ID")
     };
@@ -205,6 +205,17 @@ export class OwnerfareComponent implements OnInit {
       );
     }
   }
+
+    formatDate(dateValue: string | number | Date) {
+      const date = new Date(dateValue);
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+
+      return `${year}-${month}-${day}`;
+}
+
 
 
   refresh() {

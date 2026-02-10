@@ -108,12 +108,10 @@ export class CompletereportComponent implements OnInit {
       date_type :this.completeReportRecord.date_type,
       pnr :this.completeReportRecord.pnr,
       rows_number:this.completeReportRecord.rows_number,
-      rangeFromDate:this.completeReportRecord.rangeFromDate,
-      rangeToDate :this.completeReportRecord.rangeToDate
+      rangeFromDate:this.formatDate(this.completeReportRecord.rangeFromDate),
+      rangeToDate :this.formatDate(this.completeReportRecord.rangeToDate)
             
     };
-       
-    // console.log(data);
     
     if(pageurl!="")
     {
@@ -135,6 +133,16 @@ export class CompletereportComponent implements OnInit {
     }
     
   }
+
+   formatDate(dateValue: string | number | Date) {
+      const date = new Date(dateValue);
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+
+      return `${year}-${month}-${day}`;
+}
 
 
   findOperator(id:any) {

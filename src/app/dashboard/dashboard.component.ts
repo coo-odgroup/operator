@@ -210,7 +210,10 @@ export class DashboardComponent implements OnInit {
       operator_id: this.operatorId,
       rangeFor: range,
     }
-    this.http.post<any>(this.apiURL + '/operator-booking', {}).subscribe({
+    
+    console.log(reqData);
+    
+    this.http.post<any>(this.apiURL + '/operator-booking', reqData).subscribe({
       next: (res) => {
 
         const categories: string[] = [];
@@ -312,6 +315,7 @@ export class DashboardComponent implements OnInit {
             ...(this.opRevenuechart.xAxis as Highcharts.XAxisOptions),
             categories
           },
+          
           series: [{
             name: 'Total Revenue',
             type: 'column',
