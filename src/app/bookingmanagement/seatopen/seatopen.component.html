@@ -291,10 +291,8 @@
 
                           <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                             <div class="tabs">
-                              <button (click)="switchTab('tab1')" [class.active]="activeTab === 'tab1'"> Seater
-                              </button>
-                              <button (click)="switchTab('tab2')" [class.active]="activeTab === 'tab2'"> Sleeper
-                              </button>
+                              <button (click)="switchTab('tab1')" [class.active]="activeTab === 'tab1'" *ngIf="lower !=0"> Seater</button>
+                              <button (click)="switchTab('tab2')" [class.active]="activeTab === 'tab2'" *ngIf="upper !=0"> Sleeper</button>
                             </div>
 
                             <div formArrayName="bus_seat_layout_data" class="col-12 bus-transform">

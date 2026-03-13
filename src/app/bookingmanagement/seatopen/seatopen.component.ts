@@ -451,6 +451,9 @@ export class SeatopenComponent implements OnInit {
   );
   }
 
+  lower:any;
+  upper:any;
+
   checkEvent(event: any) {
     this.spinner.show();
     const data = {
@@ -468,9 +471,14 @@ export class SeatopenComponent implements OnInit {
             let counter = 0;
             this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']) as FormArray;
             this.seatLayoutData.clear();
-            this.seatLengthData = resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
+            this.lower = resp?.data?.lowerBerth?.length ?? 0;
+            this.upper = resp?.data?.upperBerth?.length ?? 0;
+            this.seatLengthData = this.lower + this.upper;
+
+
+            // console.log(upper)
             
-            if (resp.data.lowerBerth != undefined) {
+            if (resp.data.lowerBerth != 0) {
               for (let lowerData of resp.data.lowerBerth) {
     
                 let arraylen = this.seatLayoutData.length;
@@ -556,7 +564,7 @@ export class SeatopenComponent implements OnInit {
                 counter++;
               }
             }
-            if (resp.data.upperBerth != undefined) {
+            if (resp.data.upperBerth != 0) {
               for (let upperData of resp.data.upperBerth) {
                 let arraylen = this.seatLayoutData.length;
                 let berthData: FormGroup = this.fb.group({

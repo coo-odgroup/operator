@@ -39,23 +39,23 @@ const before = (one: NgbDateStruct, two: NgbDateStruct) =>
   !one || !two
     ? false
     : one.year === two.year
-    ? one.month === two.month
-      ? one.day === two.day
-        ? false
-        : one.day < two.day
-      : one.month < two.month
-    : one.year < two.year;
+      ? one.month === two.month
+        ? one.day === two.day
+          ? false
+          : one.day < two.day
+        : one.month < two.month
+      : one.year < two.year;
 
 const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   !one || !two
     ? false
     : one.year === two.year
-    ? one.month === two.month
-      ? one.day === two.day
-        ? false
-        : one.day > two.day
-      : one.month > two.month
-    : one.year > two.year;
+      ? one.month === two.month
+        ? one.day === two.day
+          ? false
+          : one.day > two.day
+        : one.month > two.month
+      : one.year > two.year;
 
 @Component({
   selector: 'app-seatblock',
@@ -138,53 +138,53 @@ export class SeatblockComponent implements OnInit {
     aLengthMenu: (string | number)[];
     buttons: (
       | {
-          extend: string;
-          className: string;
-          init: (api: any, node: any, config: any) => void;
-          exportOptions: { columns: string };
-          text?: undefined;
-          action?: undefined;
-        }
+        extend: string;
+        className: string;
+        init: (api: any, node: any, config: any) => void;
+        exportOptions: { columns: string };
+        text?: undefined;
+        action?: undefined;
+      }
       | {
-          text: string;
-          className: string;
-          init: (api: any, node: any, config: any) => void;
-          action: () => void;
-          extend?: undefined;
-          exportOptions?: undefined;
-        }
+        text: string;
+        className: string;
+        init: (api: any, node: any, config: any) => void;
+        action: () => void;
+        extend?: undefined;
+        exportOptions?: undefined;
+      }
     )[];
     language: { searchPlaceholder: string; processing: string };
     ajax: (dataTablesParameters: any, callback: any) => void;
     columns: (
       | {
-          data: string;
-          title?: undefined;
-          render?: undefined;
-          orderable?: undefined;
-          className?: undefined;
-        }
+        data: string;
+        title?: undefined;
+        render?: undefined;
+        orderable?: undefined;
+        className?: undefined;
+      }
       | {
-          title: string;
-          data: string;
-          render?: undefined;
-          orderable?: undefined;
-          className?: undefined;
-        }
+        title: string;
+        data: string;
+        render?: undefined;
+        orderable?: undefined;
+        className?: undefined;
+      }
       | {
-          data: string;
-          render: (data: any) => 'Active' | 'Pending';
-          title?: undefined;
-          orderable?: undefined;
-          className?: undefined;
-        }
+        data: string;
+        render: (data: any) => 'Active' | 'Pending';
+        title?: undefined;
+        orderable?: undefined;
+        className?: undefined;
+      }
       | {
-          title: string;
-          data: any;
-          orderable: boolean;
-          className: string;
-          render?: undefined;
-        }
+        title: string;
+        data: any;
+        orderable: boolean;
+        className: string;
+        render?: undefined;
+      }
     )[];
   };
   pagination: any;
@@ -441,23 +441,23 @@ export class SeatblockComponent implements OnInit {
       });
     }
   }
-  
+
 
   formatDate(dateValue: string | number | Date) {
-      const date = new Date(dateValue);
+    const date = new Date(dateValue);
 
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
 
-      return `${year}-${month}-${day}`;
-}
+    return `${year}-${month}-${day}`;
+  }
 
   activeTab: string = 'tab1';
   dnone: string = '';
   switchTab(tab: string) {
     this.activeTab = tab;
-    if(this.activeTab==='tab2'){
+    if (this.activeTab === 'tab2') {
       this.dnone = 'd-none';
     } else {
       this.dnone = '';
@@ -524,6 +524,9 @@ export class SeatblockComponent implements OnInit {
     });
   }
 
+  lower: any;
+  upper: any;
+
   checkEvent(event: any) {
     this.spinner.show();
     const data = {
@@ -541,9 +544,12 @@ export class SeatblockComponent implements OnInit {
           this.seatBlockForm.controls['bus_seat_layout_data']
         )) as FormArray;
         this.seatLayoutData.clear();
-        this.seatLengthData =
-          resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
-        if (resp.data.lowerBerth != undefined) {
+        
+        this.lower = resp?.data?.lowerBerth?.length ?? 0;
+        this.upper = resp?.data?.upperBerth?.length ?? 0;
+        this.seatLengthData = this.lower + this.upper;
+
+        if (resp.data.lowerBerth != 0) {
           for (let lowerData of resp.data.lowerBerth) {
             let arraylen = this.seatLayoutData.length;
             let berthData: FormGroup = this.fb.group({
@@ -640,7 +646,7 @@ export class SeatblockComponent implements OnInit {
             counter++;
           }
         }
-        if (resp.data.upperBerth != undefined) {
+        if (resp.data.upperBerth != 0) {
           for (let upperData of resp.data.upperBerth) {
             let arraylen = this.seatLayoutData.length;
             let berthData: FormGroup = this.fb.group({
