@@ -182,8 +182,13 @@ export class BuscancellationComponent implements OnInit {
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       source_id: this.searchForm.value.source_id,
       destination_id: this.searchForm.value.destination_id,
-      toDate: this.formatDate(this.searchForm.value.toDate),
-      fromDate: this.formatDate(this.searchForm.value.fromDate),
+      toDate: this.searchForm.value.toDate
+        ? this.formatDate(this.searchForm.value.toDate)
+        : null,
+
+      fromDate: this.searchForm.value.fromDate
+        ? this.formatDate(this.searchForm.value.fromDate)
+        : null,
       rows_number: this.searchForm.value.rows_number,
       USER_BUS_OPERATOR_ID: localStorage.getItem('USER_BUS_OPERATOR_ID')
     };

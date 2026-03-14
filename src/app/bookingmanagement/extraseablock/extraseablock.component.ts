@@ -16,8 +16,8 @@ import { LocationService } from '../../services/location.service';
 import { SeatlayoutService } from '../../services/seatlayout.service';
 import * as XLSX from 'xlsx';
 import { NgxSpinnerService } from "ngx-spinner";
-import {Input,Output,EventEmitter} from '@angular/core';
-import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Input, Output, EventEmitter } from '@angular/core';
+import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 
 
@@ -63,14 +63,14 @@ export class ExtraseablockComponent implements OnInit {
   activeTab: string = 'tab1';
   dnone: string = '';
 
-switchTab(tab: string) {
-  this.activeTab = tab;
-  if(this.activeTab==='tab2'){
-    this.dnone = 'd-none';
-  } else {
-    this.dnone = '';
+  switchTab(tab: string) {
+    this.activeTab = tab;
+    if (this.activeTab === 'tab2') {
+      this.dnone = 'd-none';
+    } else {
+      this.dnone = '';
+    }
   }
-}
 
   @ViewChild("addnew") addnew;
   public seatOpenForm: FormGroup;
@@ -80,7 +80,7 @@ switchTab(tab: string) {
   modalReference: NgbModalRef;
   confirmDialogReference: NgbModalRef;
 
-  seatOpen: any=[];
+  seatOpen: any = [];
   // seatOpen: Seatopen[];
   seatOpenRecord: Seatopen;
 
@@ -113,14 +113,14 @@ switchTab(tab: string) {
   route: any;
   deletedata: any;
   showSection = false;
-  page_no=1;
+  page_no = 1;
   busSchedule: any[];
   cancelDates: any;
   extraSeatBlockDetails: any;
   lastUrl: any;
   public DatesRecord: any;
   busDatas: any;
-  checkedDate: any= [];
+  checkedDate: any = [];
   constructor(
     private dtconfig: NgbDatepickerConfig,
     private buscanCellationService: BuscancellationService,
@@ -145,8 +145,10 @@ switchTab(tab: string) {
     this.ModalBtn = "Save";
 
     const current = new Date();
-    this.dtconfig.minDate = { year: current.getFullYear(), month: 
-    current.getMonth() + 1, day: current.getDate() };
+    this.dtconfig.minDate = {
+      year: current.getFullYear(), month:
+        current.getMonth() + 1, day: current.getDate()
+    };
   }
 
   toggleSection() {
@@ -192,15 +194,15 @@ switchTab(tab: string) {
       bus_id: [null],
       rows_number: Constants.RecordLimit,
       page_no: this.page_no,
-      date:[null],
-      source_id:[null],
-      destination_id:[null],
+      date: [null],
+      source_id: [null],
+      destination_id: [null],
     });
 
     this.findOperator();
     this.search();
     // this.loadServices();
-  
+
 
 
   }
@@ -213,16 +215,15 @@ switchTab(tab: string) {
   //   this.page_no = url.replace('/api/extraSeatBlockData?&page=','');
   //   // console.log(url)
   //  this.search();
-  
+
   // }
-  set_page(url:any)
-  {
+  set_page(url: any) {
     this.lastUrl = '';
     // console.log(url);
-    this.page_no = url.replace('/api/extraSeatBlockData?page=','');
+    this.page_no = url.replace('/api/extraSeatBlockData?page=', '');
     this.search();
     this.lastUrl = url;
-  
+
   }
 
 
@@ -233,10 +234,10 @@ switchTab(tab: string) {
       name: this.searchForm.value.name,
       bus_id: this.searchForm.value.bus_id,
       rows_number: this.searchForm.value.rows_number,
-      page_no:this.page_no,
-      date:this.formatDate(this.searchForm.value.date),
-      source_id:this.searchForm.value.source_id,
-      destination_id:this.searchForm.value.destination_id,
+      page_no: this.page_no,
+      date: this.searchForm.value.date ? this.formatDate(this.searchForm.value.date) : null,
+      source_id: this.searchForm.value.source_id,
+      destination_id: this.searchForm.value.destination_id,
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
     };
@@ -250,38 +251,37 @@ switchTab(tab: string) {
           this.all = res.data;
           this.spinner.hide();
           // console.log( this.BusOperators);
-          this.lastUrl="/api/extraSeatBlockData?page="+this.all.current_page ;
+          this.lastUrl = "/api/extraSeatBlockData?page=" + this.all.current_page;
           mainArray = Object.keys(mainArray).map(k1 => ({ value: mainArray[k1] }));
           // console.log(mainArray);
-          if(mainArray.length >0)
-          {
+          if (mainArray.length > 0) {
             for (var bus of mainArray) {
-              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] })); 
-             //  console.log(bus);               
-              
-              let allbus=[];
-             for (var date of bus) {
-               date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
-               let allDate=[];
-               // console.log(date);               
- 
-               for (var route of date) {
-                 route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));              
-                 let allroute = [];
-                //  console.log(route);               
- 
-                 for (var seat of route) {
-                   seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));  
-                   allroute.push(seat);
-                   // console.log(seat);               
-                 }
-                 allDate.push(route);
-               }
-               allbus.push(date);
-              //  console.log(allbus);
-             }
-             this.seatOpen.push(allbus);
-           }
+              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] }));
+              //  console.log(bus);               
+
+              let allbus = [];
+              for (var date of bus) {
+                date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
+                let allDate = [];
+                // console.log(date);               
+
+                for (var route of date) {
+                  route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));
+                  let allroute = [];
+                  //  console.log(route);               
+
+                  for (var seat of route) {
+                    seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));
+                    allroute.push(seat);
+                    // console.log(seat);               
+                  }
+                  allDate.push(route);
+                }
+                allbus.push(date);
+                //  console.log(allbus);
+              }
+              this.seatOpen.push(allbus);
+            }
           }
         }
       );
@@ -293,77 +293,75 @@ switchTab(tab: string) {
           this.pagination = res.data;
           this.all = res.data;
           this.spinner.hide();
-          this.lastUrl="/api/extraSeatBlockData?page="+this.all.current_page ;
+          this.lastUrl = "/api/extraSeatBlockData?page=" + this.all.current_page;
           mainArray = Object.keys(mainArray).map(k1 => ({ value: mainArray[k1] }));
           // console.log(mainArray);
-          if(mainArray.length >0)
-          {
+          if (mainArray.length > 0) {
             for (var bus of mainArray) {
-              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] })); 
-             //  console.log(bus);               
-              
-              let allbus=[];
-             for (var date of bus) {
-               date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
-               let allDate=[];
-               // console.log(date);               
- 
-               for (var route of date) {
-                 route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));              
-                 let allroute = [];
-                //  console.log(route);               
- 
-                 for (var seat of route) {
-                   seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));  
-                   allroute.push(seat);
-                   // console.log(seat);               
-                 }
-                 allDate.push(route);
-               }
-               allbus.push(date);
-              //  console.log(allbus);
-             }
-             this.seatOpen.push(allbus);
-           }
-          }  
+              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] }));
+              //  console.log(bus);               
+
+              let allbus = [];
+              for (var date of bus) {
+                date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
+                let allDate = [];
+                // console.log(date);               
+
+                for (var route of date) {
+                  route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));
+                  let allroute = [];
+                  //  console.log(route);               
+
+                  for (var seat of route) {
+                    seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));
+                    allroute.push(seat);
+                    // console.log(seat);               
+                  }
+                  allDate.push(route);
+                }
+                allbus.push(date);
+                //  console.log(allbus);
+              }
+              this.seatOpen.push(allbus);
+            }
+          }
         }
       );
     }
   }
 
-   formatDate(dateValue: string | number | Date) {
-      const date = new Date(dateValue);
+  formatDate(dateValue: string | number | Date) {
+    const date = new Date(dateValue);
 
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
 
-      return `${year}-${month}-${day}`;
-}
+    return `${year}-${month}-${day}`;
+  }
 
 
   refresh() {
     this.spinner.show();
-    this.lastUrl = ''; 
+    this.lastUrl = '';
     this.searchForm = this.fb.group({
       name: [null],
       bus_id: [null],
       rows_number: Constants.RecordLimit,
-      page_no:this.page_no,
-      date:[null],
-      source_id:[null],
-      destination_id:[null],
+      page_no: this.page_no,
+      date: [null],
+      source_id: [null],
+      destination_id: [null],
     });
     this.search();
-    
+
 
 
   }
 
-  viewDetails(id)
-  {
-   // console.log(id);
-   this.extraSeatBlockDetails= this.seatOpen[id] ;
+  viewDetails(id) {
+    // console.log(id);
+    this.extraSeatBlockDetails = this.seatOpen[id];
   }
 
 
@@ -385,14 +383,13 @@ switchTab(tab: string) {
 
   }
 
-  getSchedule()
-  {
+  getSchedule() {
     const data = {
       bus_id: this.seatOpenForm.value.bus_id
     };
     this.bss.getScheduleById(data.bus_id).subscribe(
       seatData => {
-        this.busSchedule = seatData ;
+        this.busSchedule = seatData;
       }
     );
   }
@@ -455,7 +452,7 @@ switchTab(tab: string) {
   //               }
   //               else {
   //                 var isPresent = this.seatOpenRecord.seat_open_seats.some(function (el) { 
-                    
+
   //                   return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
   //                 });
   //                 if (isPresent) {
@@ -540,7 +537,7 @@ switchTab(tab: string) {
   //                 this.seatLayoutCol.insert(collen, columnData);
   //               }
   //               else {
-                  
+
   //                 var isPresent = this.seatOpenRecord.seat_open_seats.some(function (el) { 
   //                   return JSON.parse(el.seats_id) === JSON.parse(seatData.id); 
   //                 });
@@ -599,85 +596,85 @@ switchTab(tab: string) {
   //     }
   //   );
 
-    
+
   // }
 
   //changed by siraz
- 
+
   checkEvent(event: any) {
-  this.activeTab = 'tab1';   // Change by Siraz
-  const data = {
-    bus_id: this.seatOpenForm.value.bus_id
-  };
+    this.activeTab = 'tab1';   // Change by Siraz
+    const data = {
+      bus_id: this.seatOpenForm.value.bus_id
+    };
 
-  this.spinner.show();
+    this.spinner.show();
 
-  this.busService.getSelectedextraSeat(data.bus_id).subscribe(
-    seatData => {
-      this.selectedSeats = seatData.data;
+    this.busService.getSelectedextraSeat(data.bus_id).subscribe(
+      seatData => {
+        this.selectedSeats = seatData.data;
 
-      this.seatlayoutService.seatsBus(data).subscribe(
-        resp => {
-          let counter = 0;
-          this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']);
-          this.seatLayoutData.clear();     // 🔥 Clear previous bus layout
+        this.seatlayoutService.seatsBus(data).subscribe(
+          resp => {
+            let counter = 0;
+            this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']);
+            this.seatLayoutData.clear();     // 🔥 Clear previous bus layout
 
-          if (resp.data.lowerBerth) {
-            for (let lowerData of resp.data.lowerBerth) {
-              this.seatLayoutData.push(this.fb.group({
-                lowerBerth: this.fb.array([]),
-                upperBerth: this.fb.array([])
-              }));
-
-              let lowerArray = this.seatLayoutData.at(counter).get('lowerBerth') as FormArray;
-
-              for (let seatData of lowerData) {
-                let isBlocked = this.selectedSeats.some(x => x.seats_id == seatData.id);
-
-                lowerArray.push(this.fb.group({
-                  seatText: seatData.seatText,
-                  seatType: seatData.seat_class_id,
-                  berthType: seatData.berthType,
-                  seatChecked: isBlocked ? [] : [{ value: false, disabled: true }],
-                  seatId: seatData.id,
-                  busId: data.bus_id
+            if (resp.data.lowerBerth) {
+              for (let lowerData of resp.data.lowerBerth) {
+                this.seatLayoutData.push(this.fb.group({
+                  lowerBerth: this.fb.array([]),
+                  upperBerth: this.fb.array([])
                 }));
+
+                let lowerArray = this.seatLayoutData.at(counter).get('lowerBerth') as FormArray;
+
+                for (let seatData of lowerData) {
+                  let isBlocked = this.selectedSeats.some(x => x.seats_id == seatData.id);
+
+                  lowerArray.push(this.fb.group({
+                    seatText: seatData.seatText,
+                    seatType: seatData.seat_class_id,
+                    berthType: seatData.berthType,
+                    seatChecked: isBlocked ? [] : [{ value: false, disabled: true }],
+                    seatId: seatData.id,
+                    busId: data.bus_id
+                  }));
+                }
+                counter++;
               }
-              counter++;
             }
-          }
 
-          if (resp.data.upperBerth) {
-            for (let upperData of resp.data.upperBerth) {
-              this.seatLayoutData.push(this.fb.group({
-                lowerBerth: this.fb.array([]),
-                upperBerth: this.fb.array([])
-              }));
-
-              let upperArray = this.seatLayoutData.at(counter).get('upperBerth') as FormArray;
-
-              for (let seatData of upperData) {
-                let isBlocked = this.selectedSeats.some(x => x.seats_id == seatData.id);
-
-                upperArray.push(this.fb.group({
-                  seatText: seatData.seatText,
-                  seatType: seatData.seat_class_id,
-                  berthType: seatData.berthType,
-                  seatChecked: isBlocked ? [] : [{ value: false, disabled: true }],
-                  seatId: seatData.id,
-                  busId: data.bus_id
+            if (resp.data.upperBerth) {
+              for (let upperData of resp.data.upperBerth) {
+                this.seatLayoutData.push(this.fb.group({
+                  lowerBerth: this.fb.array([]),
+                  upperBerth: this.fb.array([])
                 }));
-              }
-              counter++;
-            }
-          }
 
-          this.spinner.hide();
-        }
-      );
-    }
-  );
-}
+                let upperArray = this.seatLayoutData.at(counter).get('upperBerth') as FormArray;
+
+                for (let seatData of upperData) {
+                  let isBlocked = this.selectedSeats.some(x => x.seats_id == seatData.id);
+
+                  upperArray.push(this.fb.group({
+                    seatText: seatData.seatText,
+                    seatType: seatData.seat_class_id,
+                    berthType: seatData.berthType,
+                    seatChecked: isBlocked ? [] : [{ value: false, disabled: true }],
+                    seatId: seatData.id,
+                    busId: data.bus_id
+                  }));
+                }
+                counter++;
+              }
+            }
+
+            this.spinner.hide();
+          }
+        );
+      }
+    );
+  }
 
 
 
@@ -707,9 +704,9 @@ switchTab(tab: string) {
   }
 
   ResetAttributes() {
-    this.datesSelected=[];
+    this.datesSelected = [];
     this.route = [];
-    this.DatesRecord="";
+    this.DatesRecord = "";
     // this.loadServices();
     this.busSchedule = [];
     this.seatOpenRecord = {} as Seatopen;
@@ -786,17 +783,17 @@ switchTab(tab: string) {
     this.seatOpenForm.controls.busRoute.setValue('');
 
     // let operatorId = 157;
-    let operatorId =  localStorage.getItem('OPERATOR_ID');
+    let operatorId = localStorage.getItem('OPERATOR_ID');
 
     if (operatorId) {
       this.spinner.show();
       this.busService.getByOperaor(operatorId).subscribe(
         res => {
           this.buses = res.data;
-          this.buses.map((i:any) => { i.testing = i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
-           this.spinner.hide();
+          this.buses.map((i: any) => { i.testing = i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
+          this.spinner.hide();
           // console.log(this.buses);
-       
+
         }
       );
     }
@@ -825,15 +822,15 @@ switchTab(tab: string) {
       );
     }
   }
-  getcurrentmonths(){
-    
+  getcurrentmonths() {
+
     var date = new Date();
     var transformmonth = this.datePipe.transform(date, 'MM');
     // console.log(transformmonth);
     return transformmonth;
   }
 
-  getcurrentyears(){ 
+  getcurrentyears() {
     var date = new Date();
     var transformyear = this.datePipe.transform(date, 'yyyy');
     // console.log(transformyear);
@@ -842,17 +839,17 @@ switchTab(tab: string) {
   }
 
   getBusScheduleEntryDatesFilter() {
-    if (this.seatOpenForm.value.bus_id==null)
+    if (this.seatOpenForm.value.bus_id == null)
       return false;
 
 
     const arr = <FormArray>this.seatOpenForm.controls.dateLists;
     arr.controls = [];
 
-    const data={
+    const data = {
       busLists: this.seatOpenForm.value.bus_id,
-      month:this.getcurrentmonths(),
-      year:this.getcurrentyears(),
+      month: this.getcurrentmonths(),
+      year: this.getcurrentyears(),
     }
 
     this.spinner.show();
@@ -863,19 +860,18 @@ switchTab(tab: string) {
         for (let bData of this.busDatas) {
           this.DatesRecord = (<FormArray>this.seatOpenForm.controls['dateLists']) as FormArray;
           let arraylen = this.DatesRecord.length;
-          for (let eDate of bData.entryDates) {    
-            if(this.ModalBtn=="Save")
-            {
-                let newDatesgroup: FormGroup = this.fb.group({
-                  entryDates: [eDate.entry_date],
-                  datechecked: [null],
-                })
-                this.DatesRecord.insert(arraylen, newDatesgroup);
-                // console.log(this.DatesRecord);
-                // return
-            }           
+          for (let eDate of bData.entryDates) {
+            if (this.ModalBtn == "Save") {
+              let newDatesgroup: FormGroup = this.fb.group({
+                entryDates: [eDate.entry_date],
+                datechecked: [null],
+              })
+              this.DatesRecord.insert(arraylen, newDatesgroup);
+              // console.log(this.DatesRecord);
+              // return
+            }
           }
-         
+
           counter++;
         }
         response = [];
@@ -887,25 +883,23 @@ switchTab(tab: string) {
   addOpenseat() {
 
     this.checkedDate;
-    
-    let i=0;
-    for(let checked of this.seatOpenForm.value.dateLists){
-      if(checked.datechecked==true){
+
+    let i = 0;
+    for (let checked of this.seatOpenForm.value.dateLists) {
+      if (checked.datechecked == true) {
         this.checkedDate[i] = checked.entryDates;
         i++;
-      } 
+      }
     }
-    
-    
+
+
     this.spinner.show();
     this.onSelectAll();
-    if(this.checkedDate == null)
-    {
+    if (this.checkedDate == null) {
       this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
       this.spinner.hide();
       return;
-    }else
-    {
+    } else {
       const data = {
         bus_operator_id: this.seatOpenForm.value.bus_operator_id,
         bus_id: this.seatOpenForm.value.bus_id,
@@ -915,7 +909,7 @@ switchTab(tab: string) {
         date: this.checkedDate,
         bus_seat_layout_data: this.seatOpenForm.value.bus_seat_layout_data,
         created_by: localStorage.getItem('USERNAME')
-  
+
       };
       // console.log(data);
       // return;
@@ -936,31 +930,31 @@ switchTab(tab: string) {
       //   );
       // }
       // else {
-        this.seatopenService.create(data).subscribe(
-          resp => {
-  
-            if (resp.status == 1) {
-              this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
-              this.modalReference.close();
-              this.lastUrl= '';
-              this.set_page(this.lastUrl);
-            }
-            else {
-              this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
-              this.spinner.hide();
-            }
-          }
-        );
-  
-      //}
-  
+      this.seatopenService.create(data).subscribe(
+        resp => {
 
-    }   
+          if (resp.status == 1) {
+            this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
+            this.modalReference.close();
+            this.lastUrl = '';
+            this.set_page(this.lastUrl);
+          }
+          else {
+            this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
+            this.spinner.hide();
+          }
+        }
+      );
+
+      //}
+
+
+    }
   }
 
- 
 
-  openConfirmDialog(content, id: any,date: any) {
+
+  openConfirmDialog(content, id: any, date: any) {
     this.confirmDialogReference = this.modalService.open(content, { scrollable: true, size: 'md' });
     // this.seatOpenRecord = this.seatOpen[id];
 
@@ -1029,29 +1023,27 @@ switchTab(tab: string) {
   hoveredDate: NgbDateStruct;
   fromDate: NgbDateStruct;
   toDate: NgbDateStruct;
-  _datesSelected:NgbDateStruct[]=[]; 
+  _datesSelected: NgbDateStruct[] = [];
 
   @Input()
-  set datesSelected(value:NgbDateStruct[])  
-  {
-     this._datesSelected=value;
-     
+  set datesSelected(value: NgbDateStruct[]) {
+    this._datesSelected = value;
+
   }
-  get datesSelected():NgbDateStruct[]
-  {
-    
-    return this._datesSelected?this._datesSelected:[];
+  get datesSelected(): NgbDateStruct[] {
+
+    return this._datesSelected ? this._datesSelected : [];
   }
 
-  @Output() datesSelectedChange=new EventEmitter<NgbDateStruct[]>();
+  @Output() datesSelectedChange = new EventEmitter<NgbDateStruct[]>();
 
- 
 
-  onDateSelection(event:any,date: NgbDateStruct) {
+
+  onDateSelection(event: any, date: NgbDateStruct) {
 
     event.target.parentElement.blur();  //make that not appear the outline
     if (!this.fromDate && !this.toDate) {
-      if (event.ctrlKey==true)  //If is CrtlKey pressed
+      if (event.ctrlKey == true)  //If is CrtlKey pressed
         this.fromDate = date;
       else
         this.addDate(date);
@@ -1060,43 +1052,40 @@ switchTab(tab: string) {
 
     } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
       this.toDate = date;
-      this.addRangeDate(this.fromDate,this.toDate);
-      this.fromDate=null;
-      this.toDate=null;
+      this.addRangeDate(this.fromDate, this.toDate);
+      this.fromDate = null;
+      this.toDate = null;
     } else {
       this.toDate = null;
       this.fromDate = date;
     }
   }
 
-  addDate(date:NgbDateStruct)
-  {
-      let index=this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year);
-      if (index>=0)       //If exist, remove the date
-        this.datesSelected.splice(index,1);
-      else   //a simple push
-        this.datesSelected.push(date);
-        // console.log(this.datesSelected);
-        this.seatOpenForm.controls['date'].setValue(this.datesSelected);
-    }
-    addRangeDate(fromDate:NgbDateStruct,toDate:NgbDateStruct)
+  addDate(date: NgbDateStruct) {
+    let index = this.datesSelected.findIndex(f => f.day == date.day && f.month == date.month && f.year == date.year);
+    if (index >= 0)       //If exist, remove the date
+      this.datesSelected.splice(index, 1);
+    else   //a simple push
+      this.datesSelected.push(date);
+    // console.log(this.datesSelected);
+    this.seatOpenForm.controls['date'].setValue(this.datesSelected);
+  }
+  addRangeDate(fromDate: NgbDateStruct, toDate: NgbDateStruct) {
+    //We get the getTime() of the dates from and to
+    let from = new Date(fromDate.year + "-" + fromDate.month + "-" + fromDate.day).getTime();
+    let to = new Date(toDate.year + "-" + toDate.month + "-" + toDate.day).getTime();
+    for (let time = from; time <= to; time += (24 * 60 * 60 * 1000)) //add one day
     {
-        //We get the getTime() of the dates from and to
-        let from=new Date(fromDate.year+"-"+fromDate.month+"-"+fromDate.day).getTime();
-        let to=new Date(toDate.year+"-"+toDate.month+"-"+toDate.day).getTime();
-        for (let time=from;time<=to;time+=(24*60*60*1000)) //add one day
-        {
-            let date=new Date(time);
-            //javascript getMonth give 0 to January, 1, to February...
-            this.addDate({year:date.getFullYear(),month:date.getMonth()+1,day:date.getDate()});
-        }   
-        this.datesSelectedChange.emit(this.datesSelected);
+      let date = new Date(time);
+      //javascript getMonth give 0 to January, 1, to February...
+      this.addDate({ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() });
     }
-    //return true if is selected
-    isDateSelected(date:NgbDateStruct)
-    {
-        return (this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year)>=0);
-    }
+    this.datesSelectedChange.emit(this.datesSelected);
+  }
+  //return true if is selected
+  isDateSelected(date: NgbDateStruct) {
+    return (this.datesSelected.findIndex(f => f.day == date.day && f.month == date.month && f.year == date.year) >= 0);
+  }
   isHovered = date => this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate);
   isInside = date => after(date, this.fromDate) && before(date, this.toDate);
   isFrom = date => equals(date, this.fromDate);

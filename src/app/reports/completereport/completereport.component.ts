@@ -106,8 +106,13 @@ export class CompletereportComponent implements OnInit {
       date_type: this.completeReportRecord.date_type,
       pnr: this.completeReportRecord.pnr,
       rows_number: this.completeReportRecord.rows_number,
-      rangeFromDate: this.formatDate(this.completeReportRecord.rangeFromDate),
-      rangeToDate: this.formatDate(this.completeReportRecord.rangeToDate)
+      rangeFromDate: this.completeReportRecord.rangeFromDate
+        ? this.formatDate(this.completeReportRecord.rangeFromDate)
+        : null,
+
+      rangeToDate: this.completeReportRecord.rangeToDate
+        ? this.formatDate(this.completeReportRecord.rangeToDate)
+        : null
 
     };
 

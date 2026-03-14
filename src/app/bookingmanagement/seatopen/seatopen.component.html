@@ -87,7 +87,7 @@
         </div>
       </div>
       <div class="table-responsive" id="print-section">
-        <table class="table table-striped" style="font-size: 12px;">
+        <table class="table table-striped table-bordered" style="font-size:12px;">
           <thead *ngIf="seatOpen?.length != 0">
             <tr>
               <th>#</th>
@@ -95,53 +95,91 @@
               <th>Seat Open Details <br>(Date & Seats)</th>
             </tr>
           </thead>
+
           <tbody *ngIf="seatOpen?.length != 0">
             <tr *ngFor="let sblock of seatOpen; let i = index">
-              <td style="min-width: 15px !important;">{{i+1}}</td>
-              <td>{{ sblock[0][0].value[0].bus.name }} <br>{{ sblock[0][0].value[0].bus.bus_number
-                }}<br>{{sblock[0][0].value[0].bus_source[0]?.name}} >>
-                {{sblock[0][0].value[0].bus_destination[0]?.name}}</td>
+
+              <!-- Serial -->
+              <td style="min-width:15px;">{{ i + 1 }}</td>
+
+              <!-- Bus Info -->
               <td>
-                <table>
-                  <tr *ngFor="let opendate of sblock;let dateIndex= index ">
+                <strong>{{ sblock[0][0].value[0].bus.name }}</strong><br>
+                {{ sblock[0][0].value[0].bus.bus_number }}<br>
+
+                <span class="text-muted">
+                  {{ sblock[0][0].value[0].bus_source[0]?.name }}
+                  >>
+                  {{ sblock[0][0].value[0].bus_destination[0]?.name }}
+                </span>
+              </td>
+
+              <!-- Seat Details -->
+              <td>
+
+                <table class="table table-sm mb-0">
+                  <tr *ngFor="let opendate of sblock">
+
+                    <!-- Date -->
+                    <td width="80">
+                      {{ opendate[0].value[0].operation_date | date:'dd/MM' }}
+                    </td>
+
+                    <!-- Seats -->
                     <td>
-                      {{opendate[0].value[0].operation_date | date: 'dd/MM'}}
-                    </td>
-
-                    <td style="padding-left: 10px !important">
-                      <span *ngFor="let seat of opendate[0].value; let seatIndex= index ">
-                        {{seat.seats.seatText}},
-                      </span>
-                    </td>
-                    <td class="hide_print">
-
-                      <span *ngIf="opendate[0].value[0].operation_date >= getFormattedDate()">
-                        <span type="button" (click)="ResetAttributes();editsopen(opendate[0].value[0].bus.id ,
-                        opendate[0].value[0].operation_date,opendate[0].value[0].ticket_price_id);OpenModal(editSeat)"
-                          class="btn btn-sm">
-                          <i class="fa fa-edit btn btn-primary" aria-hidden="true"></i>
+                      <span *ngFor="let seat of opendate[0].value">
+                        <span class="badge bg-light text-dark me-1">
+                          {{ seat.seats.seatText }}
                         </span>
                       </span>
+                    </td>
 
-                      <span type="button" (click)="openConfirmDialog (confirmDialog,
-                        opendate[0].value[0].bus.id ,
-                        opendate[0].value[0].operation_date)" class="btn   float-right">
-                        <i class="fa fa-trash btn btn-danger" aria-hidden="true"></i>
-                      </span>
+                    <!-- Actions -->
+                    <td class="hide_print text-end" width="120">
+
+                      <div class="d-flex gap-2 justify-content-end">
+
+                        <!-- Edit -->
+                        <button *ngIf="opendate[0].value[0].operation_date >= getFormattedDate()" (click)="ResetAttributes();
+                           editsopen(
+                             opendate[0].value[0].bus.id,
+                             opendate[0].value[0].operation_date,
+                             opendate[0].value[0].ticket_price_id
+                           );
+                           OpenModal(editSeat)" class="btn btn-sm btn-primary">
+                          <i class="fa fa-edit"></i>
+                        </button>
+
+                        <!-- Delete -->
+                        <button (click)="openConfirmDialog(
+                    confirmDialog,
+                    opendate[0].value[0].bus.id,
+                    opendate[0].value[0].operation_date
+                  )" class="btn btn-sm btn-danger">
+                          <i class="fa fa-trash"></i>
+                        </button>
+
+                      </div>
 
                     </td>
 
                   </tr>
                 </table>
+
               </td>
 
             </tr>
           </tbody>
+
+          <!-- No Data -->
           <tbody *ngIf="seatOpen?.length == 0">
             <tr>
-              <td colspan="8" class="no-data-available bold">No Record Found!</td>
+              <td colspan="3" class="text-center fw-bold">
+                No Record Found!
+              </td>
             </tr>
           </tbody>
+
         </table>
         <div *ngIf="seatOpen?.length != 0" class="hide_print container">
           <div class="row">
@@ -291,8 +329,10 @@
 
                           <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                             <div class="tabs">
-                              <button (click)="switchTab('tab1')" [class.active]="activeTab === 'tab1'" *ngIf="lower !=0"> Seater</button>
-                              <button (click)="switchTab('tab2')" [class.active]="activeTab === 'tab2'" *ngIf="upper !=0"> Sleeper</button>
+                              <button (click)="switchTab('tab1')" [class.active]="activeTab === 'tab1'"
+                                *ngIf="lower !=0"> Seater</button>
+                              <button (click)="switchTab('tab2')" [class.active]="activeTab === 'tab2'"
+                                *ngIf="upper !=0"> Sleeper</button>
                             </div>
 
                             <div formArrayName="bus_seat_layout_data" class="col-12 bus-transform">

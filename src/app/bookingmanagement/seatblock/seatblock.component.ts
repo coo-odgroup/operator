@@ -329,8 +329,8 @@ export class SeatblockComponent implements OnInit {
       bus_id: this.searchForm.value.bus_id,
       rows_number: this.searchForm.value.rows_number,
       page_no: this.page_no,
-      fromDate: this.formatDate(this.searchForm.value.fromDate),
-      toDate: this.formatDate(this.searchForm.value.toDate),
+      fromDate: this.searchForm.value.fromDate ? this.formatDate(this.searchForm.value.fromDate) : null,
+      toDate: this.searchForm.value.toDate ? this.formatDate(this.searchForm.value.toDate) : null,
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       source_id: this.searchForm.value.source_id,
@@ -544,7 +544,7 @@ export class SeatblockComponent implements OnInit {
           this.seatBlockForm.controls['bus_seat_layout_data']
         )) as FormArray;
         this.seatLayoutData.clear();
-        
+
         this.lower = resp?.data?.lowerBerth?.length ?? 0;
         this.upper = resp?.data?.upperBerth?.length ?? 0;
         this.seatLengthData = this.lower + this.upper;
