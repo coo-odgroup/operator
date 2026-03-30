@@ -77,9 +77,38 @@
 
     </section>
     <hr *ngIf="showSection">
-    <button class="serch-btn" (click)="toggleSection()">
+    <!-- <button class="serch-btn" (click)="toggleSection()">
         <i [ngClass]="showSection ? 'fas fa-times' : 'fas fa-filter'"></i> {{ showSection ? 'Close' : 'Search' }}
-    </button>
+    </button> -->
+
+    <!-- <button class="serch-btn"
+        ngbTooltip="Open Search Filter"
+        placement="left"
+        container="body"
+        triggers="hover"
+        (click)="toggleSection()">
+
+    <i [ngClass]="showSection ? 'fas fa-times' : 'fas fa-filter'"></i>
+    {{ showSection ? 'Close' : 'Search' }}
+</button> -->
+<button class="serch-btn d-flex align-items-center"
+        (click)="toggleSection()">
+
+    <i [ngClass]="showSection ? 'fas fa-times' : 'fas fa-filter'"></i>
+    <span class="ms-2">
+        {{ showSection ? 'Close' : 'Search' }}
+    </span>
+
+    <!-- INFO ICON -->
+    <i class="fas fa-info-circle ms-2 text-info"
+       ngbTooltip="Use this filter to search booking reports by date, bus or PNR"
+       placement="left"
+       container="body"
+       triggers="hover"
+       (click)="$event.stopPropagation()">
+    </i>
+
+</button>
 
 
 

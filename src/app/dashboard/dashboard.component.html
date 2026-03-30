@@ -17,28 +17,33 @@
             <h2>Showing {{searchfor}} Data</h2>
           </label>
         </div>
-        <div class="btn-group btn-group-toggle float-right" ngbRadioGroup name="ticketSize" data-toggle="buttons">
+        <div class="dashboard-header">
+          <div class="btn-group btn-group-toggle dashboard-tabs" ngbRadioGroup name="ticketSize" data-toggle="buttons">
 
-          <label ngbButtonLabel class="btn btn-info {{searchfor === 'Today' ? 'active' : ''}}">Today
-            <input ngbButton type="radio" class="dateRange" name="dateRange" value="sm-view" id="option1"
-              (click)="getall('Today');opRevenue('Today');opBooking('Today')"><i class="feather icon-align-justify m-0"></i>
-          </label>
-          <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Week' ? 'active' : ''}}">This Week
-            <input ngbButton type="radio" class="dateRange" name="dateRange" value="md-view" id="option2"
-              (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')"> <i class="feather icon-menu m-0"></i>
-          </label>
-          <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Month' ? 'active' : ''}}">This Month
-            <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option3"
-              (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')"> <i class="feather icon-grid m-0"></i>
-          </label>
-          <!-- <label ngbButtonLabel class="btn btn-info {{searchfor === 'ALL' ? 'active' : ''}}">All
+            <label ngbButtonLabel class="btn btn-info {{searchfor === 'Today' ? 'active' : ''}}">Today
+              <input ngbButton type="radio" class="dateRange" name="dateRange" value="sm-view" id="option1"
+                (click)="getall('Today');opRevenue('Today');opBooking('Today')"><i
+                class="feather icon-align-justify m-0"></i>
+            </label>
+            <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Week' ? 'active' : ''}}">This Week
+              <input ngbButton type="radio" class="dateRange" name="dateRange" value="md-view" id="option2"
+                (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')"> <i
+                class="feather icon-menu m-0"></i>
+            </label>
+            <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Month' ? 'active' : ''}}">This Month
+              <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option3"
+                (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')"> <i
+                class="feather icon-grid m-0"></i>
+            </label>
+            <!-- <label ngbButtonLabel class="btn btn-info {{searchfor === 'ALL' ? 'active' : ''}}">All
             <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option5"
               (click)="getall('ALL')"> <i class="feather icon-award m-0"></i>
           </label> -->
 
-          <!-- <label ngbButtonLabel class="btn btn-info">Custom Range
+            <!-- <label ngbButtonLabel class="btn btn-info">Custom Range
                       <input ngbButton type="radio" name="dateRange" value="large-view" id="option4"> <i class="feather icon-plus m-0"></i>
                   </label> -->
+          </div>
         </div>
       </app-card>
     </div>
@@ -152,17 +157,17 @@
 
     <div class="col-md-6 mb-3">
       <div class="row">
-          <highcharts-chart [Highcharts]="Highcharts" [options]="opbookingchart" [update]="updateFlag"
-            style="width: 100%; height: 420px; display: block;">
-          </highcharts-chart>
+        <highcharts-chart [Highcharts]="Highcharts" [options]="opbookingchart" [update]="updateFlag"
+          style="width: 100%; height: 420px; display: block;">
+        </highcharts-chart>
       </div>
     </div>
 
     <div class="col-md-6 mb-3">
       <div class="row">
-          <highcharts-chart [Highcharts]="Highcharts" [options]="opRevenuechart" [update]="updateFlag"
-            style="width: 100%; height: 420px; display: block;">
-          </highcharts-chart>
+        <highcharts-chart [Highcharts]="Highcharts" [options]="opRevenuechart" [update]="updateFlag"
+          style="width: 100%; height: 420px; display: block;">
+        </highcharts-chart>
       </div>
     </div>
 

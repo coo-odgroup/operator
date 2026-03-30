@@ -137,6 +137,19 @@ margin-left: 1px;
 .kis-center{
   text-align: center;
 }
+
+/* Sidebar always on top */
+  .sidebar {
+    position: fixed;
+    z-index: 9999 !important;
+  }
+
+  /* Dashboard content below */
+  .btn-group,
+  .dashboard-tabs {
+    position: relative;
+    z-index: 0 !important;
+  }
   
 }
 
