@@ -356,7 +356,7 @@ export class DashboardComponent implements OnInit {
     },
 
     tooltip: {
-      pointFormat: '<b>{point.y}</b> bookings'
+      pointFormat: '<b>₹ {point.y}</b> Revenue'
     },
 
     plotOptions: {

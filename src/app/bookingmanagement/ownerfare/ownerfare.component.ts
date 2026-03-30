@@ -19,8 +19,8 @@ import { IOption } from 'ng-select';
 import * as XLSX from 'xlsx';
 import { debounceTime, map } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
-import {Input,Output,EventEmitter} from '@angular/core';
-import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Input, Output, EventEmitter } from '@angular/core';
+import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -86,8 +86,8 @@ export class OwnerfareComponent implements OnInit {
   public ModalBtn: any;
   public searchBy: any;
 
-  role=localStorage.getItem('ROLE_ID');
-  
+  role = localStorage.getItem('ROLE_ID');
+
   public searchForm: FormGroup;
   pagination: any;
   all: any;
@@ -96,7 +96,7 @@ export class OwnerfareComponent implements OnInit {
   showSection = false;
 
 
-  constructor(private ownerfareService: OwnerfareService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busService: BusService, private busOperatorService: BusOperatorService, private locationService: LocationService, private spinner: NgxSpinnerService,  private dtconfig: NgbDatepickerConfig) {
+  constructor(private ownerfareService: OwnerfareService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busService: BusService, private busOperatorService: BusOperatorService, private locationService: LocationService, private spinner: NgxSpinnerService, private dtconfig: NgbDatepickerConfig) {
     this.isSubmit = false;
     this.ownerFareRecord = {} as Ownerfare;
     //this.busstoppageRecord= {} as Busstoppage;
@@ -106,11 +106,13 @@ export class OwnerfareComponent implements OnInit {
     this.ModalBtn = "Save";
 
     const current = new Date();
-    this.dtconfig.minDate = { year: current.getFullYear(), month: 
-    current.getMonth() + 1, day: current.getDate() };
+    this.dtconfig.minDate = {
+      year: current.getFullYear(), month:
+        current.getMonth() + 1, day: current.getDate()
+    };
 
-  this.today = current;
-    
+    this.today = current;
+
   }
   toggleSection() {
     this.showSection = !this.showSection;
@@ -121,7 +123,7 @@ export class OwnerfareComponent implements OnInit {
     this.modalReference = this.modalService.open(content, { scrollable: true, size: 'xl' });
   }
   ngOnInit(): void {
-    
+
     this.spinner.show();
     this.ownerFareForm = this.fb.group({
       searchBy: ['operator'],
@@ -156,10 +158,10 @@ export class OwnerfareComponent implements OnInit {
     this.searchForm = this.fb.group({
       name: [null],
       rows_number: Constants.RecordLimit,
-      fromDate:[null],
-      toDate:[null],
-      bus_id:[null],
-      bus_operator_id:[null],
+      fromDate: [null],
+      toDate: [null],
+      bus_id: [null],
+      bus_operator_id: [null],
     });
 
     this.search();
@@ -177,10 +179,10 @@ export class OwnerfareComponent implements OnInit {
     const data = {
       name: this.searchForm.value.name,
       rows_number: this.searchForm.value.rows_number,
-      fromDate:this.formatDate(this.searchForm.value.fromDate),
-      toDate:this.formatDate(this.searchForm.value.toDate),
+      fromDate: this.searchForm.value.fromDate ? this.formatDate(this.searchForm.value.fromDate) : null,
+      toDate: this.searchForm.value.toDate ? this.formatDate(this.searchForm.value.toDate) : null,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
-      USER_BUS_OPERATOR_ID:localStorage.getItem("BUS_OPERATOR_ID")
+      USER_BUS_OPERATOR_ID: localStorage.getItem("BUS_OPERATOR_ID")
     };
 
     if (pageurl != "") {
@@ -206,15 +208,15 @@ export class OwnerfareComponent implements OnInit {
     }
   }
 
-    formatDate(dateValue: string | number | Date) {
-      const date = new Date(dateValue);
+  formatDate(dateValue: string | number | Date) {
+    const date = new Date(dateValue);
 
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
 
-      return `${year}-${month}-${day}`;
-}
+    return `${year}-${month}-${day}`;
+  }
 
 
 
@@ -223,9 +225,9 @@ export class OwnerfareComponent implements OnInit {
     this.searchForm = this.fb.group({
       name: [null],
       rows_number: Constants.RecordLimit,
-      fromDate:[null],
-      toDate:[null],
-      bus_operator_id:[null],
+      fromDate: [null],
+      toDate: [null],
+      bus_operator_id: [null],
     });
     this.search();
 
@@ -236,53 +238,50 @@ export class OwnerfareComponent implements OnInit {
   title = 'angular-app';
   fileName = 'Owner-Fare.csv';
 
-  exportexcel(): void
-  {
+  exportexcel(): void {
     this.spinner.show();
     // this.completeReportRecord = this.searchFrom.value ; 
-    this.completExportdata= '';
+    this.completExportdata = '';
 
-        const data = {
-          rows_number:'all',
-          name: this.searchForm.value.name,
-          fromDate:this.searchForm.value.fromDate,
-          toDate:this.searchForm.value.toDate,
-          bus_operator_id:this.searchForm.value.bus_operator_id,
-        };
+    const data = {
+      rows_number: 'all',
+      name: this.searchForm.value.name,
+      fromDate: this.searchForm.value.fromDate,
+      toDate: this.searchForm.value.toDate,
+      bus_operator_id: this.searchForm.value.bus_operator_id,
+    };
 
-        this.ownerfareService.getAllData(data).subscribe(
-          res => {
-            this.completExportdata = res.data.data.data;
+    this.ownerfareService.getAllData(data).subscribe(
+      res => {
+        this.completExportdata = res.data.data.data;
 
-            let length = this.completExportdata.length;
-            // console.log( length);return;
-            if(length != 0)
-            {
-              setTimeout(() => {
-                this.exportdata();
-              }, 3 * 1000);
-            }
-          }
-        );
+        let length = this.completExportdata.length;
+        // console.log( length);return;
+        if (length != 0) {
+          setTimeout(() => {
+            this.exportdata();
+          }, 3 * 1000);
+        }
+      }
+    );
   }
 
-  exportdata(): void
-  {
+  exportdata(): void {
     let element = document.getElementById('export-section');
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-    /* save to file */  
+    /* save to file */
     XLSX.writeFile(wb, this.fileName);
 
     this.spinner.hide();
   }
 
   ResetAttributes() {
-    this.datesSelected=[];
+    this.datesSelected = [];
     this.ownerFareRecord = {} as Ownerfare;
     //this.busstoppageRecord= {} as Busstoppage;
     this.ownerFareForm = this.fb.group({
@@ -299,7 +298,7 @@ export class OwnerfareComponent implements OnInit {
 
     });
     this.editownerFareForm = this.fb.group({
-      searchBy: ["operator"],      
+      searchBy: ["operator"],
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       source_id: [null],
       destination_id: [null],
@@ -318,7 +317,7 @@ export class OwnerfareComponent implements OnInit {
   }
 
   loadServices() {
-    if(localStorage.getItem('ROLE_ID')== '1'){
+    if (localStorage.getItem('ROLE_ID') == '1') {
       this.busService.all().subscribe(
         res => {
           this.buses = res.data;
@@ -327,41 +326,38 @@ export class OwnerfareComponent implements OnInit {
       );
     }
     else {
-      let operatorId=localStorage.getItem('OPERATOR_ID');
+      let operatorId = localStorage.getItem('OPERATOR_ID');
 
-    if(operatorId)
-    {
-      this.busService.getByOperaor(operatorId).subscribe(
-        res=>{
-          this.buses=res.data;
-          this.buses.map((i: any) => { i.testing = i.name + ' - ' + i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
+      if (operatorId) {
+        this.busService.getByOperaor(operatorId).subscribe(
+          res => {
+            this.buses = res.data;
+            this.buses.map((i: any) => { i.testing = i.name + ' - ' + i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
 
-          
-        }
-      );
-    }    
+
+          }
+        );
+      }
     }
 
-    const BusOperator={
-      USER_BUS_OPERATOR_ID:localStorage.getItem("BUS_OPERATOR_ID")
+    const BusOperator = {
+      USER_BUS_OPERATOR_ID: localStorage.getItem("BUS_OPERATOR_ID")
     };
-    if(BusOperator.USER_BUS_OPERATOR_ID!="" && localStorage.getItem('ROLE_ID')!= '1')
-    {
+    if (BusOperator.USER_BUS_OPERATOR_ID != "" && localStorage.getItem('ROLE_ID') != '1') {
       this.busOperatorService.readOne(BusOperator.USER_BUS_OPERATOR_ID).subscribe(
-        record=>{
-        this.busoperators=record.data;
-        this.busoperators.map((i: any) => { i.operatorData = i.organisation_name + '    (  ' + i.operator_name  + '  )'; return i; });
+        record => {
+          this.busoperators = record.data;
+          this.busoperators.map((i: any) => { i.operatorData = i.organisation_name + '    (  ' + i.operator_name + '  )'; return i; });
         }
       );
     }
-    else
-    {
+    else {
       this.busOperatorService.readAll().subscribe(
-        record=>{
-        this.busoperators=record.data;
-        this.busoperators.map((i: any) => { i.operatorData = i.organisation_name + '    (  ' + i.operator_name  + '  )'; return i; });
+        record => {
+          this.busoperators = record.data;
+          this.busoperators.map((i: any) => { i.operatorData = i.organisation_name + '    (  ' + i.operator_name + '  )'; return i; });
         }
-      ); 
+      );
     }
 
     this.locationService.readAll().subscribe(
@@ -372,7 +368,7 @@ export class OwnerfareComponent implements OnInit {
   }
 
   findOperator(event: any) {
-   
+
     let operatorId = event.id;
     if (operatorId) {
       this.spinner.show();
@@ -411,17 +407,16 @@ export class OwnerfareComponent implements OnInit {
   // }
 
   findSource() {
-    this.buses= '';
+    this.buses = '';
     let source_id = this.ownerFareForm.controls.source_id.value;
     let destination_id = this.ownerFareForm.controls.destination_id.value;
-    const BusOperator={
-      USER_BUS_OPERATOR_ID:localStorage.getItem("BUS_OPERATOR_ID"),
-      source_id:this.ownerFareForm.controls.source_id.value,
-      destination_id : this.ownerFareForm.controls.destination_id.value,      
+    const BusOperator = {
+      USER_BUS_OPERATOR_ID: localStorage.getItem("BUS_OPERATOR_ID"),
+      source_id: this.ownerFareForm.controls.source_id.value,
+      destination_id: this.ownerFareForm.controls.destination_id.value,
     };
 
-    if(BusOperator.USER_BUS_OPERATOR_ID!="" && localStorage.getItem('ROLE_ID')!= '1')
-    {
+    if (BusOperator.USER_BUS_OPERATOR_ID != "" && localStorage.getItem('ROLE_ID') != '1') {
       // findbySource
       this.busService.findbySource(BusOperator).subscribe(
         res => {
@@ -429,10 +424,9 @@ export class OwnerfareComponent implements OnInit {
           this.buses.map((i: any) => { i.testing = i.name + ' - ' + i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
         }
       );
-      
+
     }
-    else
-    {
+    else {
       if (source_id != null && destination_id != null) {
         this.spinner.show();
         this.busService.findSource(source_id, destination_id).subscribe(
@@ -440,7 +434,7 @@ export class OwnerfareComponent implements OnInit {
             this.buses = res.data;
             this.buses.map((i: any) => { i.testing = i.name + ' - ' + i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
             this.spinner.hide();
-            
+
           }
         );
       }
@@ -458,58 +452,31 @@ export class OwnerfareComponent implements OnInit {
 
   addOwnerFare() {
     let id: any = this.editownerFareForm.value.id;
-      if (id == null) {
-        if(this.ownerFareForm.value.date == null){
-          this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
-          this.spinner.hide();
-          return;
-        }
-        else{
-          const data = {
-            date: this.ownerFareForm.value.date,
-            seater_price: this.ownerFareForm.value.seater_price,
-            sleeper_price: this.ownerFareForm.value.sleeper_price,
-            reason: this.ownerFareForm.value.reason,
-            bus_operator_id: localStorage.getItem('OPERATOR_ID'),
-            source_id: this.ownerFareForm.value.source_id,
-            destination_id: this.ownerFareForm.value.destination_id,
-            created_by: localStorage.getItem('USERNAME'),
-            bus_id: this.ownerFareForm.value.bus_id,
-          };
-          this.ownerfareService.create(data).subscribe(
-            resp => {
-              if (resp.status == 1) {
-                this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
-                this.modalReference.close();
-                this.ResetAttributes();
-                this.loadServices();
-                this.refresh();
-              }
-              else {
-                this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
-                this.spinner.hide();
-              }
-            });
-        }        
+    if (id == null) {
+      if (this.ownerFareForm.value.date == null) {
+        this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
+        this.spinner.hide();
+        return;
       }
-      else {  
+      else {
         const data = {
-          date: this.editownerFareForm.value.date,
-          seater_price: this.editownerFareForm.value.seater_price,
-          sleeper_price: this.editownerFareForm.value.sleeper_price,
-          reason: this.editownerFareForm.value.reason,
+          date: this.ownerFareForm.value.date,
+          seater_price: this.ownerFareForm.value.seater_price,
+          sleeper_price: this.ownerFareForm.value.sleeper_price,
+          reason: this.ownerFareForm.value.reason,
           bus_operator_id: localStorage.getItem('OPERATOR_ID'),
-          source_id: this.editownerFareForm.value.source_id,
-          destination_id: this.editownerFareForm.value.destination_id,
+          source_id: this.ownerFareForm.value.source_id,
+          destination_id: this.ownerFareForm.value.destination_id,
           created_by: localStorage.getItem('USERNAME'),
-          bus_id: this.editownerFareForm.value.bus_id,
+          bus_id: this.ownerFareForm.value.bus_id,
         };
-        this.ownerfareService.update(id, data).subscribe(
+        this.ownerfareService.create(data).subscribe(
           resp => {
             if (resp.status == 1) {
               this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
               this.modalReference.close();
               this.ResetAttributes();
+              this.loadServices();
               this.refresh();
             }
             else {
@@ -518,12 +485,39 @@ export class OwnerfareComponent implements OnInit {
             }
           });
       }
+    }
+    else {
+      const data = {
+        date: this.editownerFareForm.value.date,
+        seater_price: this.editownerFareForm.value.seater_price,
+        sleeper_price: this.editownerFareForm.value.sleeper_price,
+        reason: this.editownerFareForm.value.reason,
+        bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+        source_id: this.editownerFareForm.value.source_id,
+        destination_id: this.editownerFareForm.value.destination_id,
+        created_by: localStorage.getItem('USERNAME'),
+        bus_id: this.editownerFareForm.value.bus_id,
+      };
+      this.ownerfareService.update(id, data).subscribe(
+        resp => {
+          if (resp.status == 1) {
+            this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
+            this.modalReference.close();
+            this.ResetAttributes();
+            this.refresh();
+          }
+          else {
+            this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+            this.spinner.hide();
+          }
+        });
+    }
   }
 
   editOwnerFare(event: Event, id: any) {
     this.spinner.show();
     this.ownerFareRecord = this.ownerFares[id];
-    
+
     // this.busOperatorService.readAll().subscribe(
     //   res => {
     //     this.busoperators = res.data;
@@ -642,29 +636,27 @@ export class OwnerfareComponent implements OnInit {
   fromDate: NgbDateStruct;
   toDate: NgbDateStruct;
 
-  _datesSelected:NgbDateStruct[]=[]; 
+  _datesSelected: NgbDateStruct[] = [];
 
   @Input()
-  set datesSelected(value:NgbDateStruct[])  
-  {
-     this._datesSelected=value;
-     
+  set datesSelected(value: NgbDateStruct[]) {
+    this._datesSelected = value;
+
   }
-  get datesSelected():NgbDateStruct[]
-  {
-    
-    return this._datesSelected?this._datesSelected:[];
+  get datesSelected(): NgbDateStruct[] {
+
+    return this._datesSelected ? this._datesSelected : [];
   }
 
-  @Output() datesSelectedChange=new EventEmitter<NgbDateStruct[]>();
+  @Output() datesSelectedChange = new EventEmitter<NgbDateStruct[]>();
 
- 
 
-  onDateSelection(event:any,date: NgbDateStruct) {
+
+  onDateSelection(event: any, date: NgbDateStruct) {
 
     event.target.parentElement.blur();  //make that not appear the outline
     if (!this.fromDate && !this.toDate) {
-      if (event.ctrlKey==true)  //If is CrtlKey pressed
+      if (event.ctrlKey == true)  //If is CrtlKey pressed
         this.fromDate = date;
       else
         this.addDate(date);
@@ -673,43 +665,40 @@ export class OwnerfareComponent implements OnInit {
 
     } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
       this.toDate = date;
-      this.addRangeDate(this.fromDate,this.toDate);
-      this.fromDate=null;
-      this.toDate=null;
+      this.addRangeDate(this.fromDate, this.toDate);
+      this.fromDate = null;
+      this.toDate = null;
     } else {
       this.toDate = null;
       this.fromDate = date;
     }
   }
 
-  addDate(date:NgbDateStruct)
-  {
-      let index=this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year);
-      if (index>=0)       //If exist, remove the date
-        this.datesSelected.splice(index,1);
-      else   //a simple push
-        this.datesSelected.push(date);
-        // console.log(this.datesSelected);
-        this.ownerFareForm.controls['date'].setValue(this.datesSelected);
-    }
-    addRangeDate(fromDate:NgbDateStruct,toDate:NgbDateStruct)
+  addDate(date: NgbDateStruct) {
+    let index = this.datesSelected.findIndex(f => f.day == date.day && f.month == date.month && f.year == date.year);
+    if (index >= 0)       //If exist, remove the date
+      this.datesSelected.splice(index, 1);
+    else   //a simple push
+      this.datesSelected.push(date);
+    // console.log(this.datesSelected);
+    this.ownerFareForm.controls['date'].setValue(this.datesSelected);
+  }
+  addRangeDate(fromDate: NgbDateStruct, toDate: NgbDateStruct) {
+    //We get the getTime() of the dates from and to
+    let from = new Date(fromDate.year + "-" + fromDate.month + "-" + fromDate.day).getTime();
+    let to = new Date(toDate.year + "-" + toDate.month + "-" + toDate.day).getTime();
+    for (let time = from; time <= to; time += (24 * 60 * 60 * 1000)) //add one day
     {
-        //We get the getTime() of the dates from and to
-        let from=new Date(fromDate.year+"-"+fromDate.month+"-"+fromDate.day).getTime();
-        let to=new Date(toDate.year+"-"+toDate.month+"-"+toDate.day).getTime();
-        for (let time=from;time<=to;time+=(24*60*60*1000)) //add one day
-        {
-            let date=new Date(time);
-            //javascript getMonth give 0 to January, 1, to February...
-            this.addDate({year:date.getFullYear(),month:date.getMonth()+1,day:date.getDate()});
-        }   
-        this.datesSelectedChange.emit(this.datesSelected);
+      let date = new Date(time);
+      //javascript getMonth give 0 to January, 1, to February...
+      this.addDate({ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() });
     }
-    //return true if is selected
-    isDateSelected(date:NgbDateStruct)
-    {
-        return (this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year)>=0);
-    }
+    this.datesSelectedChange.emit(this.datesSelected);
+  }
+  //return true if is selected
+  isDateSelected(date: NgbDateStruct) {
+    return (this.datesSelected.findIndex(f => f.day == date.day && f.month == date.month && f.year == date.year) >= 0);
+  }
   isHovered = date => this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate);
   isInside = date => after(date, this.fromDate) && before(date, this.toDate);
   isFrom = date => equals(date, this.fromDate);
