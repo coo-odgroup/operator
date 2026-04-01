@@ -129,7 +129,7 @@ thead {
 
 .ticket-card {
   display: flex;
-  height: 140px;
+  height: auto;
   width: 100%;
   background: #fff;
   border-radius: 18px;
@@ -155,6 +155,8 @@ thead {
   flex: 1;
   padding: 7px 5px;
   width: 80px;
+  margin: auto 0;
+  display: table;
 }
 
 
@@ -174,7 +176,7 @@ thead {
 
 .route {
   overflow: hidden;
-  height: 20px;
+  height: auto;
 
 }
 
@@ -190,7 +192,7 @@ thead {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 140px;
+  height: auto;
   border-radius: 0 15px 15px 20px;
 }
 
@@ -221,7 +223,7 @@ thead {
 
 @media screen and (min-width: 320px) and (max-width: 374px) {
   .ticket-card {
-    height: 120px;
+    height: auto;
     margin-bottom: 3px !important;
 }
 .ticket-center h3{
@@ -235,7 +237,7 @@ thead {
  .ticket-right{
     width: 80px;
     padding: 1px 0;
-    height: 120px;
+    height: auto;
 }
 .ticket-right div{
     padding: 1px;
