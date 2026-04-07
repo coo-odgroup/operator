@@ -6,7 +6,7 @@
     text-align: center;
     box-shadow: 0 -2px 6px 0 #0009;
     display: none;
-    z-index: 9999;
+    z-index: 999;
 }
 
 .mobile-display ul {
@@ -47,7 +47,7 @@
     padding: 20px;
     position: fixed;
     width: 100%;
-    z-index: 9998;
+    z-index: 999;
     top: 50px;
     height: 90%;
     overflow-y: auto;
