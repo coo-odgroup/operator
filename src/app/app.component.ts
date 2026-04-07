@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 
@@ -10,29 +10,17 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router, private auth: AuthService) {
+  constructor(private router: Router,private auth: AuthService) { 
 
     this.auth.getToken().subscribe(
-      res => {
-        localStorage.setItem('AccessToken', res.data);
+      res=>{
+        localStorage.setItem('AccessToken',res.data);         
       }
     );
 
   }
 
   ngOnInit() {
-    const isCleared = localStorage.getItem('force_clear_v1');
-
-    if (!isCleared) {
-      // First time → not set yet
-
-      localStorage.clear();
-      sessionStorage.clear();
-
-      localStorage.setItem('force_clear_v1', 'done');
-      window.location.href = '/login';
-    }
-    
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
