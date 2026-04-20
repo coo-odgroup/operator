@@ -1,0 +1,247 @@
+import { Component, OnInit } from '@angular/core';
+import { ReportsService } from '../../services/reports.service';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { BusOperatorService } from './../../services/bus-operator.service';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CompleteReport } from '../../model/completereport';
+import { LocationService } from '../../services/location.service';
+import { BusService } from '../../services/bus.service';
+import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { Constants } from '../../constant/constant';
+import * as XLSX from 'xlsx';
+import { NgxSpinnerService } from "ngx-spinner";
+
+
+
+
+@Component({
+  selector: 'app-completereport',
+  templateUrl: './cancelreport.component.html',
+  styleUrls: ['./cancelreport.component.scss']
+})
+export class CancelreportComponent implements OnInit {
+
+  public searchFrom: FormGroup | undefined;
+
+  completeReport: CompleteReport[] = [];
+  completeReportRecord: CompleteReport = {} as CompleteReport;
+
+  completedata: any;
+  totalfare = 0;
+  busoperators: any;
+  url: any;
+  locations: any;
+  buses: any;
+
+  hoveredDate: NgbDate | null = null;
+  fromDate: NgbDate | null;
+  toDate: NgbDate | null;
+  showSection = false;
+
+  constructor(
+    private spinner: NgxSpinnerService,
+    private http: HttpClient,
+    private rs: ReportsService,
+    private busOperatorService: BusOperatorService,
+    private fb: FormBuilder,
+    private locationService: LocationService,
+    private busService: BusService,
+    private calendar: NgbCalendar,
+    public formatter: NgbDateParserFormatter
+  ) {
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getToday();
+  }
+
+  ngOnInit(): void {
+    this.spinner.show();
+
+    this.searchFrom = this.fb.group({
+      bus_operator_id: [null],
+      rangeFromDate: [null],
+      rangeToDate: [null],
+      payment_id: [null],
+      bus_id: [null],
+      date_type: ['journey'],
+      pnr: [null],
+      rows_number: 25,
+      source_id: [null],
+      destination_id: [null]
+    })
+
+
+    this.search();
+    this.findOperator(localStorage.getItem('OPERATOR_ID'));
+    // this.findOperator(157);
+
+  }
+  title = 'angular-app';
+  fileName = 'Complete-Report.xlsx';
+  exportexcel(): void {
+
+    /* pass here the table id */
+    let element = document.getElementById('export-section');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+
+  }
+
+  page(label: any) {
+    return label;
+  }
+  search(pageurl = "") {
+    this.spinner.show();
+    this.completeReportRecord = this.searchFrom?.value;
+
+    const data = {
+      // bus_operator_id: 157,
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
+      bus_id: this.completeReportRecord.bus_id,
+      date_type: this.completeReportRecord.date_type,
+      pnr: this.completeReportRecord.pnr,
+      rows_number: this.completeReportRecord.rows_number,
+      rangeFromDate: this.completeReportRecord.rangeFromDate
+        ? this.formatDate(this.completeReportRecord.rangeFromDate)
+        : null,
+
+      rangeToDate: this.completeReportRecord.rangeToDate
+        ? this.formatDate(this.completeReportRecord.rangeToDate)
+        : null
+
+    };
+
+    if (pageurl != "") {
+      this.rs.completepaginationReport(pageurl, data).subscribe(
+        res => {
+          this.completedata = res.data;
+          this.spinner.hide();
+        }
+      );
+    }
+    else {
+      this.rs.completeReport(data).subscribe(
+        res => {
+          this.completedata = res.data;
+          this.spinner.hide();
+        }
+      );
+    }
+
+  }
+
+  formatDate(dateValue: string | number | Date) {
+    const date = new Date(dateValue);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
+
+  findOperator(id: any) {
+    let operatorId = id;
+    if (operatorId) {
+      this.busService.getByOperaor(operatorId).subscribe(
+        res => {
+          this.buses = res.data;
+          this.buses.map((i: any) => { i.busData = i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
+          // this.buses.map((i: any) => { i.busData = i.name + ' - ' + i.bus_number ; return i; });
+          // console.log(this.buses);
+        }
+      );
+    }
+
+  }
+
+
+
+
+  ///////////////Function to Copy data to Clipboard/////////////////
+  copyMessage($event: any) {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = $event;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
+
+  refresh() {
+    this.spinner.show();
+    this.searchFrom = this.fb.group({
+      bus_operator_id: [null],
+      rangeFromDate: [null],
+      rangeToDate: [null],
+      payment_id: [null],
+      pnr: [null],
+      bus_id: [null],
+      date_type: ['journey'],
+      rows_number: 10,
+      // rows_number: Constants.RecordLimit,
+      source_id: [null],
+      destination_id: [null]
+
+    })
+    this.search();
+  }
+
+  toggleSection() {
+    this.showSection = !this.showSection;
+  }
+
+  //   loadServices() {
+
+  //     this.busOperatorService.readAll().subscribe(
+  //       res => {
+  //         this.busoperators = res.data;
+  //         this.busoperators.map((i: any) => { i.operatorData = i.organisation_name + '    (  ' + i.operator_name  + '  )'; return i; });
+
+  //       }
+  //     );
+  //     this.locationService.readAll().subscribe(
+  //       records=>{
+  //         this.locations=records.data;
+  //       }
+  //     );
+  //   }
+
+  //   findSource(event:any)
+  // {
+  //   let source_id=this.searchFrom.controls.source_id.value;
+  //   let destination_id=this.searchFrom.controls.destination_id.value;
+
+
+  //   if(source_id!="" && destination_id!="")
+  //   {
+  //     this.busService.findSource(source_id,destination_id).subscribe(
+  //       res=>{
+  //         this.buses=res.data;
+  //       }
+  //     );
+  //   }
+  //   else
+  //   {
+  //     this.busService.all().subscribe(
+  //       res=>{
+  //         this.buses=res.data;
+  //       }
+  //     );
+  //   }
+  // }
+
+
+
+}
