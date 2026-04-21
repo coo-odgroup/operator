@@ -79,7 +79,7 @@ export class ReportsService {
 
 
   completeReport(data): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + '/cancelreport',JSON.stringify(data), this.httpOptions).pipe(
+    return this.httpClient.post<any>(this.apiURL + '/completereport',JSON.stringify(data), this.httpOptions).pipe(
       catchError(this.errorHandler)
     )
   }
