@@ -231,10 +231,21 @@ export class SeatblockComponent implements OnInit {
     };
   }
 
+  // OpenModal(content: any) {
+  //   this.modalReference = this.modalService.open(content, {
+  //     scrollable: true,
+  //     size: 'xl',
+  //   });
+  //   this.seatLengthData = 0;
+  // }
+
   OpenModal(content: any) {
     this.modalReference = this.modalService.open(content, {
       scrollable: true,
       size: 'xl',
+      backdrop: 'static',
+      keyboard: false,
+      centered: true,
     });
     this.seatLengthData = 0;
   }
