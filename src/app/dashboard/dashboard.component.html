@@ -241,99 +241,73 @@
 
   <div class="dashboard-header">
 
-    <div class="dashboard-left">
+    <!-- Top Row -->
+    <div class="dashboard-header-top">
 
-      <h2 class="dashboard-title">
+      <div class="dashboard-left">
+        <h2 class="dashboard-title">
+          Welcome,
+          <span>{{userName}}</span>
+        </h2>
+        <!-- 
+        <p class="dashboard-subtitle">
+          Welcome back! Here's what's happening with your buses today.
+        </p> -->
+      </div>
 
-        Good Morning 👋
+      <div class="dashboard-right">
+        <div class="dashboard-tabs">
 
-        <span>{{userName}}</span>
+          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='Today'}"
+            (click)="getall('Today');opRevenue('Today');opBooking('Today')">
+            <i class="fa fa-sun"></i>
+            <span>Today</span>
+          </button>
 
-      </h2>
+          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Week'}"
+            (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')">
+            <i class="fa fa-calendar"></i>
+            <span>This Week</span>
+          </button>
 
-      <p class="dashboard-subtitle">
+          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Month'}"
+            (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')">
+            <i class="fa fa-th-large"></i>
+            <span>This Month</span>
+          </button>
 
-        Welcome back! Here's what's happening with your buses today.
+          <button type="button" class="filter-btn" [ngClass]="{'active': showCustomFilter}"
+            (click)="toggleCustomFilter()">
+            <i class="fa fa-filter"></i>
+            <span>Custom</span>
+          </button>
 
-      </p>
-
-    </div>
-
-    <div class="dashboard-right">
-
-      <div class="dashboard-tabs">
-
-        <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='Today'}"
-          (click)="getall('Today');opRevenue('Today');opBooking('Today')">
-
-          <i class="fa fa-sun"></i>
-
-          <span>Today</span>
-
-        </button>
-
-        <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Week'}"
-          (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')">
-
-          <i class="fa fa-calendar"></i>
-
-          <span>This Week</span>
-
-        </button>
-
-        <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Month'}"
-          (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')">
-
-          <i class="fa fa-th-large"></i>
-
-          <span>This Month</span>
-
-        </button>
-
-        <button type="button" class="filter-btn" [ngClass]="{'active': showCustomFilter}"
-          (click)="toggleCustomFilter()">
-
-          <i class="fa fa-sliders"></i>
-
-          <span>Custom</span>
-
-        </button>
-
+        </div>
       </div>
 
     </div>
 
-  </div>
+    <!-- Filter Inside Header -->
+    <div class="custom-filter-box" *ngIf="showCustomFilter">
 
-  <div class="custom-filter-box" *ngIf="showCustomFilter">
+      <div class="row align-items-end">
 
-    <div class="row align-items-end">
+        <div class="col-lg-3 col-md-4">
+          <label>From Date</label>
+          <input type="date" class="form-control" [(ngModel)]="fromDate">
+        </div>
 
-      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="col-lg-3 col-md-4">
+          <label>To Date</label>
+          <input type="date" class="form-control" [(ngModel)]="toDate">
+        </div>
 
-        <label>From Date</label>
-
-        <input type="date" class="form-control" [(ngModel)]="fromDate">
-
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-3">
-
-        <label>To Date</label>
-
-        <input type="date" class="form-control" [(ngModel)]="toDate">
-
-      </div>
-
-      <div class="col-lg-2 col-md-4 mb-3">
-
-        <button class="btn btn-primary apply-btn w-100" (click)="applyCustomFilter()">
-
-          <i class="fa fa-search mr-2"></i>
-
-          Apply Filter
-
-        </button>
+        <div class="col-lg-2 col-md-3">
+          <button class="btn apply-btn w-100" (click)="applyCustomFilter()">
+            <i class="fa fa-search mr-2"></i>
+            Apply Filter
+          </button>
+        </div>
 
       </div>
 
@@ -351,7 +325,7 @@
 
     <!-- Active Bus -->
 
-    <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
 
       <div class="dashboard-card blue-card">
 
@@ -381,7 +355,7 @@
 
     <!-- Total Booking -->
 
-    <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
 
       <div class="dashboard-card green-card">
 
@@ -411,7 +385,7 @@
 
     <!-- Upcoming -->
 
-    <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
 
       <div class="dashboard-card yellow-card">
 
@@ -441,7 +415,7 @@
 
     <!-- Cancelled -->
 
-    <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
 
       <div class="dashboard-card red-card">
 
@@ -480,7 +454,7 @@
 
     <!-- Booking -->
 
-    <div class="col-xl-6 col-lg-12 mb-4">
+    <div class="col-xl-6 col-lg-12">
 
       <div class="analytics-card">
 
@@ -528,7 +502,7 @@
 
     <!-- Revenue -->
 
-    <div class="col-xl-6 col-lg-12 mb-4">
+    <div class="col-xl-6 col-lg-12">
 
       <div class="analytics-card">
 
