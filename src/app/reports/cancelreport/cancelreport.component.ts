@@ -117,7 +117,7 @@ export class CancelreportComponent implements OnInit {
     };
 
     if (pageurl != "") {
-      this.rs.completepaginationReport(pageurl, data).subscribe(
+      this.rs.cancelticketpaginationReport(pageurl, data).subscribe(
         res => {
           this.completedata = res.data;
           this.spinner.hide();
@@ -125,7 +125,7 @@ export class CancelreportComponent implements OnInit {
       );
     }
     else {
-      this.rs.completeReport(data).subscribe(
+      this.rs.cancelticketReport(data).subscribe(
         res => {
           this.completedata = res.data;
           this.spinner.hide();
