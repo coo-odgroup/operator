@@ -817,6 +817,10 @@ thead {
   margin: 10px 5px;
 }
 
+.page-link {
+  border: 1px solid #dee2e6 !important;
+}
+
 
 /*=========================================
         BOOKING REPORT - MOBILE ONLY
@@ -851,6 +855,7 @@ thead {
     justify-content: space-between;
     align-items: center;
     padding: 14px 16px;
+    border: 1px solid #3455a5;
 
   }
 
@@ -859,6 +864,14 @@ thead {
 
     display: none;
 
+  }
+
+  .btn-search{
+    width: 100%;
+  }
+
+  .btn-reset{
+    width: 100%;
   }
 
   .booking-search-btn {
@@ -916,6 +929,7 @@ thead {
     padding: 16px;
 
     margin-bottom: 15px;
+    border: 1px solid #3455a5;
 
   }
 
@@ -971,7 +985,7 @@ thead {
 
     box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
 
-    border: 1px solid #dde9ff;
+    border: 1px solid #3455a5;
 
   }
 
@@ -1011,7 +1025,7 @@ Top
 
     margin-top: 3px;
 
-    color: #7b879d;
+    color: #1b2155;
 
     font-size: 12px;
 
@@ -1086,14 +1100,13 @@ Top
   }
 
   .booking-user small {
-
-    display: block;
-
-    color: #7b879d;
-
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #1b2155;
     margin-top: 2px;
-
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 700;
 
   }
 
@@ -1123,9 +1136,9 @@ Top
 
     border-radius: 6px;
 
-    font-size: 11px;
+    font-size: 14px;
 
-    font-weight: 700;
+    font-weight: 800;
 
   }
 
@@ -1148,6 +1161,7 @@ Top
     padding: 12px;
 
     margin-bottom: 14px;
+    border: 1px solid #3455a5;
 
   }
 
@@ -1155,9 +1169,9 @@ Top
 
     width: 40%;
 
-    font-size: 13px;
+    font-size: 15px;
 
-    font-weight: 600;
+    font-weight: 700;
 
     color: #1b2155;
 
@@ -1191,7 +1205,7 @@ Top
 
     background: #fafcff;
 
-    border: 1px solid #edf2f7;
+    border: 1px solid #3455a5;
 
     border-radius: 12px;
 
@@ -1219,7 +1233,7 @@ Top
 
     display: block;
 
-    font-size: 13px;
+    font-size: 15px;
 
     color: #1b2155;
 
