@@ -48,6 +48,14 @@ const OperatorItems =[{
       url: 'reports/completeReport'
     },
     {
+      id: 'cancelerepor',
+      title: 'Cancel Report',
+    
+      type: 'item',
+      icon: 'feather icon-list',
+      url: 'reports/cancelReport'
+    },
+    {
       id: 'BusCancellation',
       title: 'Bus Cancellation',
       type: 'item',
@@ -75,13 +83,13 @@ const OperatorItems =[{
       icon:'feather icon-plus-square',
       url: 'bookingmanagement/extraseatblock'
     },
-    {
-      id: 'BusSchedule',
-      title: 'Bus Schedule',
-      type: 'item',
-      icon:'feather icon-calendar',
-      url: 'busmanagement/busschedule'
-    },
+    // {
+    //   id: 'BusSchedule',
+    //   title: 'Bus Schedule',
+    //   type: 'item',
+    //   icon:'feather icon-calendar',
+    //   url: 'busmanagement/busschedule'
+    // },
     {
       id: 'Owner Fare',
       title: 'Manage Fare',

@@ -1,4 +1,6 @@
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
 
 <div class="row">
   <div class="col-sm-12">
@@ -92,8 +94,8 @@
                 <div class="overlay-edit">
                   <button type="button" (click)="editRole($event, i); OpenModal(content);"
                     class="btn btn-icon btn-success"><i class="feather icon-edit"></i></button>
-                  <button type="button" (click)="deleteRole(confirmDialog,roless.id)"
-                    class="btn btn-icon btn-danger"><i class="feather icon-trash-2"></i></button>
+                  <button type="button" (click)="deleteRole(confirmDialog,roless.id)" class="btn btn-icon btn-danger"><i
+                      class="feather icon-trash-2"></i></button>
                 </div>
               </td>
             </tr>
@@ -106,32 +108,31 @@
         </table>
         <div *ngIf="pagination?.length!= 0" class="hide_print container">
           <div class="row">
-            <div class="col-3">             
-                <div class="col-12">
-                  <p class=" row mt-3 ml-1"> Showing {{all?.count}} of {{all?.total}} records. </p>
-                </div> 
+            <div class="col-3">
+              <div class="col-12">
+                <p class=" row mt-3 ml-1"> Showing {{all?.count}} of {{all?.total}} records. </p>
+              </div>
             </div>
             <div class="col-9">
               <div class="d-flex flex-row-reverse mb-4 text-center" *ngIf="pagination?.links">
                 <nav class="my-1 pt-1 ">
-                    <ul class="pagination pagination-circle pg-blue mb-0">
-                        <li (click)="search(pagination.first_page_url,statusLabel)"
-                            class="page-item {{ pagination.current_page == 1 ? 'disabled' : '' }} clearfix d-none d-md-block">
-                            <a class="page-link">First</a>
-                        </li>
-                        <li class="page-item " *ngFor="let b of pagination.links ; let i = index ">
-                            <a class="page-link {{ pagination.current_page == b.label ? 'active' : '' }}"
-                                (click)="(b.url) ? search(b.url) : ''"
-                                [innerHTML]="page(b.label)"></a>
-                        </li>
-                        <li class="page-item {{ pagination.last_page == 1 ? 'disabled' : '' }} clearfix d-none d-md-block"
-                            (click)="search(pagination.last_page_url,statusLabel)">
-                            <a class="page-link">Last</a>
-                        </li>
-                    </ul>
+                  <ul class="pagination pagination-circle pg-blue mb-0">
+                    <li (click)="search(pagination.first_page_url,statusLabel)"
+                      class="page-item {{ pagination.current_page == 1 ? 'disabled' : '' }} clearfix d-none d-md-block">
+                      <a class="page-link">First</a>
+                    </li>
+                    <li class="page-item " *ngFor="let b of pagination.links ; let i = index ">
+                      <a class="page-link {{ pagination.current_page == b.label ? 'active' : '' }}"
+                        (click)="(b.url) ? search(b.url) : ''" [innerHTML]="page(b.label)"></a>
+                    </li>
+                    <li class="page-item {{ pagination.last_page == 1 ? 'disabled' : '' }} clearfix d-none d-md-block"
+                      (click)="search(pagination.last_page_url,statusLabel)">
+                      <a class="page-link">Last</a>
+                    </li>
+                  </ul>
                 </nav>
+              </div>
             </div>
-           </div>  
           </div>
         </div>
       </div>
@@ -182,8 +183,8 @@
                         <div class="col-sm-8">
                           <input type="hidden" formControlName="id" [value]="roleRecord.id">
                           <input type="text" class="form-control" placeholder="Enter Role" required
-                            formControlName="name" [value]="roleRecord.name" placement="bottom"
-                            ngbTooltip="Enter Role" (change)="formatText($event)" />
+                            formControlName="name" [value]="roleRecord.name" placement="bottom" ngbTooltip="Enter Role"
+                            (change)="formatText($event)" />
                           <span class="text-danger"
                             *ngIf="form.controls['name'].touched && form.controls['name'].hasError('required')">
                             Role is required! </span>

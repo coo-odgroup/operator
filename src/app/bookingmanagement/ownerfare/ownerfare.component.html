@@ -157,9 +157,34 @@
       </section>
 
       <button type="button" class="cancel-btn-kis sml_input cancel-btn mr-1"
-        (click)="ResetAttributes();OpenModal(content)">Add Owner Fare</button>
-      <button class="serch-btn" (click)="toggleSection()">
+        (click)="ResetAttributes(); OpenModal(content)">
+
+        Add Owner Fare
+
+        <i class="fas fa-info-circle ms-2 text-info info-icon"
+          ngbTooltip="You can cancel your bus only if it is cancelled. If seats are booked for that date, cancellation is not allowed."
+          placement="left" container="body" triggers="hover" (click)="$event.stopPropagation()">
+        </i>
+
+      </button>
+
+      <!-- <button class="serch-btn" (click)="toggleSection()">
         <i [ngClass]="showSection ? 'fas fa-times' : 'fas fa-filter'"></i> &nbsp; {{ showSection ? 'Close' : 'Search' }}
+      </button> -->
+
+      <button class="serch-btn d-flex align-items-center" (click)="toggleSection()">
+
+        <i [ngClass]="showSection ? 'fas fa-times' : 'fas fa-filter'"></i>
+        <span class="ms-2">
+          {{ showSection ? 'Close' : 'Search' }}
+        </span>
+
+        <!-- INFO ICON -->
+        <!-- <i class="fas fa-info-circle ms-2 text-info"
+          ngbTooltip="Search your fare increase / decrease details which was done by you by selecting date range"
+          placement="left" container="body" triggers="hover" (click)="$event.stopPropagation()">
+        </i> -->
+
       </button>
 
       <div class="no-bdr text-right mt-3" *ngIf="ownerFares?.length != 0">

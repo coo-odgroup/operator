@@ -16,7 +16,7 @@ import { Constants } from '../constant/constant';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  userName = localStorage.getItem('USERNAME');
   public RangeText: any;
   public supportChartData1: any;
   public supportChartData2: any;
@@ -48,6 +48,12 @@ export class DashboardComponent implements OnInit {
   pnr_date: any;
   pnr_label: any;
   searchfor: string;
+
+  showCustomFilter = false;
+
+  fromDate: any = "";
+
+  toDate: any = "";
 
   user_role: any = localStorage.getItem("ROLE_ID");
   private apiURL = Constants.BASE_URL;
@@ -199,20 +205,21 @@ export class DashboardComponent implements OnInit {
     this.searchfor = 'Today';
     this.opBooking("Today");
     this.opRevenue("Today");
+
   }
 
   Highcharts: typeof Highcharts = Highcharts;
   updateFlag = false;
 
   //Bus wise Booking
-  opBooking(range:any) {
+  opBooking(range: any) {
     const reqData = {
       operator_id: this.operatorId,
       rangeFor: range,
     }
-    
+
     console.log(reqData);
-    
+
     this.http.post<any>(this.apiURL + '/operator-booking', reqData).subscribe({
       next: (res) => {
 
@@ -293,7 +300,7 @@ export class DashboardComponent implements OnInit {
   };
 
   //Bus Wise Revenue
-  opRevenue(range:any) {
+  opRevenue(range: any) {
     const reqData = {
       operator_id: this.operatorId,
       rangeFor: range,
@@ -315,7 +322,7 @@ export class DashboardComponent implements OnInit {
             ...(this.opRevenuechart.xAxis as Highcharts.XAxisOptions),
             categories
           },
-          
+
           series: [{
             name: 'Total Revenue',
             type: 'column',
@@ -356,7 +363,7 @@ export class DashboardComponent implements OnInit {
     },
 
     tooltip: {
-      pointFormat: '<b>{point.y}</b> bookings'
+      pointFormat: '<b>₹ {point.y}</b> Revenue'
     },
 
     plotOptions: {
@@ -378,6 +385,39 @@ export class DashboardComponent implements OnInit {
       enabled: false
     }
   };
+
+  toggleCustomFilter() {
+
+    this.showCustomFilter = !this.showCustomFilter;
+
+  }
+
+  applyCustomFilter() {
+
+    if (!this.fromDate || !this.toDate) {
+      return;
+    }
+
+    this.searchfor = "Custom";
+
+    const reqData = {
+      operator_id: this.operatorId,
+      rangeFor: "Custom",
+      rangeFrom: this.fromDate,
+      rangeTo: this.toDate
+    };
+
+    console.log(reqData);
+
+    // Call your APIs here
+
+    this.getall(reqData);
+
+    this.opBooking(reqData);
+
+    this.opRevenue(reqData);
+
+  }
 
 
   getall(range: any) {

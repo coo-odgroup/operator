@@ -65,7 +65,7 @@ export class BuscancellationComponent implements OnInit {
   get busesFormGroup() {
     return this.busCancellationForm.get('buses') as FormArray;
   }
-  constructor(private locationService:LocationService,private buscanCellationService: BuscancellationService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busOperatorService: BusOperatorService, private busService: BusService, private spinner: NgxSpinnerService,) {
+  constructor(private locationService: LocationService, private buscanCellationService: BuscancellationService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busOperatorService: BusOperatorService, private busService: BusService, private spinner: NgxSpinnerService,) {
     this.isSubmit = false;
     this.busCancellationRecord = {} as Buscancellation;
     config.backdrop = 'static';
@@ -137,24 +137,24 @@ export class BuscancellationComponent implements OnInit {
     // console.log( this.getcurrentyears());
   }
 
-  
-  
-  getFormattedDate(){
-    
+
+
+  getFormattedDate() {
+
     var date = new Date();
     var transformDate = this.datePipe.transform(date, 'yyyy-MM-dd');
     return transformDate;
 
   }
-  getcurrentmonths(){
-    
+  getcurrentmonths() {
+
     var date = new Date();
     var transformmonth = this.datePipe.transform(date, 'MM');
     // console.log(transformmonth);
     return transformmonth;
   }
 
-  getcurrentyears(){ 
+  getcurrentyears() {
     var date = new Date();
     var transformyear = this.datePipe.transform(date, 'yyyy');
     // console.log(transformyear);
@@ -182,8 +182,13 @@ export class BuscancellationComponent implements OnInit {
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       source_id: this.searchForm.value.source_id,
       destination_id: this.searchForm.value.destination_id,
-      toDate: this.searchForm.value.toDate,
-      fromDate: this.searchForm.value.fromDate,
+      toDate: this.searchForm.value.toDate
+        ? this.formatDate(this.searchForm.value.toDate)
+        : null,
+
+      fromDate: this.searchForm.value.fromDate
+        ? this.formatDate(this.searchForm.value.fromDate)
+        : null,
       rows_number: this.searchForm.value.rows_number,
       USER_BUS_OPERATOR_ID: localStorage.getItem('USER_BUS_OPERATOR_ID')
     };
@@ -194,7 +199,7 @@ export class BuscancellationComponent implements OnInit {
         res => {
           this.busCancellations = res.data.data.data;
           this.pagination = res.data.data;
-          this.url= this.pagination.path+'?page='+this.pagination.current_page ;
+          this.url = this.pagination.path + '?page=' + this.pagination.current_page;
           this.all = res.data;
           this.spinner.hide();
 
@@ -206,10 +211,10 @@ export class BuscancellationComponent implements OnInit {
         res => {
           this.busCancellations = res.data.data.data;
           this.pagination = res.data.data;
-          this.url= this.pagination.path+'?page='+this.pagination.current_page ;
+          this.url = this.pagination.path + '?page=' + this.pagination.current_page;
           this.all = res.data;
           this.spinner.hide();
-       
+
         }
       );
     }
@@ -288,7 +293,7 @@ export class BuscancellationComponent implements OnInit {
   ResetAttributes() {
     this.getBusbyOperator();
     this.loadServices();
-    this.buses=[];
+    this.buses = [];
     this.showdates = '0';
     this.busCancellationRecord = {} as Buscancellation;
     this.busCancellationForm = this.fb.group({
@@ -326,7 +331,7 @@ export class BuscancellationComponent implements OnInit {
   getBusbyOperator() {
     this.spinner.show();
     // let operatorId = 157;
-  let operatorId = localStorage.getItem('OPERATOR_ID');
+    let operatorId = localStorage.getItem('OPERATOR_ID');
     if (operatorId) {
       this.busOperatorService.getBusbyOperator(operatorId).subscribe(
         resp => {
@@ -339,7 +344,7 @@ export class BuscancellationComponent implements OnInit {
 
 
   getBusScheduleEntryDatesFilter() {
-    if (this.busCancellationForm.value.month == null || this.busCancellationForm.value.year == null ||this.busCancellationForm.value.busLists == null)
+    if (this.busCancellationForm.value.month == null || this.busCancellationForm.value.year == null || this.busCancellationForm.value.busLists == null)
       return false;
 
 
@@ -352,8 +357,8 @@ export class BuscancellationComponent implements OnInit {
       response => {
         this.busDatas = response.data.busDatas;
         let counter = 0;
-    // console.log(this.busDatas);
-        
+        // console.log(this.busDatas);
+
         for (let bData of this.busDatas) {
           this.busesRecord = (<FormArray>this.busCancellationForm.controls['buses']) as FormArray;
           let busesGroup: FormGroup = this.fb.group({
@@ -368,59 +373,55 @@ export class BuscancellationComponent implements OnInit {
           let arraylen = this.DatesRecord.length;
           let data = this.busCancellationRecord.bus_cancelled_date;
           let canceldates = bData.cancelDates;
-          let caneldateArr=[] ; 
+          let caneldateArr = [];
           let count = 0;
           for (let canceldt of bData.cancelDates) {
-            caneldateArr[count]= this.pipe.transform(canceldt.cancelled_date, 'y-MM-dd');
+            caneldateArr[count] = this.pipe.transform(canceldt.cancelled_date, 'y-MM-dd');
             count++;
-         }
+          }
           // console.log(caneldateArr);
-          
-          let existingDate=false;
+
+          let existingDate = false;
           for (let eDate of bData.entryDates) {
 
             let dateformate = this.pipe.transform(eDate.entry_date, 'y-MM-dd');
-      
-            let isPresent=false;
-            
-            if(this.busCancellationRecord.bus_cancelled_date)
-            {
+
+            let isPresent = false;
+
+            if (this.busCancellationRecord.bus_cancelled_date) {
               isPresent = this.busCancellationRecord.bus_cancelled_date.some(function (el) {    ////checking the date in the array                      
-                return  el.cancelled_date === dateformate;               
+                return el.cancelled_date === dateformate;
               });
-           
-            }    
-              if(canceldates.length>0)
-            { 
-              existingDate = caneldateArr.some(function (el) { 
-              return  el === dateformate;
-                            
+
+            }
+            if (canceldates.length > 0) {
+              existingDate = caneldateArr.some(function (el) {
+                return el === dateformate;
+
               });
 
             }
 
-            if(this.ModalBtn=="Save")
-            {
+            if (this.ModalBtn == "Save") {
               if (existingDate) {
                 let newDatesgroup: FormGroup = this.fb.group({
                   entryDates: [eDate.entry_date],
-                  datechecked: [{ value: null, disabled: true}],
+                  datechecked: [{ value: null, disabled: true }],
                 })
                 this.DatesRecord.insert(arraylen, newDatesgroup);
-              }       
-              
+              }
+
               else {
                 let newDatesgroup: FormGroup = this.fb.group({
                   entryDates: [eDate.entry_date],
-  
+
                   datechecked: [null],
                 })
-                this.DatesRecord.insert(arraylen, newDatesgroup);            
+                this.DatesRecord.insert(arraylen, newDatesgroup);
               }
             }
-            if(this.ModalBtn=="Update")
-            {
-                    
+            if (this.ModalBtn == "Update") {
+
               if (isPresent) {
                 let newDatesgroup: FormGroup = this.fb.group({
                   entryDates: [eDate.entry_date],
@@ -431,11 +432,11 @@ export class BuscancellationComponent implements OnInit {
               else {
                 let newDatesgroup: FormGroup = this.fb.group({
                   entryDates: [eDate.entry_date],
-  
+
                   datechecked: [null],
                 })
-                this.DatesRecord.insert(arraylen, newDatesgroup);            
-  
+                this.DatesRecord.insert(arraylen, newDatesgroup);
+
               }
             }
 
@@ -463,11 +464,11 @@ export class BuscancellationComponent implements OnInit {
 
             // }
 
-            
-            
+
+
           }
-    
-         
+
+
           counter++;
         }
         response = [];
@@ -507,8 +508,8 @@ export class BuscancellationComponent implements OnInit {
     }
 
     this.locationService.readAll().subscribe(
-      records=>{
-        this.locations=records.data;
+      records => {
+        this.locations = records.data;
       }
     );
 
@@ -517,7 +518,7 @@ export class BuscancellationComponent implements OnInit {
     // this.spinner.show();
     let counter = 0;
     let id: any = "";
-      id= this.busCancellationRecord.id;
+    id = this.busCancellationRecord.id;
     const data = {
       bus_operator_id: this.busCancellationForm.value.bus_operator_id,
       cancelled_by: localStorage.getItem('USERNAME'),
@@ -531,74 +532,81 @@ export class BuscancellationComponent implements OnInit {
 
 
     data.buses[0].dateLists.forEach(function (value) {
-      if(value.datechecked == true)
-      {
+      if (value.datechecked == true) {
         counter++;
       }
 
-  });
-  //  console.log(id);
-  //  console.log(data);
-  //  return;
-  if(counter == 0)
-  {
-    this.notificationService.addToast({ title: Constants.ErrorTitle, msg:'Please Select a Date', type: Constants.ErrorType });
-            this.spinner.hide();
-  }
-  else
-  {
-    if(counter>5){ 
-      this.notificationService.addToast({ title: Constants.ErrorTitle, msg:'You Can`t block more than 5 Days', type: Constants.ErrorType });
+    });
+    //  console.log(id);
+    //  console.log(data);
+    //  return;
+    if (counter == 0) {
+      this.notificationService.addToast({ title: Constants.ErrorTitle, msg: 'Please Select a Date', type: Constants.ErrorType });
       this.spinner.hide();
-      return;
     }
-    else{
-      if (id == null) {
-     
-        this.buscanCellationService.create(data).subscribe(
-          resp => {
-            if (resp.status == 1) {
-              console.log(resp);
-              this.notificationService.addToast({
-                title: Constants.SuccessTitle, msg: resp.data,
-                type: Constants.SuccessType
-              });
-              this.modalReference.close();
-              this.ResetAttributes();
-              this.search(this.url);
-            }
-            else {
-              this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
-              this.spinner.hide();
-            }
-          });
+    else {
+      if (counter > 5) {
+        this.notificationService.addToast({ title: Constants.ErrorTitle, msg: 'You Can`t block more than 5 Days', type: Constants.ErrorType });
+        this.spinner.hide();
+        return;
       }
       else {
+        if (id == null) {
 
-        this.buscanCellationService.update(id, data).subscribe(
-          resp => {
-            if (resp.status == 1) {
-              this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
-              this.modalReference.close();
-              this.ResetAttributes();
-              // this.refresh();
-              this.search(this.url);
-            }
-            else {
-              this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
-              this.spinner.hide();
-            }
-          });
+          this.buscanCellationService.create(data).subscribe(
+            resp => {
+              if (resp.status == 1) {
+                console.log(resp);
+                this.notificationService.addToast({
+                  title: Constants.SuccessTitle, msg: resp.data,
+                  type: Constants.SuccessType
+                });
+                this.modalReference.close();
+                this.ResetAttributes();
+                this.search(this.url);
+              }
+              else {
+                this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+                this.spinner.hide();
+              }
+            });
+        }
+        else {
+
+          this.buscanCellationService.update(id, data).subscribe(
+            resp => {
+              if (resp.status == 1) {
+                this.notificationService.addToast({ title: Constants.SuccessTitle, msg: resp.message, type: Constants.SuccessType });
+                this.modalReference.close();
+                this.ResetAttributes();
+                // this.refresh();
+                this.search(this.url);
+              }
+              else {
+                this.notificationService.addToast({ title: Constants.ErrorTitle, msg: resp.message, type: Constants.ErrorType });
+                this.spinner.hide();
+              }
+            });
+        }
+
       }
 
-    }
-    
 
-  }
+    }
   }
 
   toggleSection() {
     this.showSection = !this.showSection;
+  }
+
+  formatDate(dateValue: string | number | Date) {
+    const date = new Date(dateValue);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 
   editBusCancellation(event: Event, id: any) {
@@ -678,7 +686,7 @@ export class BuscancellationComponent implements OnInit {
         }
       }
     );
-  }                             
+  }
 
 }
 

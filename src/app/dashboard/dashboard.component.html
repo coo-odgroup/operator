@@ -3,12 +3,7 @@
 </ngx-spinner>
 
 
-<!-- <ngx-spinner></ngx-spinner> -->
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
-  <p style="color: white"> Loading... </p>
-</ngx-spinner>
-
-<div *ngIf="user_role != 1">
+<!-- <div *ngIf="user_role != 1">
   <div class="row">
     <div class="col-xl-12 ">
       <app-card [hidHeader]="true" [options]="false">
@@ -17,28 +12,37 @@
             <h2>Showing {{searchfor}} Data</h2>
           </label>
         </div>
-        <div class="btn-group btn-group-toggle float-right" ngbRadioGroup name="ticketSize" data-toggle="buttons">
+        <div class="dashboard-header float-right">
+          <div class="btn-group btn-group-toggle dashboard-tabs" ngbRadioGroup name="ticketSize" data-toggle="buttons">
 
-          <label ngbButtonLabel class="btn btn-info {{searchfor === 'Today' ? 'active' : ''}}">Today
-            <input ngbButton type="radio" class="dateRange" name="dateRange" value="sm-view" id="option1"
-              (click)="getall('Today');opRevenue('Today');opBooking('Today')"><i class="feather icon-align-justify m-0"></i>
-          </label>
-          <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Week' ? 'active' : ''}}">This Week
-            <input ngbButton type="radio" class="dateRange" name="dateRange" value="md-view" id="option2"
-              (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')"> <i class="feather icon-menu m-0"></i>
-          </label>
-          <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Month' ? 'active' : ''}}">This Month
-            <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option3"
-              (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')"> <i class="feather icon-grid m-0"></i>
-          </label>
-          <!-- <label ngbButtonLabel class="btn btn-info {{searchfor === 'ALL' ? 'active' : ''}}">All
+            <label ngbButtonLabel class="btn btn-info {{searchfor === 'Today' ? 'active' : ''}}">Today
+              <input ngbButton type="radio" class="dateRange" name="dateRange" value="sm-view" id="option1"
+                (click)="getall('Today');opRevenue('Today');opBooking('Today')"><i
+                class="feather icon-align-justify m-0"></i>
+            </label>
+            <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Week' ? 'active' : ''}}">This Week
+              <input ngbButton type="radio" class="dateRange" name="dateRange" value="md-view" id="option2"
+                (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')"> <i
+                class="feather icon-menu m-0"></i>
+            </label>
+            <label ngbButtonLabel class="btn btn-info {{searchfor === 'This Month' ? 'active' : ''}}">This Month
+              <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option3"
+                (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')"> <i
+                class="feather icon-grid m-0"></i>
+            </label> -->
+
+<!-- Closed From Here By dev -->
+
+<!-- <label ngbButtonLabel class="btn btn-info {{searchfor === 'ALL' ? 'active' : ''}}">All
             <input ngbButton type="radio" class="dateRange" name="dateRange" value="large-view" id="option5"
               (click)="getall('ALL')"> <i class="feather icon-award m-0"></i>
           </label> -->
 
-          <!-- <label ngbButtonLabel class="btn btn-info">Custom Range
+<!-- <label ngbButtonLabel class="btn btn-info">Custom Range
                       <input ngbButton type="radio" name="dateRange" value="large-view" id="option4"> <i class="feather icon-plus m-0"></i>
                   </label> -->
+<!-- Closed From Here By dev end here -->
+<!-- </div>
         </div>
       </app-card>
     </div>
@@ -52,8 +56,10 @@
         <i class="feather icon-file-text"></i>
       </app-card>
 
-    </div>
-    <!-- <div class="col-md-3" *ngIf="RoleType==4">
+    </div> -->
+
+<!-- Closed From Here By dev -->
+<!-- <div class="col-md-3" *ngIf="RoleType==4">
             <app-card [hidHeader]="true" cardClass="bg-c-blue text-white widget-visitor-card" blockClass="text-center">
                 <h3 class="text-white">{{dashboarddata.sales_data[0].today_amount || "0"}}</h3>
                 <h6 class="text-white">Sales {{RangeText}}</h6>
@@ -61,7 +67,10 @@
               </app-card>
           
           </div> -->
-    <div class="col-md-3">
+
+<!-- Closed From Here By dev end here-->
+
+<!-- <div class="col-md-3">
       <app-card [hidHeader]="true" cardClass="bg-c-green text-white widget-visitor-card" blockClass="text-center">
         <h3 class="text-white">{{dashboarddata.active_bus_count}}</h3>
         <h6 class="text-white">Active Buses</h6>
@@ -89,15 +98,16 @@
         <h6 class="text-white">Cancelled PNR</h6>
         <i class="feather icon-file-text"></i>
       </app-card>
-    </div>
+    </div> -->
 
-    <!-- <div class="col-md-6">
+<!-- Closed From Here By dev -->
+<!-- <div class="col-md-6">
       <app-card class="booking_device_height" cardTitle="Booking By Device {{searchfor}}" [options]="false">
         <app-apex-chart chartID="pie-chart-2-cac" [chartConfig]="this.pie2CAC"
           style="height:200px; padding-top: 6px;"></app-apex-chart>
       </app-card>
     </div> -->
-    <!-- <div class="col-md-6">
+<!-- <div class="col-md-6">
               <div class="row">
                 <div class="col-md-6 col-xl-6">
                   <app-card [hidHeader]="true" cardClass="bg-c-blue card-body22 order-card borderless">
@@ -148,25 +158,26 @@
                 </div>
               </div>
             </div> -->
+<!-- Closed From Here By dev end here-->
 
-
-    <div class="col-md-6 mb-3">
+<!-- <div class="col-md-6 mb-3">
       <div class="row">
-          <highcharts-chart [Highcharts]="Highcharts" [options]="opbookingchart" [update]="updateFlag"
-            style="width: 100%; height: 420px; display: block;">
-          </highcharts-chart>
+        <highcharts-chart [Highcharts]="Highcharts" [options]="opbookingchart" [update]="updateFlag"
+          style="width: 100%; height: 420px; display: block;">
+        </highcharts-chart>
       </div>
     </div>
 
     <div class="col-md-6 mb-3">
       <div class="row">
-          <highcharts-chart [Highcharts]="Highcharts" [options]="opRevenuechart" [update]="updateFlag"
-            style="width: 100%; height: 420px; display: block;">
-          </highcharts-chart>
+        <highcharts-chart [Highcharts]="Highcharts" [options]="opRevenuechart" [update]="updateFlag"
+          style="width: 100%; height: 420px; display: block;">
+        </highcharts-chart>
       </div>
-    </div>
+    </div> -->
 
-    <!-- <div class="col-xl-6 col-md-12">
+<!-- Closed From Here By dev -->
+<!-- <div class="col-xl-6 col-md-12">
       <app-card cardTitle="TOP ROUTES BOOKINGS IN LAST 30 DAYS" cardClass="table-card" blockClass="p-0">
         <div class="table-responsive">
           <table class="table table-hover mb-0">
@@ -217,5 +228,325 @@
         </div>
       </app-card>
     </div> -->
+<!-- Closed From Here By dev end here-->
+<!-- </div>
+</div> -->
+
+<!-- New code starts here -->
+
+<div *ngIf="user_role != 1">
+  <!--====================================
+        PREMIUM HEADER
+=====================================-->
+
+  <div class="dashboard-header">
+
+    <!-- Top Row -->
+    <div class="dashboard-header-top">
+
+      <div class="dashboard-left">
+        <h2 class="dashboard-title">
+          Welcome,
+          <span>{{userName}}</span>
+        </h2>
+        <!-- 
+        <p class="dashboard-subtitle">
+          Welcome back! Here's what's happening with your buses today.
+        </p> -->
+      </div>
+
+      <div class="dashboard-right">
+        <div class="dashboard-tabs">
+
+          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='Today'}"
+            (click)="getall('Today');opRevenue('Today');opBooking('Today')">
+            <i class="fa fa-sun"></i>
+            <span>Today</span>
+          </button>
+
+          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Week'}"
+            (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')">
+            <i class="fa fa-calendar"></i>
+            <span>This Week</span>
+          </button>
+
+          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Month'}"
+            (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')">
+            <i class="fa fa-th-large"></i>
+            <span>This Month</span>
+          </button>
+
+          <button type="button" class="filter-btn" [ngClass]="{'active': showCustomFilter}"
+            (click)="toggleCustomFilter()">
+            <i class="fa fa-filter"></i>
+            <span>Custom</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Filter Inside Header -->
+    <div class="custom-filter-box" *ngIf="showCustomFilter">
+
+      <div class="row align-items-end">
+
+        <div class="col-lg-3 col-md-4">
+          <label>From Date</label>
+          <input type="date" class="form-control" [(ngModel)]="fromDate">
+        </div>
+
+        <div class="col-lg-3 col-md-4">
+          <label>To Date</label>
+          <input type="date" class="form-control" [(ngModel)]="toDate">
+        </div>
+
+        <div class="col-lg-2 col-md-3">
+          <button class="btn apply-btn w-100" (click)="applyCustomFilter()">
+            <i class="fa fa-search mr-2"></i>
+            Apply Filter
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- end -->
+
+  <!--====================================
+        KPI CARDS
+=====================================-->
+
+  <div class="row dashboard-cards" *ngIf="dashboarddata">
+
+    <!-- Active Bus -->
+
+    <div class="col-xl-3 col-lg-6 col-md-6">
+
+      <div class="dashboard-card blue-card">
+
+        <div class="card-icon">
+          <i class="fa fa-bus"></i>
+        </div>
+
+        <div class="card-details">
+
+          <h2>{{dashboarddata.active_bus_count}}</h2>
+
+          <h5>Active Buses</h5>
+
+          <span>
+
+            <i class="fa fa-check-circle"></i>
+
+            Running Today
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Total Booking -->
+
+    <div class="col-xl-3 col-lg-6 col-md-6">
+
+      <div class="dashboard-card green-card">
+
+        <div class="card-icon">
+          <i class="fa fa-envelope"></i>
+        </div>
+
+        <div class="card-details">
+
+          <h2>{{dashboarddata.total_pnr}}</h2>
+
+          <h5>Total Bookings</h5>
+
+          <span>
+
+            <i class="fa fa-arrow-up"></i>
+
+            Booked Today
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Upcoming -->
+
+    <div class="col-xl-3 col-lg-6 col-md-6">
+
+      <div class="dashboard-card yellow-card">
+
+        <div class="card-icon">
+          <i class="fa fa-key"></i>
+        </div>
+
+        <div class="card-details">
+
+          <h2>{{dashboarddata.upcoming_pnr}}</h2>
+
+          <h5>Upcoming Trips</h5>
+
+          <span>
+
+            <i class="fa fa-calendar"></i>
+
+            Scheduled
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Cancelled -->
+
+    <div class="col-xl-3 col-lg-6 col-md-6">
+
+      <div class="dashboard-card red-card">
+
+        <div class="card-icon">
+          <i class="fa fa-times-circle"></i>
+        </div>
+
+        <div class="card-details">
+
+          <h2>{{dashboarddata.total_pnr_cancel}}</h2>
+
+          <h5>Cancelled PNR</h5>
+
+          <span class="danger">
+
+            <i class="fa fa-exclamation-circle"></i>
+
+            Needs Attention
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- End -->
+  <!--====================================
+        ANALYTICS
+=====================================-->
+
+  <div class="row">
+
+    <!-- Booking -->
+
+    <div class="col-xl-6 col-lg-12">
+
+      <div class="analytics-card">
+
+        <div class="analytics-header">
+
+          <div>
+
+            <h4>
+
+              <i class="fa fa-sun text-primary mr-2"></i>
+
+              Booking Trend
+
+            </h4>
+
+            <p>
+
+              Booking performance for
+              <strong>{{searchfor}}</strong>
+
+            </p>
+
+          </div>
+
+          <div class="analytics-badge">
+
+            Live
+
+          </div>
+
+        </div>
+
+        <div class="analytics-body">
+
+          <highcharts-chart [Highcharts]="Highcharts" [options]="opbookingchart" [update]="updateFlag"
+            style="width:100%;height:360px;display:block;">
+
+          </highcharts-chart>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Revenue -->
+
+    <div class="col-xl-6 col-lg-12">
+
+      <div class="analytics-card">
+
+        <div class="analytics-header">
+
+          <div>
+
+            <h4>
+
+              <i class="fa fa-calendar text-success mr-2"></i>
+
+              Revenue Trend
+
+            </h4>
+
+            <p>
+
+              Revenue generated during
+              <strong>{{searchfor}}</strong>
+
+            </p>
+
+          </div>
+
+          <div class="analytics-badge success">
+
+            ₹ Earnings
+
+          </div>
+
+        </div>
+
+        <div class="analytics-body">
+
+          <highcharts-chart [Highcharts]="Highcharts" [options]="opRevenuechart" [update]="updateFlag"
+            style="width:100%;height:360px;display:block;">
+
+          </highcharts-chart>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 </div>

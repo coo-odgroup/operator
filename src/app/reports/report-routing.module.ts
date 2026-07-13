@@ -8,6 +8,10 @@ const routes: Routes = [
       {
         path: 'completeReport',
         loadChildren: () => import('./completereport/completereport.module').then(module => module.CompleteReportModule)
+      },
+      {
+        path: 'cancelReport',
+        loadChildren: () => import('./cancelreport/cancelreport.module').then(module => module.CancelReportModule)
       }
      
     ]

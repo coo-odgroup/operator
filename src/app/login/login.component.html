@@ -1,4 +1,4 @@
-<div class="auth-wrapper">
+<!-- <div class="auth-wrapper">
     <div class="auth-content text-center">
       <img src="assets/images/odbus-logo.svg" alt="" class="img-fluid mb-4">
       <div class="card borderless">
@@ -19,31 +19,31 @@
                                 *ngIf="form.controls['password'].touched && form.controls['password'].hasError('required')">
                                 Password is required! </span>
                       </div>
-                      <!-- <div class="mb-3">
+                      <div class="mb-3">
                         <ng-select [items]="usertypes" style="height: 40px;" class="list-display1" bindLabel="name" bindValue="id"
                         placeholder="User Role" formControlName="user_type" [clearable]="false">
                       </ng-select>
                         <span class="text-danger"
                                 *ngIf="form.controls['user_type'].touched && form.controls['user_type'].hasError('required')">
                                 Role  is required! </span>
-                      </div> -->
-                      <!-- <div class="form-group text-left mt-2">
+                      </div>
+                      <div class="form-group text-left mt-2">
                         <label>
                         <input #saveUserNameCheckBox id="saveUserNameCheckBox" type="checkbox" [checked]="saveUsername"
                           (change)="onSaveUsernameChanged(saveUserNameCheckBox.checked)" /> &nbsp;Save credentials</label>
-                      </div> -->
-                      <!-- <div class="form-group text-left mt-2">
+                      </div>
+                      <div class="form-group text-left mt-2">
                       <div class="checkbox checkbox-primary d-inline">
       
                           <label for="checkbox-fill-a1" class="cr"> <input type="checkbox" 
                               id="checkbox-fill-a1"> Save credentials</label>
                       </div>
-                      </div> -->
+                      </div>
                       <div class="form-group text-left text-primary mt-2">
                         <a class="formlink" routerLink="/forget-password">Forgot Password ?</a>
                       </div> 
                       <button class="btn btn-block btn-primary mb-4" [disabled]="!form.valid" type="button" (click)="check_credentials()">Login</button>
-                      <!-- <p class="text-center">Don't have an account? <a class="formlink" routerLink="/signup">Signup</a> </p>   -->
+                      <p class="text-center">Don't have an account? <a class="formlink" routerLink="/signup">Signup</a> </p>  
                   
                       
                     </form>
@@ -52,4 +52,129 @@
         </div>
       </div> 
     </div>
+  </div> -->
+
+<!-- /*==========================
+    NEW OPERATOR LOGIN PAGE
+===========================*/ -->
+
+  <div class="auth-wrapper">
+
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div class="text-center mb-4">
+      <img src="assets/images/white_logo.png" class="login-logo" alt="Operator logo">
+    </div>
+
+    <!-- Card -->
+    <div class="login-card">
+
+      <form [formGroup]="form" novalidate>
+        <h3 class="login-title">
+          Operator Login
+        </h3>
+
+        <p class="login-subtitle">
+          Sign in to manage your inventory.
+        </p>
+
+        <!-- Email -->
+
+        <div class="form-group mb-4">
+
+          <label class="login-label">
+            Email Address
+          </label>
+
+          <div class="input-box">
+
+            <i class="fa fa-envelope input-icon"></i>
+
+            <input type="email" class="form-control login-input" formControlName="email" placeholder="Enter your email">
+
+          </div>
+
+          <small class="text-danger"
+            *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')">
+
+            Email is required.
+
+          </small>
+
+        </div>
+
+        <!-- Password -->
+
+        <div class="form-group mb-2">
+
+          <label class="login-label">
+            Password
+          </label>
+
+          <div class="input-box">
+
+            <i class="fa fa-lock input-icon"></i>
+
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control login-input password-input"
+              formControlName="password" placeholder="Enter your password">
+
+            <button type="button" class="password-toggle" (click)="togglePassword()">
+
+              <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'">
+              </i>
+
+            </button>
+
+          </div>
+
+          <small class="text-danger"
+            *ngIf="form.controls['password'].touched && form.controls['password'].hasError('required')">
+
+            Password is required.
+
+          </small>
+
+        </div>
+
+        <!-- Forgot Password -->
+
+        <div class="d-flex justify-content-end mb-4">
+
+          <a routerLink="/forget-password" class="forgot-link">
+
+            Forgot Password?
+
+          </a>
+
+        </div>
+
+        <!-- Login Button -->
+
+        <button type="button" class="btn login-btn w-100" [disabled]="!form.valid" (click)="check_credentials()">
+
+          <i class="fa fa-sign-in-alt me-2"></i>
+
+          Login
+
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="text-center mt-4">
+
+      <small class="copyright">
+
+        © {{currentYear || 2026}} ODBUS • Operator Panel
+
+      </small>
+
+    </div>
+
   </div>
+
+</div>

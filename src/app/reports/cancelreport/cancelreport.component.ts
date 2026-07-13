@@ -16,10 +16,10 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-completereport',
-  templateUrl: './completereport.component.html',
-  styleUrls: ['./completereport.component.scss']
+  templateUrl: './cancelreport.component.html',
+  styleUrls: ['./cancelreport.component.scss']
 })
-export class CompletereportComponent implements OnInit {
+export class CancelreportComponent implements OnInit {
 
   public searchFrom: FormGroup | undefined;
 
@@ -117,7 +117,7 @@ export class CompletereportComponent implements OnInit {
     };
 
     if (pageurl != "") {
-      this.rs.completepaginationReport(pageurl, data).subscribe(
+      this.rs.cancelticketpaginationReport(pageurl, data).subscribe(
         res => {
           this.completedata = res.data;
           this.spinner.hide();
@@ -125,7 +125,7 @@ export class CompletereportComponent implements OnInit {
       );
     }
     else {
-      this.rs.completeReport(data).subscribe(
+      this.rs.cancelticketReport(data).subscribe(
         res => {
           this.completedata = res.data;
           this.spinner.hide();

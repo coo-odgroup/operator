@@ -15,8 +15,8 @@ import { SeatlayoutService } from '../../services/seatlayout.service';
 import * as XLSX from 'xlsx';
 import { NgxSpinnerService } from "ngx-spinner";
 
-import {Input,Output,EventEmitter} from '@angular/core';
-import {NgbDateStruct, NgbCalendar,NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Input, Output, EventEmitter } from '@angular/core';
+import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 
 
@@ -69,7 +69,7 @@ export class SeatopenComponent implements OnInit {
   modalReference: NgbModalRef;
   confirmDialogReference: NgbModalRef;
 
-  seatOpen: any=[];
+  seatOpen: any = [];
   seatOpenRecord: Seatopen;
   showSection = false;
 
@@ -88,9 +88,9 @@ export class SeatopenComponent implements OnInit {
   seatLayoutData: any;
   busForm: any;
   seatLayoutCol: any;
-  upperberthcol: any; 
+  upperberthcol: any;
   lowerberthcol: any;
-  selectedSeats: any=[];
+  selectedSeats: any = [];
   busArray: FormArray;
   busesData: FormArray;
   lowerData: FormArray;
@@ -101,16 +101,16 @@ export class SeatopenComponent implements OnInit {
   all: any;
   route: any;
   deletedata: any;
-  page_no=1;
+  page_no = 1;
   busSchedule: any;
   seatOpenDetails: any;
   alreadyOpenData: any = [];
-  openSeatsData: any= [];
+  openSeatsData: any = [];
   dt: string;
   busDatas: any;
   public DatesRecord: any;
   checkedDate: any = [];
-  seatLengthData : Number =0;
+  seatLengthData: Number = 0;
   constructor(
     calendar: NgbCalendar,
     private dtconfig: NgbDatepickerConfig,
@@ -136,8 +136,10 @@ export class SeatopenComponent implements OnInit {
 
 
     const current = new Date();
-    this.dtconfig.minDate = { year: current.getFullYear(), month: 
-    current.getMonth() + 1, day: current.getDate() };
+    this.dtconfig.minDate = {
+      year: current.getFullYear(), month:
+        current.getMonth() + 1, day: current.getDate()
+    };
 
   }
   toggleSection() {
@@ -152,23 +154,23 @@ export class SeatopenComponent implements OnInit {
       });
     }
   }
-  
-  getFormattedDate(){
-    
+
+  getFormattedDate() {
+
     var date = new Date();
     var transformDate = this.datePipe.transform(date, 'yyyy-MM-dd');
     return transformDate;
 
   }
-  getcurrentmonths(){
-    
+  getcurrentmonths() {
+
     var date = new Date();
     var transformmonth = this.datePipe.transform(date, 'MM');
     // console.log(transformmonth);
     return transformmonth;
   }
 
-  getcurrentyears(){ 
+  getcurrentyears() {
     var date = new Date();
     var transformyear = this.datePipe.transform(date, 'yyyy');
     // console.log(transformyear);
@@ -180,21 +182,21 @@ export class SeatopenComponent implements OnInit {
   dnone: string = '';
   switchTab(tab: string) {
     this.activeTab = tab;
-    if(this.activeTab==='tab2'){
+    if (this.activeTab === 'tab2') {
       this.dnone = 'd-none';
     } else {
       this.dnone = '';
     }
   }
-//   addDays(a_oDate: Date, days: number): Date {
-//     a_oDate.setDate(a_oDate.getDate() + days);
-//     return a_oDate ;
-// }
-  
+  //   addDays(a_oDate: Date, days: number): Date {
+  //     a_oDate.setDate(a_oDate.getDate() + days);
+  //     return a_oDate ;
+  // }
+
   ngOnInit(): void {
     // this.seatLengthData =0;
-    
-  //  this.dt = this.datePipe.transform(this.addDays(new Date(), - 1), 'yyyy-MM-dd');
+
+    //  this.dt = this.datePipe.transform(this.addDays(new Date(), - 1), 'yyyy-MM-dd');
 
     this.spinner.show();
     this.seatOpenForm = this.fb.group({
@@ -229,14 +231,14 @@ export class SeatopenComponent implements OnInit {
 
 
     this.searchForm = this.fb.group({
-      name: [null],bus_id:[null],
+      name: [null], bus_id: [null],
       rows_number: Constants.RecordLimit,
-      page_no:this.page_no,
-      fromDate:[null],
-      toDate:[null],
-      source_id:[null],
-      destination_id:[null],
-      bus_operator_id:[null],
+      page_no: this.page_no,
+      fromDate: [null],
+      toDate: [null],
+      source_id: [null],
+      destination_id: [null],
+      bus_operator_id: [null],
     });
 
     this.loadServices();
@@ -246,18 +248,17 @@ export class SeatopenComponent implements OnInit {
 
   }
 
-  set_page(url:any)
-  {
+  set_page(url: any) {
     this.lastUrl = '';
-    this.page_no = url.replace('/api/seatopenData?page=','');
+    this.page_no = url.replace('/api/seatopenData?page=', '');
     this.search();
     this.lastUrl = url;
-  
+
   }
   page(label: any) {
     return label;
   }
- 
+
 
   search(pageurl = "") {
     this.spinner.show();
@@ -266,13 +267,13 @@ export class SeatopenComponent implements OnInit {
       name: this.searchForm.value.name,
       bus_id: this.searchForm.value.bus_id,
       rows_number: this.searchForm.value.rows_number,
-      page_no:this.page_no,
+      page_no: this.page_no,
       // bus_operator_id: 157,
       bus_operator_id: localStorage.getItem('OPERATOR_ID'),
-      fromDate:this.formatDate(this.searchForm.value.fromDate),
-      toDate:this.formatDate(this.searchForm.value.toDate),
-      source_id:this.searchForm.value.source_id,
-      destination_id:this.searchForm.value.destination_id,
+      fromDate: this.searchForm.value.fromDate ? this.formatDate(this.searchForm.value.fromDate) : null,
+      toDate: this.searchForm.value.toDate ? this.formatDate(this.searchForm.value.toDate) : null,
+      source_id: this.searchForm.value.source_id,
+      destination_id: this.searchForm.value.destination_id,
       USER_BUS_OPERATOR_ID: localStorage.getItem('USER_BUS_OPERATOR_ID')
     };
 
@@ -284,40 +285,39 @@ export class SeatopenComponent implements OnInit {
           this.pagination = res.data;
           this.all = res.data;
           this.spinner.hide();
-          this.lastUrl="/api/seatopenData?page="+this.all.current_page ;
+          this.lastUrl = "/api/seatopenData?page=" + this.all.current_page;
           // console.log( this.BusOperators);
-          
+
           mainArray = Object.keys(mainArray).map(k1 => ({ value: mainArray[k1] }));
           // console.log(mainArray);
-          if(mainArray.length >0)
-          {
+          if (mainArray.length > 0) {
             for (var bus of mainArray) {
-              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] })); 
-             //  console.log(bus);               
-              
-              let allbus=[];
-             for (var date of bus) {
-               date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
-               let allDate=[];
-               // console.log(date);               
- 
-               for (var route of date) {
-                 route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));              
-                 let allroute = [];
-                //  console.log(route);               
- 
-                 for (var seat of route) {
-                   seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));  
-                   allroute.push(seat);
-                   // console.log(seat);               
-                 }
-                 allDate.push(route);
-               }
-               allbus.push(date);
-              //  console.log(allbus);
-             }
-             this.seatOpen.push(allbus);
-           }
+              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] }));
+              //  console.log(bus);               
+
+              let allbus = [];
+              for (var date of bus) {
+                date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
+                let allDate = [];
+                // console.log(date);               
+
+                for (var route of date) {
+                  route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));
+                  let allroute = [];
+                  //  console.log(route);               
+
+                  for (var seat of route) {
+                    seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));
+                    allroute.push(seat);
+                    // console.log(seat);               
+                  }
+                  allDate.push(route);
+                }
+                allbus.push(date);
+                //  console.log(allbus);
+              }
+              this.seatOpen.push(allbus);
+            }
           }
         }
       );
@@ -329,84 +329,82 @@ export class SeatopenComponent implements OnInit {
           this.pagination = res.data;
           this.all = res.data;
           this.spinner.hide();
-          this.lastUrl="/api/seatopenData?page="+this.all.current_page ;
+          this.lastUrl = "/api/seatopenData?page=" + this.all.current_page;
           // console.log(mainArray);
 
 
           mainArray = Object.keys(mainArray).map(k1 => ({ value: mainArray[k1] }));
           // console.log(mainArray);
-          if(mainArray.length >0)
-          {
+          if (mainArray.length > 0) {
             for (var bus of mainArray) {
-              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] })); 
-             //  console.log(bus);               
-              
-              let allbus=[];
-             for (var date of bus) {
-               date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
-               let allDate=[];
-               // console.log(date);               
- 
-               for (var route of date) {
-                 route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));              
-                 let allroute = [];
-                //  console.log(route);               
- 
-                 for (var seat of route) {
-                   seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));  
-                   allroute.push(seat);
-                   // console.log(seat);               
-                 }
-                 allDate.push(route);
-               }
-               allbus.push(date);
-              //  console.log(allbus);
-             }
-             this.seatOpen.push(allbus);
-            
-           }
-          //  console.log(this.seatOpen);
-          }  
+              bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] }));
+              //  console.log(bus);               
+
+              let allbus = [];
+              for (var date of bus) {
+                date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
+                let allDate = [];
+                // console.log(date);               
+
+                for (var route of date) {
+                  route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));
+                  let allroute = [];
+                  //  console.log(route);               
+
+                  for (var seat of route) {
+                    seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));
+                    allroute.push(seat);
+                    // console.log(seat);               
+                  }
+                  allDate.push(route);
+                }
+                allbus.push(date);
+                //  console.log(allbus);
+              }
+              this.seatOpen.push(allbus);
+
+            }
+            //  console.log(this.seatOpen);
+          }
         }
       );
     }
   }
 
-   formatDate(dateValue: string | number | Date) {
-      const date = new Date(dateValue);
+  formatDate(dateValue: string | number | Date) {
+    const date = new Date(dateValue);
 
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
 
-      return `${year}-${month}-${day}`;
-}
+    return `${year}-${month}-${day}`;
+  }
 
 
   refresh() {
     this.spinner.show();
-    this.lastUrl = ''; 
+    this.lastUrl = '';
     this.searchForm = this.fb.group({
-      name: [null],bus_id:[null],
+      name: [null], bus_id: [null],
       rows_number: Constants.RecordLimit,
-      page_no:this.page_no,
-      fromDate:[null],
-      toDate:[null],
-      source_id:[null],
-      destination_id:[null],
-      bus_operator_id:[null],
+      page_no: this.page_no,
+      fromDate: [null],
+      toDate: [null],
+      source_id: [null],
+      destination_id: [null],
+      bus_operator_id: [null],
     });
     this.search();
-    
+
 
 
   }
 
 
-  viewDetails(id)
-  {
-   // console.log(id);
-   this.seatOpenDetails= this.seatOpen[id] ;
+  viewDetails(id) {
+    // console.log(id);
+    this.seatOpenDetails = this.seatOpen[id];
   }
 
 
@@ -428,28 +426,29 @@ export class SeatopenComponent implements OnInit {
 
   }
 
-  alreadyOpen() 
-{
-  this.alreadyOpenData = [];
-  const data = {
-    bus_id: this.seatOpenForm.value.bus_id
-  };
+  alreadyOpen() {
+    this.alreadyOpenData = [];
+    const data = {
+      bus_id: this.seatOpenForm.value.bus_id
+    };
 
-  this.bss.alreadyOpen(data).subscribe(
-    seatData => {
-      let opensData = seatData.data ;
-      // console.log(opensData );
-      opensData = Object.keys(opensData).map(k1 => ({ value: opensData[k1] }));
-      if(opensData.length >0)
-      {
-        for (var bus of opensData) {
-          this.alreadyOpenData.push(bus);
-         
-       }
+    this.bss.alreadyOpen(data).subscribe(
+      seatData => {
+        let opensData = seatData.data;
+        // console.log(opensData );
+        opensData = Object.keys(opensData).map(k1 => ({ value: opensData[k1] }));
+        if (opensData.length > 0) {
+          for (var bus of opensData) {
+            this.alreadyOpenData.push(bus);
+
+          }
+        }
       }
-    }
-  );
+    );
   }
+
+  lower: any;
+  upper: any;
 
   checkEvent(event: any) {
     this.spinner.show();
@@ -464,15 +463,20 @@ export class SeatopenComponent implements OnInit {
         this.selectedSeats = seatData.data['seat'];
         // console.log(this.selectedSeats);
         this.seatlayoutService.seatsBus(data).subscribe(
-          resp => {            
+          resp => {
             let counter = 0;
             this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']) as FormArray;
             this.seatLayoutData.clear();
-            this.seatLengthData = resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
-            
-            if (resp.data.lowerBerth != undefined) {
+            this.lower = resp?.data?.lowerBerth?.length ?? 0;
+            this.upper = resp?.data?.upperBerth?.length ?? 0;
+            this.seatLengthData = this.lower + this.upper;
+
+
+            // console.log(upper)
+
+            if (resp.data.lowerBerth != 0) {
               for (let lowerData of resp.data.lowerBerth) {
-    
+
                 let arraylen = this.seatLayoutData.length;
                 let berthData: FormGroup = this.fb.group({
                   lowerBerth: this.fb.array([
@@ -487,15 +491,15 @@ export class SeatopenComponent implements OnInit {
                   let seatId = "";
                   for (let selectedSeat of this.selectedSeats) {
                     if (selectedSeat.seats_id == seatData.id) {
-                      if(selectedSeat.type== null && selectedSeat.operation_date==null){
+                      if (selectedSeat.type == null && selectedSeat.operation_date == null) {
                         checkedval = "true";
                         seatId = selectedSeat.id;
-                      }                 
+                      }
                     }
                   }
-    
+
                   let collen = this.seatLayoutCol.length;
-    
+
                   if (checkedval == "true") {
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
@@ -536,7 +540,7 @@ export class SeatopenComponent implements OnInit {
                           busId: [data.bus_id]
                         });
                         this.seatLayoutCol.insert(collen, columnData);
-    
+
                       } else {
                         let columnData: FormGroup = this.fb.group({
                           seatText: [seatData.seatText],
@@ -548,7 +552,7 @@ export class SeatopenComponent implements OnInit {
                           busId: [data.bus_id]
                         });
                         this.seatLayoutCol.insert(collen, columnData);
-    
+
                       }
                     }
                   }
@@ -556,7 +560,7 @@ export class SeatopenComponent implements OnInit {
                 counter++;
               }
             }
-            if (resp.data.upperBerth != undefined) {
+            if (resp.data.upperBerth != 0) {
               for (let upperData of resp.data.upperBerth) {
                 let arraylen = this.seatLayoutData.length;
                 let berthData: FormGroup = this.fb.group({
@@ -573,17 +577,17 @@ export class SeatopenComponent implements OnInit {
                   let desiabled_seats = "";
                   for (let selectedSeat of this.selectedSeats) {
                     if (selectedSeat.seats_id == seatData.id) {
-                      if(selectedSeat.type== null && selectedSeat.operation_date==null){                  
+                      if (selectedSeat.type == null && selectedSeat.operation_date == null) {
                         checkedval = "true";
                         seatId = selectedSeat.id;
                         // desiabled_seats = "true";
-                      }                
+                      }
                     }
                   }
                   let collen = this.seatLayoutCol.length;
-    
+
                   if (checkedval == "true") {
-    
+
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
                       seatType: [seatData.seat_class_id],
@@ -623,7 +627,7 @@ export class SeatopenComponent implements OnInit {
                           busId: [data.bus_id]
                         });
                         this.seatLayoutCol.insert(collen, columnData);
-    
+
                       } else {
                         let columnData: FormGroup = this.fb.group({
                           seatText: [seatData.seatText],
@@ -635,10 +639,10 @@ export class SeatopenComponent implements OnInit {
                           busId: [data.bus_id]
                         });
                         this.seatLayoutCol.insert(collen, columnData);
-    
+
                       }
                     }
-    
+
                   }
                 }
                 counter++;
@@ -650,10 +654,10 @@ export class SeatopenComponent implements OnInit {
       }
     );
 
-    
+
   }
 
-  
+
   checkEditEvent(event: any) {
     this.spinner.show();
     const data = {
@@ -667,14 +671,14 @@ export class SeatopenComponent implements OnInit {
         this.selectedSeats = seatData.data['seat'];
         // console.log(this.selectedSeats);
         this.seatlayoutService.seatsBus(data).subscribe(
-          resp => {            
+          resp => {
             let counter = 0;
             this.seatLayoutData = (<FormArray>this.seatOpenForm.controls['bus_seat_layout_data']) as FormArray;
             this.seatLayoutData.clear();
             this.seatLengthData = resp?.data?.lowerBerth?.length + resp?.data?.upperBerth?.length || 0;
             if (resp.data.lowerBerth != undefined) {
               for (let lowerData of resp.data.lowerBerth) {
-    
+
                 let arraylen = this.seatLayoutData.length;
                 let berthData: FormGroup = this.fb.group({
                   lowerBerth: this.fb.array([
@@ -689,16 +693,17 @@ export class SeatopenComponent implements OnInit {
                   let seatId = "";
                   for (let selectedSeat of this.selectedSeats) {
                     if (selectedSeat.seats_id == seatData.id) {
-                      if(selectedSeat.type== null && selectedSeat.operation_date==null){
+                      if (selectedSeat.type == null && selectedSeat.operation_date == null) {
                         checkedval = "true";
                         seatId = selectedSeat.id;
-                      }                 
+                      }
                     }
                   }
-    
+
                   let collen = this.seatLayoutCol.length;
-    
-                  if (checkedval == "true") {;
+
+                  if (checkedval == "true") {
+                    ;
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
                       seatType: [seatData.seat_class_id],
@@ -727,8 +732,8 @@ export class SeatopenComponent implements OnInit {
                           busId: [data.bus_id]
                         });
                         this.seatLayoutCol.insert(collen, columnData);
-    
-                      }else{
+
+                      } else {
                         let columnData: FormGroup = this.fb.group({
                           seatText: [seatData.seatText],
                           seatType: [seatData.seat_class_id],
@@ -740,7 +745,7 @@ export class SeatopenComponent implements OnInit {
                         });
                         this.seatLayoutCol.insert(collen, columnData);
                       }
-                      
+
                     }
                     // else {
                     // // console.log('hihello');
@@ -759,7 +764,7 @@ export class SeatopenComponent implements OnInit {
                     //       busId: [data.bus_id]
                     //     });
                     //     this.seatLayoutCol.insert(collen, columnData);
-    
+
                     //   } else {
                     //     let columnData: FormGroup = this.fb.group({
                     //       seatText: [seatData.seatText],
@@ -771,7 +776,7 @@ export class SeatopenComponent implements OnInit {
                     //       busId: [data.bus_id]
                     //     });
                     //     this.seatLayoutCol.insert(collen, columnData);
-    
+
                     //   }
                     // }
                   }
@@ -796,17 +801,17 @@ export class SeatopenComponent implements OnInit {
                   let desiabled_seats = "";
                   for (let selectedSeat of this.selectedSeats) {
                     if (selectedSeat.seats_id == seatData.id) {
-                      if(selectedSeat.type== null && selectedSeat.operation_date==null){                  
+                      if (selectedSeat.type == null && selectedSeat.operation_date == null) {
                         checkedval = "true";
                         seatId = selectedSeat.id;
                         // desiabled_seats = "true";
-                      }                
+                      }
                     }
                   }
                   let collen = this.seatLayoutCol.length;
-    
+
                   if (checkedval == "true") {
-    
+
                     let columnData: FormGroup = this.fb.group({
                       seatText: [seatData.seatText],
                       seatType: [seatData.seat_class_id],
@@ -835,25 +840,25 @@ export class SeatopenComponent implements OnInit {
                           busId: [data.bus_id]
                         });
                         this.seatLayoutCol.insert(collen, columnData);
-    
-                      }else{
-                      let columnData: FormGroup = this.fb.group({
-                        seatText: [seatData.seatText],
-                        seatType: [seatData.seat_class_id],
-                        berthType: [seatData.berthType],
-                        seatChecked: [false],
-                        category: ['0'],
-                        seatId: [seatData.id],
-                        busId: [data.bus_id]
-                      });
-                      this.seatLayoutCol.insert(collen, columnData);
-                     }
-                    }    
+
+                      } else {
+                        let columnData: FormGroup = this.fb.group({
+                          seatText: [seatData.seatText],
+                          seatType: [seatData.seat_class_id],
+                          berthType: [seatData.berthType],
+                          seatChecked: [false],
+                          category: ['0'],
+                          seatId: [seatData.id],
+                          busId: [data.bus_id]
+                        });
+                        this.seatLayoutCol.insert(collen, columnData);
+                      }
+                    }
                   }
                 }
                 counter++;
               }
-              
+
             }
             this.spinner.hide();
           }
@@ -861,21 +866,21 @@ export class SeatopenComponent implements OnInit {
       }
     );
 
-    
+
   }
 
   getBusScheduleEntryDatesFilter() {
-    if (this.seatOpenForm.value.bus_id==null)
+    if (this.seatOpenForm.value.bus_id == null)
       return false;
 
 
     const arr = <FormArray>this.seatOpenForm.controls.dateLists;
     arr.controls = [];
 
-    const data={
+    const data = {
       busLists: this.seatOpenForm.value.bus_id,
-      month:this.getcurrentmonths(),
-      year:this.getcurrentyears(),
+      month: this.getcurrentmonths(),
+      year: this.getcurrentyears(),
     }
 
     this.spinner.show();
@@ -886,19 +891,18 @@ export class SeatopenComponent implements OnInit {
         for (let bData of this.busDatas) {
           this.DatesRecord = (<FormArray>this.seatOpenForm.controls['dateLists']) as FormArray;
           let arraylen = this.DatesRecord.length;
-          for (let eDate of bData.entryDates) {    
-            if(this.ModalBtn=="Save")
-            {
-                let newDatesgroup: FormGroup = this.fb.group({
-                  entryDates: [eDate.entry_date],
-                  datechecked: [null],
-                })
-                this.DatesRecord.insert(arraylen, newDatesgroup);
-                // console.log(this.DatesRecord);
-                // return
-            }           
+          for (let eDate of bData.entryDates) {
+            if (this.ModalBtn == "Save") {
+              let newDatesgroup: FormGroup = this.fb.group({
+                entryDates: [eDate.entry_date],
+                datechecked: [null],
+              })
+              this.DatesRecord.insert(arraylen, newDatesgroup);
+              // console.log(this.DatesRecord);
+              // return
+            }
           }
-         
+
           counter++;
         }
         response = [];
@@ -926,18 +930,17 @@ export class SeatopenComponent implements OnInit {
     // console.log(data);
   }
 
-  getSchedule()
-  {
+  getSchedule() {
     const data = {
       bus_id: this.seatOpenForm.value.bus_id
     };
     this.bss.getScheduleById(data.bus_id).subscribe(
       seatData => {
-        this.busSchedule = seatData ;
+        this.busSchedule = seatData;
       }
     );
   }
-  
+
   onSelectAll() {
     const selected = this.route.map(item => item.id);
     this.seatOpenForm.get('busRoute').patchValue(selected);
@@ -947,13 +950,13 @@ export class SeatopenComponent implements OnInit {
   }
 
   ResetAttributes() {
-    this.datesSelected=[];
-    this. alreadyOpenData =[];
+    this.datesSelected = [];
+    this.alreadyOpenData = [];
     this.route = [];
-    this.buses ="";
+    this.buses = "";
     this.loadServices();
-    this.busSchedule =[] ;
-    this.DatesRecord="";
+    this.busSchedule = [];
+    this.DatesRecord = "";
     this.route = "";
     this.seatOpenRecord = {} as Seatopen;
     this.seatOpenForm = this.fb.group({
@@ -1030,17 +1033,17 @@ export class SeatopenComponent implements OnInit {
     this.seatOpenForm.controls.busRoute.setValue('');
 
     // let operatorId = 157;
-    let operatorId =  localStorage.getItem('OPERATOR_ID');
+    let operatorId = localStorage.getItem('OPERATOR_ID');
 
     if (operatorId) {
       this.spinner.show();
       this.busService.getByOperaor(operatorId).subscribe(
         res => {
           this.buses = res.data;
-          this.buses.map((i:any) => { i.testing = i.bus_number +'('+i.from_location[0].name +'>>'+i.to_location[0].name+')' ; return i; });
-           this.spinner.hide();
+          this.buses.map((i: any) => { i.testing = i.bus_number + '(' + i.from_location[0].name + '>>' + i.to_location[0].name + ')'; return i; });
+          this.spinner.hide();
           // console.log(this.buses);
-       
+
         }
       );
     }
@@ -1088,72 +1091,71 @@ export class SeatopenComponent implements OnInit {
   addOpenseat() {
 
     this.checkedDate;
-    
-    let i=0;
-    for(let checked of this.seatOpenForm.value.dateLists){
-      if(checked.datechecked==true){
+
+    let i = 0;
+    for (let checked of this.seatOpenForm.value.dateLists) {
+      if (checked.datechecked == true) {
         this.checkedDate[i] = checked.entryDates;
         i++;
-      } 
+      }
     }
-    
+
     this.spinner.show();
     this.onSelectAll();
-    if(this.checkedDate.length<1)
-    {
+    if (this.checkedDate.length < 1) {
       this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
       this.spinner.hide();
       return;
-    }else{
-    const data = {
-      bus_operator_id: this.seatOpenForm.value.bus_operator_id,
-      bus_id: this.seatOpenForm.value.bus_id,
-      busRoute: this.seatOpenForm.value.busRoute,
-      reason: 'Open By Owner',
-      other_reson: this.seatOpenForm.value.otherReson,
-      date: this.checkedDate,
-      bus_seat_layout_data: this.seatOpenForm.value.bus_seat_layout_data,
-      created_by: localStorage.getItem('USERNAME'),
-      type: "1"
+    } else {
+      const data = {
+        bus_operator_id: this.seatOpenForm.value.bus_operator_id,
+        bus_id: this.seatOpenForm.value.bus_id,
+        busRoute: this.seatOpenForm.value.busRoute,
+        reason: 'Open By Owner',
+        other_reson: this.seatOpenForm.value.otherReson,
+        date: this.checkedDate,
+        bus_seat_layout_data: this.seatOpenForm.value.bus_seat_layout_data,
+        created_by: localStorage.getItem('USERNAME'),
+        type: "1"
 
-    };
-    // console.log(data);
-    // return;
-    let id = this.seatOpenRecord.id;
-    if (id != null) {
-      this.seatopenService.update(id, data).subscribe(
-        resp => {
-          if (resp.status == 1) {
-            this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
-            this.modalReference.close();
-            this.set_page(this.lastUrl);
+      };
+      // console.log(data);
+      // return;
+      let id = this.seatOpenRecord.id;
+      if (id != null) {
+        this.seatopenService.update(id, data).subscribe(
+          resp => {
+            if (resp.status == 1) {
+              this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
+              this.modalReference.close();
+              this.set_page(this.lastUrl);
+            }
+            else {
+              this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
+              this.spinner.hide();
+            }
           }
-          else {
-            this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
-            this.spinner.hide();
+        );
+      }
+      else {
+        this.seatopenService.create(data).subscribe(
+          resp => {
+
+            if (resp.status == 1) {
+              this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
+              this.modalReference.close();
+              this.lastUrl =
+                this.set_page(this.lastUrl);
+            }
+            else {
+              this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
+              this.spinner.hide();
+            }
           }
-        }
-      );
+        );
+
+      }
     }
-    else {
-      this.seatopenService.create(data).subscribe(
-        resp => {
-
-          if (resp.status == 1) {
-            this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
-            this.modalReference.close();
-            this.lastUrl=
-            this.set_page(this.lastUrl);
-          }
-          else {
-            this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
-            this.spinner.hide();
-          }
-        }
-      );
-
-    }
-   }
 
   }
 
@@ -1205,22 +1207,22 @@ export class SeatopenComponent implements OnInit {
       });
   }
 
-  editsopen(bus_id:any,operation_date:any,ticket_price_id:any) {
+  editsopen(bus_id: any, operation_date: any, ticket_price_id: any) {
     this.loadServices();
     const data = {
       bus_id: bus_id,
       operation_date: operation_date,
-      ticket_price_id:ticket_price_id,
-      type:1
+      ticket_price_id: ticket_price_id,
+      type: 1
     };
     // console.log(data);
 
     this.seatOpenForm = this.fb.group({
-      bus_operator_id:  localStorage.getItem('OPERATOR_ID'),
+      bus_operator_id: localStorage.getItem('OPERATOR_ID'),
       id: [null],
-      bus_id: bus_id,  
+      bus_id: bus_id,
       busRoute: [null],
-      date:operation_date,
+      date: operation_date,
       reason: "Blocked By Owner",
       otherReson: [null],
       bus_seat_layout_id: [null],
@@ -1233,21 +1235,20 @@ export class SeatopenComponent implements OnInit {
         })
       ]),
     });
-    
+
     this.ModalHeading = "Edit Seat Open";
     this.ModalBtn = "Update";
 
     this.seatopenService.edit(data).subscribe(
       res => {
-        this.openSeatsData= res.data;
+        this.openSeatsData = res.data;
         // console.log(this.openSeatsData);
-        if(this.openSeatsData.length>0)
-        {
+        if (this.openSeatsData.length > 0) {
           this.checkEditEvent(bus_id);
         }
       }
     );
-    this.checkroute();    
+    this.checkroute();
   }
 
 
@@ -1257,30 +1258,29 @@ export class SeatopenComponent implements OnInit {
     this.onSelectAll();
     // console.log(this.seatOpenForm.value.bus_id);
 
-    if(this.seatOpenForm.value.date == null)
-    {
+    if (this.seatOpenForm.value.date == null) {
       this.notificationService.addToast({ title: 'Error', msg: 'Please Select Date', type: 'error' });
       this.spinner.hide();
       return;
-    }else{
-    const data = {
-      bus_operator_id: this.seatOpenForm.value.bus_operator_id,
-      bus_id: this.seatOpenForm.value.bus_id,
-      busRoute: this.seatOpenForm.value.busRoute,
-      reason: 'Opened By Owner',
-      other_reson: this.seatOpenForm.value.otherReson,
-      date: this.seatOpenForm.value.date,
-      bus_seat_layout_data: this.seatOpenForm.value.bus_seat_layout_data,
-      created_by: localStorage.getItem('USERNAME'),
-      type: "1"
-    };
+    } else {
+      const data = {
+        bus_operator_id: this.seatOpenForm.value.bus_operator_id,
+        bus_id: this.seatOpenForm.value.bus_id,
+        busRoute: this.seatOpenForm.value.busRoute,
+        reason: 'Opened By Owner',
+        other_reson: this.seatOpenForm.value.otherReson,
+        date: this.seatOpenForm.value.date,
+        bus_seat_layout_data: this.seatOpenForm.value.bus_seat_layout_data,
+        created_by: localStorage.getItem('USERNAME'),
+        type: "1"
+      };
       this.seatopenService.updateSeatOpen(data).subscribe(
         resp => {
           if (resp.status == 1) {
             this.notificationService.addToast({ title: 'Success', msg: resp.message, type: 'success' });
             this.modalReference.close();
-            this.lastUrl=
-            this.set_page(this.lastUrl);
+            this.lastUrl =
+              this.set_page(this.lastUrl);
           }
           else {
             this.notificationService.addToast({ title: 'Error', msg: resp.message, type: 'error' });
@@ -1289,7 +1289,7 @@ export class SeatopenComponent implements OnInit {
         }
       );
 
-  }
+    }
   }
 
 
@@ -1299,30 +1299,28 @@ export class SeatopenComponent implements OnInit {
   fromDate: NgbDateStruct;
   toDate: NgbDateStruct;
 
-  _datesSelected:NgbDateStruct[]=[]; 
+  _datesSelected: NgbDateStruct[] = [];
 
   @Input()
-  set datesSelected(value:NgbDateStruct[])  
-  {
-     this._datesSelected=value;
-     
+  set datesSelected(value: NgbDateStruct[]) {
+    this._datesSelected = value;
+
   }
-  get datesSelected():NgbDateStruct[]
-  {
-    
-    return this._datesSelected?this._datesSelected:[];
+  get datesSelected(): NgbDateStruct[] {
+
+    return this._datesSelected ? this._datesSelected : [];
   }
 
-  @Output() datesSelectedChange=new EventEmitter<NgbDateStruct[]>();
+  @Output() datesSelectedChange = new EventEmitter<NgbDateStruct[]>();
 
- 
-  
 
-  onDateSelection(event:any,date: NgbDateStruct) {
+
+
+  onDateSelection(event: any, date: NgbDateStruct) {
 
     event.target.parentElement.blur();  //make that not appear the outline
     if (!this.fromDate && !this.toDate) {
-      if (event.ctrlKey==true)  //If is CrtlKey pressed
+      if (event.ctrlKey == true)  //If is CrtlKey pressed
         this.fromDate = date;
       else
         this.addDate(date);
@@ -1331,9 +1329,9 @@ export class SeatopenComponent implements OnInit {
 
     } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
       this.toDate = date;
-      this.addRangeDate(this.fromDate,this.toDate);
-      this.fromDate=null;
-      this.toDate=null;
+      this.addRangeDate(this.fromDate, this.toDate);
+      this.fromDate = null;
+      this.toDate = null;
     } else {
       this.toDate = null;
       this.fromDate = date;
@@ -1342,34 +1340,31 @@ export class SeatopenComponent implements OnInit {
 
 
 
-  addDate(date:NgbDateStruct)
-  {
-      let index=this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year);
-      if (index>=0)       //If exist, remove the date
-        this.datesSelected.splice(index,1);
-      else   //a simple push
-        this.datesSelected.push(date);
-        // console.log(this.datesSelected);
-        this.seatOpenForm.controls['date'].setValue(this.datesSelected);
-    }
-    addRangeDate(fromDate:NgbDateStruct,toDate:NgbDateStruct)
+  addDate(date: NgbDateStruct) {
+    let index = this.datesSelected.findIndex(f => f.day == date.day && f.month == date.month && f.year == date.year);
+    if (index >= 0)       //If exist, remove the date
+      this.datesSelected.splice(index, 1);
+    else   //a simple push
+      this.datesSelected.push(date);
+    // console.log(this.datesSelected);
+    this.seatOpenForm.controls['date'].setValue(this.datesSelected);
+  }
+  addRangeDate(fromDate: NgbDateStruct, toDate: NgbDateStruct) {
+    //We get the getTime() of the dates from and to
+    let from = new Date(fromDate.year + "-" + fromDate.month + "-" + fromDate.day).getTime();
+    let to = new Date(toDate.year + "-" + toDate.month + "-" + toDate.day).getTime();
+    for (let time = from; time <= to; time += (24 * 60 * 60 * 1000)) //add one day
     {
-        //We get the getTime() of the dates from and to
-        let from=new Date(fromDate.year+"-"+fromDate.month+"-"+fromDate.day).getTime();
-        let to=new Date(toDate.year+"-"+toDate.month+"-"+toDate.day).getTime();
-        for (let time=from;time<=to;time+=(24*60*60*1000)) //add one day
-        {
-            let date=new Date(time);
-            //javascript getMonth give 0 to January, 1, to February...
-            this.addDate({year:date.getFullYear(),month:date.getMonth()+1,day:date.getDate()});
-        }   
-        this.datesSelectedChange.emit(this.datesSelected);
+      let date = new Date(time);
+      //javascript getMonth give 0 to January, 1, to February...
+      this.addDate({ year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() });
     }
-    //return true if is selected
-    isDateSelected(date:NgbDateStruct)
-    {
-        return (this.datesSelected.findIndex(f=>f.day==date.day && f.month==date.month && f.year==date.year)>=0);
-    }
+    this.datesSelectedChange.emit(this.datesSelected);
+  }
+  //return true if is selected
+  isDateSelected(date: NgbDateStruct) {
+    return (this.datesSelected.findIndex(f => f.day == date.day && f.month == date.month && f.year == date.year) >= 0);
+  }
   isHovered = date => this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate);
   isInside = date => after(date, this.fromDate) && before(date, this.toDate);
   isFrom = date => equals(date, this.fromDate);
@@ -1386,7 +1381,7 @@ export class TabsComponent {
 
   switchTab(tab: string) {
     this.activeTab = tab;
-    if(this.activeTab==='tab2'){
+    if (this.activeTab === 'tab2') {
       this.dnone = 'd-none';
     } else {
       this.dnone = '';
