@@ -24,8 +24,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background: url("../../assets/images/login_bg.png") center center / cover no-repeat;
+    background: linear-gradient(13deg, #9ad5ff 0%, #abc7e3 35%, #c3cfdf 70%, #a9ceff 100%);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -33,7 +32,12 @@
 
 .auth-content {
     width: 100%;
-    max-width: 430px;
+    max-width: 450px;
+}
+
+.auth-content {
+    width: 500px !important;
+   
 }
 
 /*==========================
@@ -41,8 +45,7 @@
 ===========================*/
 
 .login-logo {
-    width: 180px;
-    margin-bottom: 18px;
+    width: 250px;   
 }
 
 .login-title {
@@ -197,7 +200,8 @@
 ===========================*/
 
 .copyright {
-    color: rgba(255, 255, 255, .7);
+    color: #0B1F55;
+    font-weight: bold;
     font-size: 13px;
 }
 
