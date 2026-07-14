@@ -1,5 +1,5 @@
 import { BusOperatorService } from './../../services/bus-operator.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Seatblock } from '../../model/seatblock';
 import { NotificationService } from '../../services/notification.service';
@@ -27,6 +27,7 @@ import {
   NgbCalendar,
   NgbDatepickerConfig,
 } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one &&
@@ -213,7 +214,8 @@ export class SeatblockComponent implements OnInit {
     private busService: BusService,
     private busOperatorService: BusOperatorService,
     private locationService: LocationService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private activateroute: ActivatedRoute
   ) {
     this.isSubmit = false;
     this.seatBlockRecord = {} as Seatblock;
@@ -1487,6 +1489,18 @@ export class SeatblockComponent implements OnInit {
   //   this.datesSelected=value;
 
   // }
+
+  @ViewChild('content') content!: TemplateRef<any>;
+
+  ngAfterViewInit() {
+    this.activateroute.queryParams.subscribe(params => {
+      if (params['openModal']) {
+        setTimeout(() => {
+          this.OpenModal(this.content);
+        });
+      }
+    });
+  }
 }
 
 export class TabsComponent {

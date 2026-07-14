@@ -1,7 +1,12 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
-    <p style="color: white"> Loading... </p>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#fff"
+  type="timer"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
 </ngx-spinner>
-
 
 <!-- <app-card cardTitle="Cancel Report" cardClass="card-datatable" [options]="false" [isCardFooter]="false">
 
@@ -84,7 +89,7 @@
             {{ showSection ? 'Close' : 'Search' }}
         </span>
 
-        
+
         <i class="fas fa-info-circle ms-2 text-info"
             ngbTooltip="Use this filter to search booking reports by date, bus or PNR" placement="left" container="body"
             triggers="hover" (click)="$event.stopPropagation()">
@@ -96,7 +101,7 @@
 
     <div class="row align-items-center mt-2" *ngIf="completedata?.data?.data?.length != 0">
 
-       
+
         <div class="col-12 col-md-6">
             <div class="d-flex flex-column flex-md-row align-items-md-center">
                 <h5 class="mb-1 mb-md-0 me-md-3">
@@ -106,7 +111,7 @@
             </div>
         </div>
 
-        
+
         <div class="col-12 col-md-6 d-flex justify-content-md-end justify-content-start mt-2 mt-md-0">
             <button type="button" class="btn btn-warning sml_input costum_button" (click)="exportexcel()">
                 <i class="fas fa-file-export"></i> Export
@@ -188,7 +193,7 @@
                     <tbody>
                 </table>
             </div>
-            
+
             <div class="mobile-view" *ngIf="completedata?.data?.data?.length != 0">
                 <div class="ticket-card" *ngFor="let complete of completedata?.data.data; let i = index">
 
@@ -277,750 +282,692 @@
     </div>
 </app-card> -->
 
+<section class="content-header desktop-view">
+  <div class="booking-header">
+    <div class="booking-left">
+      <h2>
+        <i class="fas fa-ban"></i>
 
-<section class="content-header">
+        Cancel Report
+      </h2>
 
-    <div class="booking-header">
-
-        <div class="booking-left">
-
-            <h2>
-
-                <i class="fas fa-ban"></i>
-
-                Cancel Report
-
-            </h2>
-
-            <p>
-
-                Track, search and manage all cancelled bookings.
-
-            </p>
-
-        </div>
-
-        <div class="booking-right">
-
-            <button class="btn btn-primary booking-search-btn" (click)="toggleSection()">
-
-                <i class="fas" [ngClass]="showSection ? 'fa-times':'fa-filter'">
-                </i>
-
-                <span class="btn-text">
-
-                    {{showSection ? 'Close Filter':'Search Filter'}}
-
-                </span>
-
-            </button>
-
-            <button class="btn btn-success export-btn" (click)="exportexcel()">
-
-                <i class="fas fa-file-export"></i>
-
-                Export
-
-            </button>
-
-        </div>
-
+      <p>Track, search and manage all cancelled bookings.</p>
     </div>
 
-    <div class="search-card" *ngIf="showSection">
-
-        <form [formGroup]="searchFrom">
-
-            <div class="row">
-
-                <!-- Journey From -->
-
-                <div class="col-lg-3 col-md-6">
-
-                    <label class="filter-label">
-
-                        Journey From
-
-                    </label>
-
-                    <mat-form-field appearance="outline" class="w-100 premium-mat">
-
-                        <input matInput [matDatepicker]="startPicker" placeholder="Start Date"
-                            formControlName="rangeFromDate" readonly>
-
-                        <mat-datepicker-toggle matSuffix [for]="startPicker">
-                        </mat-datepicker-toggle>
-
-                        <mat-datepicker #startPicker></mat-datepicker>
-
-                    </mat-form-field>
-
-                </div>
-
-                <!-- Journey To -->
-
-                <div class="col-lg-3 col-md-6">
-
-                    <label class="filter-label">
-
-                        Journey To
-
-                    </label>
-
-                    <mat-form-field appearance="outline" class="w-100 premium-mat">
-
-                        <input matInput [matDatepicker]="endPicker" placeholder="End Date" formControlName="rangeToDate"
-                            readonly>
-
-                        <mat-datepicker-toggle matSuffix [for]="endPicker">
-                        </mat-datepicker-toggle>
-
-                        <mat-datepicker #endPicker></mat-datepicker>
-
-                    </mat-form-field>
-
-                </div>
-
-                <!-- Bus -->
-
-                <div class="col-lg-3 col-md-6">
-
-                    <label class="filter-label">
-
-                        Bus
-
-                    </label>
-
-                    <ng-select class="premium-select" [items]="buses" bindLabel="busData" bindValue="id"
-                        placeholder="Select Bus" formControlName="bus_id" [clearable]="false">
-
-                    </ng-select>
-
-                </div>
-
-                <!-- Search By -->
-
-                <div class="col-lg-3 col-md-6">
-
-                    <label class="filter-label">
-
-                        Search By
-
-                    </label>
-
-                    <select class="form-control premium-input" formControlName="date_type">
-
-                        <option value="journey">
-
-                            Journey Date
-
-                        </option>
-
-                        <option value="booking">
-
-                            Booking Date
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-                <!-- PNR -->
-
-                <div class="col-lg-4 col-md-6">
-
-                    <label class="filter-label">
-
-                        PNR Number
-
-                    </label>
-
-                    <input type="text" class="form-control premium-input" placeholder="Enter PNR Number"
-                        formControlName="pnr">
-
-                </div>
-
-                <!-- Rows -->
-
-                <div class="col-lg-2 col-md-3 mb-4">
-
-                    <label class="filter-label">
-
-                        Rows
-
-                    </label>
-
-                    <select class="form-control premium-input" formControlName="rows_number" (change)="search()">
-
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="all">All</option>
-
-                    </select>
-
-                </div>
-
-                <!-- Buttons -->
-
-                <div class="col-lg-6 col-md-3 mb-4 d-flex align-items-end justify-content-end">
-
-                    <button type="button" class="btn btn-search" (click)="search()">
-
-                        <i class="fas fa-search"></i>
-
-                        Search
-
-                    </button>
-
-                    <button type="button" class="btn btn-reset ml-2" (click)="refresh()">
-
-                        <i class="fas fa-redo"></i>
-
-                        Reset
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </form>
-
+    <div class="booking-right">
+      <button
+        class="btn btn-primary booking-search-btn"
+        (click)="toggleSection()"
+      >
+        <i class="fas" [ngClass]="showSection ? 'fa-times' : 'fa-filter'"> </i>
+
+        <span class="btn-text">
+          {{ showSection ? "Close Filter" : "Search Filter" }}
+        </span>
+      </button>
+
+      <button
+        class="btn btn-success export-btn"
+        (click)="exportexcel()"
+        *ngIf="completedata?.data?.data?.length"
+      >
+        <i class="fas fa-file-export"></i>
+
+        Export
+      </button>
     </div>
-
-    <div class="table-card">
-        <div class="desktop-view table-responsive" id="print-section">
-            <div class="summary-card" *ngIf="completedata?.data?.data?.length != 0">
-
-                <small>
-
-                    Total Cancelled Seats :
-
-                </small>
-
-                <h3>
-
-                    {{completedata?.totalSeats || 0}}
-
-                </h3>
-
-            </div>
-            <table class="table premium-table">
-
-                <thead *ngIf="completedata?.data?.data?.length != 0">
-
-                    <tr>
-
-                        <th>#</th>
-
-                        <th>Passenger</th>
-
-                        <th>Bus Details</th>
-
-                        <th>Journey</th>
-
-                        <th>Seats</th>
-
-                        <th>Cancelled By</th>
-
-                        <th>Cancelled On</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr *ngFor="let complete of completedata?.data.data; let i=index">
-
-                        <!-- Serial -->
-
-                        <td class="serial-no">
-
-                            {{i+1}}
-
-                        </td>
-
-                        <!-- Passenger -->
-
-                        <td>
-
-                            <div class="passenger-box">
-
-                                <div class="passenger-info">
-
-                                    <h5>
-
-                                        {{complete.booking_detail[0].passenger_name | titlecase}}
-
-                                        <span class="gender-text">
-
-                                            -
-
-                                            <span *ngFor="let p of complete.booking_detail; let last=last">
-
-                                                {{p.passenger_gender | slice:0:1}}
-
-                                                <span *ngIf="!last">, </span>
-
-                                            </span>
-
-                                        </span>
-
-                                    </h5>
-
-                                    <small>
-
-                                        {{complete.users.phone}}
-
-                                    </small>
-
-                                    <br>
-
-                                    <span class="pnr">
-
-                                        {{complete.pnr}}
-
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-                        <!-- Bus -->
-
-                        <td>
-
-                            <h6>
-
-                                {{complete.bus.name}}
-
-                            </h6>
-
-                            <small>
-
-                                {{complete.bus.bus_number}}
-
-                            </small>
-
-                        </td>
-
-                        <!-- Route -->
-
-                        <td>
-
-                            <div class="route-box">
-
-                                <strong>
-
-                                    <span *ngFor="let b of complete.from_location">
-
-                                        {{b.name}}
-
-                                    </span>
-
-                                </strong>
-
-                                <i class="fa fa-arrow-right"></i>
-
-                                <strong>
-
-                                    <span *ngFor="let d of complete.to_location">
-
-                                        {{d.name}}
-
-                                    </span>
-
-                                </strong>
-
-                            </div>
-
-                            <div class="journey-date">
-
-                                {{complete.journey_dt | date:'dd MMM yyyy'}}
-
-                            </div>
-
-                        </td>
-
-                        <!-- Seats -->
-
-                        <td>
-
-                            <span class="seat-badge" *ngFor="let seat of complete.booking_detail">
-
-                                {{seat.bus_seats.seats.seatText}}
-
-                            </span>
-
-                        </td>
-
-                        <!-- Cancelled By -->
-
-                        <td>
-
-                            <span class="cancel-chip" [ngClass]="complete.cancel_by ? 'cancel-admin' : 'cancel-user'">
-
-                                {{complete.cancel_by ? 'ODBUS' : 'Customer'}}
-
-                            </span>
-
-                            <div class="cancel-reason" *ngIf="complete.cancel_reason">
-
-                                {{complete.cancel_reason | titlecase}}
-
-                            </div>
-
-                        </td>
-
-                        <!-- Cancelled Date -->
-
-                        <td>
-
-                            <div class="cancel-date">
-
-                                {{complete.updated_at | date:'dd MMM yyyy'}}
-
-                            </div>
-
-                            <small>
-
-                                {{complete.updated_at | date:'hh:mm a'}}
-
-                            </small>
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-            <!-- Pagination -->
-
-            <div class="pagination-wrapper" *ngIf="completedata?.data?.data?.length">
-
-                <div class="pagination-info">
-
-                    Showing
-
-                    <strong>{{completedata?.count}}</strong>
-
-                    of
-
-                    <strong>{{completedata?.total}}</strong>
-
-                    Cancelled Bookings
-
-                </div>
-
-                <nav *ngIf="completedata?.data?.links">
-                    <ul class="pagination mb-0">
-                        <li class="page-item" *ngFor="let b of completedata.data.links">
-                            <a class="page-link" (click)="(b.url)?search(b.url):''" [innerHTML]="page(b.label)">
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div class="empty-box" *ngIf="completedata?.data?.data?.length==0">
-
-            <i class="fa fa-inbox"></i>
-
-            <h4>
-
-                No Cancelled Booking Found
-
-            </h4>
-
-        </div>
-    </div>
-</section>
-
-<div class="mobile-view">
-
-    <div class="mobile-wrapper">
-
-        <!-- Header -->
-
-        <div class="mobile-header">
-
-            <h4 class="mobile-title">
-
-                Cancel Report
-
-            </h4>
-
-            <button class="mobile-filter-btn" (click)="toggleSection()">
-
-                <i class="fas" [ngClass]="showSection ? 'fa-times' : 'fa-filter'"></i>
-
-            </button>
-
+  </div>
+
+  <div class="search-card" *ngIf="showSection">
+    <form [formGroup]="searchFrom">
+      <div class="row">
+        <!-- Journey From -->
+
+        <div class="col-lg-3 col-md-6">
+          <label class="filter-label"> Journey From </label>
+
+          <mat-form-field appearance="outline" class="w-100 premium-mat">
+            <input
+              matInput
+              [matDatepicker]="startPicker"
+              placeholder="Start Date"
+              formControlName="rangeFromDate"
+              readonly
+            />
+
+            <mat-datepicker-toggle matSuffix [for]="startPicker">
+            </mat-datepicker-toggle>
+
+            <mat-datepicker #startPicker></mat-datepicker>
+          </mat-form-field>
         </div>
 
-        <!-- Cards -->
+        <!-- Journey To -->
 
-        <div class="booking-card" *ngFor="let complete of completedata?.data.data">
+        <div class="col-lg-3 col-md-6">
+          <label class="filter-label"> Journey To </label>
 
-            <!-- Top -->
+          <mat-form-field appearance="outline" class="w-100 premium-mat">
+            <input
+              matInput
+              [matDatepicker]="endPicker"
+              placeholder="End Date"
+              formControlName="rangeToDate"
+              readonly
+            />
 
-            <div class="booking-top">
+            <mat-datepicker-toggle matSuffix [for]="endPicker">
+            </mat-datepicker-toggle>
 
-                <h5>
+            <mat-datepicker #endPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
 
-                    {{complete.bus.name}}
+        <!-- Bus -->
 
-                </h5>
+        <div class="col-lg-3 col-md-6">
+          <label class="filter-label"> Bus </label>
 
-                <span class="cancel-chip" [ngClass]="complete.cancel_by ? 'cancel-admin':'cancel-user'">
+          <ng-select
+            class="premium-select"
+            [items]="buses"
+            bindLabel="busData"
+            bindValue="id"
+            placeholder="Select Bus"
+            formControlName="bus_id"
+            [clearable]="false"
+          >
+          </ng-select>
+        </div>
 
-                    {{complete.cancel_by ? 'ODBUS' : 'Customer'}}
+        <!-- Search By -->
 
-                </span>
+        <div class="col-lg-3 col-md-6">
+          <label class="filter-label"> Search By </label>
 
-            </div>
+          <select
+            class="form-control premium-input"
+            formControlName="date_type"
+          >
+            <option value="journey">Journey Date</option>
+
+            <option value="booking">Booking Date</option>
+          </select>
+        </div>
+
+        <!-- PNR -->
+
+        <div class="col-lg-4 col-md-6">
+          <label class="filter-label"> PNR Number </label>
+
+          <input
+            type="text"
+            class="form-control premium-input"
+            placeholder="Enter PNR Number"
+            formControlName="pnr"
+          />
+        </div>
+
+        <!-- Rows -->
+
+        <div class="col-lg-2 col-md-3 mb-4">
+          <label class="filter-label"> Rows </label>
+
+          <select
+            class="form-control premium-input"
+            formControlName="rows_number"
+            (change)="search()"
+          >
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        <!-- Buttons -->
+
+        <div
+          class="col-lg-6 col-md-3 mb-4 d-flex align-items-end justify-content-end"
+        >
+          <button type="button" class="btn btn-search" (click)="search()">
+            <i class="fas fa-search"></i>
+
+            Search
+          </button>
+
+          <button type="button" class="btn btn-reset ml-2" (click)="refresh()">
+            <i class="fas fa-redo"></i>
+
+            Reset
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-card">
+    <div class="desktop-view table-responsive" id="print-section">
+      <div class="summary-card" *ngIf="completedata?.data?.data?.length != 0">
+        <small> Total Cancelled Seats : </small>
+
+        <h3>
+          {{ completedata?.totalSeats || 0 }}
+        </h3>
+      </div>
+      <table class="table premium-table">
+        <thead *ngIf="completedata?.data?.data?.length != 0">
+          <tr>
+            <th>#</th>
+
+            <th>Passenger</th>
+
+            <th>Bus Details</th>
+
+            <th>Journey</th>
+
+            <th>Seats</th>
+
+            <th>Cancelled By</th>
+
+            <th>Cancelled On</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let complete of completedata?.data.data; let i = index">
+            <!-- Serial -->
+
+            <td class="serial-no">
+              {{ i + 1 }}
+            </td>
 
             <!-- Passenger -->
 
-            <div class="booking-user">
-
+            <td>
+              <div class="passenger-box">
                 <div class="passenger-info">
+                  <h5>
+                    {{ complete.booking_detail[0].passenger_name | titlecase }}
 
-                    <h5>
+                    <span class="gender-text">
+                      -
 
-                        {{complete.booking_detail[0].passenger_name | titlecase}}
+                      <span
+                        *ngFor="
+                          let p of complete.booking_detail;
+                          let last = last
+                        "
+                      >
+                        {{ p.passenger_gender | slice: 0 : 1 }}
 
-                        <span class="gender-text">
+                        <span *ngIf="!last">, </span>
+                      </span>
+                    </span>
+                  </h5>
 
-                            -
+                  <small>
+                    {{ complete.users.phone }}
+                  </small>
 
-                            <span *ngFor="let p of complete.booking_detail; let last=last">
+                  <br />
 
-                                {{p.passenger_gender | slice:0:1}}
-
-                                <span *ngIf="!last">, </span>
-
-                            </span>
-
-                        </span>
-
-                    </h5>
-
-                    <small>
-
-                        {{complete.users.phone}}
-
-                    </small>
-
-                    <div class="pnr-mobile">
-
-                        {{complete.pnr}}
-
-                    </div>
-
+                  <span class="pnr">
+                    {{ complete.pnr }}
+                  </span>
                 </div>
+              </div>
+            </td>
 
-            </div>
+            <!-- Bus -->
+
+            <td>
+              <h6>
+                {{ complete.bus.name }}
+              </h6>
+
+              <small>
+                {{ complete.bus.bus_number }}
+              </small>
+            </td>
 
             <!-- Route -->
 
-            <div class="booking-route">
-
+            <td>
+              <div class="route-box">
                 <strong>
-
-                    <span *ngFor="let b of complete.from_location">
-
-                        {{b.name}}
-
-                    </span>
-
+                  <span *ngFor="let b of complete.from_location">
+                    {{ b.name }}
+                  </span>
                 </strong>
 
                 <i class="fa fa-arrow-right"></i>
 
                 <strong>
-
-                    <span *ngFor="let d of complete.to_location">
-
-                        {{d.name}}
-
-                    </span>
-
+                  <span *ngFor="let d of complete.to_location">
+                    {{ d.name }}
+                  </span>
                 </strong>
+              </div>
 
-            </div>
+              <div class="journey-date">
+                {{ complete.journey_dt | date: "dd MMM yyyy" }}
+              </div>
+            </td>
 
-            <!-- Footer -->
+            <!-- Seats -->
 
-            <div class="booking-footer">
+            <td>
+              <span
+                class="seat-badge"
+                *ngFor="let seat of complete.booking_detail"
+              >
+                {{ seat.bus_seats.seats.seatText }}
+              </span>
+            </td>
 
-                <div>
+            <!-- Cancelled By -->
 
-                    <small>
+            <td>
+              <span
+                class="cancel-chip"
+                [ngClass]="complete.cancel_by ? 'cancel-admin' : 'cancel-user'"
+              >
+                {{ complete.cancel_by ? "ODBUS" : "Customer" }}
+              </span>
 
-                        DOJ
+              <div class="cancel-reason" *ngIf="complete.cancel_reason">
+                {{ complete.cancel_reason | titlecase }}
+              </div>
+            </td>
 
-                    </small>
+            <!-- Cancelled Date -->
 
-                    <strong>
+            <td>
+              <div class="cancel-date">
+                {{ complete.updated_at | date: "dd MMM yyyy" }}
+              </div>
 
-                        {{complete.journey_dt | date:'dd MMM yyyy'}}
+              <small>
+                {{ complete.updated_at | date: "hh:mm a" }}
+              </small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Pagination -->
 
-                    </strong>
+      <div class="pagination-wrapper" *ngIf="completedata?.data?.data?.length">
+        <div class="pagination-info">
+          Showing
 
-                </div>
+          <strong>{{ completedata?.count }}</strong>
 
-                <div>
+          of
 
-                    <small>
+          <strong>{{ completedata?.total }}</strong>
 
-                        Seats
-
-                    </small>
-
-                    <strong>
-
-                        <span *ngFor="let seat of complete.booking_detail; let last=last">
-
-                            {{seat.bus_seats.seats.seatText}}
-
-                            <span *ngIf="!last">, </span>
-
-                        </span>
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-            <!-- Cancel Details -->
-
-            <div class="cancel-footer">
-
-                <div>
-
-                    <small>
-
-                        Cancelled On
-
-                    </small>
-
-                    <strong>
-
-                        {{complete.updated_at | date:'dd MMM yyyy'}}
-
-                    </strong>
-
-                </div>
-
-                <div *ngIf="complete.cancel_reason">
-
-                    <small>
-
-                        Reason
-
-                    </small>
-
-                    <strong>
-
-                        {{complete.cancel_reason | titlecase}}
-
-                    </strong>
-
-                </div>
-
-            </div>
-
+          Cancelled Bookings
         </div>
 
-        <!-- Empty -->
+        <nav *ngIf="completedata?.data?.links">
+          <ul class="pagination mb-0">
+            <li class="page-item" *ngFor="let b of completedata.data.links">
+              <a
+                class="page-link"
+                (click)="b.url ? search(b.url) : ''"
+                [innerHTML]="page(b.label)"
+              >
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div
+      class="desktop-view empty-box"
+      *ngIf="completedata?.data?.data?.length == 0"
+    >
+      <i class="fa fa-inbox"></i>
 
-        <div class="empty-box" *ngIf="completedata?.data?.data?.length==0">
+      <h4>No Cancelled Booking Found</h4>
+    </div>
+  </div>
+</section>
 
-            <i class="fas fa-ban"></i>
+<div class="mobile-view">
+  <div class="mobile-wrapper">
+    <!-- Header -->
 
-            <h4>
+    <div class="mobile-header">
+      <h4 class="mobile-title">Cancel Report</h4>
 
-                No Cancelled Booking Found
-
-            </h4>
-
-            <p>
-
-                There are no cancelled bookings available for the selected filters.
-
-            </p>
-
-        </div>
-
+      <button class="mobile-filter-btn" (click)="toggleSection()">
+        <i class="fas" [ngClass]="showSection ? 'fa-times' : 'fa-filter'"></i>
+      </button>
     </div>
 
+    <div class="search-card" *ngIf="showSection">
+      <form [formGroup]="searchFrom">
+        <div class="row">
+          <!-- Journey From -->
+
+          <div class="col-lg-3 col-md-6">
+            <label class="filter-label"> Journey From </label>
+
+            <mat-form-field appearance="outline" class="w-100 premium-mat">
+              <input
+                matInput
+                [matDatepicker]="startPicker"
+                placeholder="Start Date"
+                formControlName="rangeFromDate"
+                readonly
+              />
+
+              <mat-datepicker-toggle matSuffix [for]="startPicker">
+              </mat-datepicker-toggle>
+
+              <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Journey To -->
+
+          <div class="col-lg-3 col-md-6">
+            <label class="filter-label"> Journey To </label>
+
+            <mat-form-field appearance="outline" class="w-100 premium-mat">
+              <input
+                matInput
+                [matDatepicker]="endPicker"
+                placeholder="End Date"
+                formControlName="rangeToDate"
+                readonly
+              />
+
+              <mat-datepicker-toggle matSuffix [for]="endPicker">
+              </mat-datepicker-toggle>
+
+              <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Bus -->
+
+          <div class="col-lg-3 col-md-6">
+            <label class="filter-label"> Bus </label>
+
+            <ng-select
+              class="premium-select"
+              [items]="buses"
+              bindLabel="busData"
+              bindValue="id"
+              placeholder="Select Bus"
+              formControlName="bus_id"
+              [clearable]="false"
+            >
+            </ng-select>
+          </div>
+
+          <!-- Search By -->
+
+          <div class="col-lg-3 col-md-6">
+            <label class="filter-label"> Search By </label>
+
+            <select
+              class="form-control premium-input"
+              formControlName="date_type"
+            >
+              <option value="journey">Journey Date</option>
+
+              <option value="booking">Booking Date</option>
+            </select>
+          </div>
+
+          <!-- PNR -->
+
+          <div class="col-lg-4 col-md-6">
+            <label class="filter-label"> PNR Number </label>
+
+            <input
+              type="text"
+              class="form-control premium-input"
+              placeholder="Enter PNR Number"
+              formControlName="pnr"
+            />
+          </div>
+
+          <!-- Rows -->
+
+          <div class="col-lg-2 col-md-3 mb-4">
+            <label class="filter-label"> Rows </label>
+
+            <select
+              class="form-control premium-input"
+              formControlName="rows_number"
+              (change)="search()"
+            >
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="all">All</option>
+            </select>
+          </div>
+
+          <!-- Buttons -->
+
+          <div
+            class="col-lg-6 col-md-3 mb-4 d-flex align-items-end justify-content-end"
+          >
+            <button type="button" class="btn btn-search" (click)="search()">
+              <i class="fas fa-search"></i>
+
+              Search
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-reset ml-2"
+              (click)="refresh()"
+            >
+              <i class="fas fa-redo"></i>
+
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Cards -->
+
+    <div class="booking-card" *ngFor="let complete of completedata?.data.data">
+      <!-- Top -->
+
+      <div class="booking-top">
+        <h5>
+          {{ complete.bus.name }}
+        </h5>
+
+        <span
+          class="cancel-chip"
+          [ngClass]="complete.cancel_by ? 'cancel-admin' : 'cancel-user'"
+        >
+          {{ complete.cancel_by ? "ODBUS" : "Customer" }}
+        </span>
+      </div>
+
+      <!-- Passenger -->
+
+      <div class="booking-user">
+        <div class="passenger-info">
+          <h5>
+            {{ complete.booking_detail[0].passenger_name | titlecase }}
+
+            <span class="gender-text">
+              -
+
+              <span *ngFor="let p of complete.booking_detail; let last = last">
+                {{ p.passenger_gender | slice: 0 : 1 }}
+
+                <span *ngIf="!last">, </span>
+              </span>
+            </span>
+          </h5>
+
+          <small>
+            {{ complete.users.phone }}
+          </small>
+
+          <div class="pnr-mobile">
+            {{ complete.pnr }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Route -->
+
+      <div class="booking-route">
+        <strong>
+          <span *ngFor="let b of complete.from_location">
+            {{ b.name }}
+          </span>
+        </strong>
+
+        <i class="fa fa-arrow-right"></i>
+
+        <strong>
+          <span *ngFor="let d of complete.to_location">
+            {{ d.name }}
+          </span>
+        </strong>
+      </div>
+
+      <!-- Footer -->
+
+      <div class="booking-footer">
+        <div>
+          <small> DOJ </small>
+
+          <strong>
+            {{ complete.journey_dt | date: "dd MMM yyyy" }}
+          </strong>
+        </div>
+
+        <div>
+          <small> Seats </small>
+
+          <strong>
+            <span *ngFor="let seat of complete.booking_detail; let last = last">
+              {{ seat.bus_seats.seats.seatText }}
+
+              <span *ngIf="!last">, </span>
+            </span>
+          </strong>
+        </div>
+      </div>
+
+      <!-- Cancel Details -->
+
+      <div class="cancel-footer">
+        <div>
+          <small> Cancelled On </small>
+
+          <strong>
+            {{ complete.updated_at | date: "dd MMM yyyy" }}
+          </strong>
+        </div>
+
+        <div *ngIf="complete.cancel_reason">
+          <small> Reason </small>
+
+          <strong>
+            {{ complete.cancel_reason | titlecase }}
+          </strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty -->
+
+    <div
+      class="empty-box table-card"
+      *ngIf="completedata?.data?.data?.length == 0"
+    >
+      <i class="fas fa-ban"></i>
+
+      <h4>No Cancelled Booking Found</h4>
+
+      <p>There are no cancelled bookings available for the selected filters.</p>
+    </div>
+  </div>
 </div>
 
-<div style="display: none;" id="export-section">
-    <table class="table table-striped ">
-        <thead>
-            <tr>
-                <th>Pnr No</th>
-                <th>Seat No</th>
-                <th>Sleeper No</th>
-                <th>Bus Number</th>
-                <th>Bus Name</th>
-                <th>Source- Destination</th>
-                <th>Journey Date</th>
-                <th>Passenger Details</th>
-                <th>User Name</th>
-                <th>User Phone</th>
-                <th>User Email</th>
-                <th>Owner Fare</th>
-            </tr>
-        </thead>
+<div style="display: none" id="export-section">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Pnr No</th>
+        <th>Seat No</th>
+        <th>Sleeper No</th>
+        <th>Bus Number</th>
+        <th>Bus Name</th>
+        <th>Source- Destination</th>
+        <th>Journey Date</th>
+        <th>Passenger Details</th>
+        <th>User Name</th>
+        <th>User Phone</th>
+        <th>User Email</th>
+        <th>Owner Fare</th>
+      </tr>
+    </thead>
 
-        <tbody *ngIf="completedata?.length != 0">
-            <tr *ngFor="let complete of completedata?.data.data; let i = index">
-                <td>{{complete.pnr}}</td>
-                <td>
-                    <span *ngFor="let seat of complete.booking_detail;">
-                        <span *ngIf="seat.bus_seats.seats.berthType==1">{{seat.bus_seats.seats.seatText}} || </span>
-                    </span>
-                </td>
-                <td>
-                    <span *ngFor="let seat of complete.booking_detail;">
-                        <span *ngIf="seat.bus_seats.seats.berthType==2">{{seat.bus_seats.seats.seatText}} ||</span>
-                    </span>
-                </td>
-                <td>{{ complete.bus.bus_number }}</td>
-                <td>{{ complete.bus.name }} [ {{complete.source[0][0].name}} >> {{complete.destination[0][0].name}} ]
-                </td>
-                <td>
-                    <span *ngFor="let boarding of complete.from_location;">
-                        {{boarding.name}}
-                    </span> -
-                    <span *ngFor="let dropping of complete.to_location;">
-                        {{dropping.name}}
-                    </span>
-                </td>
-                <td>{{complete.journey_dt | date: 'dd-MM-YYYY'}}</td>
-                <td>
-                    <p *ngFor="let passanger of complete.booking_detail;">
-                        {{passanger.passenger_name}}[ gender - {{passanger.passenger_gender}}, seat no -
-                        {{passanger.bus_seats.seats.seatText}}] ,
-                    </p>
-                </td>
-                <td>{{complete.users.name}}</td>
-                <td>{{complete.users.phone}}</td>
-                <td>{{complete.users.email}}</td>
-                <td>{{complete.owner_fare + complete.additional_owner_fare}}</td>
-            </tr>
-
-        </tbody>
-    </table>
+    <tbody *ngIf="completedata?.length != 0">
+      <tr *ngFor="let complete of completedata?.data.data; let i = index">
+        <td>{{ complete.pnr }}</td>
+        <td>
+          <span *ngFor="let seat of complete.booking_detail">
+            <span *ngIf="seat.bus_seats.seats.berthType == 1"
+              >{{ seat.bus_seats.seats.seatText }} ||
+            </span>
+          </span>
+        </td>
+        <td>
+          <span *ngFor="let seat of complete.booking_detail">
+            <span *ngIf="seat.bus_seats.seats.berthType == 2"
+              >{{ seat.bus_seats.seats.seatText }} ||</span
+            >
+          </span>
+        </td>
+        <td>{{ complete.bus.bus_number }}</td>
+        <td>
+          {{ complete.bus.name }} [ {{ complete.source[0][0].name }} >>
+          {{ complete.destination[0][0].name }} ]
+        </td>
+        <td>
+          <span *ngFor="let boarding of complete.from_location">
+            {{ boarding.name }}
+          </span>
+          -
+          <span *ngFor="let dropping of complete.to_location">
+            {{ dropping.name }}
+          </span>
+        </td>
+        <td>{{ complete.journey_dt | date: "dd-MM-YYYY" }}</td>
+        <td>
+          <p *ngFor="let passanger of complete.booking_detail">
+            {{ passanger.passenger_name }}[ gender -
+            {{ passanger.passenger_gender }}, seat no -
+            {{ passanger.bus_seats.seats.seatText }}] ,
+          </p>
+        </td>
+        <td>{{ complete.users.name }}</td>
+        <td>{{ complete.users.phone }}</td>
+        <td>{{ complete.users.email }}</td>
+        <td>{{ complete.owner_fare + complete.additional_owner_fare }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

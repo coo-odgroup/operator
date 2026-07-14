@@ -19,21 +19,21 @@
 
 <div class="mobile-menu-list my-section" *ngIf="showSection" >
   <ul>
-    <li><a href="#/dashboard" (click)="closeMenu()">Dashboard</a></li>    
+    <li><a href="#/dashboard" (click)="closeMenu()">Dashboard</a></li>
     <!-- <li><a href="#/busmanagement/busschedule" (click)="closeMenu()">Bus Schedule</a></li> -->
     <li><a href="#/reports/cancelReport" (click)="closeMenu()">Cancel Report</a></li>
-    <li><a href="#/bookingmanagement/extraseatblock" (click)="closeMenu()">Extra Seat Block</a></li>
-    <li><a href="#/bookingmanagement/buscancellation" (click)="closeMenu()">Bus Cancellation</a></li>   
-    <li><a href="#/bookingmanagement/ownerfare" (click)="closeMenu()">Manage Fare</a></li>
+    <li><a [routerLink]="['/bookingmanagement/extraseatblock']" [queryParams]="{ openModal: true }" (click)="closeMenu()">Extra Seat Block</a></li>
+    <li><a [routerLink]="['/bookingmanagement/buscancellation']" [queryParams]="{ openModal: true }" (click)="closeMenu()">Bus Cancellation</a></li>
+    <li><a [routerLink]="['/bookingmanagement/ownerfare']" [queryParams]="{ openModal: true }" (click)="closeMenu()">Manage Fare</a></li>
     <li><a href="#/bookingmanagement/ownerfare" (click)="logout()">Logout</a></li>
   </ul>
 </div>
 
 <div class="mobile-display">
   <ul>
-    <li><a href="#/bookingmanagement/seatblock" (click)="closeMenu()"  [class.active]="isActive('seatblock')"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
-    <li><a href="#/bookingmanagement/seatopen" (click)="closeMenu()" [class.active]="isActive('seatopen')"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
-    <li><a href="#/reports/completeReport" (click)="closeMenu()" [class.active]="isActive('completeReport')"><span><i class="feather icon-crosshair"></i></span>Booking Report</a></li>
+    <li><a [routerLink]="['/bookingmanagement/seatblock']" [queryParams]="{ openModal: true }" (click)="closeMenu()"  [class.active]="isActive('seatblock')"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
+    <li><a [routerLink]="['/bookingmanagement/seatopen']" [queryParams]="{ openModal: true }" (click)="closeMenu()" [class.active]="isActive('seatopen')"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
+    <li><a [routerLink]="['/reports/completeReport']" [queryParams]="{ openModal: true }" (click)="closeMenu()" [class.active]="isActive('completeReport')"><span><i class="feather icon-crosshair"></i></span>Booking Report</a></li>
     <li><a (click)="toggleSection()"><span><i class="feather icon-list"></i></span>Menu</a></li>
   </ul>
 </div>

@@ -1,5 +1,5 @@
 import { BusOperatorService } from './../../services/bus-operator.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Seatopen } from '../../model/seatopen';
 import { NotificationService } from '../../services/notification.service';
@@ -19,8 +19,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 
-
-
+import { ActivatedRoute } from '@angular/router';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
@@ -53,9 +52,9 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   .custom-day.faded {
     background-color: rgba(2, 117, 216, 0.5);
   }
-  .custom-day.selected{  
+  .custom-day.selected{
     background-color: rgba(255, 255, 0, .5);
-      
+
   }
 `]
 })
@@ -125,6 +124,7 @@ export class SeatopenComponent implements OnInit {
     private busService: BusService,
     private busOperatorService: BusOperatorService,
     private locationService: LocationService, private spinner: NgxSpinnerService,
+    private activateroute: ActivatedRoute
   ) {
     this.isSubmit = false;
     this.seatOpenRecord = {} as Seatopen;
@@ -293,23 +293,23 @@ export class SeatopenComponent implements OnInit {
           if (mainArray.length > 0) {
             for (var bus of mainArray) {
               bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] }));
-              //  console.log(bus);               
+              //  console.log(bus);
 
               let allbus = [];
               for (var date of bus) {
                 date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
                 let allDate = [];
-                // console.log(date);               
+                // console.log(date);
 
                 for (var route of date) {
                   route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));
                   let allroute = [];
-                  //  console.log(route);               
+                  //  console.log(route);
 
                   for (var seat of route) {
                     seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));
                     allroute.push(seat);
-                    // console.log(seat);               
+                    // console.log(seat);
                   }
                   allDate.push(route);
                 }
@@ -338,23 +338,23 @@ export class SeatopenComponent implements OnInit {
           if (mainArray.length > 0) {
             for (var bus of mainArray) {
               bus = Object.keys(bus.value).map(k2 => ({ value: bus.value[k2] }));
-              //  console.log(bus);               
+              //  console.log(bus);
 
               let allbus = [];
               for (var date of bus) {
                 date = Object.keys(date.value).map(k3 => ({ value: date.value[k3] }));
                 let allDate = [];
-                // console.log(date);               
+                // console.log(date);
 
                 for (var route of date) {
                   route = Object.keys(route.value).map(k4 => ({ value: route.value[k4] }));
                   let allroute = [];
-                  //  console.log(route);               
+                  //  console.log(route);
 
                   for (var seat of route) {
                     seat = Object.keys(seat.value).map(k5 => ({ value: seat.value[k5] }));
                     allroute.push(seat);
-                    // console.log(seat);               
+                    // console.log(seat);
                   }
                   allDate.push(route);
                 }
@@ -1371,8 +1371,17 @@ export class SeatopenComponent implements OnInit {
   isTo = date => equals(date, this.toDate);
 
 
+  @ViewChild('content') content!: TemplateRef<any>;
 
-
+  ngAfterViewInit() {
+    this.activateroute.queryParams.subscribe(params => {
+      if (params['openModal']) {
+        setTimeout(() => {
+          this.OpenModal(this.content);
+        });
+      }
+    });
+  }
 }
 
 export class TabsComponent {

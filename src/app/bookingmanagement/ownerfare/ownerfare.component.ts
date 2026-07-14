@@ -2,7 +2,7 @@ import { BusOperatorService } from './../../services/bus-operator.service';
 import { Busoperator } from './../../model/busoperator';
 import { BusstoppageService } from '../../services/busstoppage.service';
 import { Busstoppage } from '../../model/busstoppage';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Ownerfare } from '../../model/ownerfare';
 import { NotificationService } from '../../services/notification.service';
@@ -21,7 +21,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Input, Output, EventEmitter } from '@angular/core';
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-
+import { ActivatedRoute } from '@angular/router';
 
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -56,9 +56,9 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   .custom-day.faded {
     background-color: rgba(2, 117, 216, 0.5);
   }
-  .custom-day.selected{  
+  .custom-day.selected{
     background-color: rgba(255, 255, 0, .5);
-      
+
   }
 `]
 })
@@ -96,7 +96,7 @@ export class OwnerfareComponent implements OnInit {
   showSection = false;
 
 
-  constructor(private ownerfareService: OwnerfareService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busService: BusService, private busOperatorService: BusOperatorService, private locationService: LocationService, private spinner: NgxSpinnerService, private dtconfig: NgbDatepickerConfig) {
+  constructor(private ownerfareService: OwnerfareService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busService: BusService, private busOperatorService: BusOperatorService, private locationService: LocationService, private spinner: NgxSpinnerService, private dtconfig: NgbDatepickerConfig, private activateroute: ActivatedRoute) {
     this.isSubmit = false;
     this.ownerFareRecord = {} as Ownerfare;
     //this.busstoppageRecord= {} as Busstoppage;
@@ -240,7 +240,7 @@ export class OwnerfareComponent implements OnInit {
 
   exportexcel(): void {
     this.spinner.show();
-    // this.completeReportRecord = this.searchFrom.value ; 
+    // this.completeReportRecord = this.searchFrom.value ;
     this.completExportdata = '';
 
     const data = {
@@ -704,5 +704,15 @@ export class OwnerfareComponent implements OnInit {
   isFrom = date => equals(date, this.fromDate);
   isTo = date => equals(date, this.toDate);
 
+  @ViewChild('content') content!: TemplateRef<any>;
 
+  ngAfterViewInit() {
+    this.activateroute.queryParams.subscribe(params => {
+      if (params['openModal']) {
+        setTimeout(() => {
+          this.OpenModal(this.content);
+        });
+      }
+    });
+  }
 }
