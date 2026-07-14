@@ -125,7 +125,7 @@
 
 
 
-::ng-deep .pcoded-content{
+::ng-deep .pcoded-content {
   padding: 15px !important;
 }
 
@@ -149,7 +149,7 @@
 
   padding: 16px 20px;
 
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 
   background: #fff;
 
@@ -215,7 +215,7 @@
 
   border: none;
 
-  border-radius: 8px;
+  border-radius: 5px;
 
   font-weight: 600;
 }
@@ -237,7 +237,7 @@
 
   border: none;
 
-  border-radius: 8px;
+  border-radius: 5px;
 
   font-weight: 600;
 }
@@ -266,7 +266,7 @@
 
   padding: 24px;
 
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   border: 1px solid #dde9ff;
 
@@ -292,7 +292,7 @@
 
   height: 54px;
 
-  border-radius: 8px;
+  border-radius: 5px;
 
   border: 1px solid #dbe3ef;
 
@@ -360,7 +360,7 @@
   min-width: 140px;
   height: 48px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   background: #2563eb;
   color: #fff;
   font-weight: 600;
@@ -377,7 +377,7 @@
 .btn-reset {
   min-width: 140px;
   height: 48px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #dbe3ef;
   background: #fff;
   color: #475569;
@@ -414,6 +414,7 @@ Table Card
 
   overflow: hidden;
 
+  padding: 15px;
 }
 
 .summary-card {
@@ -430,6 +431,12 @@ Table Card
 
 }
 
+.summary-card div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .summary-card small {
 
   color: #64748b;
@@ -442,41 +449,48 @@ Table Card
 
   color: #2563eb;
 
-  font-size: 28px;
+  font-size: 22px;
 
   font-weight: 700;
 
 }
 
+/*=========================
+TABLE
+==========================*/
+
 .premium-table {
 
   margin: 0;
+  border: 1px solid #edf2f7;
 
 }
 
 .premium-table thead {
 
-  background: #f8fbff;
+  background: #eef4ff;
 
 }
 
-.premium-table th {
+.premium-table thead th {
+
+  padding: 18px;
 
   border: none;
 
-  padding: 16px;
+  color: #1b2155;
 
-  font-size: 13px;
-
-  color: #475569;
+  font-size: 14px;
 
   font-weight: 700;
 
+  vertical-align: middle;
+
 }
 
-.premium-table td {
+.premium-table tbody td {
 
-  padding: 18px 16px;
+  padding: 22px 18px;
 
   vertical-align: middle;
 
@@ -486,7 +500,7 @@ Table Card
 
 .serial-no {
 
-  width: 70px;
+  font-size: 18px;
 
   font-weight: 700;
 
@@ -494,25 +508,27 @@ Table Card
 
 }
 
-.bus-info h5 {
+.bus-details h6 {
 
-  margin: 0;
-
-  color: #1b2155;
+  margin: 0 0 6px;
 
   font-size: 15px;
 
-  font-weight: 700;
+  font-weight: 600;
+
+  color: #1b2155;
 
 }
 
-.bus-info small {
+.bus-details small {
 
-  color: #64748b;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
 
 }
 
-.date-chip-wrapper {
+.date-list {
 
   display: flex;
 
@@ -522,15 +538,15 @@ Table Card
 
 }
 
-.date-chip {
+.date-badge {
 
-  padding: 6px 12px;
+  padding: 7px 14px;
 
   background: #eef4ff;
 
   color: #2563eb;
 
-  border-radius: 20px;
+  border-radius: 30px;
 
   font-size: 12px;
 
@@ -538,47 +554,39 @@ Table Card
 
 }
 
-.action-group {
+.table-btn {
 
-  display: flex;
+  width: 42px;
 
-  justify-content: center;
-
-  gap: 10px;
-
-}
-
-.action-btn {
-
-  width: 38px;
-
-  height: 38px;
+  height: 42px;
 
   border: none;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
   color: #fff;
 
+  margin: 0 4px;
+
+  transition: .25s;
+
 }
 
-.edit-btn {
+.table-btn.edit {
 
   background: #2563eb;
 
 }
 
-.delete-btn {
+.table-btn.delete {
 
   background: #ef4444;
 
 }
 
-.action-btn:hover {
+.table-btn:hover {
 
   transform: translateY(-2px);
-
-  transition: .3s;
 
 }
 
@@ -621,7 +629,7 @@ Table Card
 }
 
 /*=========================
- Pagination
+Pagination
 ==========================*/
 
 .pagination-wrapper {
@@ -632,21 +640,17 @@ Table Card
 
   align-items: center;
 
-  padding: 20px 24px;
+  padding: 22px 24px;
 
   border-top: 1px solid #edf2f7;
-
-  flex-wrap: wrap;
-
-  gap: 15px;
 
 }
 
 .pagination-info {
 
-  color: #64748b;
-
   font-size: 14px;
+
+  color: #64748b;
 
 }
 
@@ -654,35 +658,37 @@ Table Card
 
   color: #2563eb;
 
+  font-weight: 700;
+
 }
 
-.pagination {
+.custom-pagination {
+
+  margin: 0;
 
   display: flex;
 
   align-items: center;
 
-  gap: 6px;
+  gap: 8px;
+
+  padding: 0;
+
+}
+
+.custom-pagination .page-item {
+
+  list-style: none;
 
   margin: 0;
 
 }
 
-.pagination .page-item {
+.custom-pagination .page-link {
 
-  list-style: none;
+  min-width: 35px;
 
-}
-
-.pagination .page-link {
-
-  min-width: 40px;
-
-  height: 40px;
-
-  border-radius: 10px;
-
-  border: 1px solid #dbe3ef;
+  height: 35px;
 
   display: flex;
 
@@ -690,33 +696,39 @@ Table Card
 
   align-items: center;
 
-  color: #2563eb;
+  border-radius: 60px;
+
+  border: 1px solid #dbe3ef;
 
   background: #fff;
 
+  color: #2563eb;
+
   cursor: pointer;
 
-  transition: .3s;
+  transition: .25s;
+
+  text-decoration: none;
 
 }
 
-.pagination .page-link:hover {
+.custom-pagination .page-link:hover {
 
   background: #eef4ff;
 
 }
 
-.pagination .page-link.active {
+.custom-pagination .page-link.active {
 
   background: #2563eb;
 
-  color: #fff;
-
   border-color: #2563eb;
+
+  color: #fff;
 
 }
 
-.page-item.disabled .page-link {
+.custom-pagination .page-item.disabled {
 
   opacity: .5;
 
@@ -747,7 +759,7 @@ Table Card
 
   border-radius: 16px;
 
-  border: 1px solid #dde9ff;
+  border: 1px solid #3455a5;
 
   box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
 
@@ -818,7 +830,7 @@ Table Card
 
 .mobile-filter-btn {
 
-  background: #1abc9c;
+  background: #2563eb;
 
 }
 
@@ -846,6 +858,7 @@ Mobile Search
   margin: 0 15px 15px;
 
   padding: 18px;
+  border: 1px solid #3455a5;
 
 }
 
@@ -894,7 +907,7 @@ Mobile Search
 
   margin: 0 15px 18px;
 
-  border: 1px solid #dde9ff;
+  border: 1px solid #3455a5;
 
   box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
 
@@ -989,6 +1002,7 @@ Mobile Search
   padding: 15px;
 
   margin-bottom: 18px;
+  border: 1px solid #3455a5;
 
 }
 
@@ -1186,107 +1200,7 @@ Mobile Search
 
 }
 
-/*=========================
- Pagination
-==========================*/
 
-.pagination-wrapper {
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  padding: 25px 15px;
-
-}
-
-.pagination-info {
-
-  margin-bottom: 15px;
-
-  color: #64748b;
-
-  font-size: 13px;
-
-}
-
-.pagination-info strong {
-
-  color: #2563eb;
-
-}
-
-.pagination {
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  gap: 8px;
-
-  flex-wrap: nowrap;
-
-  overflow-x: auto;
-
-  width: 100%;
-
-}
-
-.pagination::-webkit-scrollbar {
-
-  display: none;
-
-}
-
-.page-item {
-
-  flex: 0 0 auto;
-
-}
-
-.page-link {
-
-  width: 38px;
-
-  height: 38px;
-
-  border-radius: 10px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  border: 1px solid #dbe3ef;
-
-  color: #2563eb;
-
-  transition: .3s;
-
-}
-
-.page-link.active {
-
-  background: #2563eb;
-
-  color: #fff;
-
-  border-color: #2563eb;
-
-}
-
-.page-link:hover {
-
-  background: #eef4ff;
-
-}
 
 .booking-card {
 
@@ -1314,6 +1228,20 @@ Mobile Search
 
 }
 
+.creaton {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding: 10px;
+  border: 1px solid #3455a5;
+  border-radius: 12px;
+  background: #f8fbff;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
 /*==================================================
                 MOBILE RESPONSIVE
 ==================================================*/
@@ -1335,6 +1263,8 @@ Mobile Search
   .table-card {
     display: none;
   }
+
+
 
   /*=========================
       Mobile Wrapper
@@ -1377,7 +1307,7 @@ Mobile Search
 
   .search-card,
   .mobile-search-card {
-    margin: 0 15px 15px;
+    margin: 5px 0;
     padding: 18px;
     border-radius: 16px;
   }
@@ -1396,7 +1326,7 @@ Mobile Search
   }
 
   .mobile-search-buttons {
-    grid-template-columns: 1fr;
+    // grid-template-columns: 1fr;
     gap: 12px;
   }
 
@@ -1410,7 +1340,7 @@ Mobile Search
     ==========================*/
 
   .booking-card {
-    margin: 0 15px 18px;
+    margin: 10px 0;
     padding: 18px;
     border-radius: 16px;
   }
@@ -1448,7 +1378,8 @@ Mobile Search
   }
 
   .route-card strong {
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 600;
   }
 
   .route-card small {
@@ -1510,14 +1441,17 @@ Mobile Search
   .empty-icon {
     width: 80px;
     height: 80px;
+    background: none;
   }
 
   .empty-icon i {
-    font-size: 34px;
+    font-size: 70px;
+    margin-bottom: 20px;
+    color: #d7e3f5;
   }
 
   .empty-box h4 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .empty-box p {
@@ -1525,40 +1459,120 @@ Mobile Search
   }
 
   /*=========================
-      Pagination
-    ==========================*/
+ Mobile Pagination
+==========================*/
 
   .pagination-wrapper {
+
     padding: 20px 15px;
-    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+    border: none;
+
   }
 
   .pagination-info {
-    margin-bottom: 12px;
-    font-size: 13px;
+
+    margin-bottom: 15px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: #64748b;
+
   }
 
   .pagination {
-    width: 100%;
-    justify-content: flex-start;
-    overflow-x: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
     flex-wrap: nowrap;
+
+    gap: 8px;
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+
     padding-bottom: 5px;
+
+    margin: 0;
+
   }
 
   .pagination::-webkit-scrollbar {
+
     display: none;
+
   }
 
   .page-item {
+
     flex: 0 0 auto;
+
+    list-style: none;
+
   }
 
   .page-link {
-    min-width: 38px;
-    width: 38px;
-    height: 38px;
-    font-size: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 42px;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    border-radius: 12px;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    border: 1px solid #dbe3ef;
+
+    background: #fff;
+
+    color: #1abc9c;
+
+    text-decoration: none;
+
+  }
+
+  .page-link.active {
+
+    background: #1abc9c;
+
+    border-color: #1abc9c;
+
+    color: #fff;
+
+  }
+
+  .page-link:hover {
+
+    background: #eefaf8;
+
   }
 
 }
@@ -1667,7 +1681,7 @@ Mobile Search
 ::ng-deep .premium-select .ng-select-container {
   min-height: 52px !important;
   height: 52px !important;
-  border-radius: 10px !important;
+  border-radius: 5px !important;
   border: 1px solid #dbe3ef !important;
   box-shadow: none !important;
   transition: .25s;
@@ -1703,13 +1717,13 @@ Mobile Search
   color: #2563eb;
 }
 
-.bus-date-card {
-  background: #fdfdfd;
-  border: 1px solid #edf2f7;
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 18px;
-}
+// .bus-date-card {
+//   background: #fdfdfd;
+//   border: 1px solid #edf2f7;
+//   border-radius: 14px;
+//   padding: 18px;
+//   margin-bottom: 18px;
+// }
 
 .bus-name {
   display: flex;
@@ -1797,6 +1811,16 @@ Mobile Search
   background: #f8fbff;
 }
 
+::ng-deep .ng-select {
+  border: none !important;
+}
+
+::ng-deep .modal-header .close {
+  margin: 0;
+  padding: 0;
+}
+
+
 /*==================================================
               MOBILE
 ==================================================*/
@@ -1808,6 +1832,11 @@ Mobile Search
     max-width: 100%;
   }
 
+  ::ng-deep .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   .premium-modal-header {
     padding: 18px;
   }
@@ -1817,7 +1846,7 @@ Mobile Search
   }
 
   .premium-modal-body {
-    padding: 16px;
+    padding: 15px;
     max-height: 72vh;
   }
 
@@ -1830,17 +1859,23 @@ Mobile Search
   }
 
   .date-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
   }
 
   .date-item {
     padding: 10px;
   }
 
+  .date-item input {
+    width: 14px;
+    height: 14px;
+  }
+
   .premium-modal-footer {
     padding: 16px;
-    flex-direction: column;
+    grid-template-columns: 1fr 1fr;
+    display: grid;
   }
 
   .premium-modal-footer .btn {
@@ -1849,10 +1884,169 @@ Mobile Search
 
 }
 
-@media(max-width:480px) {
+@media(max-width:320px) {
 
   .date-grid {
     grid-template-columns: 1fr;
+  }
+
+}
+
+
+/*=====================================
+Delete Confirmation Modal
+======================================*/
+
+.premium-confirm-modal {
+
+  background: #fff;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+}
+
+.premium-confirm-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px 24px;
+
+  border-bottom: 1px solid #eef2f7;
+
+}
+
+.premium-confirm-header h4 {
+
+  margin: 0;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: #1b2155;
+
+}
+
+.premium-confirm-header i {
+
+  color: #ef4444;
+
+  margin-right: 8px;
+
+}
+
+.premium-confirm-body {
+
+  padding: 35px 30px;
+
+  text-align: center;
+
+}
+
+.confirm-icon {
+
+  width: 90px;
+
+  height: 90px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  background: #fee2e2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.confirm-icon i {
+
+  font-size: 38px;
+
+  color: #ef4444;
+
+}
+
+.premium-confirm-body h3 {
+
+  margin-bottom: 8px;
+
+  color: #1b2155;
+
+  font-weight: 700;
+
+}
+
+.premium-confirm-body p {
+
+  color: #64748b;
+
+  margin-bottom: 0;
+
+}
+
+.premium-confirm-footer {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  padding: 20px 24px;
+
+  border-top: 1px solid #eef2f7;
+
+}
+
+.premium-confirm-footer .btn {
+
+  min-width: 150px;
+
+}
+
+@media(max-width:767px) {
+
+  .premium-confirm-body {
+
+    padding: 25px 18px;
+
+  }
+
+  .confirm-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+  }
+
+  .confirm-icon i {
+
+    font-size: 28px;
+
+  }
+
+  .premium-confirm-footer {
+
+    flex-direction: column;
+
+  }
+
+  .premium-confirm-footer .btn {
+
+    width: 100%;
+
   }
 
 }

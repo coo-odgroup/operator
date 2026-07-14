@@ -819,6 +819,17 @@ thead {
 
 .page-link {
   border: 1px solid #dee2e6 !important;
+  color: #2563eb;
+}
+
+.page-link.active {
+
+  background: #2563eb;
+
+  border-color: #2563eb;
+
+  color: #fff;
+
 }
 
 
@@ -887,7 +898,7 @@ thead {
 
     border-radius: 12px;
 
-    background: #0f9d9a;
+    background: #2563eb;
     border: none;
   }
 
