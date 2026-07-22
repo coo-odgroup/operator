@@ -524,7 +524,7 @@
 
       <div>
 
-        <small>Total Cancelled Buses</small>
+        <small>Total Cancelled Buses:</small>
 
         <h3>{{all?.total || 0}}</h3>
 
@@ -720,40 +720,44 @@
 
     <div class="mobile-header-left">
 
-      <h4 class="mobile-title">
+      <div class="mobile-title">
 
-        <i class="fas fa-ban"></i>
+        <div class="mobile-title-icon">
+          <i class="fas fa-ban"></i>
+        </div>
 
-        Bus Cancellation
+        <div class="mobile-title-content">
+          <h4>Bus Cancellation</h4>
+          <p>Manage cancelled buses & availability</p>
+        </div>
 
-      </h4>
+      </div>
 
     </div>
 
     <div class="mobile-header-right">
 
       <!-- Cancel Bus -->
-
-      <button type="button" class="mobile-add-btn" (click)="ResetAttributes();OpenModal(content)" title="Cancel Bus">
+      <button type="button" class="mobile-add-btn" (click)="ResetAttributes();OpenModal(content)">
 
         <i class="fas fa-ban"></i>
+        <span>Cancel Bus</span>
 
       </button>
 
       <!-- Filter -->
-
-      <button type="button" class="mobile-filter-btn" (click)="toggleSection()" title="Filter">
+      <button type="button" class="mobile-filter-btn" (click)="toggleSection()">
 
         <i class="fas" [ngClass]="showSection ? 'fa-times':'fa-filter'">
-
         </i>
+
+        <span>{{showSection ? 'Close' : 'Filter'}}</span>
 
       </button>
 
     </div>
 
   </div>
-
   <!-- Mobile Search -->
 
   <div class="search-card mobile-search-card" *ngIf="showSection">
@@ -968,32 +972,32 @@
       </div>
 
     </div>
-<div class="creaton">
-  Created On
-    <span class="cancel-date">
+    <div class="creaton">
+      Created On
+      <span class="cancel-date">
 
-          {{busCancellation.created_at | date:'dd MMM yyyy'}}
+        {{busCancellation.created_at | date:'dd MMM yyyy'}}
 
-        </span>
+      </span>
 
-        <span class="cancel-time">
+      <span class="cancel-time">
 
-          {{busCancellation.created_at | date:'hh:mm a'}}
+        {{busCancellation.created_at | date:'hh:mm a'}}
 
-        </span>
-</div>
+      </span>
+    </div>
     <!--==========================
         Cancel Dates
     ==========================-->
 
     <div class="booking-section">
 
-      
-        <label>
 
-          Cancelled Dates
+      <label>
 
-        </label>
+        Cancelled Dates
+
+      </label>
 
       <div class="date-chip-wrapper">
 
@@ -1367,3 +1371,4 @@ Delete Confirmation Modal
     </div>
 
   </ng-template>
+</div>

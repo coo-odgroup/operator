@@ -744,109 +744,91 @@ Pagination
 ===================================*/
 
 .mobile-header {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
   background: #fff;
-
-  padding: 16px;
-
-  // margin: 15px;
-
-  border-radius: 16px;
-
   border: 1px solid #3455a5;
-
-  box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
-
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .05);
 }
 
 .mobile-title {
-
-  margin: 0;
-
-  font-size: 20px;
-
-  font-weight: 700;
-
-  color: #1b2155;
-
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.mobile-title i {
+.mobile-title-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #eef4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
 
+.mobile-title-icon i {
+  font-size: 22px;
   color: #ef4444;
+}
 
-  margin-right: 8px;
+.mobile-title-content h4 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+  color: #1b2155;
+}
 
+.mobile-title-content p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
 }
 
 .mobile-header-right {
-
-  display: flex;
-
-  gap: 10px;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .mobile-add-btn,
 .mobile-filter-btn {
-
-  width: 46px;
-
   height: 46px;
-
   border: none;
-
-  border-radius: 12px;
-
+  border-radius: 10px;
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
+  gap: 8px;
   color: #fff;
-
-  transition: .3s;
-
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .mobile-add-btn {
-
   background: #ef4444;
-
 }
 
 .mobile-add-btn:hover {
-
   background: #dc2626;
-
 }
 
 .mobile-filter-btn {
-
-  background: #2563eb;
-
+  background: #1abc9c;
 }
 
 .mobile-filter-btn:hover {
-
   background: #159a80;
-
 }
 
 .mobile-add-btn i,
 .mobile-filter-btn i {
-
-  font-size: 16px;
-
+  font-size: 15px;
 }
-
 
 
 /*=================================
@@ -1296,9 +1278,7 @@ Mobile Search
 
   .mobile-add-btn,
   .mobile-filter-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+    width: 100%;
   }
 
   /*=========================
@@ -1833,7 +1813,7 @@ Mobile Search
   }
 
   ::ng-deep .mat-form-field-wrapper {
-    margin: 0 !important;
+    margin: 8px 0 !important;
     padding: 0 !important;
   }
 
@@ -2046,6 +2026,150 @@ Delete Confirmation Modal
   .premium-confirm-footer .btn {
 
     width: 100%;
+
+  }
+
+}
+
+
+
+// mobile View 
+
+/*==================================================
+MOBILE HEADER
+==================================================*/
+
+.mobile-seat-header {
+
+  display: none;
+
+}
+
+@media(max-width:991px) {
+
+  .mobile-seat-header {
+
+    display: block;
+
+    background: #fff;
+
+    border: 1px solid #dde9ff;
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    margin-bottom: 12px;
+
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .05);
+
+  }
+
+  .mobile-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+  }
+
+  .mobile-title-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 14px;
+
+    background: #eef4ff;
+
+    color: #2563eb;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 22px;
+
+    flex-shrink: 0;
+
+  }
+
+  .mobile-title h3 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: #1b2155;
+
+  }
+
+  .mobile-title p {
+
+    margin: 4px 0 0;
+
+    font-size: 13px;
+
+    color: #64748b;
+
+  }
+
+  .mobile-header-buttons {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 18px;
+
+  }
+
+  .btn-seat-block-mobile {
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ef4444;
+
+    color: #fff;
+
+    font-weight: 600;
+
+  }
+
+  .btn-filter-mobile {
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #1abc9c;
+
+    color: #fff;
+
+    font-weight: 600;
+
+  }
+
+  .btn-seat-block-mobile i,
+
+  .btn-filter-mobile i {
+
+    margin-right: 6px;
 
   }
 

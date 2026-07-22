@@ -231,6 +231,12 @@ export class SeatblockComponent implements OnInit {
     };
   }
 
+  mobileActiveBerth = 'lower';
+
+changeMobileBerth(type: string) {
+  this.mobileActiveBerth = type;
+}
+
   // OpenModal(content: any) {
   //   this.modalReference = this.modalService.open(content, {
   //     scrollable: true,
@@ -396,7 +402,6 @@ export class SeatblockComponent implements OnInit {
                 //  console.log(allbus);
               }
               this.seatBlock.push(allbus);
-              //  console.log(this.seatBlock);
             }
           }
         });
@@ -446,7 +451,7 @@ export class SeatblockComponent implements OnInit {
               //  console.log(allbus);
             }
             this.seatBlock.push(allbus);
-            //  console.log(this.seatBlock);
+             console.log(this.seatBlock);
           }
         }
       });
