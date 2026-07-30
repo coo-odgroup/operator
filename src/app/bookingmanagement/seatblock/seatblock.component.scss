@@ -1401,47 +1401,6 @@ Tabs
     color: #fff;
 }
 
-/*==================================================
-Legend
-==================================================*/
-
-.seat-legend {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    margin-bottom: 24px;
-    padding: 16px 20px;
-    background: #f8faff;
-    border-radius: 14px;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #475569;
-}
-
-.legend-box {
-    width: 18px;
-    height: 18px;
-    border-radius: 6px;
-}
-
-.legend-box.available {
-    background: #ffffff;
-    border: 2px solid #cbd5e1;
-}
-
-.legend-box.selected {
-    background: #2563eb;
-}
-
-.legend-box.blocked {
-    background: #d1d5db;
-}
 
 /*==================================================
 Bus Layout
@@ -1497,11 +1456,7 @@ Rows
 
 }
 
-// .ng-untouched.ng-pristine.ng-valid{
-//     align-items: center;
-//     margin: 0 auto;
-//     display: table;
-// }
+
 
 /*==================================================
 Seat
@@ -3396,3 +3351,9 @@ MOBILE JOURNEY DATE
 }
 
 
+@media (max-width:768px){
+
+  ::ng-deep .pcoded-content{
+    padding: 15px !important;
+  }
+}
