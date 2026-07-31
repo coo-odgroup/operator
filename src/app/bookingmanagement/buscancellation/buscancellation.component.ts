@@ -83,7 +83,7 @@ export class BuscancellationComponent implements OnInit {
       { id: '1', name: d.getFullYear() }, { id: '2', name: d.getFullYear() + 1 },
       { id: '3', name: d.getFullYear() + 2 }, { id: '4', name: d.getFullYear() + 3 }
     ];
-    this.reasons = [{ id: '01', reason: 'Bus Cancelled ' }, { id: '02', reason: 'All Seats are Sold' }];
+    this.reasons = [{ id: '01', reason: 'Bus Cancelled' }, { id: '02', reason: 'All Seats are Sold' }];
   }
   OpenModal(content) {
 
