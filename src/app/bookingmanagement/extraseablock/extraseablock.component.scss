@@ -525,11 +525,12 @@ Search Card
   align-items: center;
   gap: 12px;
   width: 100%;
+  margin-top: 5px;
 }
 
 .search-actions .btn {
   min-width: 140px;
-  height: 48px;
+  height: 53px;
   border: none;
   border-radius: 5px;
   background: #2563eb;
@@ -543,7 +544,7 @@ Search Card
 
 .search-actions .btn-light {
   min-width: 140px;
-  height: 48px;
+  height: 53px;
   border-radius: 5px;
   border: 1px solid #dbe3ef;
   background: #fff;
