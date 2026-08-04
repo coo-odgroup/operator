@@ -1690,23 +1690,63 @@
 
             </div>
 
-            <div>
+            <div class="mobile-bus-details">
 
               <h5>{{fare.bus[0]?.name}}</h5>
 
-              <span class="mobile-bus-number">
+              <div class="mobile-bus-tags">
 
-                {{fare.bus[0]?.bus_number}}
+                <!-- First Bus -->
 
-              </span>
+                <span class="mobile-bus-number">
+
+                  {{fare.bus[0]?.bus_number}}
+
+                </span>
+
+                <!-- More Bus -->
+
+                <span class="mobile-more-bus" *ngIf="fare.bus.length > 1" (click)="fare.showMore = !fare.showMore">
+
+                  +{{fare.bus.length - 1}} More
+
+                </span>
+
+              </div>
+
+              <!-- Dropdown -->
+
+              <div class="mobile-bus-dropdown" *ngIf="fare.showMore">
+
+                <ng-container *ngFor="let bus of fare.bus; let j = index">
+
+                  <div class="mobile-bus-item" *ngIf="j > 0">
+
+                    <strong>
+
+                      {{bus.name}}
+
+                    </strong>
+
+                    <span>
+
+                      {{bus.bus_number}}
+
+                    </span>
+
+                  </div>
+
+                </ng-container>
+
+              </div>
 
             </div>
 
           </div>
 
-          <span class="status-badge" [ngClass]="fare.status==1 ? 'active':'inactive'">
+          <span class="status-badge" [ngClass]="fare.status==1 ? 'active' : 'inactive'">
 
-            {{fare.status==1?'Active':'Inactive'}}
+            {{fare.status==1 ? 'Active' : 'Inactive'}}
 
           </span>
 

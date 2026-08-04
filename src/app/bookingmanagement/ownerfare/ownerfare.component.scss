@@ -1973,7 +1973,90 @@ MOBILE OWNER FARE CARD
   }
 }
 
+.mobile-bus-details {
+  flex: 1;
+  position: relative;
+}
 
+.mobile-bus-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.mobile-more-bus {
+
+  background: #2563eb;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 18px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.mobile-bus-dropdown {
+
+  position: absolute;
+
+  top: 65px;
+
+  left: 0;
+
+  width: 220px;
+
+  background: #fff;
+
+  border: 1px solid #dbe3ef;
+
+  border-radius: 12px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+
+  z-index: 99;
+
+  overflow: hidden;
+
+}
+
+.mobile-bus-item {
+
+  padding: 12px 14px;
+
+  border-bottom: 1px solid #eef2f7;
+
+}
+
+.mobile-bus-item:last-child {
+
+  border-bottom: none;
+
+}
+
+.mobile-bus-item strong {
+
+  display: block;
+
+  font-size: 14px;
+
+  color: #1b2155;
+
+  margin-bottom: 4px;
+
+}
+
+.mobile-bus-item span {
+
+  color: #2563eb;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
 
 /*=========================================
 MOBILE PAGINATION
