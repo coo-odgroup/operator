@@ -508,7 +508,7 @@
                 </h3>
 
             </div>
-            <table class="table premium-table">
+            <table class="table premium-table" *ngIf="completedata?.data?.data?.length">
 
                 <thead *ngIf="completedata?.data?.data?.length != 0">
 
@@ -700,6 +700,20 @@
                 </tbody>
 
             </table>
+
+            <div class="empty-table-card" *ngIf="completedata?.data?.data?.length==0">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        <i class="fa fa-ban"></i>
+                    </div>
+
+                    <h4>No Record Found</h4>
+
+                </div>
+
+            </div>
             <!-- Pagination -->
 
             <div class="pagination-wrapper" *ngIf="completedata?.data?.data?.length">

@@ -468,7 +468,7 @@
   ============================ -->
 
         <div class="desktop-view table-responsive" id="print-section">
-            <div class="summary-card">
+            <div class="summary-card" *ngIf="completedata?.data?.data?.length">
 
                 <small>Total Seat Booking :</small>
 
@@ -641,11 +641,17 @@
 
             </table>
 
-            <div class="empty-box" *ngIf="completedata?.data?.data?.length==0">
+            <div class="empty-table-card" *ngIf="completedata?.data?.data?.length==0">
 
-                <i class="fa fa-inbox"></i>
+                <div class="empty-state">
 
-                <h4>No Booking Found</h4>
+                    <div class="empty-icon">
+                        <i class="fa fa-inbox"></i>
+                    </div>
+
+                    <h4>No Record Found</h4>
+
+                </div>
 
             </div>
 
@@ -797,7 +803,7 @@
 
         <!-- Pagination -->
 
-        <div class="pagination-wrapper" *ngIf="completedata?.data?.links">
+        <div class="pagination-wrapper" *ngIf="completedata?.data?.links && completedata?.data?.data?.length">
             <div>
                 <p *ngIf="completedata?.data?.data?.length">
                     Showing {{completedata?.count}} of {{completedata?.total}} Bookings
@@ -821,7 +827,7 @@
             </nav>
 
         </div>
-
+        
     </div>
 </section>
 

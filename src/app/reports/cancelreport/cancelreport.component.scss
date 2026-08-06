@@ -283,7 +283,6 @@
   overflow: hidden;
 
   box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
-  min-height: 520px;
   display: flex;
   flex-direction: column;
 }
@@ -549,35 +548,43 @@
                 EMPTY
 ==================================================*/
 
-.empty-box {
-  flex: 1;
-  min-height: 55vh;
+.empty-table-card {
+  border: 1px solid #dde9ff;
+  background: #fff;
+  border-radius: 6px;
+  min-height: 420px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.empty-state {
   text-align: center;
-  padding: 30px 20px;
 }
 
-.empty-box i {
-
-  font-size: 70px;
-  margin-bottom: 20px;
-  color: #d7e3f5;
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #eef4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
 }
 
-.empty-box h4 {
+.empty-icon i {
+  font-size: 34px;
+  color: #2563eb;
+}
 
+.empty-state h4 {
   margin: 0;
-  font-size: 22px;
+  color: #1b2155;
   font-weight: 700;
+  font-size: 22px;
 }
 
-.empty-box p {
-  margin-top: 10px;
-  color: #6b7280;
-}
 
 /*==================================================
                 PAGINATION
@@ -631,7 +638,7 @@
   color: #2563eb;
 }
 
-.page-link.active{
+.page-link.active {
 
   background: #2563eb;
 
@@ -842,7 +849,7 @@
     border: 1px solid #3455a5;
   }
 
-  .booking-user small{
+  .booking-user small {
     font-size: 14px;
     font-weight: 700;
     display: flex;
@@ -880,18 +887,18 @@
     border: 1px solid #3455a5;
   }
 
-  .booking-card{
+  .booking-card {
     border: 1px solid #3455a5;
   }
 
-  .booking-route{
+  .booking-route {
     border: 1px solid #3455a5;
     font-size: 15px;
     font-weight: 700;
     justify-content: space-between;
   }
 
-  .booking-footer div{
+  .booking-footer div {
     border: 1px solid #3455a5;
   }
 
@@ -909,49 +916,51 @@
   }
 
   .pagination-wrapper {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
   }
 
   .pagination-info {
-   text-align:center;
-    font-size:13px;
+    text-align: center;
+    font-size: 13px;
   }
 
   .pagination {
-     display:flex;
-    flex-wrap:nowrap;      /* Prevent wrapping */
-    justify-content:center;
-    align-items:center;
-    gap:8px;
-    overflow-x:auto;       /* Scroll only if absolutely needed */
-    overflow-y:hidden;
-    padding-bottom:2px;
-    margin:0;
+    display: flex;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    /* Scroll only if absolutely needed */
+    overflow-y: hidden;
+    padding-bottom: 2px;
+    margin: 0;
   }
 
-   .pagination::-webkit-scrollbar{
-    display:none;
+  .pagination::-webkit-scrollbar {
+    display: none;
   }
 
-  .pagination .page-item{
-    margin:0;
-    flex:0 0 auto;
+  .pagination .page-item {
+    margin: 0;
+    flex: 0 0 auto;
   }
 
-  .pagination .page-link{
-    min-width:36px;
-    height:36px;
-    padding:0 12px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    white-space:nowrap;
-    border-radius:60px;
-    font-size:13px;
+  .pagination .page-link {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    border-radius: 60px;
+    font-size: 13px;
   }
 
 }

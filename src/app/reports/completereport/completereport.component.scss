@@ -723,6 +723,8 @@ thead {
 
 /* TABLE */
 
+
+
 .premium-table {
   border-spacing: 0 6px;
 }
@@ -832,6 +834,85 @@ thead {
 
 }
 
+.empty-state{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    min-height:420px;
+}
+
+.empty-icon{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#eef4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:18px;
+}
+
+.empty-icon i{
+    font-size:34px;
+    color:#2563eb;
+}
+
+.empty-state h4{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    color:#1b2155;
+}
+
+.empty-state p{
+    margin-top:10px;
+    color:#64748b;
+    font-size:10px;
+}
+
+
+.empty-table-card{
+    border:1px solid #dde9ff;
+    background:#fff;
+    border-radius:6px;
+    min-height:420px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.empty-state{
+    text-align:center;
+}
+
+.empty-icon{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#eef4ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 20px;
+}
+
+.empty-icon i{
+    font-size:34px;
+    color:#2563eb;
+}
+
+.empty-state h4{
+    color:#1b2155;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.empty-state p{
+    color:#64748b;
+    margin:0;
+}
 
 /*=========================================
         BOOKING REPORT - MOBILE ONLY
@@ -1329,3 +1410,4 @@ Top
 .gender-badge i {
   font-size: 11px;
 }
+

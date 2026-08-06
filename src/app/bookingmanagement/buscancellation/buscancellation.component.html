@@ -520,7 +520,7 @@
 
     <!-- Summary -->
 
-    <div class="summary-card">
+    <div class="summary-card" *ngIf="busCancellations?.length">
 
       <div>
 
@@ -536,7 +536,7 @@
 
     <div class="table-responsive desktop-view d-none d-md-block">
 
-      <table class="table premium-table mb-0">
+      <table class="table premium-table mb-0" *ngIf="busCancellations?.length">
 
         <thead *ngIf="busCancellations?.length">
 
@@ -632,7 +632,27 @@
         </tbody>
 
       </table>
+      <div class="empty-table-card" *ngIf="!busCancellations?.length">
 
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            <i class="fas fa-ban"></i>
+          </div>
+
+          <h4>No Record Found</h4>
+
+          <button type="button" class="btn btn-danger empty-action-btn" (click)="ResetAttributes();OpenModal(content)">
+
+            <i class="fas fa-plus-circle"></i>
+
+            Cancel Bus
+
+          </button>
+
+        </div>
+
+      </div>
     </div>
 
     <!-- Pagination -->
@@ -691,19 +711,6 @@
       </nav>
 
     </div>
-
-    <!-- Empty -->
-
-    <div class="empty-box" *ngIf="busCancellations?.length==0">
-
-      <i class="fas fa-ban"></i>
-
-      <h4>No Bus Cancellation Found</h4>
-
-      <p>No cancelled buses available.</p>
-
-    </div>
-
   </div>
 </section>
 

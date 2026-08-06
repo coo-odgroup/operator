@@ -845,15 +845,8 @@
 
     <div class="operator-card-header">
 
-      <div>
-
-        <h3>Seat Open Records</h3>
-
-        <p>Manage all opened seat schedules.</p>
-
-      </div>
-
-      <button class="btn btn-success operator-btn">
+      <button class="btn btn-success operator-btn"
+        *ngIf="seatOpen?.length">
 
         <i class="fas fa-file-excel"></i>
 
@@ -867,9 +860,9 @@
 
       <div class="operator-table-wrapper">
 
-        <table class="table operator-table">
+        <table class="table operator-table" *ngIf="seatOpen?.length">
 
-          <thead>
+          <thead *ngIf="seatOpen?.length">
 
             <tr>
 
@@ -1017,24 +1010,31 @@
 
             </tr>
 
-            <tr *ngIf="seatOpen?.length==0">
-
-              <td colspan="4">
-
-                <div class="operator-empty">
-
-                  No Record Found
-
-                </div>
-
-              </td>
-
-            </tr>
-
           </tbody>
 
         </table>
+        <div class="empty-table-card" *ngIf="!seatOpen?.length">
 
+          <div class="empty-state">
+
+            <div class="empty-icon">
+              <i class="fas fa-unlock-alt"></i>
+            </div>
+
+            <h4>No Record Found</h4>
+
+            <button type="button" class="btn btn-danger empty-action-btn"
+              (click)="ResetAttributes(); OpenModal(content)">
+
+              <i class="fas fa-plus-circle"></i>
+
+              Seat Open
+
+            </button>
+
+          </div>
+
+        </div>
       </div>
 
 
@@ -1043,19 +1043,19 @@
     FOOTER
 ====================================-->
 
-      <div class="operator-table-footer">
+      <div class="operator-table-footer" *ngIf="seatOpen?.length">
 
         <div class="operator-record-info">
 
           Showing
           <strong>
-           {{ all?.to || 0 }}
-           </strong>
-            of 
-           <strong>
-            {{ all?.total || 0 }} 
-            </strong>
-            Records
+            {{ all?.to || 0 }}
+          </strong>
+          of
+          <strong>
+            {{ all?.total || 0 }}
+          </strong>
+          Records
 
         </div>
 
@@ -2244,16 +2244,9 @@ seatOpenForm.controls['bus_id'].hasError('required')">
 
   <h4>
 
-    No Seat Open Records
+    No Record Found
 
   </h4>
-
-  <p>
-
-    No seat open records are available.
-
-  </p>
-
 </div>
 
 
@@ -2559,7 +2552,7 @@ seatOpenForm.controls['bus_id'].hasError('required')">
 
             <h4>
 
-             Edit Seat Open
+              Edit Seat Open
 
             </h4>
 

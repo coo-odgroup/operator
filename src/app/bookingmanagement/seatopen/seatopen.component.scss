@@ -412,14 +412,9 @@
 .operator-card-header {
 
   display: flex;
-
-  justify-content: space-between;
-
+  justify-content: end;
   align-items: center;
-
-  padding: 20px 24px;
-
-  border-bottom: 1px solid #edf2f7;
+  padding: 10px 15px 0;
 
 }
 
@@ -447,7 +442,7 @@
 
 .operator-card-body {
 
-  padding: 24px;
+  padding: 15px;
 
 }
 
@@ -874,28 +869,112 @@
 /*====================================
         EMPTY
 ====================================*/
+/*=====================================
+    EMPTY STATE
+======================================*/
 
-.operator-empty {
+.empty-table-card {
+  padding: 70px 20px;
+  border: 1px solid #dde9ff;
+  border-radius: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  padding: 70px;
-
+.empty-state {
   text-align: center;
-
+  padding: 40px 20px;
 }
 
-.operator-empty i {
-
-  font-size: 48px;
-
-  color: #c5d1e5;
-
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #eef4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.operator-empty h4 {
+.empty-icon i {
+  font-size: 34px;
+  color: #2563eb;
+}
 
-  margin-top: 20px;
+.empty-state h4 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1b2155;
+}
 
-  color: #64748b;
+
+/*=====================================
+    ACTION BUTTON
+======================================*/
+
+.empty-action-btn {
+  min-width: 180px;
+  height: 46px;
+  border-radius: 10px;
+  background: #ef4444;
+  border: 1px solid #ef4444;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: .25s ease;
+}
+
+.empty-action-btn i {
+  margin-right: 8px;
+}
+
+.empty-action-btn:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(239, 68, 68, .25);
+}
+
+/*=====================================
+    MOBILE
+======================================*/
+
+@media (max-width:768px) {
+
+  .empty-table-card {
+    min-height: 420px;
+    border-radius: 16px;
+  }
+
+  .empty-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .empty-icon i {
+    font-size: 28px;
+  }
+
+  .empty-state h4 {
+    font-size: 24px;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+  }
+
+  .empty-action-btn {
+    width: 100%;
+    max-width: 220px;
+  }
 
 }
 
@@ -960,9 +1039,9 @@
   font-weight: 500;
 }
 
-.operator-record-info strong{
+.operator-record-info strong {
   color: #2563eb;
-    font-weight: 700;
+  font-weight: 700;
 }
 
 
