@@ -28,8 +28,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AuthInterceptor } from './shared/auth.interceptor';
-
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -63,7 +62,8 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},NavigationItem, Routeguard,{
     provide: HTTP_INTERCEPTORS,

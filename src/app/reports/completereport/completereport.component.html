@@ -1,7 +1,6 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
-</ngx-spinner>
-
+</ngx-spinner> -->
 
 <section class="content-header">
 
@@ -321,7 +320,7 @@
                                     <strong>{{ complete.bus.name }} {{ complete.bus.bus_number }} </strong>
                                     <br>
                                     <strong>DOJ: {{complete.journey_dt | date: 'dd-MMM-yyyy'}} </strong>
-                                
+
                                 </td>
                                 <td class="align-middle">
                                     <span *ngFor="let boarding of complete.from_location;">
@@ -367,16 +366,16 @@
                         <tbody>
                     </table>
                 </div>
-               
+
                 <div class="mobile-view" *ngIf="completedata?.data?.data?.length != 0">
                     <div class="ticket-card" *ngFor="let complete of completedata?.data.data; let i = index">
 
-                       
+
                         <div class="ticket-left">
                             #{{ i+1 }}
                         </div>
 
-                     
+
                         <div class="ticket-center">
                             <h3>{{ complete.bus.name }}</h3>
                             <h3>{{ complete.bus.bus_number }}</h3>
@@ -396,7 +395,7 @@
                             </p>
                         </div>
 
-                       
+
                         <div class="ticket-right">
                             <div class="r-top">
                                 <p>DOJ : {{complete.journey_dt | date: 'dd-MMM-yyyy'}}</p>
@@ -827,7 +826,7 @@
             </nav>
 
         </div>
-        
+
     </div>
 </section>
 

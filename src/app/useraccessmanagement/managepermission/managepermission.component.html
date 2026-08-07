@@ -1,4 +1,4 @@
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner> -->
 
 <div class="row">
   <div class="col-sm-12">
@@ -106,10 +106,10 @@
         </table>
         <div *ngIf="pagination?.length!= 0" class="hide_print container">
           <div class="row">
-            <div class="col-3">             
+            <div class="col-3">
                 <div class="col-12">
                   <p class=" row mt-3 ml-1"> Showing {{all?.count}} of {{all?.total}} records. </p>
-                </div> 
+                </div>
             </div>
             <div class="col-9">
               <div class="d-flex flex-row-reverse mb-4 text-center" *ngIf="pagination?.links">
@@ -131,7 +131,7 @@
                     </ul>
                 </nav>
             </div>
-           </div>  
+           </div>
           </div>
         </div>
       </div>

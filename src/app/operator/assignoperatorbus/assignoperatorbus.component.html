@@ -1,6 +1,6 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
-</ngx-spinner>
+</ngx-spinner> -->
 
 <div class="row">
     <div class="col-sm-12">
@@ -10,7 +10,7 @@
                 <div class="col-2">
                     <div class="from-group ">
                         <button class="btn btn-sm btn-success mb-2 " (click)="ResetAttributes();OpenModal(content)">
-                            Assign Bus 
+                            Assign Bus
                         </button>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                                 <ng-select [items]="allUserOperator" bindLabel="operatorData" bindValue="id"
                                     placeholder="User Name" formControlName="assoc_id"
                                     [clearable]="false"  (change)=search()>
-                                </ng-select>                                
+                                </ng-select>
                             </div>
                             <div class="col-2">
                                 <button type="button" class="btn btn-danger sml_input " (click)="refresh()" title="refresh">
@@ -51,8 +51,8 @@
                             <th scope="col" width="100px">#</th>
                             <!-- <th scope="col">User Details</th> -->
                             <th scope="col">Bus Operator Details</th>
-                            <th scope="col">Bus Name/Number</th>  
-                            <th scope="col">Source >> Destination</th>                         
+                            <th scope="col">Bus Name/Number</th>
+                            <th scope="col">Source >> Destination</th>
 
                             <th width="150" class="hide_print">&nbsp; </th>
                         </tr>
@@ -162,7 +162,7 @@
                                                         Assocation is Required
                                                     </span>
                                                 </div>
-                                                
+
 
                                                 <div class="from-group col-md-7">
                                                     <label for="name" class="col-sm-12 col-form-label">Bus Name & Number

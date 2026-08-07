@@ -1,6 +1,6 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
-</ngx-spinner>
+</ngx-spinner> -->
 
 <div class="row">
     <div class="col-sm-12">
@@ -84,9 +84,9 @@
                             <th>Source</th>
                             <th>Destination</th>
                             <th>Adj Date</th>
-                            <th>Seat no</th>                         
-                            <th>Adj By</th>                            
-                         
+                            <th>Seat no</th>
+                            <th>Adj By</th>
+
                         </tr>
                     </thead>
                     <tbody *ngIf="cancelTickets?.length != 0">
@@ -99,13 +99,13 @@
                             </td>
                             <!-- <td>
                                 {{cancelTkt.from_location[0].name}} >>
-                                {{cancelTkt.to_location[0].name}} 
+                                {{cancelTkt.to_location[0].name}}
                             </td> -->
                             <td>
-                                {{cancelTkt.from_location[0].name}} 
+                                {{cancelTkt.from_location[0].name}}
                             </td>
                             <td>
-                                {{cancelTkt.to_location[0].name}} 
+                                {{cancelTkt.to_location[0].name}}
                             </td>
 
                             <td>{{ cancelTkt.updated_at | date: 'dd/MM/yyyy' }}</td>
@@ -114,7 +114,7 @@
                                     {{seat.bus_seats.seats.seatText}},
                                 </span>
                             </td>
-                            <td>{{ cancelTkt.created_by }}</td>                      
+                            <td>{{ cancelTkt.created_by }}</td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="cancelTickets?.length == 0">
@@ -205,7 +205,7 @@
                                                                 formControlName="j_date"
                                                                 placeholder="Enter Journey Date" required  (change)="dateWiseBusListing()"/>
                                                             <span class="text-danger"
-                                                                *ngIf="adjustTicketForm.controls['j_date'].touched && adjustTicketForm.controls['j_date'].hasError('required')">                       
+                                                                *ngIf="adjustTicketForm.controls['j_date'].touched && adjustTicketForm.controls['j_date'].hasError('required')">
                                                                 Journey Date required! </span>
                                                         </div>
                                                     </div>
@@ -213,13 +213,13 @@
                                                     <div class="from-group">
                                                         <label for="name" class="col-sm-10 col-form-label">Avalible Buses:<span class="text-danger">*</span></label>
                                                         <div class="col-sm-12">
-                                                            <ng-select 
+                                                            <ng-select
                                                                 [items]="busList"
                                                                 bindLabel="testing"
                                                                 bindValue="busId"
                                                                 placeholder="Select Bus"
                                                                 formControlName="bus"
-                                                                (change)="getSeatLayout();getBoardingDropping()" 
+                                                                (change)="getSeatLayout();getBoardingDropping()"
                                                                 [clearable]="false" required>
                                                             </ng-select>
                                                           </div>
@@ -229,12 +229,12 @@
                                                             <div class="from-group">
                                                                 <label for="name" class="col-sm-10 col-form-label">Boarding Point:<span class="text-danger">*</span></label>
                                                                 <div class="col-sm-12">
-                                                                    <ng-select 
+                                                                    <ng-select
                                                                         [items]="boardingPoints"
                                                                         bindLabel="boarding"
                                                                         bindValue="id"
                                                                         placeholder="Select Boarding Point"
-                                                                        formControlName="boarding_id"      
+                                                                        formControlName="boarding_id"
                                                                         [clearable]="false" required>
                                                                     </ng-select>
                                                                   </div>
@@ -244,7 +244,7 @@
                                                             <div class="from-group">
                                                                 <label for="name" class="col-sm-10 col-form-label">Dropping Point:<span class="text-danger">*</span></label>
                                                                 <div class="col-sm-12">
-                                                                    <ng-select 
+                                                                    <ng-select
                                                                         [items]="droppingPoints"
                                                                         bindLabel="dropping"
                                                                         bindValue="id"
@@ -259,49 +259,49 @@
                                                     <div class="row">
                                                         <div class="row form-group col-sm-12">
                                                           <div formArrayName="bus_seat_layout_data" class="col-12" >
-                                                              
+
                                                             <table>
                                                               <tr *ngIf="adjustTicketForm.controls.bus_seat_layout_data.length!= 0  " >
                                                                 <table>
-                                                                   
+
                 <tr>
                     <td >
-                        <div class="row">                            
+                        <div class="row">
                             <div class="col-12">
                                 <h5>Seater</h5>
                             </div>
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-2" *ngFor="let seaterdata of adjustTicketForm.controls.bus_seat_layout_data.controls; let layout_row = index "  [formGroupName]="layout_row">                                
+                                    <div class="col-2" *ngFor="let seaterdata of adjustTicketForm.controls.bus_seat_layout_data.controls; let layout_row = index "  [formGroupName]="layout_row">
                                         <span *ngIf="seaterdata.controls.berthType.value == 1">
                                             <input  type="checkbox" formControlName="seatChecked" (change)="getSeatFare()">
-                                            {{seaterdata.controls.seatText.value}}                              
-                                        </span>                                 
+                                            {{seaterdata.controls.seatText.value}}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                            
-                           
+
+
                             <div class="col-12">
                                 <h5>Sleeper</h5>
                             </div>
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="col-2" *ngFor="let seaterdata of adjustTicketForm.controls.bus_seat_layout_data.controls; let layout_row = index "  [formGroupName]="layout_row">                                
+                                    <div class="col-2" *ngFor="let seaterdata of adjustTicketForm.controls.bus_seat_layout_data.controls; let layout_row = index "  [formGroupName]="layout_row">
                                         <span *ngIf="seaterdata.controls.berthType.value == 2" class="text-primary">
                                             <input  type="checkbox" formControlName="seatChecked" (change)="getSeatFare()">
-                                            {{seaterdata.controls.seatText.value}}                              
-                                        </span>                                 
+                                            {{seaterdata.controls.seatText.value}}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <!-- <div class="col-12">
                                 <div class="row">
-                                    
+
                                 </div>
                             </div>                                                       -->
-                        </div> 
+                        </div>
                     </td>
                 </tr>
                                                                 </table>
@@ -335,19 +335,19 @@
                                                                 Reason required! </span> -->
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-8 offset-2 mt-3">
                                                         <button type="button" [disabled]="!adjustTicketForm.valid"
                                                         (click)="adjustTicket()" class="btn btn-danger"
                                                         ngbAutofocus>{{ModalBtn}}</button>
 
-                                                        <!-- <button type="button" 
+                                                        <!-- <button type="button"
                                                             *ngIf="adjustTicketForm.controls.refundAmount.value!=null && adjustTicketForm.controls.reason.value!=null" (click)="OpenModal(cancelticket);previewCancelTicket()" class="btn btn-warning ml-2"
                                                             ngbAutofocus title="cancel ticket Preview">
                                                             <small> <i class="fa fa-eye" aria-hidden="true"></i></small>
                                                          </button> -->
                                                     </div>
-                                                 
+
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h3 class="text-center">Booking Details</h3>
@@ -422,12 +422,12 @@
                                                         </tr>
 
                                                     </table>
-                                                    
-                                                    <div *ngIf="seatFareDetails.length>0" > 
+
+                                                    <div *ngIf="seatFareDetails.length>0" >
                                                         <strong>Fare Details For :</strong>
                                                         <strong>
                                                                 {{selectedSeats}}
-                                                        </strong> 
+                                                        </strong>
                                                        <table class="table ">
                                                             <tr *ngIf='seatFareDetails[0].ownerFare!= 0'>
                                                                 <td><strong>Base Fare</strong></td>
@@ -450,7 +450,7 @@
                                                                 <td class="text-danger ">
                                                                     <strong>
                                                                         {{seatFareDetails[0].festiveFare}}
-                                                                    </strong> 
+                                                                    </strong>
                                                                 </td>
                                                             </tr> -->
                                                             <!-- <tr *ngIf='seatFareDetails[0].odbusServiceCharges!= 0'>
@@ -480,13 +480,13 @@
                                                        </table>
 
                                                     </div>
-                                                   
+
                                                 </div>
                                             </div>
                                             <div class="row" *ngIf="pnrDetails.length == 0">
                                                 <h4 class="text-center">{{msg}}</h4>
                                             </div>
-                                            
+
                                         </form>
                                     </div>
                                 </div>
@@ -543,9 +543,9 @@
                                                   <td></td>
                                                   <td></td>
                                               </tr>
-  
+
                                             </table> -->
-                                          </tr>                                          
+                                          </tr>
                                       </table>
                                     </div>
                                 </div>

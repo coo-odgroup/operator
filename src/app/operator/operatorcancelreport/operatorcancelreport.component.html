@@ -1,6 +1,6 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
-</ngx-spinner>
+</ngx-spinner> -->
 <div class="row">
     <div class="col-sm-12">
         <app-card cardTitle="User Operator Ticket Cancellation  Report" cardClass="card-datatable" [options]="false" [isCardFooter]="false">
@@ -21,18 +21,18 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <div class="row">  
+                                    <div class="row">
                                         <div class="form-group col-6">
                                             <div class="form-group row">
                                                 <input type="date" class="form-control sml_input" placeholder="Enter pnr"
                                                 required formControlName="rangeFromDate" />
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="form-group col-6">
                                             <div class="form-group row">
                                                 <input type="date" class="form-control sml_input" placeholder="Enter pnr"
                                                 required formControlName="rangeToDate" />
-                                            </div>                                            
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +293,7 @@
                                 </td>
                                 <!-- <td>
                                     <h5> {{ (complete.user_id > 0) ? 'Agent' : 'Customer'  }} </h5>
-    
+
                                 </td> -->
                             </tr>
                         </tbody>
@@ -394,13 +394,13 @@
                         <td>
                             <span *ngFor="let seat of complete.booking_detail;">
 
-                               <span *ngIf="seat.bus_seats.seats.berthType==1">{{seat.bus_seats.seats.seatText}} ,</span> 
+                               <span *ngIf="seat.bus_seats.seats.berthType==1">{{seat.bus_seats.seats.seatText}} ,</span>
                             </span>
                         </td>
                         <td>
                             <span *ngFor="let seat of complete.booking_detail;">
 
-                               <span *ngIf="seat.bus_seats.seats.berthType==2">{{seat.bus_seats.seats.seatText}} ,</span> 
+                               <span *ngIf="seat.bus_seats.seats.berthType==2">{{seat.bus_seats.seats.seatText}} ,</span>
                             </span>
                         </td>
                         <td>{{complete.journey_dt | date: 'dd/MM/yyyy'}}</td>
@@ -434,7 +434,7 @@
                         </td>
                         <td>
                             <span *ngIf="complete.customer_payment">
-                                {{complete.customer_payment.razorpay_id}} 
+                                {{complete.customer_payment.razorpay_id}}
                             </span>
                         </td>
                         <td>

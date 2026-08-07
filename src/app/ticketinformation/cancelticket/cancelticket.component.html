@@ -1,6 +1,6 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="timer" [fullScreen]="true">
     <p style="color: white"> Loading... </p>
-</ngx-spinner>
+</ngx-spinner> -->
 
 <div class="row">
     <div class="col-sm-12">
@@ -82,9 +82,9 @@
                             <th>From - To</th>
                             <th>Fare Detais</th>
                             <th>Cancel Date</th>
-                            <th>Seat no</th>                         
-                            <th>Cancelled By</th>                            
-                            <th>Reason</th>                          
+                            <th>Seat no</th>
+                            <th>Cancelled By</th>
+                            <th>Reason</th>
                         </tr>
                     </thead>
                     <tbody *ngIf="cancelTickets?.length != 0">
@@ -97,7 +97,7 @@
                             </td>
                             <td>
                                 {{cancelTkt.from_location[0].name}} >>
-                                {{cancelTkt.to_location[0].name}} 
+                                {{cancelTkt.to_location[0].name}}
                             </td>
                             <td>
                                Total fare: {{cancelTkt.total_fare}}<br>
@@ -113,7 +113,7 @@
                                 </span>
                             </td>
                             <td>{{ cancelTkt.cancel_by }}</td>
-                            <td>{{ cancelTkt.cancel_reason }}</td>                      
+                            <td>{{ cancelTkt.cancel_reason }}</td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="cancelTickets?.length == 0">
@@ -172,9 +172,9 @@
                             <th>Deduction Percent</th>
                             <th>Refund Amount</th>
                             <th>Cancel Date</th>
-                            <th>Seat no</th>                         
-                            <th>Cancelled By</th>                            
-                            <th>Reason</th>                          
+                            <th>Seat no</th>
+                            <th>Cancelled By</th>
+                            <th>Reason</th>
                         </tr>
                     </thead>
                     <tbody *ngIf="cancelTickets?.length != 0">
@@ -191,7 +191,7 @@
                                 {{cancelTkt.from_location[0].name}}
                             </td>
                             <td>
-                                {{cancelTkt.to_location[0].name}} 
+                                {{cancelTkt.to_location[0].name}}
                             </td>
                             <td>
                               {{cancelTkt.total_fare}}
@@ -208,7 +208,7 @@
                                 </span>
                             </td>
                             <td>{{ cancelTkt.cancel_by }}</td>
-                            <td>{{ cancelTkt.cancel_reason }}</td>                      
+                            <td>{{ cancelTkt.cancel_reason }}</td>
                         </tr>
                     </tbody>
                     <tbody *ngIf="cancelTickets?.length == 0">
@@ -328,19 +328,19 @@
                                                                 Reason required! </span>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-8 offset-2 mt-3">
                                                         <button type="button" [disabled]="!cancelTicketForm.valid"
                                                         (click)="cancelTicket()" class="btn btn-danger"
                                                         ngbAutofocus>{{ModalBtn}}</button>
-<!-- 
-                                                        <button type="button" 
+<!--
+                                                        <button type="button"
                                                             *ngIf="cancelTicketForm.controls.refundAmount.value!=null && cancelTicketForm.controls.reason.value!=null" (click)="OpenModal(cancelticket);previewCancelTicket()" class="btn btn-warning ml-2"
                                                             ngbAutofocus title="cancel ticket Preview">
                                                             <small> <i class="fa fa-eye" aria-hidden="true"></i></small>
                                                          </button> -->
                                                     </div>
-                                                 
+
                                                 </div>
                                                 <div class="col-md-8">
                                                     <h3 class="text-center">Booking Details</h3>
@@ -421,7 +421,7 @@
                                             <div class="row" *ngIf="pnrDetails.length == 0">
                                                 <h4 class="text-center">{{msg}}</h4>
                                             </div>
-                                            
+
                                         </form>
                                     </div>
                                 </div>
@@ -478,9 +478,9 @@
                                                   <td></td>
                                                   <td></td>
                                               </tr>
-  
+
                                             </table> -->
-                                          </tr>                                          
+                                          </tr>
                                       </table>
                                     </div>
                                 </div>
