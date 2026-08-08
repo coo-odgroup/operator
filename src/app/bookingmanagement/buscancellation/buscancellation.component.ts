@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild, } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Buscancellation } from '../../model/buscancellation';
 import { BusOperatorService } from './../../services/bus-operator.service';
@@ -15,6 +15,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
 import { LocationService } from '../../services/location.service';
 import { reduce } from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -65,7 +66,7 @@ export class BuscancellationComponent implements OnInit {
   get busesFormGroup() {
     return this.busCancellationForm.get('buses') as FormArray;
   }
-  constructor(private locationService: LocationService, private buscanCellationService: BuscancellationService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busOperatorService: BusOperatorService, private busService: BusService, private spinner: NgxSpinnerService,) {
+  constructor(private locationService: LocationService, private buscanCellationService: BuscancellationService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busOperatorService: BusOperatorService, private busService: BusService, private spinner: NgxSpinnerService, private activateroute: ActivatedRoute) {
     this.isSubmit = false;
     this.busCancellationRecord = {} as Buscancellation;
     config.backdrop = 'static';
@@ -389,7 +390,7 @@ export class BuscancellationComponent implements OnInit {
             let isPresent = false;
 
             if (this.busCancellationRecord.bus_cancelled_date) {
-              isPresent = this.busCancellationRecord.bus_cancelled_date.some(function (el) {    ////checking the date in the array                      
+              isPresent = this.busCancellationRecord.bus_cancelled_date.some(function (el) {    ////checking the date in the array
                 return el.cancelled_date === dateformate;
               });
 
@@ -446,7 +447,7 @@ export class BuscancellationComponent implements OnInit {
             //     datechecked: [{ value: false, disabled: true }],
             //   })
             //   this.DatesRecord.insert(arraylen, newDatesgroup);
-            // }       
+            // }
             // if (isPresent) {
             //   let newDatesgroup: FormGroup = this.fb.group({
             //     entryDates: [eDate.entry_date],
@@ -460,7 +461,7 @@ export class BuscancellationComponent implements OnInit {
 
             //     datechecked: [null],
             //   })
-            //   this.DatesRecord.insert(arraylen, newDatesgroup);            
+            //   this.DatesRecord.insert(arraylen, newDatesgroup);
 
             // }
 
@@ -613,7 +614,7 @@ export class BuscancellationComponent implements OnInit {
     this.showdates = '0';
     this.selectedCancelBus = [];
     this.busCancellationRecord = this.busCancellations[id];
-    // console.log(this.busCancellationRecord);  
+    // console.log(this.busCancellationRecord);
     //  console.log(this.selectedCancelBus);
 
 
@@ -628,15 +629,15 @@ export class BuscancellationComponent implements OnInit {
     });
     this.getBusbyOperator();
 
-    // setTimeout(() => { 
-    //   this.busCancellationForm.get('bus_operator_id').patchValue(this.busCancellationRecord.operatorId); 
-    //   console.log("formControl value updated"); 
-    // }, 3000); 
+    // setTimeout(() => {
+    //   this.busCancellationForm.get('bus_operator_id').patchValue(this.busCancellationRecord.operatorId);
+    //   console.log("formControl value updated");
+    // }, 3000);
 
-    // call the change event's function after initialized the component. 
-    // setTimeout(() => { 
-    //   this.onChange(); 
-    // }, 3500); 
+    // call the change event's function after initialized the component.
+    // setTimeout(() => {
+    //   this.onChange();
+    // }, 3500);
     this.ModalHeading = "Edit Bus Cancellation";
     this.ModalBtn = "Update";
     //reset the selected values
@@ -686,6 +687,18 @@ export class BuscancellationComponent implements OnInit {
         }
       }
     );
+  }
+
+  @ViewChild('content') content!: TemplateRef<any>;
+
+  ngAfterViewInit() {
+    this.activateroute.queryParams.subscribe(params => {
+      if (params['openModal']) {
+        setTimeout(() => {
+          this.OpenModal(this.content);
+        });
+      }
+    });
   }
 
 }

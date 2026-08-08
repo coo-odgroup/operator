@@ -6,22 +6,19 @@ import { RoleService } from '.././services/role.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 import { Constants } from '../constant/constant';
-import { NgxSpinnerService } from "ngx-spinner";
-import { MustMatch } from "../helpers/must-match.validator";
+import { NgxSpinnerService } from 'ngx-spinner';
+import { MustMatch } from '../helpers/must-match.validator';
 import { EncryptionService } from '../encrypt.service';
-
 
 @Component({
   selector: 'app-forgetpassword',
   templateUrl: './forgetpassword.component.html',
-  styleUrls: ['./forgetpassword.component.scss']
+  styleUrls: ['./forgetpassword.component.scss'],
 })
 export class ForgetpasswordComponent implements OnInit {
-
   public forgotPasswordForm!: FormGroup;
   public otpForm!: FormGroup;
   public resetForm!: FormGroup;
-
 
   submitted = false;
   Otpsubmitted = false;
@@ -33,87 +30,91 @@ export class ForgetpasswordComponent implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
 
-  constructor(public router: Router, protected fb: FormBuilder, private loginService: LoginService, private notificationService: NotificationService, private notify: NotificationService, private roleService: RoleService, private spinner: NgxSpinnerService, private enc: EncryptionService) { }
+  constructor(
+    public router: Router,
+    protected fb: FormBuilder,
+    private loginService: LoginService,
+    private notificationService: NotificationService,
+    private notify: NotificationService,
+    private roleService: RoleService,
+    private spinner: NgxSpinnerService,
+    private enc: EncryptionService,
+  ) {}
 
-  get f() { return this.forgotPasswordForm.controls; }
+  get f() {
+    return this.forgotPasswordForm.controls;
+  }
 
-  get fo() { return this.otpForm.controls; }
+  get fo() {
+    return this.otpForm.controls;
+  }
 
-  get rf() { return this.resetForm.controls; }
-
+  get rf() {
+    return this.resetForm.controls;
+  }
 
   onSubmitResetPassword() {
-
     this.Resetsubmitted = true;
 
     if (this.resetForm.invalid) {
       return;
     } else {
-
       this.spinner.show();
 
       const data = {
         email: this.OtpData.email,
-        password: this.resetForm.value.password
+        password: this.resetForm.value.password,
       };
 
       this.loginService.resetPassword(data).subscribe(
-        res => {
+        (res) => {
           if (res.status == 1) {
-            this.notify.notify("Reset Password is successful", "Success");
+            this.notify.notify('Reset Password is successful', 'Success');
             this.router.navigate(['login']);
           } else {
-            this.notify.notify(res.message, "Error");
+            this.notify.notify(res.message, 'Error');
           }
 
           this.spinner.hide();
         },
-        error => {
+        (error) => {
           this.spinner.hide();
-          this.notify.notify(error.error.message, "Error");
-        }
+          this.notify.notify(error.error.message, 'Error');
+        },
       );
-
-
     }
-
   }
 
   onSubmitOtp() {
-
-
-
     this.Otpsubmitted = true;
 
     if (this.otpForm.invalid) {
       return;
     } else {
-
       this.spinner.show();
 
       const data = {
         email: this.OtpData.email,
-        otp: this.otpForm.value.otp
+        otp: this.otpForm.value.otp,
       };
 
       this.loginService.verifyOtp(data).subscribe(
-        res => {
+        (res) => {
           if (res.status == 1) {
             this.verifyStatus = true;
-            localStorage.setItem("OtpData", JSON.stringify(this.OtpData));
+            localStorage.setItem('OtpData', JSON.stringify(this.OtpData));
           } else {
-            this.notify.notify(res.message, "Error");
+            this.notify.notify(res.message, 'Error');
           }
 
           this.spinner.hide();
         },
-        error => {
+        (error) => {
           this.spinner.hide();
-          this.notify.notify(error.error.message, "Error");
-        }
+          this.notify.notify(error.error.message, 'Error');
+        },
       );
     }
-
   }
 
   email_id: any;
@@ -121,22 +122,19 @@ export class ForgetpasswordComponent implements OnInit {
   interval: any;
 
   onSubmit() {
-
     this.submitted = true;
 
     if (this.forgotPasswordForm.invalid) {
       return;
     } else {
-
       const data = {
-        email: this.forgotPasswordForm.value.email
+        email: this.forgotPasswordForm.value.email,
       };
 
       this.spinner.show();
 
       this.loginService.sendOtp(data).subscribe(
-
-        res => {
+        (res) => {
           if (res.status == 1) {
             let OtpData: any = this.enc.decrypt(res.data);
             OtpData = JSON.parse(OtpData);
@@ -154,31 +152,57 @@ export class ForgetpasswordComponent implements OnInit {
               }
             }, 1000);
 
-            this.notify.notify("OTP has been sent", "Success");
+            this.notify.notify('OTP has been sent', 'Success');
           } else {
-            this.notify.notify(res.message, "Error");
+            this.notify.notify(res.message, 'Error');
           }
 
           this.spinner.hide();
-
         },
-        error => {
+        (error) => {
           this.spinner.hide();
-          this.notify.notify(error.error.message, "Error");
-        }
+          this.notify.notify(error.error.message, 'Error');
+        },
       );
     }
-
   }
 
   resendOtp() {
     this.onSubmit();
   }
 
-  maskEmail(email: string): string {
-    if (!email) return '';
+  // maskEmail(email: string): string {
+  //   if (!email) return '';
 
-    const [username, domain] = email.split('@');
+  //   const [username, domain] = email.split('@');
+
+  //   if (username.length <= 4) {
+  //     return username.charAt(0) + '****@' + domain;
+  //   }
+
+  //   const first = username.slice(0, 2);
+  //   const last = username.slice(-2);
+
+  //   return `${first}****${last}@${domain}`;
+  // }
+
+  maskEmail(value: string): string {
+    if (!value) {
+      return '';
+    }
+
+    // Mobile number
+    if (/^\d{10}$/.test(value)) {
+      return value.substring(0, 2) + '******' + value.substring(8);
+    }
+
+    // Not an email
+    if (!value.includes('@')) {
+      return value;
+    }
+
+    // Email
+    const [username, domain] = value.split('@');
 
     if (username.length <= 4) {
       return username.charAt(0) + '****@' + domain;
@@ -199,25 +223,36 @@ export class ForgetpasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.forgotPasswordForm = this.fb.group({
+    //   email: [null, [Validators.required, Validators.email]],
+    // });
 
     this.forgotPasswordForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
+      email: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(
+            /^([6-9]\d{9}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
+          ),
+        ],
+      ],
     });
 
     this.otpForm = this.fb.group({
       otp: [null, Validators.compose([Validators.required])],
     });
 
-
-    this.resetForm = this.fb.group({
-      password: [null, Validators.compose([Validators.required])],
-      confirm_password: [null, Validators.compose([Validators.required])],
-    }, {
-      validator: MustMatch('password', 'confirm_password')
-    });
+    this.resetForm = this.fb.group(
+      {
+        password: [null, Validators.compose([Validators.required])],
+        confirm_password: [null, Validators.compose([Validators.required])],
+      },
+      {
+        validator: MustMatch('password', 'confirm_password'),
+      },
+    );
 
     clearInterval(this.interval);
-
   }
-
 }
