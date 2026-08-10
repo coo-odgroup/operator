@@ -6,7 +6,7 @@ table {
 @media only screen and (max-width: 800px) {
     img#main-logo {
         width: 35% !important;
-        margin-left: 10px;
+        margin-left: 0px !important;
     }
 
     // @media only screen and (min-width: 430px) and (max-width: 768px) {
@@ -15,4 +15,8 @@ table {
     //         margin-left: 10px;
     //     }
     // }
+}
+
+.home-icon i{
+    color: #1d5fd3 !important;
 }

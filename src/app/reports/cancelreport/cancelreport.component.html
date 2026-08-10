@@ -850,26 +850,16 @@
 
     </div>
 
-    <!-- Empty -->
+   <div
+        class="mobile-empty-box d-lg-none"
+        *ngIf="completedata?.data?.data?.length == 0"
+      >
+        <div class="mobile-empty-icon">
+          <i class="fas fa-th-large"></i>
+        </div>
 
-    <div class="empty-box" *ngIf="completedata?.data?.data?.length==0">
-
-        <i class="fas fa-ban"></i>
-
-        <h4>
-
-            No Cancelled Booking Found
-
-        </h4>
-
-        <p>
-
-            There are no cancelled bookings available.
-
-        </p>
-
-    </div>
-
+        <h4>No Cancelled Bookings Found</h4>
+      </div>
     <!-- Pagination -->
 
     <div class="pagination-wrapper" *ngIf="completedata?.data?.data?.length">

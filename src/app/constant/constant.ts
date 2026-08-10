@@ -28,12 +28,12 @@ export class Constants {
     // public static CONSUMER_API_URL:any ='https://testing.odbus.co.in/api/';
     // public static PATHURL:any = 'https://testingadminapi.odbus.co.in/public/uploads/';
 
-    public static BASE_URL: any = 'http://localhost:7001/ODBUS/odbusproviderbe/api';
-    public static CONSUMER_API_URL: any = 'http://localhost:7001/ODBUS/odbusconsumerbe/api/';
-    public static PATHURL: any = 'http://localhost:7001/ODBUS/odbusproviderbe/public/uploads/';
+    // public static BASE_URL: any = 'http://localhost:7001/ODBUS/odbusproviderbe/api';
+    // public static CONSUMER_API_URL: any = 'http://localhost:7001/ODBUS/odbusconsumerbe/api/';
+    // public static PATHURL: any = 'http://localhost:7001/ODBUS/odbusproviderbe/public/uploads/';
 
 
-    // public static BASE_URL:any ='https://odapi.adglob.in/api';
-    // public static CONSUMER_API_URL:any ='https://odclient.adglob.in/api/';
-    // public static PATHURL:any = 'https://odapi.adglob.in/public/uploads/';
+    public static BASE_URL:any ='https://odapi.adglob.in/api';
+    public static CONSUMER_API_URL:any ='https://odclient.adglob.in/api/';
+    public static PATHURL:any = 'https://odapi.adglob.in/public/uploads/';
 }

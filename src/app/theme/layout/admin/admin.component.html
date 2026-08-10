@@ -1,10 +1,14 @@
-<app-navigation class="pcoded-navbar" [ngClass]="{'navbar-collapsed' : navCollapsed, 'theme-horizontal': this.flatConfig['layout'] === 'horizontal', 'mob-open' : navCollapsedMob}" (onNavMobCollapse)="navMobClick()"></app-navigation>
-<app-nav-bar class="navbar pcoded-header navbar-expand-lg navbar-light" (onNavCollapse)="this.navCollapsed = !this.navCollapsed;" (onNavHeaderMobCollapse)="navMobClick()"></app-nav-bar>
+<app-navigation class="pcoded-navbar"
+  [ngClass]="{'navbar-collapsed' : navCollapsed, 'theme-horizontal': this.flatConfig['layout'] === 'horizontal', 'mob-open' : navCollapsedMob}"
+  (onNavMobCollapse)="navMobClick()"></app-navigation>
+<app-nav-bar class="navbar pcoded-header navbar-expand-lg navbar-light"
+  (onNavCollapse)="this.navCollapsed = !this.navCollapsed;" (onNavHeaderMobCollapse)="navMobClick()"></app-nav-bar>
 <div class="pcoded-main-container">
-    <div class="pcoded-content" [ngClass]="{'container': this.flatConfig.layout === 'horizontal' && this.flatConfig.subLayout === 'horizontal-2'}">
-      <app-breadcrumb></app-breadcrumb>
-      <router-outlet></router-outlet>
-    </div>
+  <div class="pcoded-content"
+    [ngClass]="{'container': this.flatConfig.layout === 'horizontal' && this.flatConfig.subLayout === 'horizontal-2'}">
+    <app-breadcrumb></app-breadcrumb>
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 
@@ -17,23 +21,118 @@
   </div>
 </div>
 
-<div class="mobile-menu-list my-section" *ngIf="showSection" >
+<div class="mobile-menu-list my-section" *ngIf="showSection">
+
   <ul>
-    <li><a href="#/dashboard" (click)="closeMenu()">Dashboard</a></li>
-    <!-- <li><a href="#/busmanagement/busschedule" (click)="closeMenu()">Bus Schedule</a></li> -->
-    <li><a href="#/reports/cancelReport" (click)="closeMenu()">Cancel Report</a></li>
-    <li><a [routerLink]="['/bookingmanagement/extraseatblock']" [queryParams]="{ openModal: true }" (click)="closeMenu()">Extra Seat Block</a></li>
-    <li><a [routerLink]="['/bookingmanagement/buscancellation']" [queryParams]="{ openModal: true }" (click)="closeMenu()">Bus Cancellation</a></li>
-    <li><a [routerLink]="['/bookingmanagement/ownerfare']" [queryParams]="{ openModal: true }" (click)="closeMenu()">Manage Fare</a></li>
-    <li><a href="#/bookingmanagement/ownerfare" (click)="logout()">Logout</a></li>
+
+    <!-- Dashboard -->
+    <li>
+      <a href="#/dashboard" (click)="closeMenu()">
+        <span class="menu-item-icon">
+          <i class="fa fa-home"></i>
+        </span>
+
+        <span class="menu-item-text">
+          Dashboard
+        </span>
+
+        <i class="fa fa-angle-right menu-item-arrow"></i>
+      </a>
+    </li>
+
+    <!-- Cancel Report -->
+    <li>
+      <a href="#/reports/cancelReport" (click)="closeMenu()">
+        <span class="menu-item-icon">
+          <i class="fa fa-times-circle"></i>
+        </span>
+
+        <span class="menu-item-text">
+          Cancel Report
+        </span>
+
+        <i class="fa fa-angle-right menu-item-arrow"></i>
+      </a>
+    </li>
+
+    <!-- Extra Seat Block -->
+    <li>
+      <a [routerLink]="['/bookingmanagement/extraseatblock']" [queryParams]="{ openModal: true }" (click)="closeMenu()">
+
+        <span class="menu-item-icon">
+          <i class="fa fa-plus-square"></i>
+        </span>
+
+        <span class="menu-item-text">
+          Extra Seat Block
+        </span>
+
+        <i class="fa fa-angle-right menu-item-arrow"></i>
+      </a>
+    </li>
+
+    <!-- Bus Cancellation -->
+    <li>
+      <a [routerLink]="['/bookingmanagement/buscancellation']" [queryParams]="{ openModal: true }"
+        (click)="closeMenu()">
+
+        <span class="menu-item-icon">
+          <i class="fa fa-bus"></i>
+        </span>
+
+        <span class="menu-item-text">
+          Bus Cancellation
+        </span>
+
+        <i class="fa fa-angle-right menu-item-arrow"></i>
+      </a>
+    </li>
+
+    <!-- Manage Fare -->
+    <li>
+      <a [routerLink]="['/bookingmanagement/ownerfare']" [queryParams]="{ openModal: true }" (click)="closeMenu()">
+
+        <span class="menu-item-icon">
+          <i class="fa fa-tag"></i>
+        </span>
+
+        <span class="menu-item-text">
+          Manage Fare
+        </span>
+
+        <i class="fa fa-angle-right menu-item-arrow"></i>
+      </a>
+    </li>
+
+    <!-- Logout -->
+    <li>
+      <a href="javascript:void(0)" (click)="logout()">
+
+        <span class="menu-item-icon logout-icon">
+          <i class="fa fa-power-off"></i>
+        </span>
+
+        <span class="menu-item-text">
+          Logout
+        </span>
+
+        <i class="fa fa-angle-right menu-item-arrow"></i>
+      </a>
+    </li>
+
   </ul>
+
 </div>
 
 <div class="mobile-display">
   <ul>
-    <li><a [routerLink]="['/bookingmanagement/seatblock']" [queryParams]="{ openModal: true }" (click)="closeMenu()"  [class.active]="isActive('seatblock')"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
-    <li><a [routerLink]="['/bookingmanagement/seatopen']" [queryParams]="{ openModal: true }" (click)="closeMenu()" [class.active]="isActive('seatopen')"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
-    <li><a [routerLink]="['/reports/completeReport']" (click)="closeMenu()" [class.active]="isActive('completeReport')"><span><i class="feather icon-crosshair"></i></span>Booking Report</a></li>
+    <li><a [routerLink]="['/bookingmanagement/seatblock']" [queryParams]="{ openModal: true }" (click)="closeMenu()"
+        [class.active]="isActive('seatblock')"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
+    <li><a [routerLink]="['/bookingmanagement/seatopen']" [queryParams]="{ openModal: true }" (click)="closeMenu()"
+        [class.active]="isActive('seatopen')"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
+    <li><a [routerLink]="['/reports/completeReport']" (click)="closeMenu()"
+        [class.active]="isActive('completeReport')"><span><i class="feather icon-crosshair"></i></span>Booking
+        Report</a></li>
     <li><a (click)="toggleSection()"><span><i class="feather icon-list"></i></span>Menu</a></li>
   </ul>
 </div>

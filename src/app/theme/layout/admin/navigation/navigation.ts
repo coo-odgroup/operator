@@ -94,7 +94,7 @@ const OperatorItems =[{
       id: 'Owner Fare',
       title: 'Manage Fare',
       type: 'item',
-      icon:'feather icon-layers',
+      icon:'feather icon-tag',
       url: 'bookingmanagement/ownerfare'
     }
   ]

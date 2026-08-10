@@ -389,6 +389,9 @@ export class DashboardComponent implements OnInit {
   toggleCustomFilter() {
 
     this.showCustomFilter = !this.showCustomFilter;
+    if (this.showCustomFilter) {
+    this.searchfor = 'Custom';
+  }
 
   }
 
@@ -422,7 +425,7 @@ export class DashboardComponent implements OnInit {
 
   getall(range: any) {
     this.spinner.show();
-
+    this.showCustomFilter = false;
     this.searchfor = range;
     this.dashboarddata = "";
     this.RangeText = range;
