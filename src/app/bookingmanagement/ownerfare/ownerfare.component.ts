@@ -56,9 +56,9 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
   .custom-day.faded {
     background-color: rgba(2, 117, 216, 0.5);
   }
-  .custom-day.selected{  
+  .custom-day.selected{
     background-color: rgba(255, 255, 0, .5);
-      
+
   }
 `]
 })
@@ -240,7 +240,7 @@ export class OwnerfareComponent implements OnInit {
 
   exportexcel(): void {
     this.spinner.show();
-    // this.completeReportRecord = this.searchFrom.value ; 
+    // this.completeReportRecord = this.searchFrom.value ;
     this.completExportdata = '';
 
     const data = {

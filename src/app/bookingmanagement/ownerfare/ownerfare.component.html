@@ -217,7 +217,7 @@
 
               <th width="70">ID</th>
 
-              <th>Operator</th>
+              <!-- <th>Operator</th> -->
 
               <th>Bus Name</th>
 
@@ -250,12 +250,12 @@
               </td>
 
               <!-- Operator -->
-              <td>
+              <!-- <td>
 
                 <strong>{{ fare.bus[0]?.bus_operator?.organisation_name }}</strong> <br>
                 ({{ fare.bus[0]?.bus_operator?.operator_name }})
 
-              </td>
+              </td> -->
 
               <!-- Bus Name -->
               <td>
@@ -316,22 +316,26 @@
               <!-- Seater -->
               <td>
 
-                <span class="price-chip">
-
+                <span class="price-chip" *ngIf="fare.seater_price > 0; else noSeaterPrice">
                   ₹ {{ fare.seater_price }}
-
                 </span>
+
+                <ng-template #noSeaterPrice>
+                  --
+                </ng-template>
 
               </td>
 
               <!-- Sleeper -->
               <td>
 
-                <span class="price-chip">
-
+                <span class="price-chip" *ngIf="fare.sleeper_price > 0; else noSleeperPrice">
                   ₹ {{ fare.sleeper_price }}
-
                 </span>
+
+                <ng-template #noSleeperPrice>
+                  --
+                </ng-template>
 
               </td>
 
@@ -450,7 +454,7 @@
           <li class="page-item" *ngFor="let b of pagination.links">
 
             <span class="page-link" [class.active]="pagination.current_page == +b.label"
-              (click)="b.url ? set_page(b.url) : null" [innerHTML]="page(b.label)">
+              (click)="b.url ? search(b.url) : null" [innerHTML]="page(b.label)">
 
             </span>
 

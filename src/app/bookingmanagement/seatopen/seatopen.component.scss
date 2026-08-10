@@ -146,9 +146,9 @@
 // }
 
 
-// @media screen 
-// and (min-width: 375px) 
-// and (max-width: 667px) 
+// @media screen
+// and (min-width: 375px)
+// and (max-width: 667px)
 // and (orientation: landscape) {
 //   .bus-transform {
 //     margin-top: 10px;
@@ -156,18 +156,18 @@
 // }
 
 
-// @media screen 
-// and (min-width: 768px) 
-// and (max-width: 1024px) 
+// @media screen
+// and (min-width: 768px)
+// and (max-width: 1024px)
 // and (orientation: portrait) {
 //   .bus-transform {
 //     margin-top: 110px;
 //     }
 // }
 
-// @media screen 
-// and (min-width: 1024px) 
-// and (max-width: 1366px) 
+// @media screen
+// and (min-width: 1024px)
+// and (max-width: 1366px)
 // and (orientation: portrait) {
 //   .bus-transform {
 //     margin-top: 10px;
@@ -176,7 +176,7 @@
 
 // Chnages By Siraz
 
-// @media screen 
+// @media screen
 // and (min-width: 320px)
 // and (max-width: 350px)
 // and (orientation: portrait)
@@ -187,7 +187,7 @@
 //     }
 // }
 
-// @media screen 
+// @media screen
 // and (min-width: 350px)
 // and (max-width: 375px)
 // and (orientation: portrait)
@@ -198,7 +198,7 @@
 //     }
 // }
 
-// @media screen 
+// @media screen
 // and (min-width: 375px)
 // and (max-width: 425px)
 // and (orientation: portrait)
@@ -209,7 +209,7 @@
 //     }
 // }
 
-// @media screen 
+// @media screen
 // and (min-width: 425px)
 // and (max-width: 768px)
 // and (orientation: portrait)
@@ -220,7 +220,7 @@
 //     }
 // }
 
-// @media screen 
+// @media screen
 // and (min-width: 768px)
 // and (orientation: portrait)
 // and (orientation: portrait) {
@@ -230,7 +230,7 @@
 //     }
 // }
 
-// @media screen 
+// @media screen
 // and (min-width: 320px)
 // and (max-width: 320px)
 // and (min-height: 768px)
@@ -274,8 +274,8 @@
 // }
 
 
-// @media screen 
-// and (min-width: 320px) 
+// @media screen
+// and (min-width: 320px)
 // and (max-width: 375px) {
 //   .mob_view{
 //     padding: 0px !important;
@@ -1443,6 +1443,7 @@ Steering
   /* right: 27px; */
   top: 40px;
   transform: rotate(-90deg);
+  left: 0px;
 }
 
 .steering img {

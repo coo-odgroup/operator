@@ -63,7 +63,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: .25s;
+  transition: 0.25s;
 }
 
 .booking-search-btn,
@@ -75,18 +75,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: .25s;
+  transition: 0.25s;
 }
 
 .booking-search-btn {
-
   background-color: #1abc9c;
   border-color: #1abc9c;
   padding: 0 15px;
 }
 
 .booking-search-btn:hover {
-
   background: #159a80;
 
   border-color: #148f77;
@@ -99,14 +97,12 @@
 }
 
 .export-btn:hover {
-
   background: #059669;
 
   border-color: #059669;
 }
 
 .btn-search {
-
   background: #2563eb;
 
   color: #fff;
@@ -118,14 +114,12 @@
 }
 
 .btn-search:hover {
-
   background: #1d4ed8;
 
   color: #fff;
 }
 
 .btn-reset {
-
   background: #f3f4f6;
 
   border: 1px solid #dbe3ef;
@@ -137,7 +131,6 @@
 }
 
 .btn-reset:hover {
-
   background: #e5e7eb;
 }
 
@@ -145,7 +138,6 @@
 .export-btn i,
 .btn-search i,
 .btn-reset i {
-
   margin-right: 8px;
 }
 
@@ -159,7 +151,7 @@
   padding: 24px;
   margin-bottom: 22px;
   border: 1px solid #edf2f7;
-  box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
 }
 
 .filter-label {
@@ -171,7 +163,6 @@
 }
 
 .premium-input {
-
   height: 54px;
 
   border-radius: 5px;
@@ -184,14 +175,12 @@
 }
 
 .premium-input:focus {
-
   border-color: #2563eb;
 
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .premium-select {
-
   width: 100%;
 }
 
@@ -200,7 +189,6 @@
 }
 
 ::ng-deep .premium-select .ng-select-container {
-
   height: 54px !important;
 
   border-radius: 5px !important;
@@ -211,28 +199,24 @@
 }
 
 ::ng-deep .premium-select.ng-select-focused .ng-select-container {
-
   border-color: #2563eb !important;
 
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 ::ng-deep .premium-mat .mat-mdc-text-field-wrapper {
-
   border-radius: 12px;
 }
 
 ::ng-deep .premium-mat .mdc-notched-outline__leading,
 ::ng-deep .premium-mat .mdc-notched-outline__notch,
 ::ng-deep .premium-mat .mdc-notched-outline__trailing {
-
   border-color: #dbe3ef !important;
 }
 
 ::ng-deep .premium-mat.mat-focused .mdc-notched-outline__leading,
 ::ng-deep .premium-mat.mat-focused .mdc-notched-outline__notch,
 ::ng-deep .premium-mat.mat-focused .mdc-notched-outline__trailing {
-
   border-color: #2563eb !important;
 }
 
@@ -241,7 +225,6 @@
 ==================================================*/
 
 .summary-card {
-
   display: flex;
   align-items: center;
   padding: 0 15px 10px 15px;
@@ -249,14 +232,12 @@
 }
 
 .summary-card small {
-
   font-size: 12px;
 
   color: #1b2155;
 }
 
 .summary-card h3 {
-
   margin: 5px 0 0;
 
   font-size: 22px;
@@ -265,7 +246,6 @@
 
   font-weight: 700;
 }
-
 
 /*==================================================
                 TABLE CARD
@@ -282,7 +262,7 @@
 
   overflow: hidden;
 
-  box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
   display: flex;
   flex-direction: column;
 }
@@ -300,12 +280,10 @@
 }
 
 .premium-table thead {
-
   background: #eef4ff !important;
 }
 
 .premium-table thead th {
-
   padding: 10px 14px;
 
   border: none;
@@ -318,7 +296,6 @@
 }
 
 .premium-table tbody td {
-
   padding: 10px 14px;
 
   border-top: 1px solid #edf2f7;
@@ -329,12 +306,10 @@
 }
 
 .premium-table tbody tr {
-
-  transition: .25s;
+  transition: 0.25s;
 }
 
 .premium-table tbody tr:hover {
-
   background: #f8fbff;
 }
 
@@ -343,7 +318,6 @@
 ==================================================*/
 
 .serial-no {
-
   width: 55px;
 
   font-weight: 700;
@@ -356,14 +330,12 @@
 ==================================================*/
 
 .passenger-box {
-
   display: flex;
 
   align-items: center;
 }
 
 .passenger-info h5 {
-
   margin: 0;
 
   font-size: 15px;
@@ -374,7 +346,6 @@
 }
 
 .passenger-info small {
-
   display: block;
 
   margin-top: 6px;
@@ -389,7 +360,6 @@
 ==================================================*/
 
 .gender-text {
-
   margin-left: 6px;
 
   color: #64748b;
@@ -418,7 +388,6 @@
 ==================================================*/
 
 .premium-table h6 {
-
   margin: 0;
   font-size: 13px;
   font-weight: 600;
@@ -426,7 +395,6 @@
 }
 
 .premium-table td small {
-
   color: #64748b;
 
   font-size: 11px;
@@ -437,7 +405,6 @@
 ==================================================*/
 
 .route-box {
-
   display: flex;
 
   align-items: center;
@@ -450,19 +417,16 @@
 }
 
 .route-box strong {
-
   color: #1b2155;
 
   font-size: 13px;
 }
 
 .route-box i {
-
   font-size: 12px;
 }
 
 .journey-date {
-
   color: #2563eb;
 
   font-size: 11px;
@@ -473,7 +437,6 @@
 ==================================================*/
 
 .seat-badge {
-
   display: inline-flex;
 
   align-items: center;
@@ -500,7 +463,6 @@
 ==================================================*/
 
 .cancel-chip {
-
   display: inline-block;
 
   padding: 5px 12px;
@@ -513,21 +475,18 @@
 }
 
 .cancel-admin {
-
   background: #fee2e2;
 
   color: #dc2626;
 }
 
 .cancel-user {
-
   background: #eef4ff;
 
   color: #2563eb;
 }
 
 .cancel-reason {
-
   margin-top: 8px;
 
   color: #64748b;
@@ -536,7 +495,6 @@
 }
 
 .cancel-date {
-
   color: #1b2155;
 
   font-size: 14px;
@@ -585,7 +543,6 @@
   font-size: 22px;
 }
 
-
 /*==================================================
                 PAGINATION
 ==================================================*/
@@ -598,24 +555,20 @@
 }
 
 .pagination-info {
-
   color: #64748b;
 
   font-size: 13px;
 }
 
 .pagination-info strong {
-
   color: #2563eb;
 }
 
 .pagination {
-
   margin: 0;
 }
 
 .pagination .page-item {
-
   border-radius: 60px;
   margin: 0 5px;
 }
@@ -632,23 +585,18 @@
 }
 
 .pagination .page-link:hover {
-
   background: #eef4ff;
 
   color: #2563eb;
 }
 
 .page-link.active {
-
   background: #2563eb;
 
   border-color: #2563eb;
 
   color: #fff;
-
-
 }
-
 
 /*==================================================
                 MOBILE
@@ -668,7 +616,7 @@
   padding: 18px;
   margin-bottom: 16px;
   border: 1px solid #edf2f7;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, .06);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
 }
 
 .booking-top {
@@ -813,8 +761,7 @@
                 MOBILE
 ==================================================*/
 
-@media(max-width:767px) {
-
+@media (max-width: 767px) {
   .desktop-view {
     display: none;
   }
@@ -962,11 +909,9 @@
     border-radius: 60px;
     font-size: 13px;
   }
-
 }
 
-@media(max-width:480px) {
-
+@media (max-width: 480px) {
   .booking-card {
     padding: 16px;
   }
@@ -1004,5 +949,76 @@
     width: 42px;
     height: 42px;
   }
+}
 
+/* Mobile */
+@media (max-width: 767px) {
+  .empty-box {
+    padding: 35px 15px;
+    min-height: 200px;
+  }
+
+  .empty-box i {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .empty-box h4 {
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .empty-box p {
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 280px;
+  }
+}
+
+/* Very small mobile */
+@media (max-width: 375px) {
+  .empty-box {
+    padding: 30px 10px;
+  }
+
+  .empty-box i {
+    font-size: 35px;
+  }
+
+  .empty-box h4 {
+    font-size: 16px;
+  }
+
+  .empty-box p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .empty-box {
+    text-align: center;
+    padding: 30px 15px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-box i {
+    font-size: 38px;
+    margin-bottom: 12px;
+  }
+
+  .empty-box h4 {
+    font-size: 17px;
+    margin: 0 0 6px;
+  }
+
+  .empty-box p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 280px;
+  }
 }

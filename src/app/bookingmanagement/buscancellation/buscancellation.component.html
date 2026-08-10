@@ -908,8 +908,7 @@ Mobile Pagination
         </div>
 
         <!-- Date Selection -->
-
-        <div class="date-section" formArrayName="buses">
+        <div class="date-section" formArrayName="buses" *ngIf="busesFormGroup.controls.length > 0">
 
           <h5 class="section-title">
 
