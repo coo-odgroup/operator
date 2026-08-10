@@ -1466,6 +1466,178 @@ Header
   font-size: 14px;
 }
 
+
+
+/*==================================================
+  SEAT LEGEND
+==================================================*/
+
+.seat-legend {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 7px 12px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 10px;
+
+  white-space: nowrap;
+
+}
+
+
+/*==================================================
+  LEGEND ITEM
+==================================================*/
+
+.legend-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: #475569;
+
+}
+
+
+/*==================================================
+  ACTUAL SEAT IMAGE
+==================================================*/
+
+.seat-legend .legend-seat {
+
+  display: inline-block;
+
+  width: 22px !important;
+
+  height: 22px !important;
+
+  min-width: 22px;
+
+  background-size: contain !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: center !important;
+
+  border: none !important;
+
+  border-radius: 0 !important;
+
+  flex-shrink: 0;
+
+}
+
+
+/*==================================================
+  AVAILABLE
+  Same original dark seat appearance
+==================================================*/
+
+.seat-legend .legend-available {
+
+  filter: none;
+
+}
+
+
+/*==================================================
+  BLOCKED
+  Convert actual seat image to RED
+==================================================*/
+
+.seat-legend .legend-blocked {
+
+  filter:
+    invert(81%) sepia(12%) saturate(650%) hue-rotate(250deg) brightness(96%) contrast(91%);
+
+}
+
+
+/*==================================================
+  SELECTED
+  Convert actual seat image to BLUE
+==================================================*/
+
+.seat-legend .legend-selected {
+
+  filter: invert(63%) sepia(78%) saturate(590%) hue-rotate(119deg) brightness(91%) contrast(87%);
+
+}
+
+
+/*==================================================
+  LEGEND TEXT
+==================================================*/
+
+.seat-legend .legend-item span:last-child {
+
+  line-height: 1;
+
+}
+
+
+
+/*==================================================
+        MOBILE SEAT LEGEND
+==================================================*/
+
+@media (max-width: 768px) {
+
+  .seat-legend {
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 7px 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #3455a5;
+
+  }
+
+  .legend-item {
+
+    gap: 5px;
+
+    font-size: 10px;
+
+  }
+
+  .seat-legend .legend-seat {
+
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 20px;
+    transform: rotate(90deg);
+
+  }
+
+  .seat-legend .legend-item span:last-child {
+
+    line-height: 1;
+
+  }
+
+}
+
+
 /*==================================================
 Tabs
 ==================================================*/

@@ -704,6 +704,39 @@
 
             </div>
 
+            <!-- Seat Legend -->
+            <div class="seat-legend">
+
+              <!-- Available -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-available seaterImage"></span>
+
+                <span>Available</span>
+
+              </div>
+
+              <!-- Blocked -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-blocked seaterImage"></span>
+
+                <span>Blocked</span>
+
+              </div>
+
+              <!-- Selected -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-selected seaterImage"></span>
+
+                <span>Selected</span>
+
+              </div>
+
+            </div>
+
+            <!-- Seat Tabs -->
             <div class="seat-tabs">
 
               <button type="button" class="tab-btn" *ngIf="lower != 0" [class.active]="activeTab == 'tab1'"
@@ -979,7 +1012,7 @@
       <div class="seat-layout-card">
 
         <div class="seat-layout-header">
-
+          <!-- Header -->
           <div>
 
             <h5>
@@ -997,7 +1030,39 @@
             </p>
 
           </div>
+          <!-- Seat Legend -->
+          <div class="seat-legend">
 
+            <!-- Available -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-available seaterImage"></span>
+
+              <span>Available</span>
+
+            </div>
+
+            <!-- Blocked -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-blocked seaterImage"></span>
+
+              <span>Blocked</span>
+
+            </div>
+
+            <!-- Selected -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-selected seaterImage"></span>
+
+              <span>Selected</span>
+
+            </div>
+
+          </div>
+
+          <!-- Seats Tabs -->
           <div class="mobile-seat-tabs">
 
             <button type="button" class="tab-btn" *ngIf="lower!=0" [class.active]="activeTab=='tab1'"
@@ -1755,6 +1820,45 @@
         </div>
 
         <!--====================================================
+              MOBILE SEAT LEGEND
+=====================================================-->
+
+        <div class="mobile-seat-legend-wrapper" *ngIf="seatBlockForm.value.bus_id">
+
+          <div class="seat-legend">
+
+            <!-- Available -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-available seaterImage"></span>
+
+              <span>Available</span>
+
+            </div>
+
+            <!-- Blocked -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-blocked seaterImage"></span>
+
+              <span>Blocked</span>
+
+            </div>
+
+            <!-- Selected -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-selected seaterImage"></span>
+
+              <span>Selected</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--====================================================
                 SEAT LAYOUT
 =====================================================-->
 
@@ -1769,14 +1873,14 @@
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab1')"
                   [class.active]="activeTab=='tab1'" *ngIf="lower!=0">
 
-                  Seater
+                  Lower
 
                 </button>
 
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab2')"
                   [class.active]="activeTab=='tab2'" *ngIf="upper!=0">
 
-                  Sleeper
+                  Upper
 
                 </button>
 
@@ -1894,7 +1998,7 @@
 
 
       </div>
-<div class="mobile-form-card mt-5"></div>
+      <div class="mobile-form-card mt-5"></div>
       <!--====================================================
                 MOBILE FOOTER
 =====================================================-->

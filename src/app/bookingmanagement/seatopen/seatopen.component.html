@@ -183,8 +183,7 @@
 
     <div class="operator-card-header">
 
-      <button class="btn btn-success operator-btn"
-        *ngIf="seatOpen?.length">
+      <button class="btn btn-success operator-btn" *ngIf="seatOpen?.length">
 
         <i class="fas fa-file-excel"></i>
 
@@ -635,7 +634,7 @@ seatOpenForm.controls['bus_id'].hasError('required')">
           <!-- Header -->
 
           <div class="seat-layout-header">
-
+            <!-- Header -->
             <div>
 
               <h5>
@@ -654,6 +653,39 @@ seatOpenForm.controls['bus_id'].hasError('required')">
 
             </div>
 
+            <!-- Seat Legend -->
+            <div class="seat-legend">
+
+              <!-- Available -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-available seaterImage"></span>
+
+                <span>Available</span>
+
+              </div>
+
+              <!-- Blocked -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-blocked seaterImage"></span>
+
+                <span>Blocked</span>
+
+              </div>
+
+              <!-- Selected -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-selected seaterImage"></span>
+
+                <span>Selected</span>
+
+              </div>
+
+            </div>
+
+            <!-- Seat Tabs -->
             <div class="seat-tabs">
 
               <button type="button" class="tab-btn" *ngIf="lower != 0" [class.active]="activeTab == 'tab1'"
@@ -947,6 +979,7 @@ seatOpenForm.controls['bus_id'].hasError('required')">
 
           </div>
 
+          <!-- Seat Tabs -->
           <div class="mobile-seat-tabs">
 
             <button type="button" class="tab-btn" *ngIf="lower!=0" [class.active]="activeTab=='tab1'"
@@ -1698,6 +1731,45 @@ seatOpenForm.controls['bus_id'].hasError('required')">
         </div>
 
         <!--====================================================
+              MOBILE SEAT LEGEND
+=====================================================-->
+
+        <div class="mobile-seat-legend-wrapper" *ngIf="seatOpenForm.value.bus_id">
+
+          <div class="seat-legend">
+
+            <!-- Available -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-available seaterImage"></span>
+
+              <span>Available</span>
+
+            </div>
+
+            <!-- Blocked -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-blocked seaterImage"></span>
+
+              <span>Blocked</span>
+
+            </div>
+
+            <!-- Selected -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-selected seaterImage"></span>
+
+              <span>Selected</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--====================================================
                 SEAT LAYOUT
 =====================================================-->
 
@@ -1712,14 +1784,14 @@ seatOpenForm.controls['bus_id'].hasError('required')">
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab1')"
                   [class.active]="activeTab=='tab1'" *ngIf="lower!=0">
 
-                  Seater
+                  Lower
 
                 </button>
 
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab2')"
                   [class.active]="activeTab=='tab2'" *ngIf="upper!=0">
 
-                  Sleeper
+                  Upper
 
                 </button>
 
@@ -1956,6 +2028,45 @@ seatOpenForm.controls['bus_id'].hasError('required')">
         </div>
 
         <!--====================================================
+              MOBILE SEAT LEGEND
+=====================================================-->
+
+        <div class="mobile-seat-legend-wrapper" *ngIf="seatOpenForm.value.bus_id">
+
+          <div class="seat-legend">
+
+            <!-- Available -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-available seaterImage"></span>
+
+              <span>Available</span>
+
+            </div>
+
+            <!-- Blocked -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-blocked seaterImage"></span>
+
+              <span>Blocked</span>
+
+            </div>
+
+            <!-- Selected -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-selected seaterImage"></span>
+
+              <span>Selected</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--====================================================
                 SEAT LAYOUT
 =====================================================-->
 
@@ -1970,14 +2081,14 @@ seatOpenForm.controls['bus_id'].hasError('required')">
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab1')"
                   [class.active]="activeTab=='tab1'" *ngIf="lower!=0">
 
-                  Seater
+                  Lower
 
                 </button>
 
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab2')"
                   [class.active]="activeTab=='tab2'" *ngIf="upper!=0">
 
-                  Sleeper
+                  Upper
 
                 </button>
 

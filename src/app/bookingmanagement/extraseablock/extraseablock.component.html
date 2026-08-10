@@ -114,7 +114,7 @@
 
           <div class="col-lg-3 col-md-12 d-flex">
 
-               <div class="search-actions">
+            <div class="search-actions">
 
               <button type="button" class="btn btn-primary" (click)="search()">
 
@@ -134,7 +134,7 @@
 
             </div>
 
-        </div>
+          </div>
 
         </div>
 
@@ -601,45 +601,7 @@
         </div>
 
 
-        <!-- ===========================
-             Already Blocked Seats
-        ============================ -->
 
-        <!-- <div class="seat-card" *ngIf="alreadyBlocksData.length">
-
-          <div class="card-title">
-
-            <i class="fas fa-lock"></i>
-
-            Already Blocked Seats
-
-          </div>
-
-          <div class="blocked-list">
-
-            <div class="blocked-row" *ngFor="let aldBlock of alreadyBlocksData">
-
-              <div class="blocked-date">
-
-                {{aldBlock.value[0].operation_date}}
-
-              </div>
-
-              <div class="blocked-seats">
-
-                <span class="seat-badge" *ngFor="let seat of aldBlock.value">
-
-                  {{seat.seats.seatText}}
-
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div> -->
 
         <!-- ==========================
      Seat Layout
@@ -653,6 +615,7 @@ seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.leng
 
           <div class="seat-layout-header">
 
+            <!-- Header -->
             <div>
 
               <h5>
@@ -671,6 +634,39 @@ seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.leng
 
             </div>
 
+            <!-- Seat Legend -->
+            <div class="seat-legend">
+
+              <!-- Available -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-available seaterImage"></span>
+
+                <span>Available</span>
+
+              </div>
+
+              <!-- Blocked -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-blocked seaterImage"></span>
+
+                <span>Blocked</span>
+
+              </div>
+
+              <!-- Selected -->
+              <div class="legend-item">
+
+                <span class="legend-seat legend-selected seaterImage"></span>
+
+                <span>Selected</span>
+
+              </div>
+
+            </div>
+
+            <!-- Seat Tabs -->
             <div class="seat-tabs">
 
               <button type="button" class="tab-btn" *ngIf="lower != 0" [class.active]="activeTab == 'tab1'"
@@ -1442,6 +1438,45 @@ seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.leng
         </div>
 
         <!--====================================================
+              MOBILE SEAT LEGEND
+=====================================================-->
+
+        <div class="mobile-seat-legend-wrapper" *ngIf="seatOpenForm.value.bus_id">
+
+          <div class="seat-legend">
+
+            <!-- Available -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-available seaterImage"></span>
+
+              <span>Available</span>
+
+            </div>
+
+            <!-- Blocked -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-blocked seaterImage"></span>
+
+              <span>Blocked</span>
+
+            </div>
+
+            <!-- Selected -->
+            <div class="legend-item">
+
+              <span class="legend-seat legend-selected seaterImage"></span>
+
+              <span>Selected</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--====================================================
                 SEAT LAYOUT
 =====================================================-->
 
@@ -1456,14 +1491,14 @@ seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.leng
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab1')"
                   [class.active]="activeTab=='tab1'" *ngIf="lower!=0">
 
-                  Seater
+                  Lower
 
                 </button>
 
                 <button type="button" class="mobile-tab-btn" (click)="switchTab('tab2')"
                   [class.active]="activeTab=='tab2'" *ngIf="upper!=0">
 
-                  Sleeper
+                  Upper
 
                 </button>
 
