@@ -95,6 +95,7 @@ export class OwnerfareComponent implements OnInit {
   today: Date;
   showSection = false;
 
+  actiontoday = new Date();
 
   constructor(private ownerfareService: OwnerfareService, private http: HttpClient, private notificationService: NotificationService, private fb: FormBuilder, config: NgbModalConfig, private modalService: NgbModal, private busService: BusService, private busOperatorService: BusOperatorService, private locationService: LocationService, private spinner: NgxSpinnerService, private dtconfig: NgbDatepickerConfig) {
     this.isSubmit = false;

@@ -221,7 +221,7 @@
 
               <th>Bus Name</th>
 
-              <th>Date</th>
+              <th>Journey Date</th>
 
               <th>Seater Price</th>
 
@@ -367,7 +367,7 @@
               <!-- Action -->
               <td>
 
-                <div class="block-actions">
+                <!-- <div class="block-actions">
 
                   <button class="btn btn-edit" (click)="ResetAttributes();
                                                 editOwnerFare($event,i);
@@ -383,7 +383,27 @@
 
                   </button>
 
+                </div> -->
+
+                <div *ngIf="fare.date >= (actiontoday | date:'yyyy-MM-dd'); else blank">
+
+                  <button
+                    class="btn btn-edit"
+                    (click)="ResetAttributes(); editOwnerFare($event, i); OpenModal(editSeat)">
+                    <i class="fas fa-pen"></i>
+                  </button>
+
+                  <button
+                    class="btn btn-delete"
+                    (click)="deleteOwnerFare(confirmDialog, fare.id)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+
                 </div>
+
+                <ng-template #blank>
+                  --
+                </ng-template>
 
               </td>
 
@@ -600,11 +620,18 @@
 
               </div>
 
+              <div class="col-md-12">
+                <small class="form-text text-muted">
+                  <i class="fas fa-info-circle text-danger"></i>
+                  Enter only the fare increase/decrease amount. For example, if the current fare is ₹100 and you want to make it ₹150, enter ₹50 only.
+                </small>
+              </div>
+
             </div>
 
             <div class="form-group mt-3">
 
-              <label>Reason</label>
+              <label>Reason <span class="text-danger">*</span></label>
 
               <textarea rows="4" class="form-control" formControlName="reason" placeholder="Enter Reason">
 
@@ -775,7 +802,7 @@
 
             <div class="form-group mt-3">
 
-              <label>Reason</label>
+              <label>Reason <span class="text-danger">*</span></label>
 
               <textarea rows="4" class="form-control" formControlName="reason" placeholder="Enter Reason">
 
