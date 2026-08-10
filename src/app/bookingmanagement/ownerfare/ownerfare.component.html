@@ -11,11 +11,11 @@
 
       <h3 class="page-title">
         <i class="fas fa-lock"></i>
-        Owner Fare
+        Manage Fare
       </h3>
 
       <p class="page-subtitle">
-        Manage owner fare schedules and pricing.
+        Manage Manage fare schedules and pricing.
       </p>
 
     </div>
@@ -28,7 +28,7 @@
 
         <i class="fas fa-rupee-sign"></i>
 
-        Owner Fare
+        Manage Fare
 
       </button>
 
@@ -305,9 +305,9 @@
 
                 <span class="date-badge">
 
-                  <i class="far fa-calendar-alt"></i>
+                  <!-- <i class="far fa-calendar-alt"></i> -->
 
-                  {{ fare.date | date:'dd MMM yyyy' }}
+                  {{ fare.date | date:'dd MMM' }}
 
                 </span>
 
@@ -413,7 +413,7 @@
 
                     <i class="fas fa-plus-circle"></i>
 
-                    Add Owner Fare
+                    Add Manage Fare
 
                   </button>
 
@@ -487,9 +487,9 @@
 
       <div>
 
-        <h4>Owner Fare</h4>
+        <h4>Manage Fare</h4>
 
-        <p>Apply owner fare for one or multiple buses.</p>
+        <p>Apply Manage fare for one or multiple buses.</p>
 
       </div>
 
@@ -660,7 +660,7 @@
 
         <h4>{{ModalHeading}}</h4>
 
-        <p>Update owner fare details.</p>
+        <p>Update Manage fare details.</p>
 
       </div>
 
@@ -827,7 +827,7 @@
 
         <i class="fas fa-trash-alt"></i>
 
-        Delete Owner Fare
+        Delete Manage Fare
 
       </h4>
 
@@ -849,13 +849,13 @@
 
       <h3>
 
-        Delete Owner Fare?
+        Delete Manage Fare?
 
       </h3>
 
       <p>
 
-        Are you sure you want to delete this owner fare? This action cannot be undone.
+        Are you sure you want to delete this Manage fare? This action cannot be undone.
 
       </p>
 
@@ -911,9 +911,9 @@
 
     <div>
 
-      <h3>Owner Fare</h3>
+      <h3>Manage Fare</h3>
 
-      <p>Manage owner fare for buses</p>
+      <p>Manage Manage fare for buses</p>
 
     </div>
 
@@ -1073,7 +1073,7 @@
 
 
 <!--====================================================
-                MOBILE OWNER FARE LIST
+                MOBILE Manage FARE LIST
 =====================================================-->
 
 <div class="mobile-seat-wrapper d-lg-none">
@@ -1176,17 +1176,25 @@
 
             <div class="price-wrapper">
 
-              <span class="seat-chip">
+              <span class="seat-chip" *ngIf="fare.seater_price > 0; else noSeaterPrice">
 
                 ₹ {{fare.seater_price}}
 
               </span>
 
-              <span class="seat-chip">
+              <ng-template #noSeaterPrice>
+                --
+              </ng-template>
+
+              <span class="seat-chip" *ngIf="fare.sleeper_price > 0; else noSleeperPrice">
 
                 ₹ {{fare.sleeper_price}}
 
               </span>
+
+              <ng-template #noSleeperPrice>
+                --
+              </ng-template>
 
             </div>
 
@@ -1261,7 +1269,7 @@
 
     <strong>{{all?.total}}</strong>
 
-    Owner Fares
+    Manage Fares
 
   </div>
 
@@ -1352,13 +1360,13 @@
 
   <h4>
 
-    No Owner Fares Found
+    No Manage Fares Found
 
   </h4>
 
   <p>
 
-    No owner fare records are available.
+    No Manage fare records are available.
 
   </p>
 
@@ -1389,7 +1397,7 @@
 
           <div>
 
-            <h4>Owner Fare</h4>
+            <h4>Manage Fare</h4>
 
             <p>Apply fare for one or multiple buses</p>
 
@@ -1584,9 +1592,9 @@
 
           <div>
 
-            <h4>Edit Owner Fare</h4>
+            <h4>Edit Manage Fare</h4>
 
-            <p>Update owner fare details</p>
+            <p>Update Manage fare details</p>
 
           </div>
 

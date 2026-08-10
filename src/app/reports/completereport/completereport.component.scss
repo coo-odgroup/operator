@@ -37,7 +37,7 @@
 ::ng-deep button.calendar,
 button.calendar:active {
   width: 2.75rem;
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=') !important;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=") !important;
   background-repeat: no-repeat;
   background-size: 23px;
   background-position: center;
@@ -54,7 +54,6 @@ button.calendar:active {
 .table-responsive {
   margin-top: 14px;
 }
-
 
 @media print {
   ::ng-deep .hide_print {
@@ -119,7 +118,6 @@ thead {
 //   }
 // }
 
-
 // Added by siraz for ticket design
 
 .serch-btn i.fa-info-circle {
@@ -128,7 +126,6 @@ thead {
   font-size: 14px;
   cursor: pointer;
 }
-
 
 .ticket-card {
   display: flex;
@@ -162,7 +159,6 @@ thead {
   display: table;
 }
 
-
 .ticket-center h3 {
   margin: -5px 0 -1px;
   color: #1b2559;
@@ -180,7 +176,6 @@ thead {
 .route {
   overflow: hidden;
   height: auto;
-
 }
 
 .age {
@@ -214,7 +209,6 @@ thead {
   overflow: hidden;
 }
 
-
 .r-top {
   padding: 5px 0 !important;
 }
@@ -223,8 +217,6 @@ thead {
   padding: 5px 0 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-
 
 /* Default: Desktop */
 .desktop-view {
@@ -235,16 +227,11 @@ thead {
   display: none;
 }
 
-
-
-
 .total_seats h5 {
   margin: 0;
   font-size: 14px;
   font-weight: 600;
 }
-
-
 
 .costum_button i {
   color: black !important;
@@ -261,7 +248,6 @@ thead {
   justify-content: flex-end;
 }
 
-
 .booking-header {
   display: flex;
   justify-content: space-between;
@@ -273,7 +259,6 @@ thead {
   // margin: 10px 0;
   border: 1px solid #dde9ff;
 }
-
 
 .booking-left h2 {
   margin: 0;
@@ -289,15 +274,12 @@ thead {
 }
 
 .booking-right {
-
   display: flex;
 
   gap: 15px;
-
 }
 
 .booking-search-btn {
-
   height: 38px;
   padding: 0 15px;
   border-radius: 8px;
@@ -315,20 +297,17 @@ thead {
   background: #fff;
   border-radius: 12px;
   padding: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, .05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
   margin: 15px 0;
   border: 1px solid #dde9ff;
 }
-
 
 ::ng-deep .card-body {
   padding: 20px !important;
 }
 
 .premium-field {
-
   margin-bottom: 18px;
-
 }
 
 // .summary-card {
@@ -351,39 +330,29 @@ thead {
 }
 
 .summary-card h3 {
-
   margin: 5px 0 0;
 
   font-size: 22px;
 
   font-weight: 700;
   color: #2b63ec;
-
 }
 
 .summary-card small {
-
   color: #1b2155;
 
   font-size: 12px;
-
 }
 
-
 .table {
-
   margin-bottom: 0;
-
 }
 
 .table thead {
-
   background: #f8fafc;
-
 }
 
 .table thead th {
-
   border: none;
 
   font-size: 13px;
@@ -393,22 +362,17 @@ thead {
   padding: 16px;
 
   color: #334155;
-
 }
 
 .table tbody td {
-
   padding: 18px 16px;
 
   vertical-align: middle;
 
   border-top: 1px solid #eef2f7;
-
 }
 
-
 .filter-label {
-
   display: block;
 
   margin-bottom: 8px;
@@ -418,11 +382,9 @@ thead {
   font-weight: 600;
 
   color: #475569;
-
 }
 
 .premium-input {
-
   height: 54px;
 
   border-radius: 5px;
@@ -433,20 +395,16 @@ thead {
 
   box-shadow: none;
 
-  transition: .3s;
-
+  transition: 0.3s;
 }
 
 .premium-input:focus {
-
   border-color: #2563eb;
 
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
-
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
 ::ng-deep .premium-select .ng-select-container {
-
   height: 54px !important;
 
   border-radius: 5px !important;
@@ -456,32 +414,25 @@ thead {
   min-height: 54px !important;
 
   align-items: center;
-
 }
 
 .ng-select {
   border: none !important;
 }
 
-
 ::ng-deep .premium-mat .mat-mdc-text-field-wrapper {
-
   height: 54px;
 
   border-radius: 14px;
-
 }
 
 ::ng-deep .premium-mat .mat-mdc-form-field-flex {
-
   height: 54px;
 
   align-items: center;
-
 }
 
 .btn-search {
-
   height: 54px;
 
   padding: 0 28px;
@@ -495,19 +446,15 @@ thead {
   font-weight: 600;
 
   background: linear-gradient(135deg, #2563eb, #3b82f6);
-
 }
 
 .btn-search:hover {
-
   transform: translateY(-2px);
 
-  box-shadow: 0 10px 20px rgba(37, 99, 235, .25);
-
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
 }
 
 .btn-reset {
-
   height: 54px;
 
   padding: 0 28px;
@@ -521,13 +468,10 @@ thead {
   font-weight: 600;
 
   background: #f1f5f9;
-
 }
 
 .btn-reset:hover {
-
   background: #e2e8f0;
-
 }
 
 // @media(max-width:991px) {
@@ -556,25 +500,19 @@ thead {
 
 // }
 
-
 .table {
-
   margin-bottom: 0;
-
 }
 
 .booking-info {
-
   display: flex;
 
   align-items: center;
 
   gap: 15px;
-
 }
 
 .passenger-avatar {
-
   width: 48px;
 
   height: 48px;
@@ -594,11 +532,9 @@ thead {
   font-weight: 700;
 
   font-size: 18px;
-
 }
 
 .booking-text h5 {
-
   margin: 0;
 
   font-size: 16px;
@@ -606,45 +542,36 @@ thead {
   font-weight: 700;
 
   color: #1b2559;
-
 }
 
 .pnr-badge {
-
   margin-top: 5px;
 
   font-size: 13px;
 
   color: #64748b;
-
 }
 
 .bus-name {
-
   margin-top: 6px;
 
   font-size: 13px;
 
   color: #475569;
-
 }
 
 .route-card {
-
   display: flex;
 
   flex-direction: column;
 
   gap: 6px;
-
 }
 
 .route-arrow {
-
   color: #94a3b8;
 
   padding-left: 18px;
-
 }
 
 .journey-date {
@@ -652,17 +579,14 @@ thead {
   font-weight: 600;
   margin-top: 3px;
   font-size: 11px;
-
 }
 
 .seat-wrapper {
-
   display: flex;
 
   flex-wrap: wrap;
 
   gap: 6px;
-
 }
 
 .seat-badge {
@@ -673,11 +597,9 @@ thead {
   border-radius: 5px;
   font-size: 11px;
   margin: 1px;
-
 }
 
 .amount-chip {
-
   display: inline-block;
   background: #eef4ff;
   color: #2563eb;
@@ -685,7 +607,6 @@ thead {
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 14px;
-
 }
 
 /* TABLE */
@@ -694,7 +615,7 @@ thead {
   padding: 12px;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, .05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
   margin-top: 10px;
   border: 1px solid #dde9ff;
 }
@@ -722,8 +643,6 @@ thead {
 }
 
 /* TABLE */
-
-
 
 .premium-table {
   border-spacing: 0 6px;
@@ -782,7 +701,6 @@ thead {
   font-weight: 800;
   border-radius: 5px;
   background: #eef4ff;
-  ;
 }
 
 /* Bus */
@@ -805,7 +723,6 @@ thead {
   font-size: 13px;
 }
 
-
 /* Hover */
 
 .premium-table tbody tr:hover {
@@ -825,101 +742,97 @@ thead {
 }
 
 .page-link.active {
-
   background: #2563eb;
 
   border-color: #2563eb;
 
   color: #fff;
-
 }
 
-.empty-state{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    min-height:420px;
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 420px;
 }
 
-.empty-icon{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:#eef4ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:18px;
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #eef4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
 }
 
-.empty-icon i{
-    font-size:34px;
-    color:#2563eb;
+.empty-icon i {
+  font-size: 34px;
+  color: #2563eb;
 }
 
-.empty-state h4{
-    margin:0;
-    font-size:22px;
-    font-weight:700;
-    color:#1b2155;
+.empty-state h4 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1b2155;
 }
 
-.empty-state p{
-    margin-top:10px;
-    color:#64748b;
-    font-size:10px;
+.empty-state p {
+  margin-top: 10px;
+  color: #64748b;
+  font-size: 10px;
 }
 
-
-.empty-table-card{
-    border:1px solid #dde9ff;
-    background:#fff;
-    border-radius:6px;
-    min-height:420px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.empty-table-card {
+  border: 1px solid #dde9ff;
+  background: #fff;
+  border-radius: 6px;
+  min-height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.empty-state{
-    text-align:center;
+.empty-state {
+  text-align: center;
 }
 
-.empty-icon{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:#eef4ff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto 20px;
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #eef4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
 }
 
-.empty-icon i{
-    font-size:34px;
-    color:#2563eb;
+.empty-icon i {
+  font-size: 34px;
+  color: #2563eb;
 }
 
-.empty-state h4{
-    color:#1b2155;
-    font-weight:700;
-    margin-bottom:10px;
+.empty-state h4 {
+  color: #1b2155;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-.empty-state p{
-    color:#64748b;
-    margin:0;
+.empty-state p {
+  color: #64748b;
+  margin: 0;
 }
 
 /*=========================================
         BOOKING REPORT - MOBILE ONLY
 =========================================*/
 
-@media (max-width:767px) {
-
+@media (max-width: 767px) {
   /* Hide desktop */
   .desktop-view {
     display: none !important;
@@ -948,26 +861,21 @@ thead {
     align-items: center;
     padding: 14px 16px;
     border: 1px solid #3455a5;
-
   }
-
 
   .export-btn {
-
     display: none;
-
   }
 
-  .btn-search{
+  .btn-search {
     width: 100%;
   }
 
-  .btn-reset{
+  .btn-reset {
     width: 100%;
   }
 
   .booking-search-btn {
-
     width: 44px;
     height: 44px;
     min-width: 44px;
@@ -984,7 +892,6 @@ thead {
   }
 
   .booking-search-btn i {
-
     font-size: 18px;
     color: #fff;
     margin: 0;
@@ -994,11 +901,8 @@ thead {
     display: none !important;
   }
 
-
   .booking-search-btn span {
-
     display: none;
-
   }
 
   .booking-left p {
@@ -1015,14 +919,12 @@ thead {
 ==========================*/
 
   .search-card {
-
     border-radius: 16px;
 
     padding: 16px;
 
     margin-bottom: 15px;
     border: 1px solid #3455a5;
-
   }
 
   /*=========================
@@ -1030,7 +932,6 @@ thead {
 ==========================*/
 
   .summary-card {
-
     background: #fff;
 
     border-radius: 14px;
@@ -1044,21 +945,16 @@ thead {
     justify-content: space-between;
 
     align-items: center;
-
   }
 
   .summary-card small {
-
     font-size: 13px;
-
   }
 
   .summary-card h3 {
-
     margin: 0;
 
     font-size: 24px;
-
   }
 
   /*=========================
@@ -1066,7 +962,6 @@ thead {
 ==========================*/
 
   .booking-card {
-
     background: #fff;
 
     border-radius: 18px;
@@ -1075,10 +970,9 @@ thead {
 
     margin-bottom: 14px;
 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 
     border: 1px solid #3455a5;
-
   }
 
   /*=========================
@@ -1086,7 +980,6 @@ Top
 ==========================*/
 
   .booking-top {
-
     display: flex;
 
     justify-content: space-between;
@@ -1096,11 +989,9 @@ Top
     padding-bottom: 14px;
 
     border-bottom: 1px dashed #e6edf8;
-
   }
 
   .booking-top h4 {
-
     margin: 0;
 
     font-size: 17px;
@@ -1108,11 +999,9 @@ Top
     font-weight: 700;
 
     color: #1b2155;
-
   }
 
   .booking-top small {
-
     display: block;
 
     margin-top: 3px;
@@ -1120,11 +1009,9 @@ Top
     color: #1b2155;
 
     font-size: 12px;
-
   }
 
   .price {
-
     background: #edf4ff;
 
     color: #2b63ec;
@@ -1136,7 +1023,6 @@ Top
     padding: 8px 12px;
 
     border-radius: 10px;
-
   }
 
   /*=========================
@@ -1144,7 +1030,6 @@ Top
 ==========================*/
 
   .booking-user {
-
     display: flex;
 
     align-items: center;
@@ -1152,11 +1037,9 @@ Top
     gap: 12px;
 
     padding: 15px 0;
-
   }
 
   .avatar {
-
     width: 48px;
 
     height: 48px;
@@ -1176,11 +1059,9 @@ Top
     font-size: 18px;
 
     font-weight: 700;
-
   }
 
   .booking-user h5 {
-
     margin: 0;
 
     font-size: 15px;
@@ -1188,7 +1069,6 @@ Top
     font-weight: 700;
 
     color: #1b2155;
-
   }
 
   .booking-user small {
@@ -1199,7 +1079,6 @@ Top
     margin-top: 2px;
     font-size: 14px;
     font-weight: 700;
-
   }
 
   /*=========================
@@ -1207,15 +1086,12 @@ Top
 ==========================*/
 
   .booking-user::after {
-
     content: "";
 
     display: block;
-
   }
 
   .pnr-mobile {
-
     display: inline-block;
 
     margin-top: 6px;
@@ -1231,7 +1107,6 @@ Top
     font-size: 14px;
 
     font-weight: 800;
-
   }
 
   /*=========================
@@ -1239,7 +1114,6 @@ Top
 ==========================*/
 
   .booking-route {
-
     display: flex;
 
     align-items: center;
@@ -1254,11 +1128,9 @@ Top
 
     margin-bottom: 14px;
     border: 1px solid #3455a5;
-
   }
 
   .booking-route span {
-
     width: 40%;
 
     font-size: 15px;
@@ -1266,15 +1138,12 @@ Top
     font-weight: 700;
 
     color: #1b2155;
-
   }
 
   .booking-route i {
-
     color: #2b63ec;
 
     font-size: 18px;
-
   }
 
   /*=========================
@@ -1282,17 +1151,14 @@ Top
 ==========================*/
 
   .booking-footer {
-
     display: flex;
 
     justify-content: space-between;
 
     gap: 10px;
-
   }
 
-  .booking-footer>div {
-
+  .booking-footer > div {
     flex: 1;
 
     background: #fafcff;
@@ -1302,11 +1168,9 @@ Top
     border-radius: 12px;
 
     padding: 12px;
-
   }
 
   .booking-footer label {
-
     display: block;
 
     font-size: 11px;
@@ -1317,12 +1181,10 @@ Top
 
     text-transform: uppercase;
 
-    letter-spacing: .5px;
-
+    letter-spacing: 0.5px;
   }
 
   .booking-footer strong {
-
     display: block;
 
     font-size: 15px;
@@ -1330,7 +1192,6 @@ Top
     color: #1b2155;
 
     font-weight: 700;
-
   }
 
   /*=========================
@@ -1338,7 +1199,6 @@ Top
 ==========================*/
 
   .pagination-wrapper {
-
     flex-direction: column;
 
     gap: 10px;
@@ -1346,19 +1206,15 @@ Top
     align-items: center;
 
     text-align: center;
-
   }
 
   .pagination {
-
     flex-wrap: wrap;
 
     justify-content: center;
-
   }
 
   .page-link {
-
     min-width: 36px;
 
     height: 36px;
@@ -1368,9 +1224,7 @@ Top
     align-items: center;
 
     justify-content: center;
-
   }
-
 }
 
 .gender-text {
@@ -1411,3 +1265,62 @@ Top
   font-size: 11px;
 }
 
+/*==================================================
+MOBILE EMPTY STATE
+==================================================*/
+
+.mobile-empty-box {
+  background: #fff;
+
+  border: 1px solid #dde9ff;
+
+  border-radius: 18px;
+
+  padding: 40px 20px;
+
+  text-align: center;
+
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+
+  margin-top: 20px;
+}
+
+.mobile-empty-icon {
+  width: 70px;
+
+  height: 70px;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  background: #eef4ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #2563eb;
+
+  font-size: 28px;
+}
+
+.mobile-empty-box h4 {
+  margin-bottom: 8px;
+
+  color: #1b2155;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+.mobile-empty-box p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+}

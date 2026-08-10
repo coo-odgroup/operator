@@ -10,7 +10,7 @@
 //     display: none;
 // }
 
-// // ::ng-deep .datelist label input[type="checkbox"][disabled] 
+// // ::ng-deep .datelist label input[type="checkbox"][disabled]
 // // {
 // // background-color: #d30101f2 !important;
 // // cursor:not-allowed !important;
@@ -24,7 +24,7 @@
 //     min-height: 0px;
 //     border-radius: 0;
 // }
-// .ng-select.custom .ng-select-container  {            
+// .ng-select.custom .ng-select-container  {
 //     min-height: 0px;
 //     border-radius: 0;
 // }
@@ -69,25 +69,25 @@
 //   margin: 0;
 // }
 
-// @media screen 
-// and (min-width: 412px) 
-// and (max-width: 915px) 
+// @media screen
+// and (min-width: 412px)
+// and (max-width: 915px)
 // and (orientation: portrait) {
 //   .bus-transform {
 //     margin-top: 110px !important;
 //     }
 // }
 
-// @media screen 
-// and (min-width: 768px) 
-// and (max-width: 1024px) 
+// @media screen
+// and (min-width: 768px)
+// and (max-width: 1024px)
 // and (orientation: portrait) {
 //   .bus-transform {
 //     margin-top: 160px !important;
 //     }
 // }
 
-// @media screen 
+// @media screen
 // and (min-width: 320px)
 // and (max-width: 320px)
 // and (min-height: 768px)
@@ -114,8 +114,8 @@
 //   }
 // }
 
-// @media screen 
-// and (min-width: 320px) 
+// @media screen
+// and (min-width: 320px)
 // and (max-width: 375px) {
 //   .mob_view{
 //     padding: 0px !important;
@@ -2093,7 +2093,7 @@ Delete Confirmation Modal
 
 
 
-// mobile View 
+// mobile View
 
 /*==================================================
 MOBILE HEADER
@@ -2232,5 +2232,73 @@ MOBILE HEADER
     margin-right: 6px;
 
   }
+
+}
+
+/*==================================================
+MOBILE EMPTY STATE
+==================================================*/
+
+.mobile-empty-box {
+
+    background: #fff;
+
+    border: 1px solid #dde9ff;
+
+    border-radius: 18px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .05);
+
+    margin-top: 20px;
+
+}
+
+.mobile-empty-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #eef4ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #2563eb;
+
+    font-size: 28px;
+
+}
+
+.mobile-empty-box h4 {
+
+    margin-bottom: 8px;
+
+    color: #1b2155;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+.mobile-empty-box p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
 
 }

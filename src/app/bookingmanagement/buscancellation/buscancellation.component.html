@@ -759,7 +759,7 @@ Mobile Pagination
 
   </div>
 
-  <div class="empty-box" *ngIf="busCancellations?.length==0">
+  <!-- <div class="empty-box" *ngIf="busCancellations?.length==0">
 
     <div class="empty-icon">
 
@@ -778,6 +778,22 @@ Mobile Pagination
       No cancelled buses are available.
 
     </p>
+
+  </div> -->
+
+  <div class="mobile-empty-box d-lg-none" *ngIf="busCancellations?.length==0">
+
+    <div class="mobile-empty-icon">
+
+      <i class="fas fa-th-large"></i>
+
+    </div>
+
+    <h4>
+
+      No Record Found
+
+    </h4>
 
   </div>
 
