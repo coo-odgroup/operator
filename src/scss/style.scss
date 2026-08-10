@@ -116,3 +116,45 @@ File: style.css
     transform: rotate(360deg);
   }
 }
+
+/* Past / disabled dates */
+.ngb-dp-day.disabled {
+    position: relative;
+}
+
+.ngb-dp-day.disabled,
+.ngb-dp-day.disabled .btn-light {
+    background-color: #dfdfdf !important;
+    opacity: 0.6;
+    border: 1px solid #ffffff;
+}
+
+/* Red cross */
+.ngb-dp-day.disabled::before,
+.ngb-dp-day.disabled::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #ff0000;
+    border-radius: 2px;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.ngb-dp-day.disabled::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.ngb-dp-day.disabled::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+// Available dates
+.ngb-dp-day,
+.ngb-dp-day .btn-light {
+    background-color: #e9eaeb !important;
+    border: 1px solid #ffffff;
+}
