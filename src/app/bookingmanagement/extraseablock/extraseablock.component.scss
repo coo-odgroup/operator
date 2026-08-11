@@ -395,7 +395,7 @@ Header
   margin-bottom: 10px;
   background: #fff;
   border-radius: 16px;
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
   box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
 }
 
@@ -462,7 +462,7 @@ Search Card
 
 .search-card {
   background: #fff;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   border-radius: 18px;
   padding: 15px;
   box-shadow: 0 10px 30px rgba(16, 24, 40, .05);
@@ -595,7 +595,7 @@ Table Wrapper
 .table-wrapper {
   background: #fff;
   border-radius: 18px;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   box-shadow: 0 10px 30px rgba(16, 24, 40, .05);
   overflow: hidden;
   padding: 15px;
@@ -1013,6 +1013,8 @@ Empty State
   height: 46px;
   padding: 0 24px;
   font-weight: 600;
+  background: #ef4444;
+  border: none;
 }
 
 /*==================================================
@@ -1235,7 +1237,7 @@ Cards
 
 .seat-card {
   background: #fff;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   border-radius: 18px;
   padding: 24px;
   margin-bottom: 10px;
@@ -1437,7 +1439,7 @@ Footer
 .seat-layout-card {
   background: #fff;
   border-radius: 18px;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   padding: 24px;
   box-shadow: 0 8px 24px rgba(15, 23, 42, .04);
 }
@@ -3354,7 +3356,7 @@ MOBILE JOURNEY DATE
   justify-content: center;
   align-items: center;
 
-  border: 1px solid #d9e2ef;
+  border: 1px solid #3455a5;
   border-radius: 12px;
 
   background: #fff;
@@ -3362,7 +3364,7 @@ MOBILE JOURNEY DATE
   font-size: 13px;
   font-weight: 600;
 
-  color: #475569;
+  color: #2563eb !important;
 
   transition: .25s;
 }

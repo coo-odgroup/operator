@@ -155,7 +155,7 @@
 
   border-radius: 16px;
 
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
 
   box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
 
@@ -268,7 +268,7 @@
 
   margin-bottom: 10px;
 
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
 
   box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
 
@@ -408,7 +408,7 @@ Table Card
 
   border-radius: 18px;
 
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
 
   box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
 
@@ -1684,7 +1684,7 @@ Mobile Search
 ==================================================*/
 
 .premium-modal-body {
-  padding: 24px;
+  padding: 15px;
   background: #f8fbff;
   max-height: 70vh;
   overflow-y: auto;
@@ -1692,7 +1692,7 @@ Mobile Search
 
 .modal-card {
   background: #fff;
-  border: 1px solid #e5eefc;
+  border: 1px solid #a0bbff;
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 20px;
@@ -1718,15 +1718,6 @@ Mobile Search
   width: 100%;
 }
 
-::ng-deep .premium-select .ng-select-container {
-  min-height: 52px !important;
-  height: 52px !important;
-  border-radius: 5px !important;
-  border: 1px solid #dbe3ef !important;
-  box-shadow: none !important;
-  transition: .25s;
-}
-
 ::ng-deep .premium-select.ng-select-focused .ng-select-container {
   border-color: #2563eb !important;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, .08) !important;
@@ -1738,7 +1729,7 @@ Mobile Search
 
 .date-section {
   background: #fff;
-  border: 1px solid #e5eefc;
+  border: 1px solid #a0bbff;
   border-radius: 16px;
   padding: 24px;
 }
@@ -1867,6 +1858,15 @@ Mobile Search
 
 @media(max-width:767px) {
 
+  ::ng-deep .premium-select .ng-select-container {
+  min-height: 52px !important;
+  height: 52px !important;
+  border-radius: 12px !important;
+  border: 1px solid #3455a5 !important;
+  box-shadow: none !important;
+  transition: .25s;
+}
+
   ::ng-deep .modal-dialog {
     margin: 10px;
     max-width: 100%;
@@ -1886,16 +1886,23 @@ Mobile Search
   }
 
   .premium-modal-body {
-    padding: 15px;
+    padding: 0;
     max-height: 72vh;
   }
 
   .modal-card {
-    padding: 16px;
+    padding: 15px;
+    background: none;
+    border: none;
+    border-radius: none;
+    margin-bottom: 0;
   }
 
   .date-section {
-    padding: 16px;
+    padding: 15px;
+    background: none;
+    border: none;
+    border-radius: none;
   }
 
   .date-grid {
@@ -1905,13 +1912,18 @@ Mobile Search
 
   .date-item {
     padding: 10px;
+    border: 1px solid #3455a5;
   }
 
   .date-item input {
     width: 14px;
     height: 14px;
+    color: #2563eb;
   }
 
+  .date-item span {
+    color: #2563eb;
+  }
   .premium-modal-footer {
     padding: 16px;
     grid-template-columns: 1fr 1fr;
