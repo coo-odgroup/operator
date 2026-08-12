@@ -345,6 +345,12 @@ export class BuscancellationComponent implements OnInit {
 
 
   getBusScheduleEntryDatesFilter() {
+    const dateSection = document.getElementById('dateSection');
+
+    if (dateSection) {
+      dateSection.style.display = 'block';
+    }
+
     if (this.busCancellationForm.value.month == null || this.busCancellationForm.value.year == null || this.busCancellationForm.value.busLists == null)
       return false;
 
