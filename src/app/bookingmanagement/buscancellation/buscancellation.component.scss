@@ -360,8 +360,8 @@
   min-width: 140px;
   height: 48px;
   border: none;
-  border-radius: 5px;
-  background: #2563eb;
+  border-radius: 12px;
+  background: #1abc9c;
   color: #fff;
   font-weight: 600;
   display: flex;
@@ -371,13 +371,13 @@
 }
 
 .btn-search:hover {
-  background: #1d4ed8;
+  background: #00634f;
 }
 
 .btn-reset {
   min-width: 140px;
   height: 48px;
-  border-radius: 5px;
+  border-radius: 12px;
   border: 1px solid #dbe3ef;
   background: #fff;
   color: #475569;
