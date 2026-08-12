@@ -69,7 +69,7 @@ Header
   margin-bottom: 10px;
   background: #fff;
   border-radius: 16px;
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
   box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
 }
 
@@ -136,7 +136,7 @@ Search Card
 
 .search-card {
   background: #fff;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   border-radius: 18px;
   padding: 15px;
   box-shadow: 0 10px 30px rgba(16, 24, 40, .05);
@@ -268,7 +268,7 @@ Table Wrapper
 .table-wrapper {
   background: #fff;
   border-radius: 18px;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   box-shadow: 0 10px 30px rgba(16, 24, 40, .05);
   // overflow: hidden;
   padding: 15px;
@@ -915,6 +915,8 @@ Empty State
   height: 46px;
   padding: 0 24px;
   font-weight: 600;
+  background: #ef4444;
+    border: none;
 }
 
 /*==================================================
@@ -1093,13 +1095,13 @@ BODY
   padding: 20px;
 }
 
-// .ownerfare-box {
-//   background: #fff;
-//   border: 1px solid #e5edf7;
-//   border-radius: 16px;
-//   padding: 18px;
-//   box-shadow: 0 5px 14px rgba(15, 23, 42, .04);
-// }
+.ownerfare-box {
+  background: #fff;
+  border: 1px solid #a0bbff;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 5px 14px rgba(15, 23, 42, .04);
+}
 
 .ownerfare-box label {
   display: block;
@@ -1219,7 +1221,7 @@ CALENDAR
 }
 
 ::ng-deep ngb-datepicker {
-  border: 2px solid #dbeafe !important;
+  border: 2px solid #3455a5 !important;
   transform: scale(.92);
   transform-origin: top center;
 }
@@ -2388,7 +2390,7 @@ FORM
 
   border-radius: 12px;
 
-  border: 1px solid #d7e2ef;
+  border: 1px solid #3455a5;
 
   box-shadow: none;
 
@@ -2430,7 +2432,7 @@ NG SELECT
 
   border-radius: 12px !important;
 
-  border: 1px solid #d7e2ef !important;
+  border: 1px solid #3455a5 !important;
 
   box-shadow: none !important;
 

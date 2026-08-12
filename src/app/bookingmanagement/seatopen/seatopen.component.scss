@@ -313,6 +313,7 @@
   margin-bottom: 18px;
 
   background: #fff;
+  border: 1px solid #a0bbff;
 
   border-radius: 18px;
 
@@ -379,7 +380,7 @@
 
   padding: 0 20px;
 
-  border-radius: 10px;
+  border-radius: 5px;
 
   font-weight: 600;
 
@@ -388,6 +389,15 @@
   align-items: center;
 
   gap: 8px;
+
+}
+
+
+button.btn.btn-success.operator-btn {
+
+  background-color: #1abc9c !important;
+    border-color: #1abc9c !important;
+    padding: 0 15px !important;
 
 }
 
@@ -406,6 +416,7 @@
   box-shadow: 0 10px 35px rgba(13, 38, 76, .08);
 
   margin-bottom: 20px;
+  border: 1px solid #a0bbff;
 
 }
 
@@ -443,6 +454,7 @@
 .operator-card-body {
 
   padding: 15px;
+  
 
 }
 
@@ -1158,7 +1170,7 @@ Cards
 
 .seat-card {
   background: #fff;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   border-radius: 18px;
   padding: 24px;
   margin-bottom: 10px;
@@ -1360,7 +1372,7 @@ Footer
 .seat-layout-card {
   background: #fff;
   border-radius: 18px;
-  border: 1px solid #edf1f7;
+  border: 1px solid #a0bbff;
   padding: 24px;
   box-shadow: 0 8px 24px rgba(15, 23, 42, .04);
 }
@@ -1390,10 +1402,179 @@ Header
 }
 
 /*==================================================
+  SEAT LEGEND
+==================================================*/
+
+.seat-legend {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 7px 12px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 10px;
+
+  white-space: nowrap;
+
+}
+
+
+/*==================================================
+  LEGEND ITEM
+==================================================*/
+
+.legend-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: #475569;
+
+}
+
+
+/*==================================================
+  ACTUAL SEAT IMAGE
+==================================================*/
+
+.seat-legend .legend-seat {
+
+  display: inline-block;
+
+  width: 22px !important;
+
+  height: 22px !important;
+
+  min-width: 22px;
+
+  background-size: contain !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: center !important;
+
+  border: none !important;
+
+  border-radius: 0 !important;
+
+  flex-shrink: 0;
+
+}
+
+
+/*==================================================
+  AVAILABLE
+  Same original dark seat appearance
+==================================================*/
+
+.seat-legend .legend-available {
+
+  filter: none;
+
+}
+
+
+/*==================================================
+  BLOCKED
+  Convert actual seat image to RED
+==================================================*/
+
+.seat-legend .legend-blocked {
+
+  filter:
+    invert(81%) sepia(12%) saturate(650%) hue-rotate(250deg) brightness(96%) contrast(91%);
+
+}
+
+
+/*==================================================
+  SELECTED
+  Convert actual seat image to BLUE
+==================================================*/
+
+.seat-legend .legend-selected {
+
+  filter: invert(63%) sepia(78%) saturate(590%) hue-rotate(119deg) brightness(91%) contrast(87%);
+
+}
+
+
+/*==================================================
+  LEGEND TEXT
+==================================================*/
+
+.seat-legend .legend-item span:last-child {
+
+  line-height: 1;
+
+}
+
+
+/*==================================================
+        MOBILE SEAT LEGEND
+==================================================*/
+
+@media (max-width: 768px) {
+
+  .seat-legend {
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 7px 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #3455a5;
+
+  }
+
+  .legend-item {
+
+    gap: 5px;
+
+    font-size: 10px;
+
+  }
+
+  .seat-legend .legend-seat {
+
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 20px;
+    transform: rotate(90deg);
+
+  }
+
+  .seat-legend .legend-item span:last-child {
+
+    line-height: 1;
+
+  }
+
+}
+
+
+/*==================================================
 Tabs
 ==================================================*/
 
-.mobile-seat-tabs {
+.seat-tabs {
   display: flex;
   gap: 10px;
 }
@@ -3098,7 +3279,7 @@ MOBILE JOURNEY DATE
   justify-content: center;
   align-items: center;
 
-  border: 1px solid #d9e2ef;
+  border: 1px solid #3455a5;
   border-radius: 12px;
 
   background: #fff;
@@ -3106,7 +3287,7 @@ MOBILE JOURNEY DATE
   font-size: 13px;
   font-weight: 600;
 
-  color: #475569;
+  color: #2563eb !important;
 
   transition: .25s;
 }

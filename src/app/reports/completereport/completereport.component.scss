@@ -257,7 +257,7 @@ thead {
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   // margin: 10px 0;
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
 }
 
 .booking-left h2 {
@@ -299,7 +299,7 @@ thead {
   padding: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
   margin: 15px 0;
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
 }
 
 ::ng-deep .card-body {
@@ -433,19 +433,13 @@ thead {
 }
 
 .btn-search {
-  height: 54px;
-
-  padding: 0 28px;
-
+  height: 46px;
+  padding: 0 24px;
   border: none;
-
-  border-radius: 8px;
-
+  border-radius: 5px;
   color: #fff;
-
   font-weight: 600;
-
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  background: #2563eb;
 }
 
 .btn-search:hover {
@@ -455,19 +449,13 @@ thead {
 }
 
 .btn-reset {
-  height: 54px;
-
-  padding: 0 28px;
-
-  border: none;
-
-  border-radius: 8px;
-
-  color: #475569;
-
+  height: 46px;
+  padding: 0 24px;
+  border-radius: 5px;
   font-weight: 600;
-
   background: #f1f5f9;
+  border: 1px solid #dbe3ef;
+  color: #374151;
 }
 
 .btn-reset:hover {
@@ -617,7 +605,7 @@ thead {
   background: #fff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
   margin-top: 10px;
-  border: 1px solid #dde9ff;
+  border: 1px solid #a0bbff;
 }
 
 .table-header {
@@ -833,6 +821,7 @@ thead {
 =========================================*/
 
 @media (max-width: 767px) {
+
   /* Hide desktop */
   .desktop-view {
     display: none !important;
@@ -1158,7 +1147,7 @@ Top
     gap: 10px;
   }
 
-  .booking-footer > div {
+  .booking-footer>div {
     flex: 1;
 
     background: #fafcff;

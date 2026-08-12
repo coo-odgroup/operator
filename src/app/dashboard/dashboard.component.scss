@@ -38,7 +38,7 @@
     gap: 22px;
     background: #fff;
     border-radius: 12px;
-    border: 1px solid #dfe8ff;
+    border: 1px solid #a0bbff;
     padding: 28px;
     box-shadow: 0 10px 35px rgba(0, 0, 0, .05);
 }
@@ -278,7 +278,7 @@
 
     box-shadow: 0 8px 30px rgba(0, 0, 0, .06);
 
-    border: 1px solid #dfe8ff;
+    border: 1px solid #a0bbff;
 
     height: 140px;
 
@@ -407,7 +407,7 @@
 
     transition: .3s;
 
-    border: 1px solid #dfe8ff;
+    border: 1px solid #a0bbff;
 
 }
 
@@ -525,6 +525,7 @@
     .dashboard-header {
         padding: 15px;
         border-radius: 14px;
+        border: 1px solid #3455a5;
         // margin-bottom: 5px;
     }
 
@@ -696,6 +697,7 @@
         border-radius: 16px;
         margin-bottom: 5px;
         overflow: hidden;
+        border: 1px solid #3455a5;
     }
 
     .analytics-header {
