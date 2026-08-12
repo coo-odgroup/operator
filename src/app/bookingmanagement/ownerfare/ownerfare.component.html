@@ -1251,7 +1251,7 @@
 
         <!-- Footer -->
 
-        <div class="mobile-footer">
+        <div class="mobile-footer" *ngIf="fare.date >= (actiontoday | date:'yyyy-MM-dd'); else blank">
 
           <button class="btn-mobile-icon btn-edit-icon" (click)="
         ResetAttributes();
