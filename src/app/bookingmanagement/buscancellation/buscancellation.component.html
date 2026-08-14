@@ -287,7 +287,7 @@
             <td class="text-center">
 
               <button *ngIf="busCancellation.bus_cancelled_date[0].cancelled_date >= getFormattedDate()"
-                class="table-btn edit" (click)="ResetAttributes();editBusCancellation($event,i);OpenModal(content)">
+                class="table-btn edit" (click)="ResetAttributes();editBusCancellation($event,i);OpenModal(content);">
 
                 <i class="fas fa-edit"></i>
 
@@ -924,7 +924,7 @@ Mobile Pagination
         </div>
 
         <!-- Date Selection -->
-        <div class="date-section" formArrayName="buses" id="dateSection" style="display: none;">
+        <div class="date-section" formArrayName="buses" id="dateSection" *ngIf="showDateSection">
 
           <h5 class="section-title">
 

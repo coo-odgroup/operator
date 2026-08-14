@@ -1505,7 +1505,7 @@
                 sblock[0][0].value[0].operation_date,
                 sblock[0][0].value[0].ticket_price_id
             );
-            OpenModal(editSeat);
+            OpenModal(mobileEditSeatBlock);
         ">
 
               <i class="fas fa-edit"></i>
@@ -2016,4 +2016,410 @@
 
     </div>
   </form>
+</ng-template>
+
+<!-- MOBILE EDIT SEAT BLOCK -->
+
+<ng-template #mobileEditSeatBlock let-modal>
+
+  <form [formGroup]="seatBlockForm" novalidate>
+
+    <div class="mobile-seat-modal">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+
+      <div class="mobile-modal-header">
+
+        <div class="mobile-modal-title">
+
+          <div class="mobile-modal-icon">
+            <i class="fas fa-ban"></i>
+          </div>
+
+          <div>
+            <h4>
+              Edit Seat Block
+            </h4>
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="mobile-modal-close"
+          (click)="modal.dismiss()">
+
+          <i class="fas fa-times"></i>
+
+        </button>
+
+      </div>
+
+
+      <!-- =========================
+           BODY
+      ========================== -->
+
+      <div class="mobile-modal-body">
+
+        <!-- BUS INFORMATION -->
+        <div class="mobile-form-card">
+
+          <div class="mobile-form-group">
+
+            <label>
+              Select Bus
+              <span>*</span>
+            </label>
+
+            <ng-select
+              [items]="buses"
+              bindLabel="testing"
+              bindValue="id"
+              formControlName="bus_id"
+              [clearable]="false"
+              [readonly]="true">
+            </ng-select>
+
+          </div>
+
+        </div>
+
+
+        <!-- JOURNEY DATE -->
+        <div class="mobile-form-card">
+
+          <div class="mobile-form-group">
+
+            <label>
+              Journey Date
+            </label>
+
+            <div class="date-display">
+
+              <i class="far fa-calendar-alt"></i>
+
+              {{ seatBlockForm.controls.date.value }}
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             SEAT LEGEND
+        ========================== -->
+
+        <div
+          class="mobile-seat-legend-wrapper"
+          *ngIf="seatBlockForm.value.bus_id">
+
+          <div class="seat-legend">
+
+            <!-- Available -->
+            <div class="legend-item">
+
+              <span
+                class="legend-seat legend-available seaterImage">
+              </span>
+
+              <span>Available</span>
+
+            </div>
+
+
+            <!-- Blocked -->
+            <div class="legend-item">
+
+              <span
+                class="legend-seat legend-blocked seaterImage">
+              </span>
+
+              <span>Blocked</span>
+
+            </div>
+
+
+            <!-- Selected -->
+            <div class="legend-item">
+
+              <span
+                class="legend-seat legend-selected seaterImage">
+              </span>
+
+              <span>Selected</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             SEAT LAYOUT
+        ========================== -->
+
+        <div
+          class="mobile-form-card"
+          *ngIf="seatBlockForm.value.bus_id">
+
+          <div class="mobile-seat-layout-card">
+
+            <!-- TABS -->
+
+            <div class="mobile-seat-tabs">
+
+              <button
+                type="button"
+                class="mobile-tab-btn"
+                *ngIf="lower != 0"
+                [class.active]="activeTab == 'tab1'"
+                (click)="switchTab('tab1')">
+
+                Lower
+
+              </button>
+
+
+              <button
+                type="button"
+                class="mobile-tab-btn"
+                *ngIf="upper != 0"
+                [class.active]="activeTab == 'tab2'"
+                (click)="switchTab('tab2')">
+
+                Upper
+
+              </button>
+
+            </div>
+
+
+            <!-- STEERING -->
+
+            <div
+              class="mobile-steering"
+              [class.d-none]="activeTab == 'tab2'">
+
+              <img
+                src="assets/images/user/steering.png"
+                alt="Steering">
+
+            </div>
+
+
+            <!-- SEAT SCROLL -->
+
+            <div class="mobile-seat-scroll">
+
+              <div class="bus-transform">
+
+                <div formArrayName="bus_seat_layout_data">
+
+                  <div
+                    class="row"
+                    *ngFor="
+                      let layoutRow of seatBlockForm.controls.bus_seat_layout_data.controls;
+                      let r = index
+                    "
+                    [formGroupName]="r">
+
+
+                    <!-- =========================
+                         LOWER
+                    ========================== -->
+
+                    <div *ngIf="activeTab == 'tab1'">
+
+                      <div
+                        formArrayName="lowerBerth"
+                        class="seat-row">
+
+                        <div
+                          *ngFor="
+                            let layoutCol of layoutRow.controls.lowerBerth.controls;
+                            let i = index
+                          "
+                          [formGroupName]="i"
+                          class="seat-column">
+
+                          <label class="seatHolder">
+
+                            <input
+                              *ngIf="layoutCol.controls.seatType.value != 4"
+                              type="checkbox"
+                              formControlName="seatChecked">
+
+
+                            <!-- SEATER -->
+                            <span
+                              class="seaterImage"
+                              *ngIf="layoutCol.controls.seatType.value == 1">
+                            </span>
+
+
+                            <!-- SLEEPER -->
+                            <span
+                              class="sleeperImage"
+                              *ngIf="layoutCol.controls.seatType.value == 2">
+                            </span>
+
+
+                            <!-- VERTICAL -->
+                            <span
+                              class="verticalImage"
+                              *ngIf="layoutCol.controls.seatType.value == 3">
+                            </span>
+
+
+                            <!-- BLANK -->
+                            <span
+                              class="blankImage"
+                              *ngIf="layoutCol.controls.seatType.value == 4">
+                            </span>
+
+
+                            <!-- SEAT NUMBER -->
+                            <span
+                              *ngIf="layoutCol.controls.seatType.value != 4">
+
+                              {{ layoutCol.controls.seatText.value }}
+
+                            </span>
+
+                          </label>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         UPPER
+                    ========================== -->
+
+                    <div *ngIf="activeTab == 'tab2'">
+
+                      <div
+                        formArrayName="upperBerth"
+                        class="seat-row">
+
+                        <div
+                          *ngFor="
+                            let layoutCol of layoutRow.controls.upperBerth.controls;
+                            let i = index
+                          "
+                          [formGroupName]="i"
+                          class="seat-column">
+
+                          <label class="seatHolder">
+
+                            <input
+                              *ngIf="layoutCol.controls.seatType.value != 4"
+                              type="checkbox"
+                              formControlName="seatChecked">
+
+
+                            <!-- SEATER -->
+                            <span
+                              class="seaterImage"
+                              *ngIf="layoutCol.controls.seatType.value == 1">
+                            </span>
+
+
+                            <!-- SLEEPER -->
+                            <span
+                              class="sleeperImage"
+                              *ngIf="layoutCol.controls.seatType.value == 2">
+                            </span>
+
+
+                            <!-- VERTICAL -->
+                            <span
+                              class="verticalImage"
+                              *ngIf="layoutCol.controls.seatType.value == 3">
+                            </span>
+
+
+                            <!-- BLANK -->
+                            <span
+                              class="blankImage"
+                              *ngIf="layoutCol.controls.seatType.value == 4">
+                            </span>
+
+
+                            <!-- SEAT NUMBER -->
+                            <span
+                              *ngIf="layoutCol.controls.seatType.value != 4">
+
+                              {{ layoutCol.controls.seatText.value }}
+
+                            </span>
+
+                          </label>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           FOOTER
+      ========================== -->
+
+      <div class="mobile-modal-footer">
+
+        <button
+          type="button"
+          class="btn-mobile-cancel"
+          (click)="modal.dismiss()">
+
+          <i class="fas fa-times"></i>
+
+          Cancel
+
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-primary btn-save"
+          [disabled]="seatBlockForm.invalid"
+          (click)="updateBlockseat()">
+
+          <i class="fas fa-check-circle"></i>
+
+          Update
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
 </ng-template>
