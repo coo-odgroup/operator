@@ -294,7 +294,10 @@
             <p>
 
               Revenue generated during
-              <strong>{{searchfor}}</strong>
+              <strong *ngIf="searchForcondition === 'Custom'">
+                Custom
+              </strong>
+              <strong *ngIf="searchForcondition != 'Custom'">{{searchfor}}</strong>
 
             </p>
 
