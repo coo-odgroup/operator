@@ -120,6 +120,7 @@ export class CancelreportComponent implements OnInit {
       this.rs.cancelticketpaginationReport(pageurl, data).subscribe(
         res => {
           this.completedata = res.data;
+          this.showSection = false;
           this.spinner.hide();
         }
       );
@@ -128,6 +129,7 @@ export class CancelreportComponent implements OnInit {
       this.rs.cancelticketReport(data).subscribe(
         res => {
           this.completedata = res.data;
+          this.showSection = false;
           this.spinner.hide();
         }
       );

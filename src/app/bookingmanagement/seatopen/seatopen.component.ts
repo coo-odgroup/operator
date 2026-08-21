@@ -283,6 +283,7 @@ export class SeatopenComponent implements OnInit {
           let mainArray = res.data.data;
           this.pagination = res.data;
           this.all = res.data;
+          this.showSection = false;
           this.spinner.hide();
           this.lastUrl = "/api/seatopenData?page=" + this.all.current_page;
           // console.log( this.BusOperators);
@@ -327,6 +328,7 @@ export class SeatopenComponent implements OnInit {
           let mainArray = res.data.data;
           this.pagination = res.data;
           this.all = res.data;
+          this.showSection = false;
           this.spinner.hide();
           this.lastUrl = "/api/seatopenData?page=" + this.all.current_page;
           // console.log(mainArray);

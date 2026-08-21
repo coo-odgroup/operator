@@ -225,22 +225,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
 
-    const reqData = {
-      rangeFor: 'Today',
+    const data = {
+      rangeFor: '',
       rangeFrom: '',
       rangeTo: '',
-      operator_id: this.operatorId || localStorage.getItem('OPERATOR_ID'),
-      USERID: localStorage.getItem('USERID'),
-      ROLE_ID: localStorage.getItem('ROLE_ID'),
     };
-
+    this.getall('Today');
+    // this.toproute();
+    // this.operatordata();
+    // this.pnrstaticsdata("Today");
     this.searchfor = 'Today';
-    this.searchForcondition = 'Today';
-    this.RangeText = 'Today';
-
-    this.getall(reqData);
-    this.opBooking(reqData);
-    this.opRevenue(reqData);
+    this.opBooking('Today');
+    this.opRevenue('Today');
   }
 
   Highcharts: typeof Highcharts = Highcharts;
@@ -250,9 +246,7 @@ export class DashboardComponent implements OnInit {
   opBooking(range: any) {
     const reqData = {
       operator_id: this.operatorId,
-      rangeFor: range.rangeFor,
-      rangeFrom: range.rangeFrom || '',
-      rangeTo: range.rangeTo || '',
+      rangeFor: range,
     };
 
     this.http.post<any>(this.apiURL + '/operator-booking', reqData).subscribe({
@@ -260,24 +254,19 @@ export class DashboardComponent implements OnInit {
         const categories: string[] = [];
         const data: number[] = [];
 
-        if (res.data && res.data.length > 0) {
-          res.data.forEach((item: any) => {
-            categories.push(
-              `${item.source} - ${item.destination} (${item.bus_number})`,
-            );
-
-            data.push(Number(item.booking_count));
-          });
-        }
+        res.data.forEach((item: any) => {
+          categories.push(
+            `${item.source} - ${item.destination} (${item.bus_number})`,
+          );
+          data.push(Number(item.booking_count));
+        });
 
         this.opbookingchart = {
           ...this.opbookingchart,
-
           xAxis: {
             ...(this.opbookingchart.xAxis as Highcharts.XAxisOptions),
             categories,
           },
-
           series: [
             {
               name: 'Total Bookings',
@@ -289,9 +278,8 @@ export class DashboardComponent implements OnInit {
 
         this.updateFlag = true;
       },
-
       error: (err) => {
-        console.error('Operator Booking API Error:', err);
+        console.error('API Error:', err);
       },
     });
   }
@@ -349,29 +337,22 @@ export class DashboardComponent implements OnInit {
   opRevenue(range: any) {
     const reqData = {
       operator_id: this.operatorId,
-      rangeFor: range.rangeFor,
-      rangeFrom: range.rangeFrom || '',
-      rangeTo: range.rangeTo || '',
+      rangeFor: range,
     };
-
     this.http.post<any>(this.apiURL + '/operator-revenue', reqData).subscribe({
       next: (res) => {
         const categories: string[] = [];
         const data: number[] = [];
 
-        if (res.data && res.data.length > 0) {
-          res.data.forEach((item: any) => {
-            categories.push(
-              `${item.source} - ${item.destination} (${item.bus_number})`,
-            );
-
-            data.push(Number(item.total_revenue));
-          });
-        }
+        res.data.forEach((item: any) => {
+          categories.push(
+            `${item.source} - ${item.destination} (${item.bus_number})`,
+          );
+          data.push(Number(item.total_revenue));
+        });
 
         this.opRevenuechart = {
           ...this.opRevenuechart,
-
           xAxis: {
             ...(this.opRevenuechart.xAxis as Highcharts.XAxisOptions),
             categories,
@@ -389,9 +370,8 @@ export class DashboardComponent implements OnInit {
 
         this.updateFlag = true;
       },
-
       error: (err) => {
-        console.error('Operator Revenue API Error:', err);
+        console.error('API Error:', err);
       },
     });
   }
@@ -459,71 +439,66 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    const reqData = {
-      rangeFor: 'Custom',
-      rangeFrom: this.fromDate,
-      rangeTo: this.toDate,
-      operator_id: this.operatorId || localStorage.getItem('OPERATOR_ID'),
-      USERID: localStorage.getItem('USERID'),
-      ROLE_ID: localStorage.getItem('ROLE_ID'),
-    };
-
     this.searchfor = 'Custom';
     this.searchForcondition = 'Custom';
 
-    this.getall(reqData);
+    const reqData = {
+      operator_id: this.operatorId,
+      rangeFor: 'Custom',
+      rangeFrom: this.fromDate,
+      rangeTo: this.toDate,
+    };
+
+    // console.log(reqData);
+
+    // Call your APIs here
+
+    this.getCoustom(reqData);
+
     this.opBooking(reqData);
+
     this.opRevenue(reqData);
   }
 
   getCoustom(range: any) {
     this.spinner.show();
     this.showCustomFilter = false;
-
-    this.searchfor = range.rangeFor;
+    this.searchfor = range;
     this.dashboarddata = '';
-    this.RangeText = range.rangeFor;
+    this.RangeText = range;
 
-    this.ds.dashboard(range).subscribe({
-      next: (res: { data: any }) => {
-        this.dashboarddata = res.data;
-        this.spinner.hide();
-      },
-      error: (err) => {
-        console.error('Dashboard API Error:', err);
-        this.spinner.hide();
-      },
+    this.ds.dashboard(range).subscribe((res: { data: any }) => {
+      this.dashboarddata = res.data;
+      this.spinner.hide();
+      // this.pieChart();
     });
   }
 
   getall(range: any) {
     this.spinner.show();
     this.showCustomFilter = false;
-
-    const reqData = {
-      rangeFor: range.rangeFor,
-      rangeFrom: range.rangeFrom || '',
-      rangeTo: range.rangeTo || '',
-      operator_id: this.operatorId || localStorage.getItem('OPERATOR_ID'),
+    this.searchfor = range;
+    this.dashboarddata = '';
+    this.RangeText = range;
+    const data = {
+      rangeFor: range,
+      rangeFrom: '',
+      rangeTo: '',
+      operator_id: localStorage.getItem('OPERATOR_ID'),
       USERID: localStorage.getItem('USERID'),
       ROLE_ID: localStorage.getItem('ROLE_ID'),
     };
 
-    this.searchfor = reqData.rangeFor;
-    this.dashboarddata = '';
-    this.RangeText = reqData.rangeFor;
+    console.log(data);
+    // const reqData = {
+    //   operator_id: this.operatorId,
+    //   rangeFor: range,
+    // }
 
-    console.log('Dashboard Request:', reqData);
-
-    this.ds.dashboard(reqData).subscribe({
-      next: (res: { data: any }) => {
-        this.dashboarddata = res.data;
-        this.spinner.hide();
-      },
-      error: (err) => {
-        console.error('Dashboard API Error:', err);
-        this.spinner.hide();
-      },
+    this.ds.dashboard(data).subscribe((res: { data: any }) => {
+      this.dashboarddata = res.data;
+      this.spinner.hide();
+      // this.pieChart();
     });
   }
 
@@ -581,23 +556,5 @@ export class DashboardComponent implements OnInit {
         };
       });
     });
-  }
-
-  applyFilter(filter: string) {
-    const reqData = {
-      rangeFor: filter,
-      rangeFrom: '',
-      rangeTo: '',
-      operator_id: this.operatorId || localStorage.getItem('OPERATOR_ID'),
-      USERID: localStorage.getItem('USERID'),
-      ROLE_ID: localStorage.getItem('ROLE_ID'),
-    };
-
-    this.searchfor = filter;
-    this.searchForcondition = filter;
-
-    this.getall(reqData);
-    this.opRevenue(reqData);
-    this.opBooking(reqData);
   }
 }

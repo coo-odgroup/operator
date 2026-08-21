@@ -1,4 +1,11 @@
-<div class="container bg-white" *ngIf="this.flatConfig.layout === 'horizontal' && this.flatConfig.subLayout === 'horizontal-2'; else mainHeader">
+<div
+  class="container bg-white"
+  *ngIf="
+    this.flatConfig.layout === 'horizontal' &&
+      this.flatConfig.subLayout === 'horizontal-2';
+    else mainHeader
+  "
+>
   <ng-container *ngTemplateOutlet="mainHeader"></ng-container>
 </div>
 
@@ -17,18 +24,40 @@
 
 <ng-template #mainHeader>
   <div class="m-header">
-    <a href="javascript:" class="mobile-menu" id="mobile-collapse" (click)="navCollapse()"><span></span></a>
+    <a
+      href="javascript:"
+      class="mobile-menu"
+      id="mobile-collapse"
+      (click)="navCollapse()"
+      ><span></span
+    ></a>
     <!-- <a [routerLink]="['/dashboard/analytics']" class="b-brand">
       <img id="main-logo" src="assets/images/odbus_logo.png" alt="" class="logo">
 
     </a> -->
 
-    <a [routerLink]="['/dashboard']"  class="b-brand">
-      <img id="main-logo" src="assets/images/white_logo.png" alt="" class="logo ml-4">
+    <a [routerLink]="['/dashboard']" class="b-brand">
+      <img
+        id="main-logo"
+        src="assets/images/white_logo.png"
+        alt=""
+        class="logo ml-4"
+      />
     </a>
 
-    <a href="#/dashboard" class="home-icon"><span><i class="fa fa-home"></i></span></a>
-    <a class="mob-toggler" [ngClass]="{'on' : this.menuClass}" href="javascript:" (click)="toggleMobOption()"><i class="feather icon-more-vertical"></i></a>
+    <a class="home-icon" (click)="closeMenu()">
+      <span>
+        <i class="fa fa-home"></i>
+      </span>
+    </a>
+
+    <a
+      class="mob-toggler"
+      [ngClass]="{ on: this.menuClass }"
+      href="javascript:"
+      (click)="toggleMobOption()"
+      ><i class="feather icon-more-vertical"></i
+    ></a>
   </div>
   <div class="collapse navbar-collapse" [style.display]="this.collapseStyle">
     <app-nav-left class="mr-auto"></app-nav-left>

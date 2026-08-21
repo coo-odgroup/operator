@@ -10,14 +10,12 @@
 =====================================-->
 
   <div class="dashboard-header">
-
     <!-- Top Row -->
     <div class="dashboard-header-top">
-
       <div class="dashboard-left">
         <h2 class="dashboard-title">
           Welcome,
-          <span>{{userName}}</span>
+          <span>{{ userName }}</span>
         </h2>
         <!--
         <p class="dashboard-subtitle">
@@ -27,49 +25,60 @@
 
       <div class="dashboard-right">
         <div class="dashboard-tabs">
-
-          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='Today'}"
-            (click)="getall('Today');opRevenue('Today');opBooking('Today')">
+          <button
+            type="button"
+            class="filter-btn"
+            [ngClass]="{ active: searchfor == 'Today' }"
+            (click)="applyFilter('Today')"
+          >
             <i class="fa fa-sun"></i>
             <span>Today</span>
           </button>
 
-          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Week'}"
-            (click)="getall('This Week');opRevenue('This Week');opBooking('This Week')">
+          <button
+            type="button"
+            class="filter-btn"
+            [ngClass]="{ active: searchfor == 'This Week' }"
+            (click)="applyFilter('This Week')"
+          >
             <i class="fa fa-calendar"></i>
             <span>This Week</span>
           </button>
 
-          <button type="button" class="filter-btn" [ngClass]="{'active': searchfor=='This Month'}"
-            (click)="getall('This Month');opRevenue('This Month');opBooking('This Month')">
+          <button
+            type="button"
+            class="filter-btn"
+            [ngClass]="{ active: searchfor == 'This Month' }"
+            (click)="applyFilter('This Month')"
+          >
             <i class="fa fa-th-large"></i>
             <span>This Month</span>
           </button>
 
-          <button type="button" class="filter-btn" [ngClass]="{'active': showCustomFilter}"
-            (click)="toggleCustomFilter()">
+          <button
+            type="button"
+            class="filter-btn"
+            [ngClass]="{ active: showCustomFilter }"
+            (click)="toggleCustomFilter()"
+          >
             <i class="fa fa-filter"></i>
             <span>Custom</span>
           </button>
-
         </div>
       </div>
-
     </div>
 
     <!-- Filter Inside Header -->
     <div class="custom-filter-box" *ngIf="showCustomFilter">
-
       <div class="row align-items-end">
-
         <div class="col-lg-3 col-md-4">
           <label>From Date</label>
-          <input type="date" class="form-control" [(ngModel)]="fromDate">
+          <input type="date" class="form-control" [(ngModel)]="fromDate" />
         </div>
 
         <div class="col-lg-3 col-md-4">
           <label>To Date</label>
-          <input type="date" class="form-control" [(ngModel)]="toDate">
+          <input type="date" class="form-control" [(ngModel)]="toDate" />
         </div>
 
         <div class="col-lg-2 col-md-3">
@@ -78,11 +87,8 @@
             Apply Filter
           </button>
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <!-- end -->
@@ -92,127 +98,93 @@
 =====================================-->
 
   <div class="row dashboard-cards" *ngIf="dashboarddata">
-
     <!-- Active Bus -->
 
     <div class="col-xl-3 col-lg-6 col-md-6">
-
       <div class="dashboard-card blue-card">
-
         <div class="card-icon">
           <i class="fa fa-bus"></i>
         </div>
 
         <div class="card-details">
-
-          <h2>{{dashboarddata.active_bus_count}}</h2>
+          <h2>{{ dashboarddata.active_bus_count }}</h2>
 
           <h5>Active Buses</h5>
 
           <span>
-
             <i class="fa fa-check-circle"></i>
 
             Running Today
-
           </span>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- Total Booking -->
 
     <div class="col-xl-3 col-lg-6 col-md-6">
-
       <div class="dashboard-card green-card">
-
         <div class="card-icon">
           <i class="fa fa-envelope"></i>
         </div>
 
         <div class="card-details">
-
-          <h2>{{dashboarddata.total_pnr}}</h2>
+          <h2>{{ dashboarddata.total_pnr }}</h2>
 
           <h5>Total Bookings</h5>
 
           <span>
-
             <i class="fa fa-arrow-up"></i>
 
             Booked Today
-
           </span>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- Upcoming -->
 
     <div class="col-xl-3 col-lg-6 col-md-6">
-
       <div class="dashboard-card yellow-card">
-
         <div class="card-icon">
           <i class="fa fa-key"></i>
         </div>
 
         <div class="card-details">
-
-          <h2>{{dashboarddata.upcoming_pnr}}</h2>
+          <h2>{{ dashboarddata.upcoming_pnr }}</h2>
 
           <h5>Upcoming Trips</h5>
 
           <span>
-
             <i class="fa fa-calendar"></i>
 
             Scheduled
-
           </span>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- Cancelled -->
 
     <div class="col-xl-3 col-lg-6 col-md-6">
-
       <div class="dashboard-card red-card">
-
         <div class="card-icon">
           <i class="fa fa-times-circle"></i>
         </div>
 
         <div class="card-details">
-
-          <h2>{{dashboarddata.total_pnr_cancel}}</h2>
+          <h2>{{ dashboarddata.total_pnr_cancel }}</h2>
 
           <h5>Cancelled PNR</h5>
 
           <span class="danger">
-
             <i class="fa fa-exclamation-circle"></i>
 
             Needs Attention
-
           </span>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <!-- End -->
@@ -221,108 +193,76 @@
 =====================================-->
 
   <div class="row">
-
     <!-- Booking -->
 
     <div class="col-xl-6 col-lg-12">
-
       <div class="analytics-card">
-
         <div class="analytics-header">
-
           <div>
-
             <h4>
-
               <i class="fa fa-sun text-primary mr-2"></i>
 
               Booking Trend
-
             </h4>
 
             <p>
-
               Booking performance for
-              <strong *ngIf="searchForcondition === 'Custom'">
-                Custom
-              </strong>
-              <strong *ngIf="searchForcondition != 'Custom'">{{searchfor}}</strong>
-
+              <strong *ngIf="searchForcondition === 'Custom'"> Custom </strong>
+              <strong *ngIf="searchForcondition != 'Custom'">{{
+                searchfor
+              }}</strong>
             </p>
-
           </div>
 
-          <div class="analytics-badge">
-
-            Live
-
-          </div>
-
+          <div class="analytics-badge">Live</div>
         </div>
 
         <div class="analytics-body">
-
-          <highcharts-chart [Highcharts]="Highcharts" [options]="opbookingchart" [update]="updateFlag"
-            style="width:100%;height:360px;display:block;">
-
+          <highcharts-chart
+            [Highcharts]="Highcharts"
+            [options]="opbookingchart"
+            [update]="updateFlag"
+            style="width: 100%; height: 360px; display: block"
+          >
           </highcharts-chart>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- Revenue -->
 
     <div class="col-xl-6 col-lg-12">
-
       <div class="analytics-card">
-
         <div class="analytics-header">
-
           <div>
-
             <h4>
-
               <i class="fa fa-calendar text-success mr-2"></i>
 
               Revenue Trend
-
             </h4>
 
             <p>
-
               Revenue generated during
-              <strong *ngIf="searchForcondition === 'Custom'">
-                Custom
-              </strong>
-              <strong *ngIf="searchForcondition != 'Custom'">{{searchfor}}</strong>
-
+              <strong *ngIf="searchForcondition === 'Custom'"> Custom </strong>
+              <strong *ngIf="searchForcondition != 'Custom'">{{
+                searchfor
+              }}</strong>
             </p>
-
           </div>
 
-          <div class="analytics-badge success">
-
-            ₹ Earnings
-
-          </div>
-
+          <div class="analytics-badge success">₹ Earnings</div>
         </div>
 
         <div class="analytics-body">
-
-          <highcharts-chart [Highcharts]="Highcharts" [options]="opRevenuechart" [update]="updateFlag"
-            style="width:100%;height:360px;display:block;">
-
+          <highcharts-chart
+            [Highcharts]="Highcharts"
+            [options]="opRevenuechart"
+            [update]="updateFlag"
+            style="width: 100%; height: 360px; display: block"
+          >
           </highcharts-chart>
-
         </div>
-
       </div>
-
     </div>
-
   </div>
 </div>

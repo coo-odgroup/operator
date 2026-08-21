@@ -34,7 +34,7 @@ const OperatorItems =[{
     {
       id: 'dashboard',
       title: 'Dashboard',
-    
+
       type: 'item',
       icon: 'feather icon-home',
       url: 'dashboard'
@@ -42,7 +42,7 @@ const OperatorItems =[{
     {
       id: 'completerepor',
       title: 'Booking Report',
-    
+
       type: 'item',
       icon: 'feather icon-list',
       url: 'reports/completeReport'
@@ -50,7 +50,7 @@ const OperatorItems =[{
     {
       id: 'cancelerepor',
       title: 'Cancel Report',
-    
+
       type: 'item',
       icon: 'feather icon-list',
       url: 'reports/cancelReport'
@@ -108,7 +108,7 @@ export class NavigationItem {
     {
       return OperatorItems;
     }
-   
-    
+
+
   }
 }

@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NextConfig} from '../../../../app-config';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NextConfig } from '../../../../app-config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
   public flatConfig: any;
@@ -15,18 +16,18 @@ export class NavBarComponent implements OnInit {
   @Output() onNavCollapse = new EventEmitter();
   @Output() onNavHeaderMobCollapse = new EventEmitter();
 
-  constructor() {
+  constructor(private router: Router) {
     this.flatConfig = NextConfig.config;
     this.menuClass = false;
     this.collapseStyle = 'none';
     this.windowWidth = window.innerWidth;
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   toggleMobOption() {
     this.menuClass = !this.menuClass;
-    this.collapseStyle = (this.menuClass) ? 'block' : 'none';
+    this.collapseStyle = this.menuClass ? 'block' : 'none';
   }
 
   navCollapse() {
@@ -37,4 +38,12 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+  showSection = true;
+
+  closeMenu() {
+    this.showSection = false;
+    this.router.navigate(['/dashboard']).then(() => {
+      window.location.reload();
+    });
+  }
 }

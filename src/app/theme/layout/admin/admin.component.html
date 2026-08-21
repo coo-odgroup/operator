@@ -127,12 +127,12 @@
 <div class="mobile-display">
   <ul>
     <li><a [routerLink]="['/bookingmanagement/seatblock']" [queryParams]="{ openModal: true }" (click)="closeMenu()"
-        [class.active]="isActive('seatblock')"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
+        [class.active]="isActive('seatblock') && !showSection"><span><i class="feather icon-x-circle"></i></span>Seat Block</a></li>
     <li><a [routerLink]="['/bookingmanagement/seatopen']" [queryParams]="{ openModal: true }" (click)="closeMenu()"
-        [class.active]="isActive('seatopen')"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
+        [class.active]="isActive('seatopen') && !showSection"><span><i class="feather icon-check-square"></i></span>Seat Open</a></li>
     <li><a [routerLink]="['/reports/completeReport']" (click)="closeMenu()"
-        [class.active]="isActive('completeReport')"><span><i class="feather icon-crosshair"></i></span>Booking
+        [class.active]="isActive('completeReport') && !showSection"><span><i class="feather icon-crosshair"></i></span>Booking
         Report</a></li>
-    <li><a (click)="toggleSection()"><span><i class="feather icon-list"></i></span>Menu</a></li>
+    <li><a (click)="toggleSection()" [class.active]="showSection"><span><i class="feather icon-list"></i></span>Menu</a></li>
   </ul>
 </div>

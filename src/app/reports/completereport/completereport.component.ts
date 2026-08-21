@@ -120,6 +120,7 @@ export class CompletereportComponent implements OnInit {
       this.rs.completepaginationReport(pageurl, data).subscribe(
         res => {
           this.completedata = res.data;
+          this.showSection = false;
           this.spinner.hide();
         }
       );
@@ -128,6 +129,7 @@ export class CompletereportComponent implements OnInit {
       this.rs.completeReport(data).subscribe(
         res => {
           this.completedata = res.data;
+          this.showSection = false;
           this.spinner.hide();
         }
       );

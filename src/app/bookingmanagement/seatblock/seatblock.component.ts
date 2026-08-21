@@ -364,6 +364,7 @@ changeMobileBerth(type: string) {
           let mainArray = res.data.data;
           this.pagination = res.data;
           this.all = res.data;
+          this.showSection = false;
           this.spinner.hide();
           this.lastUrl = '/api/seatblockData?page=' + this.all.current_page;
           mainArray = Object.keys(mainArray).map((k1) => ({
@@ -412,6 +413,7 @@ changeMobileBerth(type: string) {
         let mainArray = res.data.data;
         this.pagination = res.data;
         this.all = res.data;
+        this.showSection = false;
         this.spinner.hide();
         // console.log(this.all);
         this.lastUrl = '/api/seatblockData?page=' + this.all.current_page;
