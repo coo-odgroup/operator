@@ -584,6 +584,8 @@ export class DashboardComponent implements OnInit {
   }
 
   applyFilter(filter: string) {
+    this.fromDate = null;
+    this.toDate = null;
     const reqData = {
       rangeFor: filter,
       rangeFrom: '',
