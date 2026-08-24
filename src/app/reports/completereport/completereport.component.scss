@@ -821,7 +821,6 @@ thead {
 =========================================*/
 
 @media (max-width: 767px) {
-
   /* Hide desktop */
   .desktop-view {
     display: none !important;
@@ -1102,38 +1101,141 @@ Top
  Route
 ==========================*/
 
+  // .booking-route {
+  //   display: flex;
+
+  //   align-items: center;
+
+  //   justify-content: space-between;
+
+  //   background: #f8fbff;
+
+  //   border-radius: 12px;
+
+  //   padding: 12px;
+
+  //   margin-bottom: 14px;
+  //   border: 1px solid #3455a5;
+  // }
+
+  // .booking-route span {
+  //   width: 40%;
+
+  //   font-size: 15px;
+
+  //   font-weight: 700;
+
+  //   color: #1b2155;
+  // }
+
+  // .booking-route i {
+  //   color: #2b63ec;
+
+  //   font-size: 18px;
+  // }
+
   .booking-route {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  background: #f8fbff;
+  border: 1px solid #3455a5;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-    align-items: center;
+/* From → To */
+.route-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #dfe5f2;
+}
 
-    justify-content: space-between;
+.route-location {
+  width: 42%;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1b2155;
+  text-align: center;
 
-    background: #f8fbff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-    border-radius: 12px;
+.route-arrow {
+  color: #2b63ec;
+  font-size: 15px;
+  flex-shrink: 0;
+}
 
-    padding: 12px;
+/* Boarding / Dropping */
+.booking-point {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 2px 2px;
+  min-width: 0;
+}
 
-    margin-bottom: 14px;
-    border: 1px solid #3455a5;
-  }
+.point-icon {
+  width: 23px;
+  height: 23px;
+  min-width: 23px;
 
-  .booking-route span {
-    width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    font-size: 15px;
+  border-radius: 50%;
+}
 
-    font-weight: 700;
+.point-icon i {
+  font-size: 11px;
+}
 
-    color: #1b2155;
-  }
+/* Boarding */
+.boarding-icon {
+  background: #e8f7ee;
+  color: #20a05a;
+}
 
-  .booking-route i {
-    color: #2b63ec;
+/* Dropping */
+.dropping-icon {
+  background: #fff0f0;
+  color: #e04444;
+}
 
-    font-size: 18px;
-  }
+/* Boarding / Dropping text */
+.point-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.point-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #7a8195;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.point-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #30364d;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
   /*=========================
  Bottom
@@ -1147,7 +1249,7 @@ Top
     gap: 10px;
   }
 
-  .booking-footer>div {
+  .booking-footer > div {
     flex: 1;
 
     background: #fafcff;
@@ -1312,4 +1414,147 @@ MOBILE EMPTY STATE
   color: #64748b;
 
   font-size: 14px;
+}
+
+.summary-cell {
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px 15px !important;
+  min-width: 150px;
+}
+
+.summary-label {
+  // display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e8f4ff;
+  color: #1261c9;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+
+.summary-value {
+  background: #f1f6ff;
+  color: #1261c9;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  // width: max-content;
+}
+
+// Mobile
+.mobile-summary {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobile-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #3455a5;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  }
+
+  .mobile-summary-box {
+    flex: 1;
+    text-align: center;
+    padding: 7px 5px;
+    border: 1px solid #3455a5;
+    border-radius: 12px;
+    background: #fafcff;
+  }
+
+  .summary-title {
+    display: block;
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+
+  .summary-number,
+  .summary-amount {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1261c9;
+  }
+}
+
+// New code for boarding and dropping
+.route-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.route i {
+  font-size: 12px;
+  color: #777;
+}
+
+.point-info {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #f7f7f7;
+  min-width: 180px;
+}
+
+.point i {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.point div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.point small {
+  font-size: 10px;
+  color: #777;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.point strong {
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+}
+
+.boarding i {
+  color: #28a745;
+}
+
+.dropping i {
+  color: #dc3545;
 }

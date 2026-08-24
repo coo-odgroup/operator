@@ -131,6 +131,8 @@ export class CompletereportComponent implements OnInit {
           this.completedata = res.data;
           this.showSection = false;
           this.spinner.hide();
+
+          console.log(this.completedata);
         }
       );
     }

@@ -463,9 +463,9 @@
 
             <th>Journey</th>
 
-            <th>Seats</th>
+            <th class="text-center">Seats</th>
 
-            <th>Amount</th>
+            <th class="text-center">Amount</th>
           </tr>
         </thead>
 
@@ -529,29 +529,54 @@
 
             <td>
               <div class="route-box">
-                <strong>
-                  <span *ngFor="let b of complete.from_location">
-                    {{ b.name }}
-                  </span>
-                </strong>
+                <div class="journey-date">
+                  {{ complete.journey_dt | date: "dd MMM yyyy" }}
+                </div>
+                <!-- Route -->
+                <div class="route">
+                  <strong>
+                    <span *ngFor="let b of complete.from_location">
+                      {{ b.name }}
+                    </span>
+                  </strong>
 
-                <i class="fa fa-arrow-right"></i>
+                  <i class="fa fa-arrow-right"></i>
 
-                <strong>
-                  <span *ngFor="let d of complete.to_location">
-                    {{ d.name }}
-                  </span>
-                </strong>
-              </div>
+                  <strong>
+                    <span *ngFor="let d of complete.to_location">
+                      {{ d.name }}
+                    </span>
+                  </strong>
+                </div>
 
-              <div class="journey-date">
-                {{ complete.journey_dt | date: "dd MMM yyyy" }}
+                <!-- Boarding / Dropping -->
+                <div class="point-info">
+                  <div class="point boarding">
+                    <i class="fa fa-map-marker"></i>
+                    <div>
+                      <small>Boarding Point</small>
+                      <strong>{{
+                        complete.boarding_point || "Not Available"
+                      }}</strong>
+                    </div>
+                  </div>
+
+                  <div class="point dropping">
+                    <i class="fa fa-map-marker"></i>
+                    <div>
+                      <small>Dropping Point</small>
+                      <strong>
+                        {{ complete.dropping_point || "Not Available" }}
+                      </strong>
+                    </div>
+                  </div>
+                </div>
               </div>
             </td>
 
             <!-- Seat -->
 
-            <td>
+            <td class="text-center">
               <span
                 class="seat-badge"
                 *ngFor="let seat of complete.booking_detail"
@@ -562,13 +587,35 @@
 
             <!-- Amount -->
 
-            <td>
+            <td class="text-center">
               <div class="amount-chip">
                 ₹{{
                   complete.owner_fare + complete.additional_owner_fare
                     | number: "1.2-2"
                 }}
               </div>
+            </td>
+          </tr>
+          <tr *ngIf="completedata?.data?.data?.length != 0">
+            <!-- Booking details -->
+            <td colspan="4"></td>
+
+            <!-- Total Seats -->
+            <td class="summary-cell">
+              <div class="summary-label">
+                <i class="fa fa-users"></i>
+                Total Seats
+              </div>
+              <div class="summary-value">{{ completedata?.totalSeats }}</div>
+            </td>
+
+            <!-- Total Amount -->
+            <td class="summary-cell">
+              <div class="summary-label">
+                <i class="fa fa-rupee"></i>
+                Total Amount
+              </div>
+              <div class="summary-value">₹{{ completedata?.totalfare }}</div>
             </td>
           </tr>
         </tbody>
@@ -642,15 +689,13 @@
                 >{{ complete.users.phone }}</small
               >
 
-              <div class="pnr-mobile">
-                PNR : {{ complete.pnr }}
-              </div>
+              <div class="pnr-mobile">PNR : {{ complete.pnr }}</div>
             </div>
           </div>
 
           <!-- Route -->
 
-          <div class="booking-route">
+          <!-- <div class="booking-route">
             <span>
               <span *ngFor="let b of complete.from_location">
                 {{ b.name }}
@@ -664,6 +709,53 @@
                 {{ d.name }}
               </span>
             </span>
+          </div> -->
+
+          <div class="booking-route">
+            <!-- Route -->
+            <div class="route-main">
+              <span class="route-location">
+                <span *ngFor="let b of complete.from_location">
+                  {{ b.name }}
+                </span>
+              </span>
+
+              <i class="fa fa-arrow-right route-arrow"></i>
+
+              <span class="route-location">
+                <span *ngFor="let d of complete.to_location">
+                  {{ d.name }}
+                </span>
+              </span>
+            </div>
+
+            <!-- Boarding -->
+            <div class="booking-point">
+              <span class="point-icon boarding-icon">
+                <i class="fa fa-map-marker"></i>
+              </span>
+
+              <div class="point-content">
+                <span class="point-label">Boarding</span>
+                <span class="point-name">
+                  {{ complete.boarding_point || "Not Available" }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Dropping -->
+            <div class="booking-point">
+              <span class="point-icon dropping-icon">
+                <i class="fa fa-map-marker"></i>
+              </span>
+
+              <div class="point-content">
+                <span class="point-label">Dropping</span>
+                <span class="point-name">
+                  {{ complete.dropping_point || "Not Available" }}
+                </span>
+              </div>
+            </div>
           </div>
 
           <!-- Info -->
@@ -692,9 +784,19 @@
             </div>
           </div>
         </div>
+        <!-- Mobile Summary -->
+        <div class="mobile-summary">
+          <div class="mobile-summary-box">
+            <span class="summary-title">Total Seats</span>
+            <span class="summary-number">{{ completedata?.totalSeats }}</span>
+          </div>
+
+          <div class="mobile-summary-box">
+            <span class="summary-title">Total Amount</span>
+            <span class="summary-amount">₹{{ completedata?.totalfare }}</span>
+          </div>
+        </div>
       </div>
-
-
 
       <div
         class="mobile-empty-box d-lg-none"

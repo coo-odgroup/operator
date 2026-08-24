@@ -799,3 +799,29 @@
     }
 
 }
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 15px;
+  padding: 10px 14px;
+  background: #eef5ff;
+  border: 1px solid #c9dcf8;
+  border-left: 4px solid #3455a5;
+  border-radius: 7px;
+  color: #3455a5;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.notice i {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.notice strong {
+  font-weight: 700;
+  color: #263f7c;
+}
