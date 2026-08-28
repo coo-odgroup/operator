@@ -2,7 +2,7 @@ import { BusOperatorService } from './../../services/bus-operator.service';
 import { Busoperator } from './../../model/busoperator';
 import { BusstoppageService } from '../../services/busstoppage.service';
 import { Busstoppage } from '../../model/busstoppage';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Ownerfare } from '../../model/ownerfare';
 import { NotificationService } from '../../services/notification.service';
@@ -29,6 +29,7 @@ import {
   NgbCalendar,
   NgbDatepickerConfig,
 } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one &&
@@ -134,6 +135,8 @@ export class OwnerfareComponent implements OnInit {
     private locationService: LocationService,
     private spinner: NgxSpinnerService,
     private dtconfig: NgbDatepickerConfig,
+    private activateroute: ActivatedRoute,
+    public router: Router
   ) {
     this.isSubmit = false;
     this.ownerFareRecord = {} as Ownerfare;
@@ -233,6 +236,7 @@ export class OwnerfareComponent implements OnInit {
           this.ownerFares = res.data.data.data;
           this.pagination = res.data.data;
           this.all = res.data;
+          this.showSection = false;
           this.spinner.hide();
         });
     } else {
@@ -240,12 +244,13 @@ export class OwnerfareComponent implements OnInit {
         this.ownerFares = res.data.data.data;
         this.pagination = res.data.data;
         this.all = res.data;
+        this.showSection = false;
         this.spinner.hide();
         // console.log(this.ownerFares);
       });
     }
 
-    console.log(this.ownerFares);
+    // console.log(this.ownerFares);
   }
 
   formatDate(dateValue: string | number | Date) {
@@ -897,4 +902,27 @@ export class OwnerfareComponent implements OnInit {
   isInside = (date) => after(date, this.fromDate) && before(date, this.toDate);
   isFrom = (date) => equals(date, this.fromDate);
   isTo = (date) => equals(date, this.toDate);
+
+  @ViewChild('ownerFareMobileModal') content!: TemplateRef<any>;
+
+  ngAfterViewInit() {
+    this.activateroute.queryParams.subscribe(params => {
+      if (params['openModal']) {
+        setTimeout(() => {
+          this.OpenModal(this.content);
+        });
+      }
+    });
+  }
+
+  removeOpenModal() {
+    this.router.navigate([], {
+      relativeTo: this.activateroute,
+      queryParams: {
+        openModal: null
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    });
+  }
 }

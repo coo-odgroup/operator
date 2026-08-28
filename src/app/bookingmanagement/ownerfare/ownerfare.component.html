@@ -1230,7 +1230,7 @@
         <button
           type="button"
           class="mobile-ownerfare-close"
-          (click)="modal.dismiss()"
+          (click)="modal.dismiss(); removeOpenModal()"
         >
           <i class="fas fa-times"></i>
         </button>
@@ -1358,7 +1358,7 @@
     ==========================================-->
 
       <div class="mobile-ownerfare-footer">
-        <button type="button" class="btn btn-light" (click)="modal.dismiss()">
+        <button type="button" class="btn btn-light" (click)="modal.dismiss(); removeOpenModal()">
           <i class="fas fa-times mr-1"></i>
 
           Cancel

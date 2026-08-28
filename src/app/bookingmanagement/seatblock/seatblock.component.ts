@@ -27,7 +27,7 @@ import {
   NgbCalendar,
   NgbDatepickerConfig,
 } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one &&
@@ -215,7 +215,8 @@ export class SeatblockComponent implements OnInit {
     private busOperatorService: BusOperatorService,
     private locationService: LocationService,
     private spinner: NgxSpinnerService,
-    private activateroute: ActivatedRoute
+    private activateroute: ActivatedRoute,
+    private router: Router
   ) {
     this.isSubmit = false;
     this.seatBlockRecord = {} as Seatblock;
@@ -1506,6 +1507,17 @@ changeMobileBerth(type: string) {
           this.OpenModal(this.content);
         });
       }
+    });
+  }
+
+  removeOpenModal() {
+    this.router.navigate([], {
+      relativeTo: this.activateroute,
+      queryParams: {
+        openModal: null
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
   }
 }

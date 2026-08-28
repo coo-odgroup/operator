@@ -821,7 +821,7 @@ Mobile Pagination
 
       </div>
 
-      <button type="button" class="close premium-close" aria-label="Close" (click)="modal.dismiss()">
+      <button type="button" class="close premium-close" aria-label="Close" (click)="modal.dismiss(); removeOpenModal()">
 
         <span>&times;</span>
 
@@ -973,7 +973,7 @@ Mobile Pagination
 
     <div class="modal-footer premium-modal-footer">
 
-      <button type="button" class="btn btn-reset" (click)="modal.dismiss()">
+      <button type="button" class="btn btn-reset" (click)="modal.dismiss(); removeOpenModal()">
 
         Close
 

@@ -1348,7 +1348,7 @@ seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.leng
 
         </div>
 
-        <button type="button" class="mobile-modal-close" (click)="modal.dismiss()">
+        <button type="button" class="mobile-modal-close" (click)="modal.dismiss(); removeOpenModal()">
 
           <i class="fas fa-times"></i>
 
@@ -1609,7 +1609,7 @@ seatOpenForm.controls.bus_seat_layout_data.controls[0]?.controls.upperBerth.leng
 
       <div class="mobile-modal-footer mt-5">
 
-        <button type="button" class="btn-mobile-cancel" (click)="modal.dismiss()">
+        <button type="button" class="btn-mobile-cancel" (click)="modal.dismiss(); removeOpenModal()">
 
           <i class="fas fa-times"></i>
 

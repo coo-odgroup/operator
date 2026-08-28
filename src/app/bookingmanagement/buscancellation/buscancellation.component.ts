@@ -18,7 +18,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DatePipe } from '@angular/common';
 import { LocationService } from '../../services/location.service';
 import { reduce } from 'lodash';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-buscancellation',
@@ -79,6 +79,7 @@ export class BuscancellationComponent implements OnInit {
     private busService: BusService,
     private spinner: NgxSpinnerService,
     private activateroute: ActivatedRoute,
+    public router: Router
   ) {
     this.isSubmit = false;
     this.busCancellationRecord = {} as Buscancellation;
@@ -220,6 +221,7 @@ export class BuscancellationComponent implements OnInit {
           this.url =
             this.pagination.path + '?page=' + this.pagination.current_page;
           this.all = res.data;
+          this.showSection = false;
           this.spinner.hide();
         });
     } else {
@@ -229,6 +231,7 @@ export class BuscancellationComponent implements OnInit {
         this.url =
           this.pagination.path + '?page=' + this.pagination.current_page;
         this.all = res.data;
+        this.showSection = false;
         this.spinner.hide();
       });
     }
@@ -729,6 +732,17 @@ export class BuscancellationComponent implements OnInit {
           this.OpenModal(this.content);
         });
       }
+    });
+  }
+
+  removeOpenModal() {
+    this.router.navigate([], {
+      relativeTo: this.activateroute,
+      queryParams: {
+        openModal: null
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
   }
 }

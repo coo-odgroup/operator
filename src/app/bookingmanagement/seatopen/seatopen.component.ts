@@ -18,7 +18,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Input, Output, EventEmitter } from '@angular/core';
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
   one && two && two.year === one.year && two.month === one.month && two.day === one.day;
@@ -123,7 +123,8 @@ export class SeatopenComponent implements OnInit {
     private busService: BusService,
     private busOperatorService: BusOperatorService,
     private locationService: LocationService, private spinner: NgxSpinnerService,
-    private activateroute: ActivatedRoute
+    private activateroute: ActivatedRoute,
+    private router: Router
   ) {
     this.isSubmit = false;
     this.seatOpenRecord = {} as Seatopen;
@@ -1381,6 +1382,17 @@ export class SeatopenComponent implements OnInit {
           this.OpenModal(this.content);
         });
       }
+    });
+  }
+
+  removeOpenModal() {
+    this.router.navigate([], {
+      relativeTo: this.activateroute,
+      queryParams: {
+        openModal: null
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
   }
 

@@ -615,7 +615,13 @@
                 <i class="fa fa-rupee"></i>
                 Total Amount
               </div>
-              <div class="summary-value">₹{{ completedata?.totalfare }}</div>
+              <div class="summary-value">
+                ₹{{
+                  ((+completedata?.owner_fare || 0) +
+                  (+completedata?.additional_owner_fare || 0))
+                  | number: "1.2-2"
+                }}
+              </div>
             </td>
           </tr>
         </tbody>

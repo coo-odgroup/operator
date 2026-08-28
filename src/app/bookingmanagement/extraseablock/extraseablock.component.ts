@@ -19,7 +19,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Input, Output, EventEmitter } from '@angular/core';
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
@@ -136,7 +136,8 @@ export class ExtraseablockComponent implements OnInit {
     private busService: BusService,
     private busOperatorService: BusOperatorService,
     private locationService: LocationService, private spinner: NgxSpinnerService,
-    private activateroute: ActivatedRoute
+    private activateroute: ActivatedRoute,
+    public router: Router
   ) {
     this.isSubmit = false;
     this.seatOpenRecord = {} as Seatopen;
@@ -251,6 +252,7 @@ export class ExtraseablockComponent implements OnInit {
           let mainArray = res.data.data;
           this.pagination = res.data;
           this.all = res.data;
+          this.showSection = false;
           this.spinner.hide();
           // console.log( this.BusOperators);
           this.lastUrl = "/api/extraSeatBlockData?page=" + this.all.current_page;
@@ -294,6 +296,7 @@ export class ExtraseablockComponent implements OnInit {
           let mainArray = res.data.data;
           this.pagination = res.data;
           this.all = res.data;
+          this.showSection = false;
           this.spinner.hide();
           this.lastUrl = "/api/extraSeatBlockData?page=" + this.all.current_page;
           mainArray = Object.keys(mainArray).map(k1 => ({ value: mainArray[k1] }));
@@ -1103,6 +1106,17 @@ export class ExtraseablockComponent implements OnInit {
           this.OpenModal(this.content);
         });
       }
+    });
+  }
+
+  removeOpenModal() {
+    this.router.navigate([], {
+      relativeTo: this.activateroute,
+      queryParams: {
+        openModal: null
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
     });
   }
 
