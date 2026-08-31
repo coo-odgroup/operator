@@ -799,7 +799,13 @@
 
           <div class="mobile-summary-box">
             <span class="summary-title">Total Amount</span>
-            <span class="summary-amount">₹{{ completedata?.totalfare }}</span>
+            <span class="summary-amount">
+              ₹{{
+                  ((+completedata?.owner_fare || 0) +
+                  (+completedata?.additional_owner_fare || 0))
+                  | number: "1.2-2"
+                }}
+            </span>
           </div>
         </div>
       </div>
