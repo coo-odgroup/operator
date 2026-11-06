@@ -19,7 +19,6 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { LocationService } from '../../services/location.service';
 import { Location } from '../../model/location';
-import { IOption } from 'ng-select';
 import * as XLSX from 'xlsx';
 import { debounceTime, map } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {} from 'ng-select';
 
 @Injectable()
 export class SelectOptionService {

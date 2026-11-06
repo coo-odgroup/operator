@@ -8,8 +8,7 @@ import {
 import { NgxSpinnerService } from 'ngx-spinner';
 // import ApexCharts from 'apexcharts/dist/apexcharts.common.js';
 import * as Highcharts from 'highcharts';
-import HC_drilldown from 'highcharts/modules/drilldown';
-HC_drilldown(Highcharts);
+import 'highcharts/modules/drilldown';
 
 import { HttpClient } from '@angular/common/http';
 import { DashboardService } from '../services/dashboard.service';

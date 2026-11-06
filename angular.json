@@ -143,7 +143,6 @@
       }
     }
   },
-  "defaultProject": "od-bus-provider-fe",
   "cli": {
     "analytics": "3592d93c-7870-42d5-a5f1-711ce835b187"
   }

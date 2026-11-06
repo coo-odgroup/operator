@@ -21,7 +21,7 @@ import { ConfigurationComponent } from './theme/layout/admin/configuration/confi
 import { ToggleFullScreenDirective } from './theme/shared/full-screen/toggle-full-screen';
 /* Menu Items */
 import { NavigationItem } from './theme/layout/admin/navigation/navigation';
-import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbTooltipModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule} from '@ng-select/ng-select';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -55,8 +55,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     SharedModule,
     NgbDropdownModule,
     NgbTooltipModule,
-    NgbButtonsModule,
-    NgbTabsetModule,
     HttpClientModule,
     NgbModule,
     NgSelectModule,
