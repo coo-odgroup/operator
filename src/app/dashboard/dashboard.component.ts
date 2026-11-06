@@ -12,7 +12,6 @@ import HC_drilldown from 'highcharts/modules/drilldown';
 HC_drilldown(Highcharts);
 
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
 import { DashboardService } from '../services/dashboard.service';
 import { Constants } from '../constant/constant';
 
